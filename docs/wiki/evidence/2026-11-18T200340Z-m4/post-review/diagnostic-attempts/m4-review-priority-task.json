@@ -1,0 +1,216 @@
+{
+  "activity_begins": 31,
+  "activity_enabled": true,
+  "activity_ends": 31,
+  "after_30_hidden_shows_footprint_bytes": 23692128,
+  "after_index_footprint_bytes": 15418088,
+  "after_typing_footprint_bytes": 30573528,
+  "appearance": "NSAppearanceNameDarkAqua",
+  "capture_method": "app-owned hidden bitmap; no WindowServer composition",
+  "cleanup": "Owned process exited; test-created APPARATE_HOME removed",
+  "cold_hidden_show_ms": 10.667583,
+  "corpus": {
+    "catalog_entries": 9,
+    "file_entries": 20000,
+    "file_index": "production FileCrawler/FileIndexSnapshot; synthetic reader; no SQLite in this UI experiment",
+    "generator": "M3 SyntheticFiles deterministic-17-31-v1",
+    "groups": 500,
+    "queries": [
+      "readme",
+      "config",
+      "network",
+      "calendar",
+      "terminal",
+      "caf\u00e9",
+      "strasse",
+      "\u6771\u4eac\u8cc7\u6599",
+      "Project-0001/report",
+      "code",
+      ".keyboard",
+      "?swift"
+    ]
+  },
+  "corpus_sha256": "bb9e45a425d259946fe7cc6095fdb50f296da6f1b59be303bc86831675325c20",
+  "delivery": "task",
+  "driver_task_priority": 25,
+  "errors": 0,
+  "fake_actions": 0,
+  "fake_registrations": 1,
+  "focus_guards_checked": true,
+  "hidden_show_samples_ms": [
+    10.667583,
+    8.614667,
+    7.576917,
+    7.395083,
+    7.340625,
+    7.622791,
+    7.813875,
+    7.690709,
+    7.65,
+    7.683541,
+    7.667292,
+    7.37025,
+    7.426916,
+    7.518458,
+    7.502875,
+    7.410417,
+    7.322042,
+    7.362333,
+    7.426417,
+    7.466792,
+    8.27825,
+    7.762333,
+    7.542458,
+    7.9915,
+    7.467709,
+    7.690792,
+    8.761333,
+    8.923,
+    8.913791,
+    8.956292
+  ],
+  "input_handler_fixed": {
+    "max_ms": 21.115792,
+    "median_ms": 1.4735829999999623,
+    "p95_ms": 3.433291000000054,
+    "samples": 88
+  },
+  "letter_raster": {
+    "max_ms": 32.54466599999978,
+    "median_ms": 9.743124999999964,
+    "p95_ms": 11.225292000000081,
+    "samples": 88
+  },
+  "measurement_limits": "fixed/overlap phases record view-state updates without forced drawing; raster phase synchronously captures each letter and result and therefore delays main-thread delivery; cached fixture symbols in place of native filesystem icon loading; no physical keyboard, window ordering, WindowServer vibrancy or displayed-frame measurements; endpoint footprints, not peaks",
+  "mode": "fixtures",
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "opaque": false,
+  "panel_check": "measure",
+  "panel_initialization_ms": 47.55725,
+  "physical_footprint_bytes": 31359960,
+  "protected_folder_probes": 0,
+  "raster_only": {
+    "max_ms": 17.097207999999682,
+    "median_ms": 10.130750000000262,
+    "p95_ms": 12.033916999999747,
+    "samples": 88
+  },
+  "ready": true,
+  "reduce_transparency": false,
+  "renderer": "drawn",
+  "result": "Passed",
+  "result_mismatches": 0,
+  "result_raster_fixed": {
+    "max_ms": 51.16733299999987,
+    "median_ms": 20.775416999999834,
+    "p95_ms": 24.060917000000245,
+    "samples": 88
+  },
+  "result_view_fixed": {
+    "max_ms": 33.677958000000004,
+    "median_ms": 4.962000000000444,
+    "p95_ms": 9.356582999999773,
+    "samples": 88
+  },
+  "result_view_overlap": {
+    "max_ms": 2.49670900000001,
+    "median_ms": 2.4338749999997162,
+    "p95_ms": 2.49670900000001,
+    "samples": 3
+  },
+  "retention": {
+    "binary_identity": "Diagnostic build not fingerprinted; do not treat as final-build paired evidence.",
+    "events": 188,
+    "events_sha256": "88ee9ddcda7dbbce3ef5196959fcbb103e61c0545bb21c2e9911679e34d01831",
+    "expected_hashes_sha256": "85e8ebb43d0b1e7f4af45a5df33291f9ad1240b403363b65bfa2a6c637efd2bb",
+    "original_receipt_sha256": "9236068b9782a315edcb3df2a8429346aca13cb517eb7215a5695d745e314bb1"
+  },
+  "schema": 1,
+  "source_load_ms": 166.693375,
+  "stages_fixed": {
+    "accept": {
+      "max_ms": 0.5489999999999782,
+      "median_ms": 0.16133400000012443,
+      "p95_ms": 0.38412500000004,
+      "samples": 88
+    },
+    "delegate_to_submit": {
+      "max_ms": 0.8050419999999576,
+      "median_ms": 0.11900000000014188,
+      "p95_ms": 0.300707999999986,
+      "samples": 88
+    },
+    "delivery_to_accept": {
+      "max_ms": 0.011708999999996195,
+      "median_ms": 0.003125000000181899,
+      "p95_ms": 0.010125000000016371,
+      "samples": 88
+    },
+    "input_before_delegate": {
+      "max_ms": 15.891375,
+      "median_ms": 0.7239580000000387,
+      "p95_ms": 1.6187920000000986,
+      "samples": 88
+    },
+    "input_handler": {
+      "max_ms": 21.115792,
+      "median_ms": 1.4735829999999623,
+      "p95_ms": 3.433291000000054,
+      "samples": 88
+    },
+    "main_queue": {
+      "max_ms": 14.479458000000001,
+      "median_ms": 0.07133300000003828,
+      "p95_ms": 3.7289160000000265,
+      "samples": 88
+    },
+    "search": {
+      "max_ms": 5.001917000000049,
+      "median_ms": 2.2458330000004025,
+      "p95_ms": 4.375583000000006,
+      "samples": 88
+    },
+    "view": {
+      "max_ms": 1.8573340000000087,
+      "median_ms": 0.5107499999999732,
+      "p95_ms": 1.306459000000018,
+      "samples": 88
+    },
+    "worker_queue": {
+      "max_ms": 1.360541000000012,
+      "median_ms": 0.04037500000004002,
+      "p95_ms": 0.70962499999996,
+      "samples": 88
+    }
+  },
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "superseded": 9,
+  "text_callback": {
+    "max_ms": 16.012332999999998,
+    "median_ms": 0.40429100000028484,
+    "p95_ms": 1.8597500000000764,
+    "samples": 188
+  },
+  "thermal_state": 0,
+  "timeouts": 0,
+  "timing_scope": "injected field-editor text through production coordinator/session/layout and explicit off-screen raster; not a screen commit or presentation timestamp",
+  "uses_vibrancy": true,
+  "view_apply": {
+    "max_ms": 1.857334,
+    "median_ms": 0.472625,
+    "p95_ms": 1.120875,
+    "samples": 179
+  },
+  "visible_profile": "none",
+  "wait_ms": 0,
+  "warm_hidden_show": {
+    "max_ms": 8.956292,
+    "median_ms": 7.622791,
+    "p95_ms": 8.923,
+    "samples": 29
+  },
+  "warm_up": true,
+  "warm_up_ms": 14.312666
+}

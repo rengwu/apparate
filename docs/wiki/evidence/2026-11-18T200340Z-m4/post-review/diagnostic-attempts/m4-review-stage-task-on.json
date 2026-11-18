@@ -1,0 +1,214 @@
+{
+  "activity_begins": 31,
+  "activity_enabled": true,
+  "activity_ends": 31,
+  "after_30_hidden_shows_footprint_bytes": 22856544,
+  "after_index_footprint_bytes": 15401728,
+  "after_typing_footprint_bytes": 31753152,
+  "appearance": "NSAppearanceNameDarkAqua",
+  "capture_method": "app-owned hidden bitmap; no WindowServer composition",
+  "cleanup": "Owned process exited; test-created APPARATE_HOME removed",
+  "cold_hidden_show_ms": 8.414625,
+  "corpus": {
+    "catalog_entries": 9,
+    "file_entries": 20000,
+    "file_index": "production FileCrawler/FileIndexSnapshot; synthetic reader; no SQLite in this UI experiment",
+    "generator": "M3 SyntheticFiles deterministic-17-31-v1",
+    "groups": 500,
+    "queries": [
+      "readme",
+      "config",
+      "network",
+      "calendar",
+      "terminal",
+      "caf\u00e9",
+      "strasse",
+      "\u6771\u4eac\u8cc7\u6599",
+      "Project-0001/report",
+      "code",
+      ".keyboard",
+      "?swift"
+    ]
+  },
+  "corpus_sha256": "bb9e45a425d259946fe7cc6095fdb50f296da6f1b59be303bc86831675325c20",
+  "delivery": "task",
+  "errors": 0,
+  "fake_actions": 0,
+  "fake_registrations": 1,
+  "focus_guards_checked": true,
+  "hidden_show_samples_ms": [
+    8.414625,
+    7.398083,
+    7.592917,
+    7.590292,
+    7.96625,
+    7.6505,
+    8.220208,
+    7.8685,
+    8.133083,
+    7.827292,
+    7.809083,
+    7.559084,
+    7.564125,
+    7.739583,
+    7.652125,
+    8.066209,
+    7.689208,
+    7.773458,
+    7.565084,
+    7.739667,
+    8.284375,
+    8.139708,
+    8.074917,
+    8.059625,
+    8.003666,
+    7.683125,
+    7.680916,
+    7.529666,
+    7.546125,
+    7.620833
+  ],
+  "input_handler_fixed": {
+    "max_ms": 19.779417,
+    "median_ms": 2.4279160000000957,
+    "p95_ms": 3.735541000000012,
+    "samples": 88
+  },
+  "letter_raster": {
+    "max_ms": 18.3567079999998,
+    "median_ms": 11.246500000000196,
+    "p95_ms": 11.951374999999643,
+    "samples": 88
+  },
+  "measurement_limits": "fixed/overlap phases record view-state updates without forced drawing; raster phase synchronously captures each letter and result and therefore delays main-thread delivery; cached fixture symbols in place of native filesystem icon loading; no physical keyboard, window ordering, WindowServer vibrancy or displayed-frame measurements; endpoint footprints, not peaks",
+  "mode": "fixtures",
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "opaque": false,
+  "panel_check": "measure",
+  "panel_initialization_ms": 33.704542,
+  "physical_footprint_bytes": 32424896,
+  "protected_folder_probes": 0,
+  "raster_only": {
+    "max_ms": 13.408916999999747,
+    "median_ms": 10.421541000000616,
+    "p95_ms": 11.922957999999198,
+    "samples": 88
+  },
+  "ready": true,
+  "reduce_transparency": false,
+  "renderer": "drawn",
+  "result": "Passed",
+  "result_mismatches": 0,
+  "result_raster_fixed": {
+    "max_ms": 37.11474999999973,
+    "median_ms": 27.359333000000333,
+    "p95_ms": 31.871290999999474,
+    "samples": 88
+  },
+  "result_view_fixed": {
+    "max_ms": 37.697666999999996,
+    "median_ms": 9.180249999999887,
+    "p95_ms": 13.362500000000182,
+    "samples": 88
+  },
+  "result_view_overlap": {
+    "max_ms": 16.03229200000078,
+    "median_ms": 16.03229200000078,
+    "p95_ms": 16.03229200000078,
+    "samples": 1
+  },
+  "retention": {
+    "binary_identity": "Diagnostic build not fingerprinted; do not treat as final-build paired evidence.",
+    "events": 188,
+    "events_sha256": "2c0fa637c9604d2359f6c6e56f7fec6f5ad2ae860123dc05c5823a8f1ef11809",
+    "expected_hashes_sha256": "85e8ebb43d0b1e7f4af45a5df33291f9ad1240b403363b65bfa2a6c637efd2bb",
+    "original_receipt_sha256": "ce948af1d8b0aef5b351541d0ec4aee4d090da69c3c26e64078dee874ebfa24b"
+  },
+  "schema": 1,
+  "source_load_ms": 167.329792,
+  "stages_fixed": {
+    "accept": {
+      "max_ms": 0.25320800000008603,
+      "median_ms": 0.15154200000000628,
+      "p95_ms": 0.24633399999993344,
+      "samples": 88
+    },
+    "delegate_to_submit": {
+      "max_ms": 0.07008300000000034,
+      "median_ms": 0.04079100000012659,
+      "p95_ms": 0.0625,
+      "samples": 88
+    },
+    "delivery_to_accept": {
+      "max_ms": 0.018583999999997047,
+      "median_ms": 0.004249999999956344,
+      "p95_ms": 0.005709000000024389,
+      "samples": 88
+    },
+    "input_before_delegate": {
+      "max_ms": 14.747792,
+      "median_ms": 2.142500000000041,
+      "p95_ms": 3.247957999999997,
+      "samples": 88
+    },
+    "input_handler": {
+      "max_ms": 19.779417,
+      "median_ms": 2.4279160000000957,
+      "p95_ms": 3.735541000000012,
+      "samples": 88
+    },
+    "main_queue": {
+      "max_ms": 18.518041,
+      "median_ms": 4.985082999999577,
+      "p95_ms": 9.115708000000012,
+      "samples": 88
+    },
+    "search": {
+      "max_ms": 3.639541999999892,
+      "median_ms": 1.5238749999998618,
+      "p95_ms": 2.0349590000000717,
+      "samples": 88
+    },
+    "view": {
+      "max_ms": 2.3402499999999975,
+      "median_ms": 0.5072920000000067,
+      "p95_ms": 0.7376659999999902,
+      "samples": 88
+    },
+    "worker_queue": {
+      "max_ms": 0.06329200000000057,
+      "median_ms": 0.02616600000010294,
+      "p95_ms": 0.04025000000001455,
+      "samples": 88
+    }
+  },
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "superseded": 11,
+  "text_callback": {
+    "max_ms": 14.874,
+    "median_ms": 1.9863750000000095,
+    "p95_ms": 3.0675830000000133,
+    "samples": 188
+  },
+  "timeouts": 0,
+  "timing_scope": "injected field-editor text through production coordinator/session/layout and explicit off-screen raster; not a screen commit or presentation timestamp",
+  "uses_vibrancy": true,
+  "view_apply": {
+    "max_ms": 2.34025,
+    "median_ms": 0.478042,
+    "p95_ms": 0.693667,
+    "samples": 177
+  },
+  "visible_profile": "none",
+  "wait_ms": 0,
+  "warm_hidden_show": {
+    "max_ms": 8.284375,
+    "median_ms": 7.739583,
+    "p95_ms": 8.220208,
+    "samples": 29
+  },
+  "warm_up": true,
+  "warm_up_ms": 12.368042
+}

@@ -1,0 +1,22 @@
+{
+  "base_commit": "09cd03a1c5f73cef93f84e608cca67dcfa2ce51e",
+  "app_sha256": "1c706fca7e86f61e5f030e14cabe6581c3265587096cb53daa71550d4ab31e12",
+  "source_manifest_sha256": "8879e084f15a344a162473dc0804d463095aaaeeb77f978a0bb508ef94d066c9",
+  "bundle_metadata": {
+    "CFBundleName": "Apparate",
+    "CFBundleIdentifier": "local.apparate",
+    "CFBundleExecutable": "Apparate",
+    "CFBundlePackageType": "APPL",
+    "CFBundleShortVersionString": "0.1.0",
+    "CFBundleVersion": "0.1.0",
+    "LSMinimumSystemVersion": "27.0",
+    "LSUIElement": true,
+    "NSDesktopFolderUsageDescription": "Apparate searches file and folder names in your Desktop folder.",
+    "NSDocumentsFolderUsageDescription": "Apparate searches file and folder names in your Documents folder.",
+    "NSDownloadsFolderUsageDescription": "Apparate searches file and folder names in your Downloads folder."
+  },
+  "architecture": "arm64",
+  "os": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A5368g",
+  "swift": "Apple Swift version 6.4.2 (swiftlang-6.4.2.1.9 clang-2100.4.1.1)\nTarget: arm64-apple-macosx27.0.0",
+  "sdk": "27.2"
+}

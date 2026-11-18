@@ -6,6 +6,21 @@ import ApparateCore
                 fixture("Keyboard layouts", .setting, keywords: ["input", "languages"]), fixture("Text replacements", .setting),
                 fixture("Restart", .command), fixture("Resources", .folder), fixture("README.md", .file), fixture("Preview"),
                 fixture("code-review.md", .file), fixture("terminal-notes.md", .file), fixture("term.txt", .file)]
+    await h.test("ranking: sorted-source merge matches exhaustive sort with duplicates and ties") {
+        let items = (0..<180).map { i in fixture(["Café", "CAFE", "cafe\u{301}", "Cafe notes"][i % 4],
+            [.app, .folder, .file][i % 3], id: "merge:\(i)") }
+        let index = try SearchIndex(items: items)
+        let rows = index.search(ParsedQuery("caf"), usage: UsageSnapshot(counts: ["merge:7": 20]), limit: 180)
+        var groups = (0..<3).map { group in rows.enumerated().filter { $0.offset % 3 == group }.map(\.element) }
+        groups[1].append(contentsOf: groups[0].prefix(20)); groups[1].sort(by: SearchResult.rankedBefore)
+        for sources in [groups, [[], rows, []], [[], [], []]] {
+            for limit in [0, 1, 50, 500] {
+                var seen = Set<String>()
+                let expected = Array(sources.flatMap { $0 }.sorted(by: SearchResult.rankedBefore).filter { seen.insert($0.item.id).inserted }.prefix(limit))
+                try expect(SearchResult.merge(sources, limit: limit) == expected)
+            }
+        }
+    }
     await h.test("ranking: golden queries, tiers and kind order") {
         for (query, expected) in [("vsc", "Visual Studio Code"), ("code", "Visual Studio Code"), ("keyboard la", "Keyboard layouts"),
                                   ("term", "Terminal"), ("calc", "Calculator"), ("cale", "Calendar")] {
@@ -15,7 +30,7 @@ import ApparateCore
         let vsc = try search([fixture("Visual Studio Code")], "vsc")[0]
         try expect(vsc.tier == .word && vsc.highlights == [0, 7, 14])
         let code = try search(apps, "code")[0]
-        try expect(code.source == .alternate(0) && code.highlights.isEmpty && code.textScore.isFinite)
+        try expect(code.source == .alternate(0) && code.highlights == [14, 15, 16, 17] && code.textScore.isFinite)
         let re = try search(apps.filter { ["Restart", "Resources", "README.md", "Text replacements", "Preview"].contains($0.name) }, "re").map(\.item.name)
         try expect(re == ["Restart", "Resources", "README.md", "Text replacements", "Preview"], "re: \(re)")
         let tier = try search([fixture("Terminal"), fixture("tml-prefix.txt", .file)], "tml")

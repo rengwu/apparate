@@ -1,7 +1,7 @@
 import AppKit
 import ApparateCore
 
-/// Test-only app orchestration. Native effects are installed by AppDelegate before this
+/// Test-only app orchestration. Fake effect adapters are installed before this
 /// object exists; it observes production readiness and keeps diagnostics out of app wiring.
 @MainActor final class AppTestDiagnostics {
     let profile: TestProfile?
@@ -33,8 +33,8 @@ import ApparateCore
     private func runRequestedWindow() {
         if let profile {
             guard !testStarted else { return }; testStarted = true
-            if profile.show == "panel" { panel?.show(); panel?.enterTestQuery(profile.query) }
-            else if profile.show == "setup" { accessWindow?.show(); Task { await access?.check() } }
+            if profile.show == "panel" { do { try panel?.beginHiddenShowing(); panel?.enterTestQuery(profile.query) } catch { errors += 1 } }
+            else if profile.show == "setup" { Task { await access?.check() } }
             if profile.show != nil {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
                     guard let self else { return }
@@ -69,6 +69,9 @@ import ApparateCore
     }
     func finishTest() {
         guard let profile, !reportWritten else { return }; reportWritten = true
+        var hidden = true
+        do { try panel?.verifyHidden(); try accessWindow?.verifyHidden() }
+        catch { hidden = false; errors += 1 }
         let elapsed = readyAt.map { durationMS($0.duration(to: .now)) / 1000 } ?? 0
         let cpu = readyAt == nil ? 0 : ProcessMetrics.cpuSeconds() - readyCPU
         let metrics = catalog?.metrics ?? CatalogMetrics()
@@ -88,9 +91,9 @@ import ApparateCore
             "observation_seconds": elapsed, "cpu_seconds": cpu, "cpu_percent_one_core": elapsed > 0 ? cpu / elapsed * 100 : 0,
             "native_hotkey_registrations": 0, "native_actions": 0, "protected_folder_probes": 0,
             "fake_registrations": testEffects?.registrationCount ?? 0, "fake_actions": testEffects?.actionCount ?? 0,
-            "capture_written": captureWritten, "visible_profile": profile.show ?? "none",
-            "timing_trigger": "injected callback entry; no physical/global key event",
-            "commit_measurement": "next implicit non-animated transaction completion; commit proxy, not presentation",
+            "capture_written": captureWritten, "focus_guards_checked": hidden, "visible_profile": "none", "render_profile": profile.show ?? "none",
+            "timing_trigger": "hidden owned-view driver; no physical/global key event",
+            "commit_measurement": "not measured; hidden profiles never order a window",
             "capture_method": "app-owned view bitmap; vibrancy can differ from on-screen composition"]
         report["app_metadata_reads"] = metrics.appMetadataReads
         report["reused_app_bundles"] = metrics.reusedApps

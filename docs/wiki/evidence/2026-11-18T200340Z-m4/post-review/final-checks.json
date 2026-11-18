@@ -1,0 +1,21 @@
+{
+  "result": "Passed",
+  "source_inputs": 54,
+  "binary_sha256": "e4b0faa9079166e686ffb451c9c9f5b41421bf1425fd5be7bd7d0e12fbc2d7fb",
+  "historical_reconstruction_files": {
+    "comparison": 54,
+    "final": 54,
+    "post-review/stage-matrix": 54
+  },
+  "safe_post_review_receipts": 18,
+  "csv_events": 376,
+  "jpeg_count": 5,
+  "latency_gate": "Missed in all 14 processes; not a latency pass",
+  "test_groups_debug": 74,
+  "test_groups_release": 74,
+  "native_functional_activity_on_off": "Passed",
+  "integration_fake_open": "Passed",
+  "setup": "Passed",
+  "signature": "Passed",
+  "archive_bytes_before_final_check": 1444198
+}

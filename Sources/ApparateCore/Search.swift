@@ -122,9 +122,13 @@ extension SearchIndex {
         heap.sort(by: better)
         return heap.map { candidate in
             let positions: [Int]
-            if candidate.source == .name && !nameQuery.scalars.isEmpty {
-                let q = candidate.match.compact ? nameQuery.compact : nameQuery.scalars
-                positions = text.displayedOffsets(text.withText(candidate.textID) { matcher.positions(q, $0) }, text: candidate.textID)
+            let titleID = Int32(candidate.item)
+            let titleMatch: TextMatch? = candidate.source == .name ? candidate.match : text.withText(titleID) {
+                matcher.match(nameQuery, text: $0, mask: text.spans[candidate.item].mask)
+            }
+            if let titleMatch, !nameQuery.scalars.isEmpty {
+                let q = titleMatch.compact ? nameQuery.compact : nameQuery.scalars
+                positions = text.displayedOffsets(text.withText(titleID) { matcher.positions(q, $0) }, text: titleID)
             } else { positions = [] }
             return SearchResult(item: items[candidate.item], tier: candidate.match.tier,
                                 textScore: candidate.match.score + candidate.pathScore, usageBoost: candidate.boost,

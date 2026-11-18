@@ -1,0 +1,33 @@
+Owned process sample, 3 seconds. Excluded from timing evidence. Cold WritingTools loading includes synchronous debugger notification caused/amplified by profiling; counts do not measure normal latency.
+Original SHA256: 5c6eb574819dcd519de004545666b9ebe206e210c73b2d559cec37feb648fa63
+
+    + !                   : 1224 __CFRunLoopRun  (in CoreFoundation) + 1204
+    + !                   : | 1224 __CFRunLoopServiceMachPort  (in CoreFoundation) + 160
+    + !                   : 298 __CFRunLoopRun  (in CoreFoundation) + 1848
+    + !                   : |       + 290 -[NSTextInputContext _textInputClientDidUpdateSelectionDebounced]  (in AppKit) + 164
+    + !                   : |       + ! 290 WritingToolsUILibraryCore  (in AppKit) + 156
+    + !                   : |       + !       :   |     + 283 dyld4::RemoteNotificationResponder::blockOnSynchronousEvent(unsigned int)  (in dyld) + 48
+    + !                   : |       + 3 -[NSTextInputContext _textInputClientDidUpdateSelectionDebounced]  (in AppKit) + 264
+    + !                   : 133 __CFRunLoopRun  (in CoreFoundation) + 836
+    + !                   : |         + 30 CA::Transaction::flush_as_runloop_observer(bool)  (in QuartzCore) + 140
+    + !                   : 13 __CFRunLoopRun  (in CoreFoundation) + 2352
+    + !                   : |           13 CA::Transaction::flush_as_runloop_observer(bool)  (in QuartzCore) + 140
+    + !                   : 5 __CFRunLoopRun  (in CoreFoundation) + 1916
+    + !                   : 5 __CFRunLoopRun  (in CoreFoundation) + 2124
+    +   :         | + 39 PanelController.injectText(_:)  (in Apparate) + 1032
+    +   :         | + 2 PanelController.injectText(_:)  (in Apparate) + 1048
+    +   :             1 PanelController.injectText(_:)  (in Apparate) + 1032
+    +       45 partial apply for closure #3 in closure #1 in SearchCoordinator.submit(index:query:files:usage:deliver:)  (in Apparate) + 1
+    +         45 closure #3 in closure #1 in SearchCoordinator.submit(index:query:files:usage:deliver:)  (in Apparate) + 36
+    +           45 closure #2 in closure #1 in SearchCoordinator.submit(index:query:files:usage:deliver:)  (in Apparate) + 348
+    +         1789 __CFRunLoopRun  (in CoreFoundation) + 1204
+    +           1789 __CFRunLoopServiceMachPort  (in CoreFoundation) + 160
+    +                   50 partial apply for closure #1 in SearchCoordinator.submit(index:query:files:usage:deliver:)  (in Apparate) + 184
+    +                     43 closure #1 in SearchCoordinator.submit(index:query:files:usage:deliver:)  (in Apparate) + 2088
+    +                     ! :   1 specialized FoldedText.init(_:)  (in Apparate) + 332
+    +                     3 closure #1 in SearchCoordinator.submit(index:query:files:usage:deliver:)  (in Apparate) + 2020
+    +                     ! : | 1 specialized FoldedText.init(_:)  (in Apparate) + 332
+    +                     ! :   1 specialized FoldedText.init(_:)  (in Apparate) + 812
+    +                     2 closure #1 in SearchCoordinator.submit(index:query:files:usage:deliver:)  (in Apparate) + 2444
+    +                     1 closure #1 in SearchCoordinator.submit(index:query:files:usage:deliver:)  (in Apparate) + 152
+    +                     1 closure #1 in SearchCoordinator.submit(index:query:files:usage:deliver:)  (in Apparate) + 880

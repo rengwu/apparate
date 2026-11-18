@@ -171,7 +171,24 @@ extension FileIndexSnapshot {
 }
 
 extension SearchResult {
-    static func rankedBefore(_ a: SearchResult, _ b: SearchResult) -> Bool {
+    /// Each source already returns rank-ordered rows. Merge only their heads, preserving
+    /// source order for equal rows and the highest-ranked occurrence of duplicate IDs.
+    package static func merge(_ groups: [[SearchResult]], limit: Int = 50) -> [SearchResult] {
+        guard limit > 0 else { return [] }
+        var offsets = Array(repeating: 0, count: groups.count), seen = Set<String>(), result: [SearchResult] = []
+        result.reserveCapacity(limit)
+        while result.count < limit {
+            var best: Int?
+            for group in groups.indices where offsets[group] < groups[group].count {
+                if best == nil || rankedBefore(groups[group][offsets[group]], groups[best!][offsets[best!]]) { best = group }
+            }
+            guard let best else { break }
+            let row = groups[best][offsets[best]]; offsets[best] += 1
+            if seen.insert(row.item.id).inserted { result.append(row) }
+        }
+        return result
+    }
+    package static func rankedBefore(_ a: SearchResult, _ b: SearchResult) -> Bool {
         if a.tier != b.tier { return a.tier < b.tier }
         if a.item.kind.rank != b.item.kind.rank { return a.item.kind.rank < b.item.kind.rank }
         let x = a.textScore + a.usageBoost, y = b.textScore + b.usageBoost

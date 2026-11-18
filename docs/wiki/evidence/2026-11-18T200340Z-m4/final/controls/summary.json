@@ -1,0 +1,932 @@
+[
+  {
+    "name": "20000-1-normal",
+    "count": 20000,
+    "variant": "normal",
+    "result": "Passed",
+    "uses_vibrancy": true,
+    "warm_up_ms": 14.0345,
+    "cold_hidden_show_ms": 9.017875,
+    "warm_hidden_show": {
+      "max_ms": 16.910333,
+      "median_ms": 8.050583,
+      "p95_ms": 14.522875,
+      "samples": 29
+    },
+    "text_callback": {
+      "max_ms": 14.182083,
+      "median_ms": 1.8643749999999955,
+      "p95_ms": 2.985874999999851,
+      "samples": 188
+    },
+    "input_handler_fixed": {
+      "max_ms": 18.933249999999997,
+      "median_ms": 2.310041999999953,
+      "p95_ms": 3.9005409999999756,
+      "samples": 88
+    },
+    "letter_raster": {
+      "max_ms": 20.240124999999807,
+      "median_ms": 10.913125000000036,
+      "p95_ms": 11.691125000000284,
+      "samples": 88
+    },
+    "view_apply": {
+      "max_ms": 2.213666,
+      "median_ms": 0.456667,
+      "p95_ms": 0.723917,
+      "samples": 177
+    },
+    "raster_only": {
+      "max_ms": 13.304208000000017,
+      "median_ms": 10.393458000000464,
+      "p95_ms": 11.85804200000075,
+      "samples": 88
+    },
+    "result_view_fixed": {
+      "max_ms": 39.847333,
+      "median_ms": 8.713124999999991,
+      "p95_ms": 12.95512500000001,
+      "samples": 88
+    },
+    "result_raster_fixed": {
+      "max_ms": 38.60745799999995,
+      "median_ms": 28.551165999999284,
+      "p95_ms": 31.899916000000303,
+      "samples": 88
+    },
+    "after_30_hidden_shows_footprint_bytes": 22971208,
+    "after_typing_footprint_bytes": 32015320,
+    "superseded": 11,
+    "timeouts": 0,
+    "result_mismatches": 0
+  },
+  {
+    "name": "20000-1-no-warmup",
+    "count": 20000,
+    "variant": "no-warmup",
+    "result": "Passed",
+    "uses_vibrancy": true,
+    "warm_up_ms": null,
+    "cold_hidden_show_ms": 12.362166,
+    "warm_hidden_show": {
+      "max_ms": 7.913292,
+      "median_ms": 7.270959,
+      "p95_ms": 7.730584,
+      "samples": 29
+    },
+    "text_callback": {
+      "max_ms": 22.633958,
+      "median_ms": 1.868249999999989,
+      "p95_ms": 2.728124999999636,
+      "samples": 188
+    },
+    "input_handler_fixed": {
+      "max_ms": 27.502291,
+      "median_ms": 2.0641669999999976,
+      "p95_ms": 3.485542000000123,
+      "samples": 88
+    },
+    "letter_raster": {
+      "max_ms": 16.49712499999987,
+      "median_ms": 11.0695410000003,
+      "p95_ms": 12.218791000000238,
+      "samples": 88
+    },
+    "view_apply": {
+      "max_ms": 2.100042,
+      "median_ms": 0.461459,
+      "p95_ms": 0.647875,
+      "samples": 177
+    },
+    "raster_only": {
+      "max_ms": 13.556582999999591,
+      "median_ms": 10.37091700000019,
+      "p95_ms": 11.560500000000502,
+      "samples": 88
+    },
+    "result_view_fixed": {
+      "max_ms": 47.830125,
+      "median_ms": 8.715041000000042,
+      "p95_ms": 11.729791999999975,
+      "samples": 88
+    },
+    "result_raster_fixed": {
+      "max_ms": 34.734457999999904,
+      "median_ms": 26.66187499999978,
+      "p95_ms": 31.631249999999454,
+      "samples": 88
+    },
+    "after_30_hidden_shows_footprint_bytes": 22954848,
+    "after_typing_footprint_bytes": 31851480,
+    "superseded": 11,
+    "timeouts": 0,
+    "result_mismatches": 0
+  },
+  {
+    "name": "20000-1-opaque",
+    "count": 20000,
+    "variant": "opaque",
+    "result": "Passed",
+    "uses_vibrancy": false,
+    "warm_up_ms": 4.570084,
+    "cold_hidden_show_ms": 0.831458,
+    "warm_hidden_show": {
+      "max_ms": 0.800958,
+      "median_ms": 0.4815,
+      "p95_ms": 0.656542,
+      "samples": 29
+    },
+    "text_callback": {
+      "max_ms": 18.69875,
+      "median_ms": 1.9546669999999722,
+      "p95_ms": 2.8246250000001965,
+      "samples": 188
+    },
+    "input_handler_fixed": {
+      "max_ms": 23.415625,
+      "median_ms": 2.1394169999999804,
+      "p95_ms": 3.1425420000000486,
+      "samples": 88
+    },
+    "letter_raster": {
+      "max_ms": 11.980375000000095,
+      "median_ms": 4.239416999999776,
+      "p95_ms": 5.221875000000182,
+      "samples": 88
+    },
+    "view_apply": {
+      "max_ms": 2.056958,
+      "median_ms": 0.469583,
+      "p95_ms": 0.704459,
+      "samples": 177
+    },
+    "raster_only": {
+      "max_ms": 6.26804200000015,
+      "median_ms": 3.3779170000002523,
+      "p95_ms": 4.67962499999976,
+      "samples": 88
+    },
+    "result_view_fixed": {
+      "max_ms": 41.254709,
+      "median_ms": 8.177000000000135,
+      "p95_ms": 12.30600000000004,
+      "samples": 88
+    },
+    "result_raster_fixed": {
+      "max_ms": 23.915207999999893,
+      "median_ms": 14.749749999999949,
+      "p95_ms": 19.16345799999999,
+      "samples": 88
+    },
+    "after_30_hidden_shows_footprint_bytes": 19350368,
+    "after_typing_footprint_bytes": 28492736,
+    "superseded": 11,
+    "timeouts": 0,
+    "result_mismatches": 0
+  },
+  {
+    "name": "20000-1-wait",
+    "count": 20000,
+    "variant": "wait",
+    "result": "Passed",
+    "uses_vibrancy": true,
+    "warm_up_ms": 13.203042,
+    "cold_hidden_show_ms": 8.102917,
+    "warm_hidden_show": {
+      "max_ms": 21.829208,
+      "median_ms": 7.876292,
+      "p95_ms": 11.421625,
+      "samples": 29
+    },
+    "text_callback": {
+      "max_ms": 14.004916,
+      "median_ms": 1.964291000000003,
+      "p95_ms": 2.971457999999984,
+      "samples": 188
+    },
+    "input_handler_fixed": {
+      "max_ms": 18.934083,
+      "median_ms": 3.4263750000000073,
+      "p95_ms": 4.976707999999917,
+      "samples": 88
+    },
+    "letter_raster": {
+      "max_ms": 20.300832999999784,
+      "median_ms": 12.184541000000536,
+      "p95_ms": 14.227208000000246,
+      "samples": 88
+    },
+    "view_apply": {
+      "max_ms": 3.022042,
+      "median_ms": 0.476959,
+      "p95_ms": 0.718042,
+      "samples": 176
+    },
+    "raster_only": {
+      "max_ms": 13.996041000000332,
+      "median_ms": 10.576624999999694,
+      "p95_ms": 12.268583000000035,
+      "samples": 87
+    },
+    "result_view_fixed": {
+      "max_ms": 37.991333,
+      "median_ms": 9.463416999999936,
+      "p95_ms": 13.144624999999905,
+      "samples": 88
+    },
+    "result_raster_fixed": {
+      "max_ms": 69.89045799999985,
+      "median_ms": 30.143792000000758,
+      "p95_ms": 37.267916999999215,
+      "samples": 87
+    },
+    "after_30_hidden_shows_footprint_bytes": 22774624,
+    "after_typing_footprint_bytes": 32064472,
+    "superseded": 12,
+    "timeouts": 0,
+    "result_mismatches": 0
+  },
+  {
+    "name": "20000-2-wait",
+    "count": 20000,
+    "variant": "wait",
+    "result": "Passed",
+    "uses_vibrancy": true,
+    "warm_up_ms": 13.064,
+    "cold_hidden_show_ms": 8.1835,
+    "warm_hidden_show": {
+      "max_ms": 8.060875,
+      "median_ms": 7.696625,
+      "p95_ms": 8.025334,
+      "samples": 29
+    },
+    "text_callback": {
+      "max_ms": 18.033707999999997,
+      "median_ms": 1.923667000000023,
+      "p95_ms": 3.0028330000000096,
+      "samples": 188
+    },
+    "input_handler_fixed": {
+      "max_ms": 23.120915999999998,
+      "median_ms": 3.4136670000002596,
+      "p95_ms": 4.560041999999839,
+      "samples": 88
+    },
+    "letter_raster": {
+      "max_ms": 19.86562499999991,
+      "median_ms": 12.240749999999935,
+      "p95_ms": 15.33062500000051,
+      "samples": 88
+    },
+    "view_apply": {
+      "max_ms": 4.075334,
+      "median_ms": 0.472708,
+      "p95_ms": 0.669625,
+      "samples": 177
+    },
+    "raster_only": {
+      "max_ms": 16.687541000000238,
+      "median_ms": 10.57683299999917,
+      "p95_ms": 12.055875000000015,
+      "samples": 88
+    },
+    "result_view_fixed": {
+      "max_ms": 44.589708,
+      "median_ms": 10.044540999999981,
+      "p95_ms": 14.481874999999974,
+      "samples": 88
+    },
+    "result_raster_fixed": {
+      "max_ms": 39.22154200000023,
+      "median_ms": 28.573791999999685,
+      "p95_ms": 35.071874999999636,
+      "samples": 88
+    },
+    "after_30_hidden_shows_footprint_bytes": 22823776,
+    "after_typing_footprint_bytes": 32244696,
+    "superseded": 11,
+    "timeouts": 0,
+    "result_mismatches": 0
+  },
+  {
+    "name": "20000-2-opaque",
+    "count": 20000,
+    "variant": "opaque",
+    "result": "Passed",
+    "uses_vibrancy": false,
+    "warm_up_ms": 5.315875,
+    "cold_hidden_show_ms": 0.861583,
+    "warm_hidden_show": {
+      "max_ms": 0.810042,
+      "median_ms": 0.528333,
+      "p95_ms": 0.763958,
+      "samples": 29
+    },
+    "text_callback": {
+      "max_ms": 19.232,
+      "median_ms": 1.9721250000000055,
+      "p95_ms": 3.0800829999998314,
+      "samples": 188
+    },
+    "input_handler_fixed": {
+      "max_ms": 23.955834,
+      "median_ms": 2.1889159999999492,
+      "p95_ms": 3.4554579999999078,
+      "samples": 88
+    },
+    "letter_raster": {
+      "max_ms": 10.908499999999549,
+      "median_ms": 4.296457999999802,
+      "p95_ms": 5.508915999999772,
+      "samples": 88
+    },
+    "view_apply": {
+      "max_ms": 2.048166,
+      "median_ms": 0.478958,
+      "p95_ms": 0.68025,
+      "samples": 177
+    },
+    "raster_only": {
+      "max_ms": 8.094499999999243,
+      "median_ms": 3.433999999999287,
+      "p95_ms": 4.348791000000347,
+      "samples": 88
+    },
+    "result_view_fixed": {
+      "max_ms": 43.560459,
+      "median_ms": 8.741790999999921,
+      "p95_ms": 11.94445799999994,
+      "samples": 88
+    },
+    "result_raster_fixed": {
+      "max_ms": 28.638167000000067,
+      "median_ms": 14.854832999999417,
+      "p95_ms": 24.183332999999948,
+      "samples": 88
+    },
+    "after_30_hidden_shows_footprint_bytes": 19366728,
+    "after_typing_footprint_bytes": 28722160,
+    "superseded": 11,
+    "timeouts": 0,
+    "result_mismatches": 0
+  },
+  {
+    "name": "20000-2-no-warmup",
+    "count": 20000,
+    "variant": "no-warmup",
+    "result": "Passed",
+    "uses_vibrancy": true,
+    "warm_up_ms": null,
+    "cold_hidden_show_ms": 12.852791,
+    "warm_hidden_show": {
+      "max_ms": 8.921625,
+      "median_ms": 7.600417,
+      "p95_ms": 8.268709,
+      "samples": 29
+    },
+    "text_callback": {
+      "max_ms": 20.032584,
+      "median_ms": 1.9027079999996204,
+      "p95_ms": 4.988583999999719,
+      "samples": 188
+    },
+    "input_handler_fixed": {
+      "max_ms": 24.9975,
+      "median_ms": 2.137167000000318,
+      "p95_ms": 5.383374999999887,
+      "samples": 88
+    },
+    "letter_raster": {
+      "max_ms": 20.34212499999967,
+      "median_ms": 11.506875000000036,
+      "p95_ms": 15.253499999999804,
+      "samples": 88
+    },
+    "view_apply": {
+      "max_ms": 2.321333,
+      "median_ms": 0.477292,
+      "p95_ms": 0.751334,
+      "samples": 161
+    },
+    "raster_only": {
+      "max_ms": 14.040750000000116,
+      "median_ms": 10.752249999999549,
+      "p95_ms": 12.296500000000378,
+      "samples": 88
+    },
+    "result_view_fixed": {
+      "max_ms": 123.96354099999985,
+      "median_ms": 17.00087499999995,
+      "p95_ms": 100.11920899999996,
+      "samples": 72
+    },
+    "result_raster_fixed": {
+      "max_ms": 45.25408399999924,
+      "median_ms": 33.18745799999988,
+      "p95_ms": 41.38458399999945,
+      "samples": 88
+    },
+    "after_30_hidden_shows_footprint_bytes": 22938464,
+    "after_typing_footprint_bytes": 33260528,
+    "superseded": 27,
+    "timeouts": 0,
+    "result_mismatches": 0
+  },
+  {
+    "name": "20000-2-normal",
+    "count": 20000,
+    "variant": "normal",
+    "result": "Passed",
+    "uses_vibrancy": true,
+    "warm_up_ms": 13.49125,
+    "cold_hidden_show_ms": 7.653209,
+    "warm_hidden_show": {
+      "max_ms": 8.714458,
+      "median_ms": 7.881084,
+      "p95_ms": 8.429792,
+      "samples": 29
+    },
+    "text_callback": {
+      "max_ms": 26.566000000000003,
+      "median_ms": 1.9609580000001188,
+      "p95_ms": 6.547625000000153,
+      "samples": 188
+    },
+    "input_handler_fixed": {
+      "max_ms": 31.631583000000003,
+      "median_ms": 2.4443749999999795,
+      "p95_ms": 10.638000000000147,
+      "samples": 88
+    },
+    "letter_raster": {
+      "max_ms": 22.56633299999976,
+      "median_ms": 11.294584000000214,
+      "p95_ms": 12.272125000000415,
+      "samples": 88
+    },
+    "view_apply": {
+      "max_ms": 2.699958,
+      "median_ms": 0.470458,
+      "p95_ms": 0.894375,
+      "samples": 177
+    },
+    "raster_only": {
+      "max_ms": 13.943416999999954,
+      "median_ms": 10.678249999999935,
+      "p95_ms": 12.163291999999274,
+      "samples": 88
+    },
+    "result_view_fixed": {
+      "max_ms": 54.567916000000004,
+      "median_ms": 17.536916999999903,
+      "p95_ms": 28.82974999999999,
+      "samples": 88
+    },
+    "result_raster_fixed": {
+      "max_ms": 47.479249999999865,
+      "median_ms": 27.282000000000153,
+      "p95_ms": 34.68983300000036,
+      "samples": 88
+    },
+    "after_30_hidden_shows_footprint_bytes": 22807392,
+    "after_typing_footprint_bytes": 31966168,
+    "superseded": 11,
+    "timeouts": 0,
+    "result_mismatches": 0
+  },
+  {
+    "name": "20000-3-normal",
+    "count": 20000,
+    "variant": "normal",
+    "result": "Passed",
+    "uses_vibrancy": true,
+    "warm_up_ms": 12.361,
+    "cold_hidden_show_ms": 7.955208,
+    "warm_hidden_show": {
+      "max_ms": 8.442125,
+      "median_ms": 7.70825,
+      "p95_ms": 8.14675,
+      "samples": 29
+    },
+    "text_callback": {
+      "max_ms": 14.907167,
+      "median_ms": 2.0627500000009604,
+      "p95_ms": 6.87658399999998,
+      "samples": 188
+    },
+    "input_handler_fixed": {
+      "max_ms": 19.964667,
+      "median_ms": 3.648208000000068,
+      "p95_ms": 8.744916999999987,
+      "samples": 88
+    },
+    "letter_raster": {
+      "max_ms": 20.903208000000177,
+      "median_ms": 11.301665999999841,
+      "p95_ms": 12.645417000000634,
+      "samples": 88
+    },
+    "view_apply": {
+      "max_ms": 2.245708,
+      "median_ms": 0.504083,
+      "p95_ms": 0.87675,
+      "samples": 177
+    },
+    "raster_only": {
+      "max_ms": 13.44662500000004,
+      "median_ms": 10.516083000000435,
+      "p95_ms": 11.862500000000182,
+      "samples": 88
+    },
+    "result_view_fixed": {
+      "max_ms": 39.925667000000004,
+      "median_ms": 12.696208000000297,
+      "p95_ms": 17.30049999999983,
+      "samples": 88
+    },
+    "result_raster_fixed": {
+      "max_ms": 40.4536250000001,
+      "median_ms": 27.081416000000445,
+      "p95_ms": 32.8129170000002,
+      "samples": 88
+    },
+    "after_30_hidden_shows_footprint_bytes": 22840160,
+    "after_typing_footprint_bytes": 32031704,
+    "superseded": 11,
+    "timeouts": 0,
+    "result_mismatches": 0
+  },
+  {
+    "name": "20000-3-no-warmup",
+    "count": 20000,
+    "variant": "no-warmup",
+    "result": "Passed",
+    "uses_vibrancy": true,
+    "warm_up_ms": null,
+    "cold_hidden_show_ms": 12.761875,
+    "warm_hidden_show": {
+      "max_ms": 9.059417,
+      "median_ms": 7.366166,
+      "p95_ms": 7.801334,
+      "samples": 29
+    },
+    "text_callback": {
+      "max_ms": 83.35725000000002,
+      "median_ms": 2.071250000000873,
+      "p95_ms": 4.751958999999715,
+      "samples": 188
+    },
+    "input_handler_fixed": {
+      "max_ms": 83.58500000000004,
+      "median_ms": 2.709415999999692,
+      "p95_ms": 5.852542000000085,
+      "samples": 88
+    },
+    "letter_raster": {
+      "max_ms": 28.534999999999854,
+      "median_ms": 11.430500000000393,
+      "p95_ms": 13.075457999999344,
+      "samples": 88
+    },
+    "view_apply": {
+      "max_ms": 2.117125,
+      "median_ms": 0.480333,
+      "p95_ms": 0.732958,
+      "samples": 175
+    },
+    "raster_only": {
+      "max_ms": 18.293833000000177,
+      "median_ms": 10.587625000000116,
+      "p95_ms": 11.81054099999983,
+      "samples": 88
+    },
+    "result_view_fixed": {
+      "max_ms": 40.093917,
+      "median_ms": 9.698374999999942,
+      "p95_ms": 17.607915999999932,
+      "samples": 86
+    },
+    "result_raster_fixed": {
+      "max_ms": 55.302458000000115,
+      "median_ms": 28.402500000000146,
+      "p95_ms": 40.14866700000039,
+      "samples": 88
+    },
+    "after_30_hidden_shows_footprint_bytes": 23004024,
+    "after_typing_footprint_bytes": 31982576,
+    "superseded": 13,
+    "timeouts": 0,
+    "result_mismatches": 0
+  },
+  {
+    "name": "20000-3-opaque",
+    "count": 20000,
+    "variant": "opaque",
+    "result": "Passed",
+    "uses_vibrancy": false,
+    "warm_up_ms": 5.066875,
+    "cold_hidden_show_ms": 0.992375,
+    "warm_hidden_show": {
+      "max_ms": 1.428125,
+      "median_ms": 0.781708,
+      "p95_ms": 1.289125,
+      "samples": 29
+    },
+    "text_callback": {
+      "max_ms": 30.111708999999998,
+      "median_ms": 1.9940829999999323,
+      "p95_ms": 4.059249999999793,
+      "samples": 188
+    },
+    "input_handler_fixed": {
+      "max_ms": 35.793667,
+      "median_ms": 2.346917000000076,
+      "p95_ms": 7.739958999999999,
+      "samples": 88
+    },
+    "letter_raster": {
+      "max_ms": 11.50045799999998,
+      "median_ms": 4.294334000000163,
+      "p95_ms": 5.337749999999687,
+      "samples": 88
+    },
+    "view_apply": {
+      "max_ms": 2.483417,
+      "median_ms": 0.472833,
+      "p95_ms": 0.864417,
+      "samples": 176
+    },
+    "raster_only": {
+      "max_ms": 6.5456250000002,
+      "median_ms": 3.3745830000007118,
+      "p95_ms": 4.3252080000002024,
+      "samples": 88
+    },
+    "result_view_fixed": {
+      "max_ms": 74.82116700000006,
+      "median_ms": 10.189041999999972,
+      "p95_ms": 32.70358299999998,
+      "samples": 87
+    },
+    "result_raster_fixed": {
+      "max_ms": 26.76924999999983,
+      "median_ms": 12.611249999999927,
+      "p95_ms": 16.27845900000011,
+      "samples": 88
+    },
+    "after_30_hidden_shows_footprint_bytes": 19497824,
+    "after_typing_footprint_bytes": 28459992,
+    "superseded": 12,
+    "timeouts": 0,
+    "result_mismatches": 0
+  },
+  {
+    "name": "200000-1-normal",
+    "count": 200000,
+    "variant": "normal",
+    "result": "Passed",
+    "uses_vibrancy": true,
+    "warm_up_ms": 12.288959,
+    "cold_hidden_show_ms": 7.726959,
+    "warm_hidden_show": {
+      "max_ms": 8.227583,
+      "median_ms": 7.505792,
+      "p95_ms": 8.045,
+      "samples": 29
+    },
+    "text_callback": {
+      "max_ms": 13.756167,
+      "median_ms": 2.0221660000006523,
+      "p95_ms": 6.10741599999983,
+      "samples": 188
+    },
+    "input_handler_fixed": {
+      "max_ms": 18.659125,
+      "median_ms": 3.050457999999935,
+      "p95_ms": 8.024124999999913,
+      "samples": 88
+    },
+    "letter_raster": {
+      "max_ms": 23.12979200000018,
+      "median_ms": 11.499374999999418,
+      "p95_ms": 12.84191699999974,
+      "samples": 88
+    },
+    "view_apply": {
+      "max_ms": 2.162167,
+      "median_ms": 0.509708,
+      "p95_ms": 1.004667,
+      "samples": 177
+    },
+    "raster_only": {
+      "max_ms": 17.92383299999983,
+      "median_ms": 10.626375000000735,
+      "p95_ms": 11.915875000000142,
+      "samples": 88
+    },
+    "result_view_fixed": {
+      "max_ms": 38.413583,
+      "median_ms": 11.029958000000079,
+      "p95_ms": 19.029749999999694,
+      "samples": 88
+    },
+    "result_raster_fixed": {
+      "max_ms": 52.377250000000004,
+      "median_ms": 27.540624999999636,
+      "p95_ms": 31.715666000000056,
+      "samples": 88
+    },
+    "after_30_hidden_shows_footprint_bytes": 77710248,
+    "after_typing_footprint_bytes": 86705160,
+    "superseded": 11,
+    "timeouts": 0,
+    "result_mismatches": 0
+  },
+  {
+    "name": "200000-1-no-warmup",
+    "count": 200000,
+    "variant": "no-warmup",
+    "result": "Passed",
+    "uses_vibrancy": true,
+    "warm_up_ms": null,
+    "cold_hidden_show_ms": 12.825875,
+    "warm_hidden_show": {
+      "max_ms": 9.096209,
+      "median_ms": 7.43875,
+      "p95_ms": 8.174917,
+      "samples": 29
+    },
+    "text_callback": {
+      "max_ms": 16.231208,
+      "median_ms": 1.9768750000000068,
+      "p95_ms": 2.9997920000000704,
+      "samples": 188
+    },
+    "input_handler_fixed": {
+      "max_ms": 21.40775,
+      "median_ms": 2.340208000000075,
+      "p95_ms": 3.449040999999852,
+      "samples": 88
+    },
+    "letter_raster": {
+      "max_ms": 17.84875000000011,
+      "median_ms": 11.655707999999777,
+      "p95_ms": 13.45220800000061,
+      "samples": 88
+    },
+    "view_apply": {
+      "max_ms": 2.204042,
+      "median_ms": 0.481167,
+      "p95_ms": 0.69275,
+      "samples": 177
+    },
+    "raster_only": {
+      "max_ms": 13.54733299999998,
+      "median_ms": 10.78008299999965,
+      "p95_ms": 11.884457999999995,
+      "samples": 88
+    },
+    "result_view_fixed": {
+      "max_ms": 38.604208,
+      "median_ms": 8.439417000000049,
+      "p95_ms": 16.044583999999986,
+      "samples": 88
+    },
+    "result_raster_fixed": {
+      "max_ms": 39.69925000000012,
+      "median_ms": 29.584332999999788,
+      "p95_ms": 34.541291999999885,
+      "samples": 88
+    },
+    "after_30_hidden_shows_footprint_bytes": 77562768,
+    "after_typing_footprint_bytes": 86508528,
+    "superseded": 11,
+    "timeouts": 0,
+    "result_mismatches": 0
+  },
+  {
+    "name": "200000-1-opaque",
+    "count": 200000,
+    "variant": "opaque",
+    "result": "Passed",
+    "uses_vibrancy": false,
+    "warm_up_ms": 4.543541,
+    "cold_hidden_show_ms": 0.914333,
+    "warm_hidden_show": {
+      "max_ms": 0.812375,
+      "median_ms": 0.509625,
+      "p95_ms": 0.753375,
+      "samples": 29
+    },
+    "text_callback": {
+      "max_ms": 17.588417000000003,
+      "median_ms": 1.9867079999999078,
+      "p95_ms": 2.9098339999999965,
+      "samples": 188
+    },
+    "input_handler_fixed": {
+      "max_ms": 22.554167000000003,
+      "median_ms": 2.236249999999984,
+      "p95_ms": 3.29424999999992,
+      "samples": 88
+    },
+    "letter_raster": {
+      "max_ms": 12.177999999999884,
+      "median_ms": 4.307874999999967,
+      "p95_ms": 5.190875000000233,
+      "samples": 88
+    },
+    "view_apply": {
+      "max_ms": 2.047209,
+      "median_ms": 0.496125,
+      "p95_ms": 0.716416,
+      "samples": 177
+    },
+    "raster_only": {
+      "max_ms": 5.853500000000167,
+      "median_ms": 3.3579170000002705,
+      "p95_ms": 4.578292000000147,
+      "samples": 88
+    },
+    "result_view_fixed": {
+      "max_ms": 43.178792,
+      "median_ms": 9.05520800000022,
+      "p95_ms": 15.361625000000004,
+      "samples": 88
+    },
+    "result_raster_fixed": {
+      "max_ms": 25.958250000000135,
+      "median_ms": 15.71441600000071,
+      "p95_ms": 21.357041999999637,
+      "samples": 88
+    },
+    "after_30_hidden_shows_footprint_bytes": 73876368,
+    "after_typing_footprint_bytes": 82854920,
+    "superseded": 11,
+    "timeouts": 0,
+    "result_mismatches": 0
+  },
+  {
+    "name": "200000-1-wait",
+    "count": 200000,
+    "variant": "wait",
+    "result": "Passed",
+    "uses_vibrancy": true,
+    "warm_up_ms": 13.080167,
+    "cold_hidden_show_ms": 7.991167,
+    "warm_hidden_show": {
+      "max_ms": 8.439708,
+      "median_ms": 7.791833,
+      "p95_ms": 8.077834,
+      "samples": 29
+    },
+    "text_callback": {
+      "max_ms": 19.699042,
+      "median_ms": 1.9058329999998023,
+      "p95_ms": 2.9446250000000873,
+      "samples": 188
+    },
+    "input_handler_fixed": {
+      "max_ms": 25.403167,
+      "median_ms": 4.597166999999985,
+      "p95_ms": 5.562791999999945,
+      "samples": 88
+    },
+    "letter_raster": {
+      "max_ms": 23.123833000000104,
+      "median_ms": 13.80724999999984,
+      "p95_ms": 16.289832999999817,
+      "samples": 88
+    },
+    "view_apply": {
+      "max_ms": 2.369583,
+      "median_ms": 0.488792,
+      "p95_ms": 0.7165,
+      "samples": 151
+    },
+    "raster_only": {
+      "max_ms": 13.956999999999425,
+      "median_ms": 10.754708000000392,
+      "p95_ms": 13.001207999999679,
+      "samples": 67
+    },
+    "result_view_fixed": {
+      "max_ms": 116.22791700000016,
+      "median_ms": 11.590249999999969,
+      "p95_ms": 48.66116599999987,
+      "samples": 83
+    },
+    "result_raster_fixed": {
+      "max_ms": 120.38533299999972,
+      "median_ms": 32.45691600000009,
+      "p95_ms": 101.37891599999966,
+      "samples": 67
+    },
+    "after_30_hidden_shows_footprint_bytes": 77628304,
+    "after_typing_footprint_bytes": 86934512,
+    "superseded": 37,
+    "timeouts": 0,
+    "result_mismatches": 0
+  }
+]

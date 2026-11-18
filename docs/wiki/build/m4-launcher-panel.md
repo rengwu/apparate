@@ -2,7 +2,7 @@
 title: M4 guide — The launcher panel
 section: Build
 updated: 2026-11-19
-status: Ready
+status: Approved; latency investigation carried to M6
 ---
 # M4 guide — The launcher panel
 
@@ -127,11 +127,46 @@ From the built app, off-screen and without focus, with in-app timestamps (the on
 
 ![Panel A, no local match](../attachments/2026-11-18-ui-spike/chosen--panel--a-compact--nomatch.jpg)
 
+## Pushback and answers
+
+Codex's pushback of 2026-11-19, all accepted. Where these differ from the sections above, these win.
+
+| # | Codex | Claude |
+| --- | --- | --- |
+| 1 | Hidden runs cannot measure a real show or composited vibrancy. Use app-owned renders, prevent activation and key status before the window is built, and replace the diagnostics' `panel.show()` with a path that does not present. Label hidden timings as proxies; the real first show, focus, Spaces and appearance go to the supervised slot and M6. | Accepted. |
+| 2 | Choose the renderer after the comparison, as the plan says. One shared row contract (keys, mouse, scrolling, truncation, highlights, icons, accessibility) for both. Repeated, alternated runs. Within noise, prefer the simpler one (likely the table); the custom list only for a repeatable gain. Ship one, and keep the loser's exact source in evidence. | Accepted. This corrects the guide, which had preselected Core Text. |
+| 3 | Measure on the real M3 index at 20,000 and 200,000 with matched corpora, per-event records, fixed-cadence overlapping input, separate processes for cold with and without warm-up, and no forced flush. The short wait is a bounded test-only experiment. Production keeps immediate text, asynchronous complete results and vibrancy until a supervised comparison says otherwise. | Accepted. |
+| 4 | Click and ⌘N bind to the displayed item's ID and the query revision. If results are pending, open that item only if it survives, never whatever lands in its place; edits, moves, composition, hiding or a source change cancel it. Return, ⌘Return and ⌘C keep the queued selected-row rule. | Accepted. |
+| 5 | Click and ⌘N may select or arm Restart; only a fresh Return confirms an armed row. Esc: the input method first, then cancel an armed Restart, then clear the text, then close. An empty field clears rows, selection and footer at once. "Searching…" only for a non-empty query before the first catalog. ⌘Q always quits. | Accepted, these priorities exactly. |
+| 6 | Accessibility exposes all results (up to 50), with the visible ones as `accessibilityVisibleRows`, full text, selection, position and an activation action; element identity follows the item ID. Notifications only for relevant selection changes. Automation inspects the tree; real VoiceOver is supervised. | Accepted. |
+| 7 | Exact geometry: search row 41 pt including its divider, list 264 pt (nine 28 pt rows plus 6 pt insets), footer 29 pt including its divider: 334 pt by 640 pt. The prototype's 600 × 420 is a style reference only. A whole-row viewport of up to nine; minimal scrolling; ⌘1–9 maps to the viewport; wheel scrolling updates hints and hit-testing; each showing starts at the top. When no useful location fits, drop the em dash too, then truncate the title. | Accepted. |
+| 8 | Bold the displayed name's own matched letters even when an alternate or keyword won, without changing the order; never move another text's offsets onto the title. Convert to whole grapheme ranges for drawing. File, folder and app rows show the home-abbreviated parent path (`~/Projects/klip`), built from stored paths without disk access; settings keep their pane name. | Accepted. This closes the M1 carry-forward on alternate-name highlights. |
+
+## Review
+
+Claude reviewed M4 on 2026-11-19: the new and changed sources, the [run](../verification/runs/2026-11-18T200340Z-m4.md) and its evidence. Claude re-ran the suite: 71 groups passed. The panel model, accessibility (all 50 rows, stable IDs), grapheme-safe highlights, geometry and the renderer comparison are well done, and the automated runs never showed, activated or took focus.
+
+**Result: two fixes before the commit.**
+
+| # | Finding | Fix |
+| --- | --- | --- |
+| 1 | Input to view-state complete takes 8.7–17.5 ms median and 12–29 ms p95 at 20,000 items, with maxima near 40–55 ms, yet the measured work is small: view updates take about 0.5 ms and a 20,000-item search about 0.5 ms (M3). Most of the time is waiting, not working. Likely causes: App Nap and timer coalescing in a hidden accessory app, and the worker-to-main hop. | Break the time into stages (input, submit, worker start, search, main delivery, accept, view) and find the wait. While the panel is shown, hold a latency-critical activity (`ProcessInfo.beginActivity(options: [.userInitiated, .latencyCritical], …)`), ended on hide; compare the main-actor `Task` hop with `DispatchQueue.main.async` for delivery. Target for this hidden proxy: input to view-state median ≤ 3 ms and p95 ≤ 8 ms at 20,000, p95 ≤ 10 ms at 200,000. If the cause is outside the app, show the evidence. |
+| 2 | The evidence folder is 18 MB, against 0.2–1 MB for M1–M3. The repository will be public, and this would grow with every milestone. | Keep the receipts, summaries, hashes, the losing renderer's source and a few representative images as JPEG. Keep one per-event record set, as CSV. Drop the rest, noting what was dropped and its hashes. Aim for 3 MB or less. |
+
+**Recheck, 2026-11-19: passed, with the latency target carried to M6.** Claude re-ran the suite: 74 groups passed. The evidence is down to 1.7 MB, with a retention record of every dropped file. Codex found and removed two real costs (a test driver re-creating the field editor on every query, and the coordinator re-sorting already sorted sources), switched the field to `NSSearchField`, and holds a latency-critical activity while the panel shows. Hidden input to view-state is now 6.4 / 14.6 / 75.9 ms (median / p95 / maximum) at 20,000 and 8.9 / 14.5 / 25.6 ms at 200,000: better, but short of the 3 / 8 ms proxy target. The run marks that gate Failed.
+
+Claude's decision: approve M4 and carry the latency work to M6. The proxy target was Claude's diagnostic aim, not a user decision. The work per keystroke is about a millisecond, so most of the remainder is waiting in a hidden accessory app, which may be scheduled differently from a visible panel. DEC-008 is end to end and is measured on screen in M6, after which the user revisits the budgets ([DEC-028](../decisions.md#round-4-2026-11-18)). M6 starts from these leads: non-CPU delivery wait (p95 7.1 ms at 20,000); AppKit loading WritingTools for the field despite the disable flags; search at 200,000 taking 4.7 ms median in the live pipeline against 1.6 ms in the M3 benchmark; native input and view costs.
+
+Carried forward:
+
+- **M7:** the release app currently contains the test profiles (`PanelVerification.swift`, the diagnostics) and links the synthetic fixtures. Release builds must leave them out, for example behind a compile-time flag that only the test and measurement builds set.
+- **Supervised and M6:** with vibrancy, the hidden full-panel raster takes about 28 ms against about 14 ms opaque. Software capture overstates composited cost, so keep vibrancy until the supervised comparison or M6 measures the real thing.
+
 ## Proposals to confirm
 
 1. Esc clears the field before closing, as in the prototype.
 2. ⌘Q in the panel quits; ⌘, follows in M5.
-3. One production row view (Core Text); the table variant only measured, then deleted.
+3. ~~One production row view (Core Text); the table variant only measured, then deleted.~~ Replaced by pushback 2: choose by comparison.
 4. The system accent colour for selection instead of the prototype's fixed blue.
 5. Vibrancy kept unless measurements argue against it.
 
@@ -139,3 +174,10 @@ From the built app, off-screen and without focus, with in-app timestamps (the on
 
 - Update `FEAT-panel` with the final layout, keys and states, and add recipes for the supervised checks.
 - One verification run for M4.
+
+
+## Implementation handoff
+
+[M4 verification](../verification/runs/2026-11-18T200340Z-m4.md) records the completed build and automated checks. The repeated, alternating comparison selected the custom Core Text list for its consistent lower raster and update costs. Historical source overrides, full input manifests, compact measurement receipts and the losing renderer remain in evidence; only the selected renderer is in the product. Production keeps immediate text, asynchronous full results, one hidden warm-up and vibrancy (respecting Reduce Transparency). The bounded wait and opaque options are test-only.
+
+The [panel feature](../features/panel.md) contains final behavior and the supervised recipes. Actual global-hotkey/focus/Spaces/VoiceOver/composited appearance and end-to-end budgets remain Untested. M4 is approved. The [post-review fixes](../verification/runs/2026-11-18T200340Z-m4.md#post-review-fixes) add activity lifetime checks, corrected field-editor injection, an ordered-source merge and delivery-stage/CPU diagnostics. Correctness passes 74 groups; the evidence directory is approximately 1.45 MB. The proxy latency target remains missed; Claude approved M4 and carried the latency investigation to M6.

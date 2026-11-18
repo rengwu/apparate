@@ -1,0 +1,33 @@
+Owned child only, sample 3 seconds. Excluded from all timing comparisons. Sampling magnifies debugger/dyld cold loading; counts are not normal wall-time estimates.
+Original SHA256: 9c27a612c347abc8edde3dade0eabd26cc1122976904c20a9627937984db9a43
+
+    + !                   : |       + 363 -[NSTextInputContext _textInputClientDidUpdateSelectionDebounced]  (in AppKit) + 164
+    + !                   : |       + ! 363 WritingToolsUILibraryCore  (in AppKit) + 156
+    + !                   : |       + 5 -[NSTextInputContext _textInputClientDidUpdateSelectionDebounced]  (in AppKit) + 264
+    + !                   : | +   131 __95-[NSAutoFillHeuristicController _showPasswordAutoFillIfNecessaryForView:withCompletionHandler:]_block_invoke  (in AppKit) + 1508
+    + !                   : | +   ! 130 -[SPSafariPlatformSupport displayOTPAutoFillRelativeToRect:ofView:oneTimeCodeMode:completionHandler:]  (in SafariPlatformSupport) + 512
+    + !                   : | +   ! : 93 __101-[SPSafariPlatformSupport displayOTPAutoFillRelativeToRect:ofView:oneTimeCodeMode:completionHandler:]_block_invoke.36  (in SafariPlatformSupport) + 364
+    + !                   : | +   ! : 18 __101-[SPSafariPlatformSupport displayOTPAutoFillRelativeToRect:ofView:oneTimeCodeMode:completionHandler:]_block_invoke.36  (in SafariPlatformSupport) + 416
+    + !                   : | +   ! : 13 __101-[SPSafariPlatformSupport displayOTPAutoFillRelativeToRect:ofView:oneTimeCodeMode:completionHandler:]_block_invoke.36  (in SafariPlatformSupport) + 480
+    + !                   : | +   ! : 3 __101-[SPSafariPlatformSupport displayOTPAutoFillRelativeToRect:ofView:oneTimeCodeMode:completionHandler:]_block_invoke.36  (in SafariPlatformSupport) + 68
+    + !                   : | +   ! : 2 __101-[SPSafariPlatformSupport displayOTPAutoFillRelativeToRect:ofView:oneTimeCodeMode:completionHandler:]_block_invoke.36  (in SafariPlatformSupport) + 164
+    + !                   : | +   ! : 1 __101-[SPSafariPlatformSupport displayOTPAutoFillRelativeToRect:ofView:oneTimeCodeMode:completionHandler:]_block_invoke.36  (in SafariPlatformSupport) + 496
+    + !                   : | +   ! 1 -[SPSafariPlatformSupport displayOTPAutoFillRelativeToRect:ofView:oneTimeCodeMode:completionHandler:]  (in SafariPlatformSupport) + 344
+    + !                   : | +   1 __95-[NSAutoFillHeuristicController _showPasswordAutoFillIfNecessaryForView:withCompletionHandler:]_block_invoke  (in AppKit) + 1372
+    +                 85 PanelController.injectText(_:)  (in Apparate) + 88
+    +                 29 PanelController.injectText(_:)  (in Apparate) + 256
+    +                 1 PanelController.injectText(_:)  (in Apparate) + 272
+    +                     31 closure #1 in SearchCoordinator.submit(index:query:files:usage:deliver:)  (in Apparate) + 2532
+    +                               31 implicit closure #2 in closure #1 in SearchCoordinator.submit(index:query:files:usage:deliver:)  (in Apparate) + 112
+    +                                 15 specialized static SearchResult.rankedBefore(_:_:)  (in Apparate) + 132
+    +                                 : 12 specialized FoldedText.init(_:)  (in Apparate) + 332
+    +                                 : 1 specialized FoldedText.init(_:)  (in Apparate) + 928
+    +                                 : 1 specialized FoldedText.init(_:)  (in Apparate) + 876
+    +                                 : 1 specialized FoldedText.init(_:)  (in Apparate) + 512
+    +                                 15 specialized static SearchResult.rankedBefore(_:_:)  (in Apparate) + 176
+    +                                 : 11 specialized FoldedText.init(_:)  (in Apparate) + 332
+    +                                 : 1 specialized FoldedText.init(_:)  (in Apparate) + 1172
+    +                                 : 1 specialized FoldedText.init(_:)  (in Apparate) + 928
+    +                                 : 1 specialized FoldedText.init(_:)  (in Apparate) + 1056
+    +                                 : 1 specialized FoldedText.init(_:)  (in Apparate) + 908
+    +                                 1 specialized static SearchResult.rankedBefore(_:_:)  (in Apparate) + 308

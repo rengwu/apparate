@@ -1,0 +1,252 @@
+{
+  "activity_begins": 31,
+  "activity_enabled": true,
+  "activity_ends": 31,
+  "after_30_hidden_shows_footprint_bytes": 79348648,
+  "after_index_footprint_bytes": 70583088,
+  "after_typing_footprint_bytes": 86557680,
+  "appearance": "NSAppearanceNameDarkAqua",
+  "capture_method": "app-owned hidden bitmap; no WindowServer composition",
+  "cleanup": "Owned process exited; test-created APPARATE_HOME removed",
+  "cold_hidden_show_ms": 8.480042,
+  "corpus": {
+    "catalog_entries": 9,
+    "file_entries": 200000,
+    "file_index": "production FileCrawler/FileIndexSnapshot; synthetic reader; no SQLite in this UI experiment",
+    "generator": "M3 SyntheticFiles deterministic-17-31-v1",
+    "groups": 500,
+    "queries": [
+      "readme",
+      "config",
+      "network",
+      "calendar",
+      "terminal",
+      "caf\u00e9",
+      "strasse",
+      "\u6771\u4eac\u8cc7\u6599",
+      "Project-0001/report",
+      "code",
+      ".keyboard",
+      "?swift"
+    ]
+  },
+  "corpus_sha256": "0d3cc6f6dc0d353a3a6f3775c1b563c870b453ab04abe38f6464cab90daca78c",
+  "delivery": "task",
+  "driver_task_priority": 25,
+  "errors": 0,
+  "fake_actions": 0,
+  "fake_registrations": 1,
+  "field_editor_configuration": {
+    "completion": false,
+    "correction": false,
+    "data_detection": false,
+    "grammar": false,
+    "link_detection": false,
+    "replacement": false,
+    "rich_text": false,
+    "spelling": false,
+    "writing_tools": -1
+  },
+  "focus_guards_checked": true,
+  "hidden_show_samples_ms": [
+    8.480042,
+    7.813875,
+    7.435667,
+    7.36275,
+    7.41,
+    7.326583,
+    7.295458,
+    7.359,
+    7.332666,
+    7.475791,
+    7.310292,
+    7.286666,
+    7.237791,
+    7.554416,
+    7.346667,
+    7.626583,
+    7.76,
+    7.366209,
+    8.139375,
+    8.747041,
+    8.784125,
+    8.771458,
+    8.795958,
+    8.198292,
+    7.80525,
+    7.501375,
+    7.496334,
+    7.474166,
+    7.31525,
+    7.393125
+  ],
+  "input_handler_fixed": {
+    "max_ms": 5.695917000000009,
+    "median_ms": 2.6870410000001357,
+    "p95_ms": 3.331625000000031,
+    "samples": 88
+  },
+  "input_setup_ms": 21.888125,
+  "letter_raster": {
+    "max_ms": 43.881124999999884,
+    "median_ms": 9.649042000000009,
+    "p95_ms": 11.266208000000006,
+    "samples": 88
+  },
+  "main_queue_non_cpu_lower_bound_fixed": {
+    "max_ms": 0.5545410000000046,
+    "median_ms": 0,
+    "p95_ms": 0.08091699999992485,
+    "samples": 88
+  },
+  "main_queue_process_cpu_fixed": {
+    "max_ms": 3.657,
+    "median_ms": 0.136,
+    "p95_ms": 3.265,
+    "samples": 88
+  },
+  "measurement_limits": "fixed/overlap phases record view-state updates without forced drawing; raster phase synchronously captures each letter and result and therefore delays main-thread delivery; cached fixture symbols in place of native filesystem icon loading; no physical keyboard, window ordering, WindowServer vibrancy or displayed-frame measurements; endpoint footprints, not peaks",
+  "mode": "fixtures",
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "opaque": false,
+  "panel_check": "measure",
+  "panel_initialization_ms": 39.624416,
+  "physical_footprint_bytes": 87376880,
+  "protected_folder_probes": 0,
+  "raster_only": {
+    "max_ms": 15.680582999999842,
+    "median_ms": 9.695666999999958,
+    "p95_ms": 12.341791999999714,
+    "samples": 87
+  },
+  "ready": true,
+  "reduce_transparency": false,
+  "renderer": "drawn",
+  "result": "Passed",
+  "result_mismatches": 0,
+  "result_raster_fixed": {
+    "max_ms": 31.35391699999991,
+    "median_ms": 20.232624999999643,
+    "p95_ms": 24.492666999999983,
+    "samples": 87
+  },
+  "result_view_fixed": {
+    "max_ms": 25.565292000000227,
+    "median_ms": 8.94379200000003,
+    "p95_ms": 14.538250000000062,
+    "samples": 88
+  },
+  "result_view_overlap": {
+    "max_ms": 2.3312919999998485,
+    "median_ms": 2.3312919999998485,
+    "p95_ms": 2.3312919999998485,
+    "samples": 2
+  },
+  "retention": {
+    "event_count": 188,
+    "events_sha256": "1c669b3e861b10b1b24fb282bdc7cacabc86153b684708c4042f8eeac6fab3a0",
+    "expected_result_hashes_sha256": "0ba9b1abdf3be38e2e5e1ee24a4b758cc4000210ad5d56bcb9f916cbb575f41c",
+    "original_receipt_sha256": "5158d4fbb82493201c046c14b25801e920ddd8f75f80de0c6dfaca86980dc0db",
+    "phase_status_counts": {
+      "fixed-40ms/completed": 88,
+      "overlap-1ms/completed": 2,
+      "overlap-1ms/superseded": 10,
+      "raster-40ms/completed": 87,
+      "raster-40ms/superseded": 1
+    }
+  },
+  "schema": 1,
+  "source_load_ms": 1946.9705840000001,
+  "stages_fixed": {
+    "accept": {
+      "max_ms": 0.5864579999999933,
+      "median_ms": 0.3824999999999932,
+      "p95_ms": 0.5593329999999241,
+      "samples": 88
+    },
+    "delegate_to_submit": {
+      "max_ms": 0.5728749999998399,
+      "median_ms": 0.22583399999984977,
+      "p95_ms": 0.41783399999985704,
+      "samples": 88
+    },
+    "delivery_to_accept": {
+      "max_ms": 0.06991699999980483,
+      "median_ms": 0.014333999999962543,
+      "p95_ms": 0.024916000000075655,
+      "samples": 88
+    },
+    "input_before_delegate": {
+      "max_ms": 2.168040999999903,
+      "median_ms": 1.3868750000001455,
+      "p95_ms": 1.816208999999958,
+      "samples": 88
+    },
+    "input_handler": {
+      "max_ms": 5.695917000000009,
+      "median_ms": 2.6870410000001357,
+      "p95_ms": 3.331625000000031,
+      "samples": 88
+    },
+    "main_queue": {
+      "max_ms": 3.737916999999925,
+      "median_ms": 0.11879099999998743,
+      "p95_ms": 3.194416999999703,
+      "samples": 88
+    },
+    "search": {
+      "max_ms": 22.45287499999995,
+      "median_ms": 4.666041000000007,
+      "p95_ms": 10.266374999999698,
+      "samples": 88
+    },
+    "view": {
+      "max_ms": 3.0892499999999927,
+      "median_ms": 1.3641659999999547,
+      "p95_ms": 2.2514169999999467,
+      "samples": 88
+    },
+    "worker_queue": {
+      "max_ms": 0.3382090000000062,
+      "median_ms": 0.060916000000020176,
+      "p95_ms": 0.12333399999988615,
+      "samples": 88
+    }
+  },
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "superseded": 11,
+  "text_callback": {
+    "max_ms": 2.468249999999898,
+    "median_ms": 0.44450000000006185,
+    "p95_ms": 2.0480829999996786,
+    "samples": 188
+  },
+  "thermal_state": 0,
+  "timeouts": 0,
+  "timing_scope": "injected field-editor text through production coordinator/session/layout and explicit off-screen raster; not a screen commit or presentation timestamp",
+  "uses_vibrancy": true,
+  "view_apply": {
+    "max_ms": 3.08925,
+    "median_ms": 0.53225,
+    "p95_ms": 1.801875,
+    "samples": 177
+  },
+  "visible_profile": "none",
+  "wait_ms": 0,
+  "warm_hidden_show": {
+    "max_ms": 8.795958,
+    "median_ms": 7.474166,
+    "p95_ms": 8.784125,
+    "samples": 29
+  },
+  "warm_up": true,
+  "warm_up_ms": 13.118125,
+  "worker_cpu_fixed": {
+    "max_ms": 21.806,
+    "median_ms": 4.666458,
+    "p95_ms": 9.918584,
+    "samples": 88
+  }
+}

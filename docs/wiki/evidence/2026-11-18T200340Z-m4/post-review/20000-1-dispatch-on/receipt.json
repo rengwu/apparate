@@ -1,0 +1,252 @@
+{
+  "activity_begins": 31,
+  "activity_enabled": true,
+  "activity_ends": 31,
+  "after_30_hidden_shows_footprint_bytes": 25052024,
+  "after_index_footprint_bytes": 16073472,
+  "after_typing_footprint_bytes": 32408536,
+  "appearance": "NSAppearanceNameDarkAqua",
+  "capture_method": "app-owned hidden bitmap; no WindowServer composition",
+  "cleanup": "Owned process exited; test-created APPARATE_HOME removed",
+  "cold_hidden_show_ms": 8.867917,
+  "corpus": {
+    "catalog_entries": 9,
+    "file_entries": 20000,
+    "file_index": "production FileCrawler/FileIndexSnapshot; synthetic reader; no SQLite in this UI experiment",
+    "generator": "M3 SyntheticFiles deterministic-17-31-v1",
+    "groups": 500,
+    "queries": [
+      "readme",
+      "config",
+      "network",
+      "calendar",
+      "terminal",
+      "caf\u00e9",
+      "strasse",
+      "\u6771\u4eac\u8cc7\u6599",
+      "Project-0001/report",
+      "code",
+      ".keyboard",
+      "?swift"
+    ]
+  },
+  "corpus_sha256": "bb9e45a425d259946fe7cc6095fdb50f296da6f1b59be303bc86831675325c20",
+  "delivery": "dispatch",
+  "driver_task_priority": 25,
+  "errors": 0,
+  "fake_actions": 0,
+  "fake_registrations": 1,
+  "field_editor_configuration": {
+    "completion": false,
+    "correction": false,
+    "data_detection": false,
+    "grammar": false,
+    "link_detection": false,
+    "replacement": false,
+    "rich_text": false,
+    "spelling": false,
+    "writing_tools": -1
+  },
+  "focus_guards_checked": true,
+  "hidden_show_samples_ms": [
+    8.867917,
+    7.525625,
+    7.42525,
+    7.351458,
+    8.975917,
+    8.755209,
+    8.69575,
+    8.17975,
+    7.807333,
+    7.649833,
+    7.496,
+    7.354958,
+    7.308041,
+    7.463,
+    7.338625,
+    7.3595,
+    7.383584,
+    7.308625,
+    7.267041,
+    7.30025,
+    7.531458,
+    7.287083,
+    7.3935,
+    7.291541,
+    7.37025,
+    7.44825,
+    7.408583,
+    7.276541,
+    7.316333,
+    7.454083
+  ],
+  "input_handler_fixed": {
+    "max_ms": 13.880957999999964,
+    "median_ms": 2.805625000000191,
+    "p95_ms": 4.196374999999989,
+    "samples": 88
+  },
+  "input_setup_ms": 22.789958,
+  "letter_raster": {
+    "max_ms": 45.41012499999988,
+    "median_ms": 9.653291999999965,
+    "p95_ms": 11.052083000000039,
+    "samples": 88
+  },
+  "main_queue_non_cpu_lower_bound_fixed": {
+    "max_ms": 10.674750000000092,
+    "median_ms": 0.008499999999890928,
+    "p95_ms": 2.8276249999997636,
+    "samples": 88
+  },
+  "main_queue_process_cpu_fixed": {
+    "max_ms": 8.335,
+    "median_ms": 1.665,
+    "p95_ms": 3.195,
+    "samples": 88
+  },
+  "measurement_limits": "fixed/overlap phases record view-state updates without forced drawing; raster phase synchronously captures each letter and result and therefore delays main-thread delivery; cached fixture symbols in place of native filesystem icon loading; no physical keyboard, window ordering, WindowServer vibrancy or displayed-frame measurements; endpoint footprints, not peaks",
+  "mode": "fixtures",
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "opaque": false,
+  "panel_check": "measure",
+  "panel_initialization_ms": 38.390125,
+  "physical_footprint_bytes": 33276888,
+  "protected_folder_probes": 0,
+  "raster_only": {
+    "max_ms": 16.46804199999997,
+    "median_ms": 9.743625000000065,
+    "p95_ms": 11.943209000000024,
+    "samples": 87
+  },
+  "ready": true,
+  "reduce_transparency": false,
+  "renderer": "drawn",
+  "result": "Passed",
+  "result_mismatches": 0,
+  "result_raster_fixed": {
+    "max_ms": 33.833958000000166,
+    "median_ms": 20.186959000000115,
+    "p95_ms": 24.054915999999594,
+    "samples": 87
+  },
+  "result_view_fixed": {
+    "max_ms": 17.768416999999772,
+    "median_ms": 8.107416999999998,
+    "p95_ms": 14.662499999999909,
+    "samples": 88
+  },
+  "result_view_overlap": {
+    "max_ms": 2.2141670000000886,
+    "median_ms": 1.622041999999965,
+    "p95_ms": 2.2141670000000886,
+    "samples": 5
+  },
+  "retention": {
+    "event_count": 188,
+    "events_sha256": "9f26e1c4d770a816ace758371b7acabb76efd3d1ec356b378f2f04402f740f65",
+    "expected_result_hashes_sha256": "85e8ebb43d0b1e7f4af45a5df33291f9ad1240b403363b65bfa2a6c637efd2bb",
+    "original_receipt_sha256": "60eb2761ba038f4bcba704c009bbd0a634b2b5468fd6dee3823b15e2c5ecf13d",
+    "phase_status_counts": {
+      "fixed-40ms/completed": 88,
+      "overlap-1ms/completed": 5,
+      "overlap-1ms/superseded": 7,
+      "raster-40ms/completed": 87,
+      "raster-40ms/superseded": 1
+    }
+  },
+  "schema": 1,
+  "source_load_ms": 170.347458,
+  "stages_fixed": {
+    "accept": {
+      "max_ms": 1.4255000000000564,
+      "median_ms": 0.45479199999999764,
+      "p95_ms": 1.0494160000002921,
+      "samples": 88
+    },
+    "delegate_to_submit": {
+      "max_ms": 1.2079589999998461,
+      "median_ms": 0.24745800000005147,
+      "p95_ms": 0.43658300000015515,
+      "samples": 88
+    },
+    "delivery_to_accept": {
+      "max_ms": 1.6537499999999454,
+      "median_ms": 0.017208000000209722,
+      "p95_ms": 0.02595799999994597,
+      "samples": 88
+    },
+    "input_before_delegate": {
+      "max_ms": 2.7564580000002934,
+      "median_ms": 1.4700419999999212,
+      "p95_ms": 1.9445409999999583,
+      "samples": 88
+    },
+    "input_handler": {
+      "max_ms": 13.880957999999964,
+      "median_ms": 2.805625000000191,
+      "p95_ms": 4.196374999999989,
+      "samples": 88
+    },
+    "main_queue": {
+      "max_ms": 12.618750000000091,
+      "median_ms": 1.918833000000177,
+      "p95_ms": 5.820083999999952,
+      "samples": 88
+    },
+    "search": {
+      "max_ms": 6.808541999999761,
+      "median_ms": 1.8813749999999914,
+      "p95_ms": 4.434083999999984,
+      "samples": 88
+    },
+    "view": {
+      "max_ms": 6.067291999999952,
+      "median_ms": 1.4840409999999338,
+      "p95_ms": 3.6126669999999876,
+      "samples": 88
+    },
+    "worker_queue": {
+      "max_ms": 3.509041000000252,
+      "median_ms": 0.07425000000000637,
+      "p95_ms": 1.405833999999686,
+      "samples": 88
+    }
+  },
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "superseded": 8,
+  "text_callback": {
+    "max_ms": 4.145125000000007,
+    "median_ms": 0.4429169999993974,
+    "p95_ms": 2.2059580000000096,
+    "samples": 188
+  },
+  "thermal_state": 0,
+  "timeouts": 0,
+  "timing_scope": "injected field-editor text through production coordinator/session/layout and explicit off-screen raster; not a screen commit or presentation timestamp",
+  "uses_vibrancy": true,
+  "view_apply": {
+    "max_ms": 6.067292,
+    "median_ms": 0.545875,
+    "p95_ms": 2.827791,
+    "samples": 180
+  },
+  "visible_profile": "none",
+  "wait_ms": 0,
+  "warm_hidden_show": {
+    "max_ms": 8.975917,
+    "median_ms": 7.3935,
+    "p95_ms": 8.755209,
+    "samples": 29
+  },
+  "warm_up": true,
+  "warm_up_ms": 13.166667,
+  "worker_cpu_fixed": {
+    "max_ms": 6.723792,
+    "median_ms": 1.77725,
+    "p95_ms": 3.342833,
+    "samples": 88
+  }
+}

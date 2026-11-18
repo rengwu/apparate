@@ -1,0 +1,17 @@
+import json,subprocess,sys
+from pathlib import Path
+out=Path(sys.argv[1]);out.mkdir(parents=True,exist_ok=True)
+controls={'normal':[],'no-warmup':['--no-warmup'],'opaque':['--opaque'],'wait':['--wait-ms','4']}
+records=[];expected={}
+for count,repeats in [(20000,3),(200000,1)]:
+ for repeat in range(repeats):
+  order=['normal','no-warmup','opaque','wait'] if repeat==0 else (['wait','opaque','no-warmup','normal'] if repeat==1 else ['normal','no-warmup','opaque'])
+  for variant in order:
+   name=f'{count}-{repeat+1}-{variant}'
+   with (out/(name+'.log')).open('w') as log:
+    subprocess.run(['python3','Tests/smoke-app.py','--panel-check','measure','--count',str(count),*controls[variant],'--output',str(out/name)],stdout=log,stderr=subprocess.STDOUT,check=True)
+   r=json.loads((out/name/'receipt.json').read_text());identity=(r['corpus_sha256'],r['expected_result_hashes'])
+   if count in expected: assert identity==expected[count]
+   expected[count]=identity
+   record={'name':name,'count':count,'variant':variant,**{k:r.get(k) for k in ['result','uses_vibrancy','warm_up_ms','cold_hidden_show_ms','warm_hidden_show','text_callback','input_handler_fixed','letter_raster','view_apply','raster_only','result_view_fixed','result_raster_fixed','after_30_hidden_shows_footprint_bytes','after_typing_footprint_bytes','superseded','timeouts','result_mismatches']}}
+   records.append(record);(out/'summary.json').write_text(json.dumps(records,indent=2)+'\n');print(json.dumps(record),flush=True)

@@ -7,7 +7,8 @@ let package = Package(
     products: [.library(name: "ApparateCore", targets: ["ApparateCore"])],
     targets: [
         .target(name: "ApparateCore", linkerSettings: [.linkedLibrary("sqlite3")]),
-        .executableTarget(name: "Apparate", dependencies: ["ApparateCore"]),
-        .executableTarget(name: "ApparateCoreTests", dependencies: ["ApparateCore"], path: "Tests/ApparateCoreTests")
+        .target(name: "ApparateFixtures", dependencies: ["ApparateCore"], path: "Tests/Fixtures"),
+        .executableTarget(name: "Apparate", dependencies: ["ApparateCore", "ApparateFixtures"]),
+        .executableTarget(name: "ApparateCoreTests", dependencies: ["ApparateCore", "ApparateFixtures"], path: "Tests/ApparateCoreTests")
     ]
 )

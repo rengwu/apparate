@@ -1,0 +1,159 @@
+{
+  "after_30_hidden_shows_footprint_bytes": 77284240,
+  "after_index_footprint_bytes": 69944112,
+  "after_typing_footprint_bytes": 86524936,
+  "appearance": "NSAppearanceNameDarkAqua",
+  "capture_method": "app-owned hidden bitmap; no WindowServer composition",
+  "cleanup": "Owned process exited; test-created APPARATE_HOME removed",
+  "cold_hidden_show_ms": 7.682833,
+  "corpus": {
+    "catalog_entries": 9,
+    "file_entries": 200000,
+    "file_index": "production FileCrawler/FileIndexSnapshot; synthetic reader; no SQLite in this UI experiment",
+    "generator": "M3 SyntheticFiles deterministic-17-31-v1",
+    "groups": 500,
+    "queries": [
+      "readme",
+      "config",
+      "network",
+      "calendar",
+      "terminal",
+      "caf\u00e9",
+      "strasse",
+      "\u6771\u4eac\u8cc7\u6599",
+      "Project-0001/report",
+      "code",
+      ".keyboard",
+      "?swift"
+    ]
+  },
+  "corpus_sha256": "0d3cc6f6dc0d353a3a6f3775c1b563c870b453ab04abe38f6464cab90daca78c",
+  "errors": 0,
+  "fake_actions": 0,
+  "fake_registrations": 1,
+  "focus_guards_checked": true,
+  "hidden_show_samples_ms": [
+    7.682833,
+    7.573583,
+    7.533916,
+    7.406,
+    7.382542,
+    7.292375,
+    7.440667,
+    7.197667,
+    7.379,
+    7.277083,
+    7.395958,
+    7.199,
+    7.334458,
+    7.304667,
+    7.373792,
+    7.214958,
+    7.215167,
+    7.2105,
+    7.140667,
+    7.138334,
+    7.154667,
+    7.226792,
+    7.535458,
+    7.520375,
+    7.603417,
+    7.357416,
+    7.311458,
+    7.142542,
+    7.471208,
+    7.377333
+  ],
+  "input_handler_fixed": {
+    "max_ms": 19.636499999999998,
+    "median_ms": 3.928042000000005,
+    "p95_ms": 11.702666000000022,
+    "samples": 88
+  },
+  "letter_raster": {
+    "max_ms": 19.86562499999991,
+    "median_ms": 11.283582999999908,
+    "p95_ms": 12.670500000000175,
+    "samples": 88
+  },
+  "measurement_limits": "fixed/overlap phases record view-state updates without forced drawing; raster phase synchronously captures each letter and result and therefore delays main-thread delivery; async fixture icons; no physical keyboard, window ordering, WindowServer vibrancy or displayed-frame measurements; endpoint footprints, not peaks",
+  "mode": "fixtures",
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "opaque": false,
+  "panel_check": "measure",
+  "panel_initialization_ms": 34.502375,
+  "physical_footprint_bytes": 86492168,
+  "protected_folder_probes": 0,
+  "raster_only": {
+    "max_ms": 17.793874999999844,
+    "median_ms": 10.666957999999795,
+    "p95_ms": 11.705833999999413,
+    "samples": 88
+  },
+  "ready": true,
+  "reduce_transparency": false,
+  "renderer": "drawn",
+  "result": "Passed",
+  "result_mismatches": 0,
+  "result_raster_fixed": {
+    "max_ms": 50.98974999999973,
+    "median_ms": 33.65066700000034,
+    "p95_ms": 38.32374999999956,
+    "samples": 88
+  },
+  "result_view_fixed": {
+    "max_ms": 39.042166,
+    "median_ms": 16.45812500000011,
+    "p95_ms": 28.041749999999865,
+    "samples": 88
+  },
+  "result_view_overlap": {
+    "max_ms": 12.102624999999534,
+    "median_ms": 12.102624999999534,
+    "p95_ms": 12.102624999999534,
+    "samples": 1
+  },
+  "retention": {
+    "event_count": 188,
+    "events_sha256": "539401c51670b6393964436020d81d3b844f944ce56628e8f0258ca2a371a387",
+    "expected_result_hashes_sha256": "0ba9b1abdf3be38e2e5e1ee24a4b758cc4000210ad5d56bcb9f916cbb575f41c",
+    "original_receipt_sha256": "c287d2bcfb5403812631b62034fb5e93b37a7f62f936b1715c432a1822575e38",
+    "phase_status_counts": {
+      "fixed-40ms/completed": 88,
+      "overlap-1ms/completed": 1,
+      "overlap-1ms/superseded": 11,
+      "raster-40ms/completed": 88
+    }
+  },
+  "schema": 1,
+  "source_load_ms": 1929.993667,
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "superseded": 11,
+  "text_callback": {
+    "max_ms": 14.520375000000001,
+    "median_ms": 1.9892499999998563,
+    "p95_ms": 9.095624999999927,
+    "samples": 188
+  },
+  "timeouts": 0,
+  "timing_scope": "injected field-editor text through production coordinator/session/layout and explicit off-screen raster; not a screen commit or presentation timestamp",
+  "uses_vibrancy": true,
+  "view_apply": {
+    "max_ms": 3.249708,
+    "median_ms": 0.492458,
+    "p95_ms": 1.020625,
+    "samples": 177
+  },
+  "visible_profile": "none",
+  "wait_ms": 0,
+  "warm_hidden_show": {
+    "max_ms": 7.603417,
+    "median_ms": 7.334458,
+    "p95_ms": 7.573583,
+    "samples": 29
+  },
+  "warm_up": true,
+  "warm_up_ms": 12.51575
+}

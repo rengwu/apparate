@@ -1,0 +1,386 @@
+[
+  {
+    "name": "20000-1-drawn",
+    "count": 20000,
+    "renderer": "drawn",
+    "result": "Passed",
+    "view": {
+      "max_ms": 2.280667,
+      "median_ms": 0.484875,
+      "p95_ms": 1.081625,
+      "samples": 177
+    },
+    "raster": {
+      "max_ms": 17.759542000000238,
+      "median_ms": 10.419999999999163,
+      "p95_ms": 11.722499999999854,
+      "samples": 88
+    },
+    "result_view": {
+      "max_ms": 40.401875000000004,
+      "median_ms": 12.053417000000081,
+      "p95_ms": 22.02166599999987,
+      "samples": 88
+    },
+    "cold": 8.125041,
+    "warm": {
+      "max_ms": 7.972833,
+      "median_ms": 7.479625,
+      "p95_ms": 7.875209,
+      "samples": 29
+    },
+    "footprint": 31949760
+  },
+  {
+    "name": "20000-1-table",
+    "count": 20000,
+    "renderer": "table",
+    "result": "Passed",
+    "view": {
+      "max_ms": 2.612083,
+      "median_ms": 0.645416,
+      "p95_ms": 1.395042,
+      "samples": 177
+    },
+    "raster": {
+      "max_ms": 16.29925000000003,
+      "median_ms": 12.618333000000348,
+      "p95_ms": 13.923542000000452,
+      "samples": 88
+    },
+    "result_view": {
+      "max_ms": 39.415167000000004,
+      "median_ms": 12.544832999999926,
+      "p95_ms": 21.088542000000416,
+      "samples": 88
+    },
+    "cold": 7.738042,
+    "warm": {
+      "max_ms": 7.961334,
+      "median_ms": 7.391834,
+      "p95_ms": 7.80025,
+      "samples": 29
+    },
+    "footprint": 32310256
+  },
+  {
+    "name": "20000-2-table",
+    "count": 20000,
+    "renderer": "table",
+    "result": "Passed",
+    "view": {
+      "max_ms": 2.219167,
+      "median_ms": 0.63675,
+      "p95_ms": 1.210417,
+      "samples": 177
+    },
+    "raster": {
+      "max_ms": 21.158582999999908,
+      "median_ms": 12.589750000000095,
+      "p95_ms": 14.095874999999978,
+      "samples": 88
+    },
+    "result_view": {
+      "max_ms": 44.45825,
+      "median_ms": 12.14304200000015,
+      "p95_ms": 20.107790999999906,
+      "samples": 88
+    },
+    "cold": 7.843625,
+    "warm": {
+      "max_ms": 8.813,
+      "median_ms": 7.435916,
+      "p95_ms": 7.851375,
+      "samples": 29
+    },
+    "footprint": 32228312
+  },
+  {
+    "name": "20000-2-drawn",
+    "count": 20000,
+    "renderer": "drawn",
+    "result": "Passed",
+    "view": {
+      "max_ms": 2.177834,
+      "median_ms": 0.484916,
+      "p95_ms": 0.999709,
+      "samples": 177
+    },
+    "raster": {
+      "max_ms": 16.50500000000011,
+      "median_ms": 10.429667000000336,
+      "p95_ms": 11.530375000000276,
+      "samples": 88
+    },
+    "result_view": {
+      "max_ms": 41.154624999999996,
+      "median_ms": 10.122000000000071,
+      "p95_ms": 19.737833000000023,
+      "samples": 88
+    },
+    "cold": 7.766,
+    "warm": {
+      "max_ms": 7.927583,
+      "median_ms": 7.342208,
+      "p95_ms": 7.888875,
+      "samples": 29
+    },
+    "footprint": 31884248
+  },
+  {
+    "name": "20000-3-drawn",
+    "count": 20000,
+    "renderer": "drawn",
+    "result": "Passed",
+    "view": {
+      "max_ms": 2.147209,
+      "median_ms": 0.483125,
+      "p95_ms": 0.955333,
+      "samples": 177
+    },
+    "raster": {
+      "max_ms": 18.235541999999896,
+      "median_ms": 10.421374999999898,
+      "p95_ms": 11.394208000000162,
+      "samples": 88
+    },
+    "result_view": {
+      "max_ms": 35.81825,
+      "median_ms": 12.958083000000215,
+      "p95_ms": 21.84225000000015,
+      "samples": 88
+    },
+    "cold": 7.750333,
+    "warm": {
+      "max_ms": 8.659917,
+      "median_ms": 7.446875,
+      "p95_ms": 7.940958,
+      "samples": 29
+    },
+    "footprint": 31982552
+  },
+  {
+    "name": "20000-3-table",
+    "count": 20000,
+    "renderer": "table",
+    "result": "Passed",
+    "view": {
+      "max_ms": 3.558125,
+      "median_ms": 0.663083,
+      "p95_ms": 1.075708,
+      "samples": 172
+    },
+    "raster": {
+      "max_ms": 19.7013750000001,
+      "median_ms": 13.215750000000298,
+      "p95_ms": 16.468500000000404,
+      "samples": 83
+    },
+    "result_view": {
+      "max_ms": 51.12887499999988,
+      "median_ms": 15.885082999999895,
+      "p95_ms": 40.03720799999974,
+      "samples": 88
+    },
+    "cold": 7.9985,
+    "warm": {
+      "max_ms": 7.937833,
+      "median_ms": 7.281125,
+      "p95_ms": 7.584958,
+      "samples": 29
+    },
+    "footprint": 32506840
+  },
+  {
+    "name": "200000-1-drawn",
+    "count": 200000,
+    "renderer": "drawn",
+    "result": "Passed",
+    "view": {
+      "max_ms": 3.811208,
+      "median_ms": 0.488083,
+      "p95_ms": 1.196083,
+      "samples": 177
+    },
+    "raster": {
+      "max_ms": 13.361582999999882,
+      "median_ms": 10.561875000000327,
+      "p95_ms": 11.626999999999498,
+      "samples": 88
+    },
+    "result_view": {
+      "max_ms": 54.404,
+      "median_ms": 15.541167000000314,
+      "p95_ms": 24.3929999999998,
+      "samples": 88
+    },
+    "cold": 8.384791,
+    "warm": {
+      "max_ms": 8.216834,
+      "median_ms": 7.657708,
+      "p95_ms": 8.100917,
+      "samples": 29
+    },
+    "footprint": 86606832
+  },
+  {
+    "name": "200000-1-table",
+    "count": 200000,
+    "renderer": "table",
+    "result": "Passed",
+    "view": {
+      "max_ms": 2.69,
+      "median_ms": 0.619584,
+      "p95_ms": 0.841292,
+      "samples": 176
+    },
+    "raster": {
+      "max_ms": 18.82962499999985,
+      "median_ms": 12.617666999999528,
+      "p95_ms": 13.958875000000262,
+      "samples": 88
+    },
+    "result_view": {
+      "max_ms": 27.04941699999972,
+      "median_ms": 11.307957999999871,
+      "p95_ms": 23.46854200000007,
+      "samples": 87
+    },
+    "cold": 8.392625,
+    "warm": {
+      "max_ms": 16.153167,
+      "median_ms": 7.991958,
+      "p95_ms": 11.9865,
+      "samples": 29
+    },
+    "footprint": 87065608
+  },
+  {
+    "name": "200000-2-table",
+    "count": 200000,
+    "renderer": "table",
+    "result": "Passed",
+    "view": {
+      "max_ms": 2.196375,
+      "median_ms": 0.659875,
+      "p95_ms": 1.239333,
+      "samples": 176
+    },
+    "raster": {
+      "max_ms": 19.21349999999984,
+      "median_ms": 12.879166000000168,
+      "p95_ms": 15.663125000000036,
+      "samples": 87
+    },
+    "result_view": {
+      "max_ms": 42.519375000000004,
+      "median_ms": 11.366916000000174,
+      "p95_ms": 19.67179199999987,
+      "samples": 88
+    },
+    "cold": 7.844042,
+    "warm": {
+      "max_ms": 8.346834,
+      "median_ms": 7.375125,
+      "p95_ms": 8.309625,
+      "samples": 29
+    },
+    "footprint": 87180248
+  },
+  {
+    "name": "200000-2-drawn",
+    "count": 200000,
+    "renderer": "drawn",
+    "result": "Passed",
+    "view": {
+      "max_ms": 3.403708,
+      "median_ms": 0.498875,
+      "p95_ms": 1.027875,
+      "samples": 177
+    },
+    "raster": {
+      "max_ms": 14.437291999999616,
+      "median_ms": 10.610125000000153,
+      "p95_ms": 11.748333999999886,
+      "samples": 88
+    },
+    "result_view": {
+      "max_ms": 38.907042,
+      "median_ms": 12.861708000000021,
+      "p95_ms": 24.969249999999647,
+      "samples": 88
+    },
+    "cold": 7.838916,
+    "warm": {
+      "max_ms": 7.979833,
+      "median_ms": 7.411166,
+      "p95_ms": 7.897041,
+      "samples": 29
+    },
+    "footprint": 86623216
+  },
+  {
+    "name": "200000-3-drawn",
+    "count": 200000,
+    "renderer": "drawn",
+    "result": "Passed",
+    "view": {
+      "max_ms": 3.249708,
+      "median_ms": 0.492458,
+      "p95_ms": 1.020625,
+      "samples": 177
+    },
+    "raster": {
+      "max_ms": 17.793874999999844,
+      "median_ms": 10.666957999999795,
+      "p95_ms": 11.705833999999413,
+      "samples": 88
+    },
+    "result_view": {
+      "max_ms": 39.042166,
+      "median_ms": 16.45812500000011,
+      "p95_ms": 28.041749999999865,
+      "samples": 88
+    },
+    "cold": 7.682833,
+    "warm": {
+      "max_ms": 7.603417,
+      "median_ms": 7.334458,
+      "p95_ms": 7.573583,
+      "samples": 29
+    },
+    "footprint": 86524936
+  },
+  {
+    "name": "200000-3-table",
+    "count": 200000,
+    "renderer": "table",
+    "result": "Passed",
+    "view": {
+      "max_ms": 2.432791,
+      "median_ms": 0.622291,
+      "p95_ms": 1.015416,
+      "samples": 177
+    },
+    "raster": {
+      "max_ms": 15.955749999999625,
+      "median_ms": 12.803124999999454,
+      "p95_ms": 14.057334000000083,
+      "samples": 88
+    },
+    "result_view": {
+      "max_ms": 55.366,
+      "median_ms": 15.185417000000143,
+      "p95_ms": 24.22133299999996,
+      "samples": 88
+    },
+    "cold": 8.164042,
+    "warm": {
+      "max_ms": 8.611292,
+      "median_ms": 7.741166,
+      "p95_ms": 8.427042,
+      "samples": 29
+    },
+    "footprint": 86770672
+  }
+]

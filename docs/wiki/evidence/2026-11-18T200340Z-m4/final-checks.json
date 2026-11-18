@@ -1,0 +1,29 @@
+{
+  "result": "Passed",
+  "source_inputs": 54,
+  "source_manifest_matches": true,
+  "app_binary_matches": true,
+  "signature_verified": true,
+  "headless_core": true,
+  "no_forced_transaction_flush": true,
+  "one_production_renderer": true,
+  "anchored_gitignore_preserved": true,
+  "native_fixture_receipts_safe": true,
+  "private_account_or_project_paths_in_evidence": [],
+  "owned_temporary_homes_remaining": [],
+  "owned_app_processes_remaining": 0,
+  "core_tests_debug": {
+    "passed": 71,
+    "failed": 0
+  },
+  "core_tests_release": {
+    "passed": 71,
+    "failed": 0
+  },
+  "explicit_web_before_catalog_regression": true,
+  "document_validation": {
+    "report_metadata": "Passed: 6 reports, zero errors",
+    "wiki_build": "Passed: 36 pages",
+    "wiki_check": "Passed: all internal links and generated reader current"
+  }
+}

@@ -13,7 +13,14 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--fixture-app', action='store_true')
 parser.add_argument('--file-source', choices=['fixture', 'projects'])
 parser.add_argument('--mode', choices=['fixtures', 'live-readonly'], default='fixtures')
-parser.add_argument('--show', choices=['panel', 'setup'])
+parser.add_argument('--render', '--show', dest='show', choices=['panel', 'setup'], help='Render an owned view without presentation or focus')
+parser.add_argument('--panel-check', choices=['functional', 'measure'])
+parser.add_argument('--count', type=int, choices=[20000, 200000], default=20000)
+parser.add_argument('--opaque', action='store_true')
+parser.add_argument('--no-warmup', action='store_true')
+parser.add_argument('--no-activity', action='store_true')
+parser.add_argument('--delivery', choices=['task','dispatch'], default='task')
+parser.add_argument('--wait-ms', type=int, choices=[0, 4], default=0)
 parser.add_argument('--seconds', type=float, default=2)
 parser.add_argument('--query', default='term')
 parser.add_argument('--action-open', action='store_true')
@@ -26,6 +33,7 @@ assert not args.show or args.mode == 'fixtures'
 assert args.file_source != 'projects' or args.mode == 'live-readonly'
 assert not args.fixture_app or args.file_source == 'fixture'
 assert not args.action_open or args.show == 'panel'
+assert not args.panel_check or (args.mode == 'fixtures' and not args.show and not args.file_source and not args.action_open and args.runs == 1)
 root = Path(__file__).resolve().parent.parent
 binary = root / 'build/Apparate.app/Contents/MacOS/Apparate'
 assert binary.is_file(), 'Run ./build.sh first'
@@ -53,6 +61,11 @@ with tempfile.TemporaryDirectory(prefix='apparate-m2-app-') as directory:
     env = {k: v for k, v in os.environ.items() if not k.startswith('APPARATE_')}
     env.update(APPARATE_HOME=directory, APPARATE_TEST_MODE=args.mode,
                APPARATE_TEST_SECONDS=str(args.seconds), APPARATE_TEST_QUERY=args.query)
+    if args.panel_check:
+        env.update(APPARATE_PANEL_CHECK=args.panel_check,
+                   APPARATE_PANEL_COUNT=str(args.count), APPARATE_PANEL_OPAQUE='1' if args.opaque else '0',
+                   APPARATE_PANEL_NO_WARMUP='1' if args.no_warmup else '0', APPARATE_PANEL_WAIT_MS=str(args.wait_ms),
+                   APPARATE_PANEL_NO_ACTIVITY='1' if args.no_activity else '0', APPARATE_PANEL_DELIVERY=args.delivery)
     if args.show:
         env['APPARATE_SHOW'] = args.show
     if args.action_open:
@@ -61,12 +74,18 @@ with tempfile.TemporaryDirectory(prefix='apparate-m2-app-') as directory:
     for run in range(args.runs):
         process = subprocess.Popen([str(binary)], env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         try:
-            stdout, stderr = process.communicate(timeout=args.seconds + 65)
+            stdout, stderr = process.communicate(timeout=max(args.seconds + 65, 180 if args.panel_check else 0))
             assert process.returncode == 0, 'App did not exit normally'
             receipt = home / 'diagnostics.json'
             assert receipt.is_file(), 'App did not write its test receipt'
             result = json.loads(receipt.read_text())
+            if args.output:
+                args.output.mkdir(parents=True, exist_ok=True)
+                (args.output / 'diagnostic.json').write_text(json.dumps(result, indent=2, sort_keys=True) + '\n')
+                for picture in home.glob('*.png'):
+                    shutil.copyfile(picture, args.output / picture.name)
             assert result['ready'] and result['errors'] == 0, result
+            assert result['visible_profile'] == 'none' and result['focus_guards_checked']
             assert result['native_actions'] == result['native_hotkey_registrations'] == result['protected_folder_probes'] == 0
             assert result['fake_registrations'] == 1
             assert result['fake_actions'] == (1 if args.action_open else 0)
@@ -105,6 +124,13 @@ with tempfile.TemporaryDirectory(prefix='apparate-m2-app-') as directory:
                 args.output.mkdir(parents=True, exist_ok=True)
                 for picture in home.glob('*.png'):
                     shutil.copyfile(picture, args.output / picture.name)
+        except BaseException as error:
+            if args.output:
+                args.output.mkdir(parents=True, exist_ok=True)
+                (args.output / 'failure.json').write_text(json.dumps({'result': 'Failed', 'exception': type(error).__name__, 'phase': 'owned process / receipt validation'}, indent=2) + '\n')
+                for picture in home.glob('*.png'):
+                    shutil.copyfile(picture, args.output / picture.name)
+            raise
         finally:
             if process.poll() is None:
                 process.terminate()

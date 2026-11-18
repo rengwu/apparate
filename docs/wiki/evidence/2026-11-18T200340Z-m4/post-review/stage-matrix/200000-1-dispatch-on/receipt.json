@@ -1,0 +1,239 @@
+{
+  "activity_begins": 31,
+  "activity_enabled": true,
+  "activity_ends": 31,
+  "after_30_hidden_shows_footprint_bytes": 78234536,
+  "after_index_footprint_bytes": 70320944,
+  "after_typing_footprint_bytes": 85263344,
+  "appearance": "NSAppearanceNameDarkAqua",
+  "capture_method": "app-owned hidden bitmap; no WindowServer composition",
+  "cleanup": "Owned process exited; test-created APPARATE_HOME removed",
+  "cold_hidden_show_ms": 8.692417,
+  "corpus": {
+    "catalog_entries": 9,
+    "file_entries": 200000,
+    "file_index": "production FileCrawler/FileIndexSnapshot; synthetic reader; no SQLite in this UI experiment",
+    "generator": "M3 SyntheticFiles deterministic-17-31-v1",
+    "groups": 500,
+    "queries": [
+      "readme",
+      "config",
+      "network",
+      "calendar",
+      "terminal",
+      "caf\u00e9",
+      "strasse",
+      "\u6771\u4eac\u8cc7\u6599",
+      "Project-0001/report",
+      "code",
+      ".keyboard",
+      "?swift"
+    ]
+  },
+  "corpus_sha256": "0d3cc6f6dc0d353a3a6f3775c1b563c870b453ab04abe38f6464cab90daca78c",
+  "delivery": "dispatch",
+  "driver_task_priority": 25,
+  "errors": 0,
+  "fake_actions": 0,
+  "fake_registrations": 1,
+  "field_editor_configuration": {
+    "completion": false,
+    "correction": false,
+    "data_detection": false,
+    "grammar": false,
+    "link_detection": false,
+    "replacement": false,
+    "rich_text": false,
+    "spelling": false,
+    "writing_tools": -1
+  },
+  "focus_guards_checked": true,
+  "hidden_show_samples_ms": [
+    8.692417,
+    7.901541,
+    7.633917,
+    7.637959,
+    8.091084,
+    8.123,
+    8.081834,
+    7.545125,
+    8.515125,
+    8.254416,
+    8.454834,
+    8.213458,
+    8.637208,
+    8.240583,
+    7.687083,
+    7.926167,
+    7.995334,
+    8.201542,
+    8.2215,
+    8.451917,
+    8.04775,
+    7.715667,
+    8.054584,
+    7.838333,
+    7.924875,
+    8.759166,
+    8.589375,
+    8.788417,
+    8.963,
+    9.094875
+  ],
+  "input_handler_fixed": {
+    "max_ms": 11.54645900000014,
+    "median_ms": 1.5833749999999895,
+    "p95_ms": 5.759500000000116,
+    "samples": 88
+  },
+  "input_setup_ms": 24.027042,
+  "letter_raster": {
+    "max_ms": 32.363374999999905,
+    "median_ms": 10.283292000000074,
+    "p95_ms": 11.35854100000006,
+    "samples": 88
+  },
+  "measurement_limits": "fixed/overlap phases record view-state updates without forced drawing; raster phase synchronously captures each letter and result and therefore delays main-thread delivery; cached fixture symbols in place of native filesystem icon loading; no physical keyboard, window ordering, WindowServer vibrancy or displayed-frame measurements; endpoint footprints, not peaks",
+  "mode": "fixtures",
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "opaque": false,
+  "panel_check": "measure",
+  "panel_initialization_ms": 50.227542,
+  "physical_footprint_bytes": 86098928,
+  "protected_folder_probes": 0,
+  "raster_only": {
+    "max_ms": 21.903833000000304,
+    "median_ms": 10.830458999999792,
+    "p95_ms": 12.6752919999999,
+    "samples": 88
+  },
+  "ready": true,
+  "reduce_transparency": false,
+  "renderer": "drawn",
+  "result": "Passed",
+  "result_mismatches": 0,
+  "result_raster_fixed": {
+    "max_ms": 55.2006250000004,
+    "median_ms": 22.73004200000014,
+    "p95_ms": 27.644874999999956,
+    "samples": 88
+  },
+  "result_view_fixed": {
+    "max_ms": 20.33554099999992,
+    "median_ms": 9.622540999999728,
+    "p95_ms": 16.777458999999908,
+    "samples": 88
+  },
+  "result_view_overlap": {
+    "max_ms": 2.757833999999093,
+    "median_ms": 2.757833999999093,
+    "p95_ms": 2.757833999999093,
+    "samples": 2
+  },
+  "retention": {
+    "event_count": 188,
+    "events_sha256": "0239f89c91606c8fe06e5c10aaa3aa891c92dc264b3e4898667b445f03b39f6f",
+    "expected_result_hashes_sha256": "0ba9b1abdf3be38e2e5e1ee24a4b758cc4000210ad5d56bcb9f916cbb575f41c",
+    "original_receipt_sha256": "6fc47092693866055b3ebf120a0151733c7b8199ce9e2733d99d1085480dd22d",
+    "phase_status_counts": {
+      "fixed-40ms/completed": 88,
+      "overlap-1ms/completed": 2,
+      "overlap-1ms/superseded": 10,
+      "raster-40ms/completed": 88
+    }
+  },
+  "schema": 1,
+  "source_load_ms": 2054.461084,
+  "stages_fixed": {
+    "accept": {
+      "max_ms": 1.7392910000000938,
+      "median_ms": 0.23345800000015515,
+      "p95_ms": 1.1086669999999685,
+      "samples": 88
+    },
+    "delegate_to_submit": {
+      "max_ms": 0.4513329999999769,
+      "median_ms": 0.1247920000000704,
+      "p95_ms": 0.3062079999999696,
+      "samples": 88
+    },
+    "delivery_to_accept": {
+      "max_ms": 0.0219579999999997,
+      "median_ms": 0.00695899999999483,
+      "p95_ms": 0.015084000000115338,
+      "samples": 88
+    },
+    "input_before_delegate": {
+      "max_ms": 5.793749999999818,
+      "median_ms": 0.7705829999999878,
+      "p95_ms": 3.8403330000001006,
+      "samples": 88
+    },
+    "input_handler": {
+      "max_ms": 11.54645900000014,
+      "median_ms": 1.5833749999999895,
+      "p95_ms": 5.759500000000116,
+      "samples": 88
+    },
+    "main_queue": {
+      "max_ms": 13.204375000000255,
+      "median_ms": 0.7127919999999222,
+      "p95_ms": 8.139415999999983,
+      "samples": 88
+    },
+    "search": {
+      "max_ms": 18.436083000000053,
+      "median_ms": 3.8333749999999327,
+      "p95_ms": 11.890542000000096,
+      "samples": 88
+    },
+    "view": {
+      "max_ms": 8.057125000000042,
+      "median_ms": 0.7958329999999023,
+      "p95_ms": 3.068583000000217,
+      "samples": 88
+    },
+    "worker_queue": {
+      "max_ms": 2.872959000000037,
+      "median_ms": 0.04524999999989632,
+      "p95_ms": 0.5304579999999532,
+      "samples": 88
+    }
+  },
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "superseded": 10,
+  "text_callback": {
+    "max_ms": 5.977041999999983,
+    "median_ms": 0.5109580000000733,
+    "p95_ms": 1.7327500000001237,
+    "samples": 188
+  },
+  "thermal_state": 0,
+  "timeouts": 0,
+  "timing_scope": "injected field-editor text through production coordinator/session/layout and explicit off-screen raster; not a screen commit or presentation timestamp",
+  "uses_vibrancy": true,
+  "view_apply": {
+    "max_ms": 8.057125,
+    "median_ms": 0.579458,
+    "p95_ms": 2.733625,
+    "samples": 178
+  },
+  "visible_profile": "none",
+  "wait_ms": 0,
+  "warm_hidden_show": {
+    "max_ms": 9.094875,
+    "median_ms": 8.123,
+    "p95_ms": 8.963,
+    "samples": 29
+  },
+  "warm_up": true,
+  "warm_up_ms": 13.630958,
+  "worker_cpu_fixed": {
+    "max_ms": 15.101541,
+    "median_ms": 3.615917,
+    "p95_ms": 7.868708,
+    "samples": 88
+  }
+}

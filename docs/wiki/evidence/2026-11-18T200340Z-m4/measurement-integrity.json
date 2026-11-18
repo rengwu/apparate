@@ -1,0 +1,269 @@
+{
+  "result": "Passed",
+  "processes": 29,
+  "events": 5452,
+  "same_corpus_and_expected_hashes": true,
+  "runs": [
+    {
+      "run": "comparison/20000-2-drawn/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 15.464750000000095
+    },
+    {
+      "run": "comparison/200000-2-table/receipt.json",
+      "events": 188,
+      "completed": 176,
+      "superseded": 12,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 28.480209000000286
+    },
+    {
+      "run": "comparison/20000-1-drawn/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 19.972583000000213
+    },
+    {
+      "run": "comparison/20000-3-drawn/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 15.907624999999996
+    },
+    {
+      "run": "comparison/200000-1-table/receipt.json",
+      "events": 188,
+      "completed": 176,
+      "superseded": 12,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 24.82450000000017
+    },
+    {
+      "run": "comparison/200000-3-table/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 15.6785
+    },
+    {
+      "run": "comparison/200000-2-drawn/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 9.225999999999658
+    },
+    {
+      "run": "comparison/20000-2-table/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 23.076709000000392
+    },
+    {
+      "run": "comparison/200000-1-drawn/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 14.679415999999996
+    },
+    {
+      "run": "comparison/200000-3-drawn/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 14.507958000000144
+    },
+    {
+      "run": "comparison/20000-1-table/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 10.205416000000241
+    },
+    {
+      "run": "comparison/20000-3-table/receipt.json",
+      "events": 188,
+      "completed": 172,
+      "superseded": 16,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 29.77050000000054
+    },
+    {
+      "run": "final/controls/20000-2-wait/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 12.779457999999977
+    },
+    {
+      "run": "final/controls/20000-2-no-warmup/receipt.json",
+      "events": 188,
+      "completed": 161,
+      "superseded": 27,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 109.29829200000017
+    },
+    {
+      "run": "final/controls/200000-1-wait/receipt.json",
+      "events": 188,
+      "completed": 151,
+      "superseded": 37,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 97.33808399999998
+    },
+    {
+      "run": "final/controls/200000-1-normal/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 12.725374999999985
+    },
+    {
+      "run": "final/controls/20000-1-normal/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 5.989000000000033
+    },
+    {
+      "run": "final/controls/20000-3-no-warmup/receipt.json",
+      "events": 188,
+      "completed": 175,
+      "superseded": 13,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 55.22325000000001
+    },
+    {
+      "run": "final/controls/200000-1-opaque/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 5.1316249999999854
+    },
+    {
+      "run": "final/controls/20000-1-opaque/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 5.119833000000199
+    },
+    {
+      "run": "final/controls/20000-3-opaque/receipt.json",
+      "events": 188,
+      "completed": 176,
+      "superseded": 12,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 54.04666599999996
+    },
+    {
+      "run": "final/controls/20000-3-normal/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 7.087750000000142
+    },
+    {
+      "run": "final/controls/20000-1-no-warmup/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 8.098624999999998
+    },
+    {
+      "run": "final/controls/200000-1-no-warmup/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 5.155375000000049
+    },
+    {
+      "run": "final/controls/20000-2-normal/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 14.84375
+    },
+    {
+      "run": "final/controls/20000-2-opaque/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 11.875874999999724
+    },
+    {
+      "run": "final/controls/20000-1-wait/receipt.json",
+      "events": 188,
+      "completed": 176,
+      "superseded": 12,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 30.178124999999454
+    },
+    {
+      "run": "final/readiness-confirmation-20000/receipt.json",
+      "events": 188,
+      "completed": 173,
+      "superseded": 15,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 86.17475
+    },
+    {
+      "run": "final/readiness-confirmation-200000/receipt.json",
+      "events": 188,
+      "completed": 177,
+      "superseded": 11,
+      "timeouts": 0,
+      "mismatches": 0,
+      "max_schedule_lateness_ms": 8.951875000000001
+    }
+  ]
+}

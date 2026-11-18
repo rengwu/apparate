@@ -1,0 +1,21 @@
+import json, subprocess, sys
+from pathlib import Path
+out = Path(sys.argv[1])
+records = []
+expected = {}
+for count in (20000, 200000):
+    for repeat in range(3):
+        for renderer in (('drawn','table') if repeat % 2 == 0 else ('table','drawn')):
+            name = f'{count}-{repeat+1}-{renderer}'
+            cmd = ['python3', 'Tests/smoke-app.py', '--panel-check', 'measure', '--renderer', renderer, '--count', str(count), '--output', str(out / name)]
+            with (out / (name + '.log')).open('w') as log:
+                subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT, check=True)
+            r = json.loads((out / name / 'receipt.json').read_text())
+            identity = (r['corpus_sha256'], r['expected_result_hashes'])
+            if count in expected: assert identity == expected[count]
+            expected[count] = identity
+            assert all(e['status'] in ('completed','superseded') for e in r['events'])
+            record = {'name':name, 'count':count,'renderer':renderer, 'result':r['result'], 'view':r['view_apply'],'raster':r['raster_only'],'result_view':r['result_view_fixed'], 'cold':r['cold_hidden_show_ms'], 'warm':r['warm_hidden_show'], 'footprint':r['after_typing_footprint_bytes']}
+            records.append(record)
+            (out / 'summary.json').write_text(json.dumps(records,indent=2)+'\n')
+            print(json.dumps(record), flush=True)

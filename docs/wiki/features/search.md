@@ -17,7 +17,7 @@ The Core library accepts fixture-supplied `SearchItem` values in an immutable `S
 
 - Whitespace at query boundaries is trimmed. Internal web-query spacing is preserved. Defaults are `'` for files and folders, `.` for settings, and `?` for web. Config can assign apps and commands prefixes too. There is no escape syntax.
 - Explicit web queries return one row; empty queries return none. Only unprefixed queries with no local matches receive a web fallback. A path query with no local matches follows that same fallback rule.
-- Matching folds case, diacritics and width. Tiers are exact, prefix, word/acronym, fuzzy, then settings keyword. A result identifies its matching name, alternate or keyword(s); only the displayed name receives character-index highlights. Unicode expansions map back to one displayed character.
+- Matching folds case, diacritics and width. Tiers are exact, prefix, word/acronym, fuzzy, then settings keyword. A result identifies its matching name, alternate or keyword(s); only the displayed name receives character-index highlights. M4 independently matches that name when an alternate/keyword wins, so its own matching letters still highlight without changing ranking. Unicode expansions map back to one displayed character, then whole grapheme ranges for rendering.
 - Ranking is tier, kind (apps/commands, settings, folders, files), text score plus bounded usage, folded display name, then ID. Text scores stay finite. Input order does not affect ties; duplicate names with different IDs remain separate rows.
 - A slash activates path mode after explicit prefix parsing. Only files and folders participate. The last segment matches the basename; earlier segments match distinct ancestors in order, allowing gaps. Leading `/` or `~/` does not anchor the search. Repeated separators are ignored; trailing `/` searches descendants; separator-only input returns no rows.
 - Usage counts have a 30-day half-life. Boost is `0.5 * min(1, log1p(count) / log1p(20))`, bounded at 0.5, and cannot cross a tier or kind boundary. At most 2,000 records survive, dropping the lowest decayed counts with ID as a deterministic tie-breaker. A snapshot stays unchanged after subsequent opens.
@@ -43,3 +43,5 @@ These checks exercise real Core entry points and SQLite persistence, using synth
 - [M3 verification](../verification/runs/2026-11-18T181500Z-m3.md) — compact files, merged ranking/fallback, app discovery, root-scoped paths, persistence and measured rebuild overlap.
 
 - [M3 search-speed review fix](../verification/runs/2026-11-18T181500Z-m3.md#post-review-search-fix) — primitive file scan buffers, shared-ancestor tie ordering and matched-corpus performance; recheck pending.
+
+- [M4 panel verification](../verification/runs/2026-11-18T200340Z-m4.md) — alternate-winner title highlights and complete-result hashes across native renderer/background/wait controls.

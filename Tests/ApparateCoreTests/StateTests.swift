@@ -55,7 +55,8 @@ final class TestClock: Sendable {
 }
 
 @MainActor func coordinatorTests(_ h: Harness) async {
-    await h.test("generations: slow work and a query burst publish only the newest") {
+    for delivery in [SearchDelivery.task, .dispatch] {
+    await h.test("generations (\(delivery.rawValue)): slow work and a query burst publish only the newest") {
         let index = try SearchIndex(items: [fixture("Alpha"), fixture("Beta")])
         let started = DispatchSemaphore(value: 0), finish = DispatchSemaphore(value: 0)
         let cancelled = Mutex(false)
@@ -66,6 +67,7 @@ final class TestClock: Sendable {
             }
             return request.index.search(request.query, usage: request.usage, isCancelled: isCancelled)
         }
+        coordinator.delivery = delivery
         var delivered: [SearchResponse] = []
         coordinator.submit(index: index, query: ParsedQuery("a")) { delivered.append($0) }
         try expect(started.wait(timeout: .now() + 3) == .success)
@@ -75,12 +77,13 @@ final class TestClock: Sendable {
         try expect(delivered.count == 1 && delivered[0].query.text == "beta" && delivered[0].results.first?.item.name == "Beta")
         try expect(cancelled.withLock { $0 })
     }
-    await h.test("generations: invalidation after scoring and before owner delivery") {
+    await h.test("generations (\(delivery.rawValue)): invalidation after scoring and before owner delivery") {
         let index = try SearchIndex(items: [fixture("Alpha")]), queued = DispatchSemaphore(value: 0)
         let coordinator = SearchCoordinator { request, cancelled in
             let rows = request.index.search(request.query, isCancelled: cancelled)
             return rows
         }
+        coordinator.delivery = delivery
         var delivered: [SearchResponse] = []
         coordinator.submit(index: index, query: ParsedQuery("alpha")) { delivered.append($0) }
         // This fence runs after the worker has enqueued its MainActor delivery task.
@@ -93,5 +96,6 @@ final class TestClock: Sendable {
         coordinator.submit(index: try SearchIndex(items: [fixture("Alpine")]), query: ParsedQuery("alp")) { delivered.append($0) }
         try await eventually { delivered.count == 1 }
         try expect(delivered[0].results.first?.item.name == "Alpine")
+    }
     }
 }

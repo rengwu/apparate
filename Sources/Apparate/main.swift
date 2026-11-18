@@ -15,21 +15,26 @@ import ApparateCore
     private var actions: ActionDispatcher?
     private var testEffects: TestEffects?
     private var profile: TestProfile?
-    private let icons = IconLoader()
+    private var icons: IconLoader!
     private var diagnostics: AppTestDiagnostics?
     private var files: FileIndexController?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        NSApp.setActivationPolicy(.accessory)
         do {
             let env = ProcessInfo.processInfo.environment
             profile = try TestProfile.read(env)
+            NSApp.setActivationPolicy(profile == nil ? .accessory : .prohibited)
+            icons = IconLoader(fixtureOnly: profile?.mode == "fixtures")
+            if let profile, profile.panelCheck != nil {
+                Task(priority: .userInitiated) { await PanelVerification.run(profile) }
+                return
+            }
             let directory = AppConfig.dataDirectory(environment: env)
             let firstRun = !FileManager.default.fileExists(atPath: directory.appendingPathComponent("config.json").path)
             let store = try ConfigStore(directory: directory); config = store
             let history = try UsageStore(directory: directory); usage = history
             let session = LauncherSession(config: store.current, requiresFiles: true, usage: { try await history.snapshot() }); self.session = session
-            let panel = PanelController(session: session, icons: icons); self.panel = panel
+            let panel = PanelController(session: session, icons: icons, presentationAllowed: profile == nil); self.panel = panel
             panel.onTiming = { [weak self] shown, commit in self?.diagnostics?.shownMS = shown; if let commit { self?.diagnostics?.commitProxyMS = commit } }
             let executor: any ActionExecuting
             let registrar: any HotKeyRegistering
@@ -45,7 +50,7 @@ import ApparateCore
                 access = FolderAccessController(directory: directory)
             }
             access?.onError = { [weak self] message in self?.logError(message) }
-            accessWindow = AccessWindow(controller: access!)
+            accessWindow = AccessWindow(controller: access!, presentationAllowed: profile == nil)
             let presence: @Sendable (URL) -> FilePresence
             if profile == nil { presence = { url in filePresence(url) } }
             else { presence = { _ in FilePresence.present } }

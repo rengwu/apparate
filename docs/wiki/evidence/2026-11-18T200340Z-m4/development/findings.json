@@ -1,0 +1,12 @@
+{
+  "result": "Failed",
+  "excluded_from_comparison": true,
+  "corrections": [
+    "Reset Core Text text matrix before drawing in a flipped view",
+    "Use emphasized selected-content text color in light appearance",
+    "Guard synchronous icon callback before table reload establishes row count; owned failed process terminated, no receipt",
+    "Use plain table style and zero automatic insets; assert actual cell frames, including scrolled viewport",
+    "Separate ordinary view-state timing from synchronous letter/result bitmap timing; captures delay main-thread delivery"
+  ],
+  "table_exception": "NSTableView row index 0 out of range (numberOfRows 0), at TableResultsView.invalidate from synchronous cached-icon callback"
+}

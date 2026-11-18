@@ -60,7 +60,7 @@ python3 Tests/smoke-app.py --mode live-readonly --runs 2 --seconds 2 --output /p
 python3 Tests/smoke-app.py --mode live-readonly --seconds 60 --output /private/tmp/apparate-idle-check
 ```
 
-Default mode is `fixtures`; `--show panel|setup` is allowed only in that mode. Visible checks last two seconds by default, render the app's own view to PNG without Screen Recording permission, and quit. The panel check asserts unchanged actual rows/footer/empty label across three pending edits, and can execute one fake open after capture. The setup check supplies fake Allowed/Denied/Not found outcomes. A bitmap may differ from the screen's composited vibrancy; inspect it without claiming physical input or on-screen latency coverage.
+Default mode is `fixtures`; `--render panel|setup` (with `--show` retained as an alias) is allowed only in that mode. Every automated profile now uses prohibited activation before creating a non-presenting window. Render checks never order a window, become key/main or activate the app; they render the owned view to PNG without Screen Recording permission and quit. The panel check asserts unchanged actual rows/footer/empty label across three pending edits, and can execute one fake open after capture. The setup check supplies fake Allowed/Denied/Not found outcomes. A bitmap may differ from the screen's composited vibrancy; inspect it without claiming physical input or on-screen latency coverage.
 
 `live-readonly` reads application metadata and system settings resources. With `--file-source projects`, it also indexes Projects read-only; Desktop/Documents/Downloads remain prohibited. `--file-source fixture` creates a temporary tree, and `--fixture-app` adds a synthetic app bundle. The app validates test roots before installing any adapters. It keeps windows hidden; native effects remain fake. Its receipt exports counts, timings and memory/CPU, never real item names/paths. `--runs 2` relaunches the app using the same isolated cache and requires the second launch’s first load to be a cache hit; earlier receipts appear under `previous_runs`. A disposable settings cache lives inside the test APPARATE_HOME and is removed with it.
 
@@ -70,7 +70,7 @@ Readiness requires the first complete attempt from both local catalogs, no repor
 
 Final app measurements run without concurrent builds/tests. The 60-second hidden profile begins CPU accounting at the first complete catalog; CPU is process user+system time divided by elapsed monotonic time, expressed as a percentage of one core. Physical memory is `TASK_VM_INFO.phys_footprint`, not peak allocation. Record catalog publication/scan counts to identify unexpected activity. Record first app/settings scan time and the subsequent verifying scan separately; a fresh cache miss includes parsing and cache writing, a hit includes file read/decode. Do not label a hit as a fresh parse.
 
-The visible fixture profile injects the same callback entry used by the hotkey, measures `makeKeyAndOrderFront` returning, then completion of the next implicit nonanimated Core Animation transaction. Completion is a **commit proxy**, not an exact commit/presentation timestamp. The timing does not include global-key delivery and is not an end-to-end budget pass. M6 owns the on-screen harness.
+M4 replaces visible diagnostics with a dedicated hidden path. Earlier M2/M3 showing/transaction timings are historical and must not be relabeled as current presentation measurements. Current checks never call `makeKeyAndOrderFront`, activate the app or force `CATransaction.flush`. M6 and the supervised slot own actual display/global-key latency.
 
 The unchanged M1 Core benchmark remains available:
 
@@ -104,7 +104,7 @@ python3 Tests/smoke-app.py --file-source fixture --fixture-app --show panel --qu
 python3 Tests/smoke-app.py --mode live-readonly --file-source projects --runs 2
 ```
 
-The driver owns its temporary root and database. It validates file counts, discovered app counts and the appropriate fake open adapter. On a second process, the file snapshot must load from SQLite. Reports export only counts, timings, flags and memory. Raw databases and user names are never copied into evidence. Paths to outputs can be supplied with `--output`; visible checks must remain fixture-only.
+The driver owns its temporary root and database. It validates file counts, discovered app counts and the appropriate fake open adapter. On a second process, the file snapshot must load from SQLite. Reports export only counts, timings, flags and memory. Raw databases and user names are never copied into evidence. Paths to outputs can be supplied with `--output`; render checks remain fixture-only and non-presenting.
 
 ```sh
 swift build -c release --product ApparateCoreTests
@@ -133,3 +133,31 @@ python3 Tests/smoke-app.py --mode live-readonly --seconds 60
 ```
 
 These runs remain hidden; do not add `--show`. The driver seeds a disposable config, installs fake effects/hotkey/access adapters and deletes its temporary home after process exit. Live runs read only the fixed app/settings sources; these commands do not index user folders. Receipts include an observation-window event histogram, reuse/read/publication counters and CPU/footprint. Startup is excluded from the long observation by the existing one-second delay. No app names or event paths are recorded. See the [catalog follow-up run](runs/2026-11-18T191222Z-catalog.md) for interpretation limits.
+
+
+## M4 panel checks and comparison
+
+Run the signed app only through the driver, serially with no other build, test or profile job:
+
+```sh
+python3 Tests/smoke-app.py --panel-check functional --output /private/tmp/apparate-m4-functional
+python3 Tests/smoke-app.py --panel-check measure --count 20000 --output /private/tmp/apparate-m4-20k
+python3 Tests/smoke-app.py --panel-check measure --count 200000 --output /private/tmp/apparate-m4-200k
+python3 Tests/smoke-app.py --panel-check measure --count 20000 --opaque --output /private/tmp/apparate-m4-opaque
+python3 Tests/smoke-app.py --panel-check measure --count 20000 --no-warmup --output /private/tmp/apparate-m4-cold
+python3 Tests/smoke-app.py --panel-check measure --count 20000 --wait-ms 4 --output /private/tmp/apparate-m4-wait
+```
+
+These modes require fixtures, one owned process, no ordinary `--render`/action options and no real file source. They build 20,000 or 200,000 entries through the production `FileCrawler`/`FileIndexSnapshot` using the unchanged M3 deterministic reader, plus nine synthetic catalog entries. This UI experiment does not open SQLite or enumerate a user folder. Symbols substitute for filesystem icons equally in all variants. The driver terminates only its owned child and removes its own temporary config/home. `--output` retains receipts, images and any failure record. The maximum process wait for these modes is 180 seconds; a timeout is a failure, not a discarded sample.
+
+Each measurement process constructs a dark-appearance panel, optionally warms its empty frame once, then performs 30 hidden reset/layout/bitmap cycles. It records the first cycle separately and statistics for the remaining 29. Warm-up-off always means a separate fresh process. Footprints are endpoint `phys_footprint` readings after the index, after 30 cycles, and after typing; they are not peak memory measurements.
+
+The post-review driver prepares the field editor once before timing (setup cost is reported separately) and reuses it, inserting only the changed suffix. Typing uses the owned native field editor at scheduled 40 ms cadence without waiting for each query. One phase records view-state completion without explicitly rasterizing. A separate matched phase explicitly rasterizes every typed letter and completed result; those captures themselves delay the main thread and must not be interpreted as natural presentation latency. A final 1 ms phase forces overlapping requests. Every event retains its deadline, delivery, text callback, worker timestamps, accepted revision, view-update cost, available raster timestamps, result hash and completed/superseded/timeout status. Missing intermediate results are never silently removed from the record. An untimed full-results oracle covers every query, including superseded ones. Corpus and expected-result hashes must agree across configurations.
+
+`--delivery task|dispatch` compares the worker-to-main hop; `--no-activity` disables the per-showing user-initiated/latency-critical activity for comparison. Production keeps Task delivery and holds the activity until hide. Per-stage timing and worker CPU time are diagnostic-only observations. The public archive keeps compact receipts and one CSV event set; a fresh driver run still writes full records.
+
+`--wait-ms 4` is a bounded test-only worker-readiness experiment. It waits at most four milliseconds on the main thread; it does not pump events, deliver the result synchronously or force a transaction. Production uses zero wait. `--opaque` removes the visual-effect view from the hierarchy; ordinary production keeps vibrancy unless Reduce Transparency is set. These hidden experiments cannot establish whether a wait removes visible flicker or what composited vibrancy costs.
+
+The final product contains one renderer. The [M4 comparison source archive](../evidence/2026-11-18T200340Z-m4/comparison/sources.json) contains historical source overrides, including both candidates, shared behavior and the comparison driver. To reproduce the old two-renderer experiment, copy the post-review M4 sources into a separate disposable checkout, apply every entry in that path-to-source JSON over it, verify every file against its [manifest](../evidence/2026-11-18T200340Z-m4/comparison/source-manifest.json), build with `./build.sh`, and run the [archived serial runner](../evidence/2026-11-18T200340Z-m4/comparison/runner.py.txt) with an empty output directory. It alternates drawn/table order for three process pairs at each count. Do not overwrite the current working tree or original evidence. The [M4 run](runs/2026-11-18T200340Z-m4.md) states which measurements qualify which conclusions.
+
+The [panel feature](../features/panel.md#supervised-recipes-untested) contains the explicit user-supervised focus, first-real-show, Spaces/full-screen, display-scale, input-method, VoiceOver and appearance recipes. They remain Untested until performed.

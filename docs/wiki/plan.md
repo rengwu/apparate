@@ -282,6 +282,7 @@ These are judged against DEC-008, kept as goals by [DEC-028](decisions.md#round-
 
 - The [app icon](design/icon.md) is final ([DEC-047](decisions.md#round-11-2026-11-19)): add `Resources/AppIcon.icns` to the bundle. M5 uses `MenuBarIconTemplate.png` for the menu bar item ([DEC-048](decisions.md#round-11-2026-11-19)).
 - README with install and update steps, and the MIT licence ([DEC-034](decisions.md#round-4-2026-11-18)).
+- Release builds leave out the test profiles, diagnostics and synthetic fixtures ([M4 review](build/m4-launcher-panel.md#review)).
 - A clean install check:
   - version and minimum macOS are consistent;
   - the signature and designated requirement are verified;
@@ -306,7 +307,7 @@ Following jstack conventions:
 | M1 Foundation, matching and ranking | [written](build/m1-foundation.md) | [yes](verification/runs/2026-11-18T154000Z-m1.md) | [passed](build/m1-foundation.md#review); [fix verified](verification/runs/2026-11-18T154000Z-m1.md#post-review-fix) | `0a6a63e` |
 | M2 Apps, settings, actions, first panel | [written](build/m2-sources-actions-panel.md) | [automated checks passed](verification/runs/2026-11-18T164000Z-m2.md); [supervised pending](verification/runs/2026-11-18T164001Z-m2-supervised.md) | [passed after five fixes](build/m2-sources-actions-panel.md#review) | `b3e68c4` |
 | M3 File index | [written](build/m3-file-index.md) | [automated checks passed; performance limits recorded](verification/runs/2026-11-18T181500Z-m3.md) | [passed after a speed fix](build/m3-file-index.md#review) | `ef9f683` |
-| M4 Launcher panel | [written](build/m4-launcher-panel.md) | — | — | — |
+| M4 Launcher panel | [written](build/m4-launcher-panel.md) | [yes](verification/runs/2026-11-18T200340Z-m4.md) | [passed; latency carried to M6](build/m4-launcher-panel.md#review) | to commit |
 | M5 Settings, menu bar, first run | — | — | — | — |
 | M6 Performance qualification | — | — | — | — |
 | M7 Release 0.1.0 | — | — | — | — |

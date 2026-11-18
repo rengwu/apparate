@@ -1,0 +1,214 @@
+{
+  "activity_begins": 31,
+  "activity_enabled": true,
+  "activity_ends": 31,
+  "after_30_hidden_shows_footprint_bytes": 23757688,
+  "after_index_footprint_bytes": 15450880,
+  "after_typing_footprint_bytes": 30524376,
+  "appearance": "NSAppearanceNameDarkAqua",
+  "capture_method": "app-owned hidden bitmap; no WindowServer composition",
+  "cleanup": "Owned process exited; test-created APPARATE_HOME removed",
+  "cold_hidden_show_ms": 8.678375,
+  "corpus": {
+    "catalog_entries": 9,
+    "file_entries": 20000,
+    "file_index": "production FileCrawler/FileIndexSnapshot; synthetic reader; no SQLite in this UI experiment",
+    "generator": "M3 SyntheticFiles deterministic-17-31-v1",
+    "groups": 500,
+    "queries": [
+      "readme",
+      "config",
+      "network",
+      "calendar",
+      "terminal",
+      "caf\u00e9",
+      "strasse",
+      "\u6771\u4eac\u8cc7\u6599",
+      "Project-0001/report",
+      "code",
+      ".keyboard",
+      "?swift"
+    ]
+  },
+  "corpus_sha256": "bb9e45a425d259946fe7cc6095fdb50f296da6f1b59be303bc86831675325c20",
+  "delivery": "dispatch",
+  "errors": 0,
+  "fake_actions": 0,
+  "fake_registrations": 1,
+  "focus_guards_checked": true,
+  "hidden_show_samples_ms": [
+    8.678375,
+    8.323458,
+    8.856292,
+    8.952958,
+    8.882416,
+    8.866917,
+    7.993958,
+    7.700709,
+    7.40925,
+    7.378542,
+    7.582042,
+    7.345834,
+    7.403416,
+    7.526959,
+    7.365792,
+    7.339209,
+    7.340416,
+    7.8145,
+    7.412084,
+    7.665709,
+    7.415709,
+    7.354458,
+    8.508542,
+    8.661958,
+    8.410458,
+    7.966042,
+    8.319625,
+    8.427875,
+    7.503291,
+    7.3395
+  ],
+  "input_handler_fixed": {
+    "max_ms": 19.953958,
+    "median_ms": 1.8902080000000296,
+    "p95_ms": 6.213915999999699,
+    "samples": 88
+  },
+  "letter_raster": {
+    "max_ms": 18.735291999999845,
+    "median_ms": 9.526582999999846,
+    "p95_ms": 11.112374999999702,
+    "samples": 88
+  },
+  "measurement_limits": "fixed/overlap phases record view-state updates without forced drawing; raster phase synchronously captures each letter and result and therefore delays main-thread delivery; cached fixture symbols in place of native filesystem icon loading; no physical keyboard, window ordering, WindowServer vibrancy or displayed-frame measurements; endpoint footprints, not peaks",
+  "mode": "fixtures",
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "opaque": false,
+  "panel_check": "measure",
+  "panel_initialization_ms": 40.33025,
+  "physical_footprint_bytes": 31392728,
+  "protected_folder_probes": 0,
+  "raster_only": {
+    "max_ms": 16.47716700000001,
+    "median_ms": 9.971459000000323,
+    "p95_ms": 11.96941599999991,
+    "samples": 88
+  },
+  "ready": true,
+  "reduce_transparency": false,
+  "renderer": "drawn",
+  "result": "Passed",
+  "result_mismatches": 0,
+  "result_raster_fixed": {
+    "max_ms": 36.30233399999997,
+    "median_ms": 20.317125000000487,
+    "p95_ms": 25.005583000000115,
+    "samples": 88
+  },
+  "result_view_fixed": {
+    "max_ms": 32.639375,
+    "median_ms": 5.366125000000011,
+    "p95_ms": 10.258749999999964,
+    "samples": 88
+  },
+  "result_view_overlap": {
+    "max_ms": 2.841457999999875,
+    "median_ms": 2.227666999999201,
+    "p95_ms": 2.841457999999875,
+    "samples": 3
+  },
+  "retention": {
+    "binary_identity": "Diagnostic build not fingerprinted; do not treat as final-build paired evidence.",
+    "events": 188,
+    "events_sha256": "6389e8a48d9dd72c51d5ca92472391dafb4c2493eff814cc82ada06e634f54da",
+    "expected_hashes_sha256": "85e8ebb43d0b1e7f4af45a5df33291f9ad1240b403363b65bfa2a6c637efd2bb",
+    "original_receipt_sha256": "3fb7d0dae7abaa66e7046f347cce942ac045f9eaf9b0f84046e1aa9f76a558fc"
+  },
+  "schema": 1,
+  "source_load_ms": 170.756958,
+  "stages_fixed": {
+    "accept": {
+      "max_ms": 2.608458999999982,
+      "median_ms": 0.16466700000000856,
+      "p95_ms": 0.5665839999999207,
+      "samples": 88
+    },
+    "delegate_to_submit": {
+      "max_ms": 0.6311669999995502,
+      "median_ms": 0.14441699999997581,
+      "p95_ms": 0.3264999999998963,
+      "samples": 88
+    },
+    "delivery_to_accept": {
+      "max_ms": 0.0996250000002874,
+      "median_ms": 0.004333000000315224,
+      "p95_ms": 0.01062499999989086,
+      "samples": 88
+    },
+    "input_before_delegate": {
+      "max_ms": 14.950667,
+      "median_ms": 0.9085829999999078,
+      "p95_ms": 2.555082999999968,
+      "samples": 88
+    },
+    "input_handler": {
+      "max_ms": 19.953958,
+      "median_ms": 1.8902080000000296,
+      "p95_ms": 6.213915999999699,
+      "samples": 88
+    },
+    "main_queue": {
+      "max_ms": 14.392833,
+      "median_ms": 0.09433399999988978,
+      "p95_ms": 4.7689580000001115,
+      "samples": 88
+    },
+    "search": {
+      "max_ms": 4.935707999999977,
+      "median_ms": 1.8287090000001172,
+      "p95_ms": 4.250332999999955,
+      "samples": 88
+    },
+    "view": {
+      "max_ms": 2.321457999999893,
+      "median_ms": 0.5289999999999964,
+      "p95_ms": 1.6659159999999247,
+      "samples": 88
+    },
+    "worker_queue": {
+      "max_ms": 0.37495899999976245,
+      "median_ms": 0.04583300000012969,
+      "p95_ms": 0.11166700000001129,
+      "samples": 88
+    }
+  },
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "superseded": 9,
+  "text_callback": {
+    "max_ms": 15.086417,
+    "median_ms": 0.4076249999998254,
+    "p95_ms": 3.416458000000148,
+    "samples": 188
+  },
+  "timeouts": 0,
+  "timing_scope": "injected field-editor text through production coordinator/session/layout and explicit off-screen raster; not a screen commit or presentation timestamp",
+  "uses_vibrancy": true,
+  "view_apply": {
+    "max_ms": 2.321458,
+    "median_ms": 0.491291,
+    "p95_ms": 1.5205,
+    "samples": 179
+  },
+  "visible_profile": "none",
+  "wait_ms": 0,
+  "warm_hidden_show": {
+    "max_ms": 8.952958,
+    "median_ms": 7.665709,
+    "p95_ms": 8.882416,
+    "samples": 29
+  },
+  "warm_up": true,
+  "warm_up_ms": 12.703791
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "count": 20000,
+    "drawn_faster_fraction": 0.875,
+    "median_apply_difference_ms": 0.11177100000000001,
+    "median_raster_difference_ms": 2.043937499999629,
+    "paired_samples": 88,
+    "repeat": 1,
+    "samples_sha256": "4f852f7fe80504f3c4eb6a7bca8f912319ae3b0251ba5faaa763e5ed05ce6964",
+    "unpaired_drawn": 0,
+    "unpaired_table": 0
+  },
+  {
+    "count": 20000,
+    "drawn_faster_fraction": 0.9204545454545454,
+    "median_apply_difference_ms": 0.12018749999999997,
+    "median_raster_difference_ms": 2.0743544999997994,
+    "paired_samples": 88,
+    "repeat": 2,
+    "samples_sha256": "3fc5a302da6bff23a64fe68674559d79130f3622744506dc94848ca7929bc88c",
+    "unpaired_drawn": 0,
+    "unpaired_table": 0
+  },
+  {
+    "count": 20000,
+    "drawn_faster_fraction": 0.9518072289156626,
+    "median_apply_difference_ms": 0.16704200000000002,
+    "median_raster_difference_ms": 2.842666000000463,
+    "paired_samples": 83,
+    "repeat": 3,
+    "samples_sha256": "2c26d356b5816aa4713e2f0557bbe6d4057d8d42b709ddb33a1e771b5b26ab5d",
+    "unpaired_drawn": 5,
+    "unpaired_table": 0
+  },
+  {
+    "count": 200000,
+    "drawn_faster_fraction": 0.8863636363636364,
+    "median_apply_difference_ms": 0.11695899999999998,
+    "median_raster_difference_ms": 1.9411459999998897,
+    "paired_samples": 88,
+    "repeat": 1,
+    "samples_sha256": "0547f6df6673ade194987f97d1e7fb885759ab9f30307fa78d717d9ccd2e6395",
+    "unpaired_drawn": 0,
+    "unpaired_table": 0
+  },
+  {
+    "count": 200000,
+    "drawn_faster_fraction": 0.9770114942528736,
+    "median_apply_difference_ms": 0.13641600000000004,
+    "median_raster_difference_ms": 2.1511239999999816,
+    "paired_samples": 87,
+    "repeat": 2,
+    "samples_sha256": "07fc711787853a40a25bfd8c2798384d4996e48dc06cfaac8dd49bf173935727",
+    "unpaired_drawn": 1,
+    "unpaired_table": 0
+  },
+  {
+    "count": 200000,
+    "drawn_faster_fraction": 0.8181818181818182,
+    "median_apply_difference_ms": 0.10558399999999996,
+    "median_raster_difference_ms": 2.16212500000006,
+    "paired_samples": 88,
+    "repeat": 3,
+    "samples_sha256": "918e76afe1c3866a49ae35160d0247d9d8ec76af797aaa3c15ae7f87c3af39e2",
+    "unpaired_drawn": 0,
+    "unpaired_table": 0
+  }
+]

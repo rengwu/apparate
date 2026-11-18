@@ -1,0 +1,234 @@
+{
+  "activity_begins": 31,
+  "activity_enabled": true,
+  "activity_ends": 31,
+  "after_30_hidden_shows_footprint_bytes": 23659384,
+  "after_index_footprint_bytes": 15401728,
+  "after_typing_footprint_bytes": 30950384,
+  "appearance": "NSAppearanceNameDarkAqua",
+  "capture_method": "app-owned hidden bitmap; no WindowServer composition",
+  "cleanup": "Owned process exited; test-created APPARATE_HOME removed",
+  "cold_hidden_show_ms": 8.585167,
+  "corpus": {
+    "catalog_entries": 9,
+    "file_entries": 20000,
+    "file_index": "production FileCrawler/FileIndexSnapshot; synthetic reader; no SQLite in this UI experiment",
+    "generator": "M3 SyntheticFiles deterministic-17-31-v1",
+    "groups": 500,
+    "queries": [
+      "readme",
+      "config",
+      "network",
+      "calendar",
+      "terminal",
+      "caf\u00e9",
+      "strasse",
+      "\u6771\u4eac\u8cc7\u6599",
+      "Project-0001/report",
+      "code",
+      ".keyboard",
+      "?swift"
+    ]
+  },
+  "corpus_sha256": "bb9e45a425d259946fe7cc6095fdb50f296da6f1b59be303bc86831675325c20",
+  "delivery": "dispatch",
+  "driver_task_priority": 25,
+  "errors": 0,
+  "fake_actions": 0,
+  "fake_registrations": 1,
+  "field_editor_configuration": {
+    "completion": false,
+    "correction": false,
+    "data_detection": false,
+    "grammar": false,
+    "link_detection": false,
+    "replacement": false,
+    "rich_text": false,
+    "spelling": false,
+    "writing_tools": -1
+  },
+  "focus_guards_checked": true,
+  "hidden_show_samples_ms": [
+    8.585167,
+    8.117917,
+    7.959791,
+    7.645125,
+    8.473459,
+    8.3905,
+    7.78575,
+    7.957708,
+    7.971709,
+    7.702125,
+    8.480208,
+    7.537208,
+    7.979458,
+    7.84025,
+    7.569292,
+    8.335833,
+    7.64075,
+    8.097584,
+    8.207167,
+    7.570792,
+    7.963125,
+    7.888584,
+    8.033875,
+    8.229375,
+    7.622709,
+    8.062333,
+    7.782292,
+    7.795083,
+    7.71125,
+    8.097167
+  ],
+  "input_handler_fixed": {
+    "max_ms": 7.169291999999814,
+    "median_ms": 1.9233750000000782,
+    "p95_ms": 5.070749999999862,
+    "samples": 88
+  },
+  "input_setup_ms": 34.073,
+  "letter_raster": {
+    "max_ms": 36.27254200000016,
+    "median_ms": 10.066875000000437,
+    "p95_ms": 10.759082999999919,
+    "samples": 88
+  },
+  "measurement_limits": "fixed/overlap phases record view-state updates without forced drawing; raster phase synchronously captures each letter and result and therefore delays main-thread delivery; cached fixture symbols in place of native filesystem icon loading; no physical keyboard, window ordering, WindowServer vibrancy or displayed-frame measurements; endpoint footprints, not peaks",
+  "mode": "fixtures",
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "opaque": false,
+  "panel_check": "measure",
+  "panel_initialization_ms": 49.189333,
+  "physical_footprint_bytes": 31785968,
+  "protected_folder_probes": 0,
+  "raster_only": {
+    "max_ms": 21.298874999999953,
+    "median_ms": 10.599957999999788,
+    "p95_ms": 11.84295800000018,
+    "samples": 88
+  },
+  "ready": true,
+  "reduce_transparency": false,
+  "renderer": "drawn",
+  "result": "Passed",
+  "result_mismatches": 0,
+  "result_raster_fixed": {
+    "max_ms": 62.20579199999975,
+    "median_ms": 21.945333000000574,
+    "p95_ms": 25.369791999999507,
+    "samples": 88
+  },
+  "result_view_fixed": {
+    "max_ms": 21.764167000000043,
+    "median_ms": 8.689666000000216,
+    "p95_ms": 16.802999999999884,
+    "samples": 88
+  },
+  "result_view_overlap": {
+    "max_ms": 2.8850000000002183,
+    "median_ms": 2.1914170000000013,
+    "p95_ms": 2.8850000000002183,
+    "samples": 3
+  },
+  "retention": {
+    "binary_identity": "Diagnostic build not fingerprinted; do not treat as final-build paired evidence.",
+    "events": 188,
+    "events_sha256": "dddf0822f938e92a73a4202a78b0fbdfa7b3e74e572dae6fd1302eb1d302bb82",
+    "expected_hashes_sha256": "85e8ebb43d0b1e7f4af45a5df33291f9ad1240b403363b65bfa2a6c637efd2bb",
+    "original_receipt_sha256": "ac9739b5d389aa53285bc964710be91190860f05f5e6db23060fd7e365b13942"
+  },
+  "schema": 1,
+  "source_load_ms": 168.586625,
+  "stages_fixed": {
+    "accept": {
+      "max_ms": 1.15949999999998,
+      "median_ms": 0.24795800000015333,
+      "p95_ms": 0.8870839999999589,
+      "samples": 88
+    },
+    "delegate_to_submit": {
+      "max_ms": 3.287499999999909,
+      "median_ms": 0.14699999999993452,
+      "p95_ms": 0.28825000000006185,
+      "samples": 88
+    },
+    "delivery_to_accept": {
+      "max_ms": 0.025416999999833934,
+      "median_ms": 0.0072079999999914435,
+      "p95_ms": 0.016583000000082393,
+      "samples": 88
+    },
+    "input_before_delegate": {
+      "max_ms": 6.02800000000002,
+      "median_ms": 0.8888330000002043,
+      "p95_ms": 1.9147499999999127,
+      "samples": 88
+    },
+    "input_handler": {
+      "max_ms": 7.169291999999814,
+      "median_ms": 1.9233750000000782,
+      "p95_ms": 5.070749999999862,
+      "samples": 88
+    },
+    "main_queue": {
+      "max_ms": 14.697999999999865,
+      "median_ms": 1.3498749999999973,
+      "p95_ms": 9.587041999999656,
+      "samples": 88
+    },
+    "search": {
+      "max_ms": 10.430124999999862,
+      "median_ms": 2.467834000000039,
+      "p95_ms": 8.587332999999944,
+      "samples": 88
+    },
+    "view": {
+      "max_ms": 12.035415999999941,
+      "median_ms": 0.864292000000205,
+      "p95_ms": 2.4677079999999023,
+      "samples": 88
+    },
+    "worker_queue": {
+      "max_ms": 2.3412080000000515,
+      "median_ms": 0.04662499999994907,
+      "p95_ms": 0.9524589999998625,
+      "samples": 88
+    }
+  },
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "superseded": 9,
+  "text_callback": {
+    "max_ms": 6.359917000000223,
+    "median_ms": 0.48366700000000407,
+    "p95_ms": 2.0014169999999467,
+    "samples": 188
+  },
+  "thermal_state": 0,
+  "timeouts": 0,
+  "timing_scope": "injected field-editor text through production coordinator/session/layout and explicit off-screen raster; not a screen commit or presentation timestamp",
+  "uses_vibrancy": true,
+  "view_apply": {
+    "max_ms": 12.035416,
+    "median_ms": 0.55525,
+    "p95_ms": 1.969958,
+    "samples": 179
+  },
+  "visible_profile": "none",
+  "wait_ms": 0,
+  "warm_hidden_show": {
+    "max_ms": 8.480208,
+    "median_ms": 7.959791,
+    "p95_ms": 8.473459,
+    "samples": 29
+  },
+  "warm_up": true,
+  "warm_up_ms": 14.508542,
+  "worker_cpu_fixed": {
+    "max_ms": 6.0995,
+    "median_ms": 2.374542,
+    "p95_ms": 4.507375,
+    "samples": 88
+  }
+}

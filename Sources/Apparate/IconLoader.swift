@@ -4,12 +4,18 @@ import ApparateCore
 @MainActor final class IconLoader {
     private let cache = NSCache<NSString, NSImage>()
     private var waiting: [String: [(NSImage?) -> Void]] = [:]
-    private var generation = 0
-    init() { cache.countLimit = 128 }
+    private(set) var generation = 0
+    private let fixtureOnly: Bool
+    init(fixtureOnly: Bool = false) { self.fixtureOnly = fixtureOnly; cache.countLimit = 128 }
     func load(_ icon: ItemIcon, completion: @escaping (NSImage?) -> Void) {
         switch icon {
-        case .symbol(let name): completion(NSImage(systemSymbolName: name, accessibilityDescription: nil))
+        case .symbol(let name):
+            let key = "symbol:" + name
+            if let image = cache.object(forKey: key as NSString) { completion(image); return }
+            let image = NSImage(systemSymbolName: name, accessibilityDescription: nil)
+            if let image { cache.setObject(image, forKey: key as NSString) }; completion(image)
         case .file(let path):
+            if fixtureOnly { load(.symbol("doc"), completion: completion); return }
             if let image = cache.object(forKey: path as NSString) { completion(image); return }
             if waiting[path] != nil { waiting[path]?.append(completion); return }
             waiting[path] = [completion]
