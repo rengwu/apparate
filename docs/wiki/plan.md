@@ -77,7 +77,7 @@ Each milestone ends with core tests passing, a verification run recorded in this
 **Items and queries:**
 
 - Stable item IDs for every kind: app, settings item, folder, file, system command, web search.
-- Prefixes, configurable ([REQ-005](requirements.md)). Defaults, with no others for now ([DEC-032](decisions.md#round-4-2026-11-18) is provisional until round 5):
+- Prefixes, configurable ([REQ-005](requirements.md)). The defaults are the only ones ([DEC-032](decisions.md#round-4-2026-11-18), confirmed by [DEC-039](decisions.md#round-5-2026-11-19)):
   - `'` searches files and folders;
   - `.` searches settings;
   - `?` searches the web ([DEC-030](decisions.md#round-4-2026-11-18)).
@@ -119,7 +119,7 @@ Each milestone ends with core tests passing, a verification run recorded in this
 
 **Apps:**
 
-- Found in `/Applications`, `/System/Applications` (with Utilities), `~/Applications`, and any app folders the user adds. Kept current with FSEvents.
+- Found in `/Applications`, `/System/Applications` (with Utilities), `/System/Library/CoreServices/Applications` and `~/Applications`. Kept current with FSEvents. There is no setting for other app folders; an app inside an indexed folder is found by M3 and ranks as an app ([DEC-041](decisions.md#round-6-2026-11-19)).
 - Duplicate installs and localized names are handled.
 - The plan does not promise to find apps stored elsewhere.
 
@@ -161,7 +161,7 @@ Each milestone ends with core tests passing, a verification run recorded in this
 - Depth 10 by default, adjustable per folder ([DEC-020](decisions.md#round-2-2026-11-18)). Depth is defined as follows:
   - the folder itself is depth 0, its children depth 1;
   - entries at the maximum depth are indexed but not descended into.
-- Overlapping folders are indexed once. Symbolic links and app packages are listed but not followed.
+- Overlapping folders are indexed once. Symbolic links and packages are listed but not followed. An `.app` package found here ranks and opens as an app ([DEC-041](decisions.md#round-6-2026-11-19)).
 
 **Exclusions:**
 
@@ -280,7 +280,7 @@ These are judged against DEC-008, kept as goals by [DEC-028](decisions.md#round-
 
 ### M7. Release 0.1.0
 
-- App icon from the reworked direction ([DEC-035](decisions.md#round-4-2026-11-18)), refined, plus a menu bar glyph. `make-icon.sh` as in Klip.
+- The [app icon](design/icon.md) is final ([DEC-047](decisions.md#round-11-2026-11-19)): add `Resources/AppIcon.icns` to the bundle. M5 uses `MenuBarIconTemplate.png` for the menu bar item ([DEC-048](decisions.md#round-11-2026-11-19)).
 - README with install and update steps, and the MIT licence ([DEC-034](decisions.md#round-4-2026-11-18)).
 - A clean install check:
   - version and minimum macOS are consistent;
@@ -303,10 +303,10 @@ Following jstack conventions:
 
 | Milestone | Guide | Built | Reviewed | Commit |
 | --- | --- | --- | --- | --- |
-| M1 Foundation, matching and ranking | [written](build/m1-foundation.md) | [yes](verification/runs/2026-11-18T154000Z-m1.md) | [passed](build/m1-foundation.md#review); [fix verified](verification/runs/2026-11-18T154000Z-m1.md#post-review-fix) | waiting for git |
-| M2 Apps, settings, actions, first panel | [written](build/m2-sources-actions-panel.md) | [automated checks passed](verification/runs/2026-11-18T164000Z-m2.md); [supervised pending](verification/runs/2026-11-18T164001Z-m2-supervised.md) | [passed after five fixes](build/m2-sources-actions-panel.md#review) | on hold |
-| M3 File index | — | — | — | — |
-| M4 Launcher panel | — | — | — | — |
+| M1 Foundation, matching and ranking | [written](build/m1-foundation.md) | [yes](verification/runs/2026-11-18T154000Z-m1.md) | [passed](build/m1-foundation.md#review); [fix verified](verification/runs/2026-11-18T154000Z-m1.md#post-review-fix) | `0a6a63e` |
+| M2 Apps, settings, actions, first panel | [written](build/m2-sources-actions-panel.md) | [automated checks passed](verification/runs/2026-11-18T164000Z-m2.md); [supervised pending](verification/runs/2026-11-18T164001Z-m2-supervised.md) | [passed after five fixes](build/m2-sources-actions-panel.md#review) | `b3e68c4` |
+| M3 File index | [written](build/m3-file-index.md) | [automated checks passed; performance limits recorded](verification/runs/2026-11-18T181500Z-m3.md) | [passed after a speed fix](build/m3-file-index.md#review) | to commit |
+| M4 Launcher panel | [written](build/m4-launcher-panel.md) | — | — | — |
 | M5 Settings, menu bar, first run | — | — | — | — |
 | M6 Performance qualification | — | — | — | — |
 | M7 Release 0.1.0 | — | — | — | — |

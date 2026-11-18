@@ -91,9 +91,9 @@ import ApparateCore
 
 /// Used only by an explicit isolated test profile; none of these methods touch global state.
 @MainActor final class TestEffects: ActionExecuting, HotKeyRegistering {
-    private(set) var actionCount = 0, registrationCount = 0
-    func openApplication(_ url: URL) async throws { actionCount += 1 }
-    func openURL(_ url: URL) async throws { actionCount += 1 }
+    private(set) var actionCount = 0, registrationCount = 0, applicationOpens = 0, urlOpens = 0
+    func openApplication(_ url: URL) async throws { actionCount += 1; applicationOpens += 1 }
+    func openURL(_ url: URL) async throws { actionCount += 1; urlOpens += 1 }
     func reveal(_ url: URL) async throws { actionCount += 1 }
     func copyPath(_ path: String) async throws { actionCount += 1 }
     func command(_ command: SystemCommand) async throws { actionCount += 1 }

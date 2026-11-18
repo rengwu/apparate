@@ -9,8 +9,10 @@ Build guides, one per milestone of the [implementation plan](../plan.md). Claude
 
 | Milestone | Guide | Status |
 | --- | --- | --- |
-| M1 Foundation, matching and ranking | [M1 guide](m1-foundation.md) | Reviewed: passed; fix verified; commit waits for git |
-| M2 Apps, settings, actions, first panel | [M2 guide](m2-sources-actions-panel.md) | [Built; automated checks passed](../verification/runs/2026-11-18T164000Z-m2.md); [reviewed: passed after five fixes](m2-sources-actions-panel.md#review); supervised checks pending |
+| M1 Foundation, matching and ranking | [M1 guide](m1-foundation.md) | Reviewed and passed; committed `0a6a63e` |
+| M2 Apps, settings, actions, first panel | [M2 guide](m2-sources-actions-panel.md) | [Built; automated checks passed](../verification/runs/2026-11-18T164000Z-m2.md); [reviewed: passed after five fixes](m2-sources-actions-panel.md#review); committed `b3e68c4`; supervised checks pending |
+| M3 File index | [M3 guide](m3-file-index.md) | [Search-speed fix verified; 63 groups pass](../verification/runs/2026-11-18T181500Z-m3.md#post-review-search-fix); independent recheck passed; approved for commit |
+| M4 Launcher panel | [M4 guide](m4-launcher-panel.md) | Ready; sent after the catalog follow-up |
 
 ## How a guide is used
 

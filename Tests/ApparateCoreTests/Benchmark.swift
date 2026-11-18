@@ -3,11 +3,11 @@ import Darwin
 import CryptoKit
 import ApparateCore
 
-private let corpusSeed: UInt64 = 0x4170706172617465
-private let nameQueries = ["code", "terminal", "calendar", "calculator", "readme", "report", "network", "project", "sources", "settings", "archive", "notes", "cafe", "strasse", "東京", "zzqv"]
-private let pathQueries = ["project/sources", "project/tests", "projects/readme", "workspace/report", "sources/network", "docs/notes", "archive/cafe", "project/", "sources/", "p/s", "s/r", "zzqv/", "project//sources"]
+let corpusSeed: UInt64 = 0x4170706172617465
+let nameQueries = ["code", "terminal", "calendar", "calculator", "readme", "report", "network", "project", "sources", "settings", "archive", "notes", "cafe", "strasse", "東京", "zzqv"]
+let pathQueries = ["project/sources", "project/tests", "projects/readme", "workspace/report", "sources/network", "docs/notes", "archive/cafe", "project/", "sources/", "p/s", "s/r", "zzqv/", "project//sources"]
 
-private func corpus(_ count: Int) -> [SearchItem] {
+func corpus(_ count: Int) -> [SearchItem] {
     var random = SeededRandom(state: corpusSeed), items: [SearchItem] = []
     let words = ["Code", "Terminal", "Calendar", "Calculator", "README", "Report", "Network", "Project", "Sources", "Settings", "Archive", "Notes", "Resources", "Design", "Search", "Index", "Config", "Layout", "Preview", "Keyboard"]
     let extensions = ["swift", "md", "json", "txt", "html", "pdf", "png"]

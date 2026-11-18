@@ -1,0 +1,38 @@
+{
+  "after_crawl_phys_footprint_bytes" : 7012880,
+  "after_load_phys_footprint_bytes" : 8143400,
+  "after_search_phys_footprint_bytes" : 8978984,
+  "baseline_phys_footprint_bytes" : 2326984,
+  "checksum" : "13814522052895919504",
+  "crawl_and_prepare_ms" : 513.81279199999994,
+  "discovered_apps" : 1,
+  "entry_count" : 11048,
+  "failed_directories" : 0,
+  "footprint_sampling_ms" : 10,
+  "loaded_snapshot_prepare_ms" : 14.907166999999999,
+  "mode" : "projects",
+  "names" : {
+    "samples" : 243,
+    "statistics" : {
+      "max_ms" : 2.1170420000000001,
+      "median_ms" : 0.88341700000000001,
+      "p95_ms" : 1.3961669999999999
+    }
+  },
+  "paths" : {
+    "samples" : 96,
+    "statistics" : {
+      "max_ms" : 3.4080409999999999,
+      "median_ms" : 1.2263329999999999,
+      "p95_ms" : 2.9867919999999999
+    }
+  },
+  "real_data_policy" : "Projects read-only, aggregate counts\/timings only; mutations confined to synthetic or temporary fixtures",
+  "result" : "Passed",
+  "schema" : 1,
+  "scope" : "Core scoring, top-50 and highlights; excludes UI\/coordinator delivery; query parsing outside timer",
+  "seed" : "deterministic-17-31-v1",
+  "sqlite_read_decode_ms" : 61.523249999999997,
+  "sqlite_save_ms" : 76.165666000000002,
+  "unavailable_entries" : 0
+}

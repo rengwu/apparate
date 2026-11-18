@@ -33,3 +33,9 @@ Native mechanisms are compiled and checked against local SDK declarations/export
 ## Verification history
 
 - [M2 automated verification](../verification/runs/2026-11-18T164000Z-m2.md).
+
+## M3 integration
+
+M3 file presence checks use the link entry itself: an existing dangling link remains available for Copy path/Reveal, and a failed open does not falsely evict it as a deleted path. Apps discovered inside indexed folders use the application-open adapter.
+
+- [M3 verification](../verification/runs/2026-11-18T181500Z-m3.md).

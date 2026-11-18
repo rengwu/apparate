@@ -1,0 +1,6 @@
+{
+  "production_sources_verified_against": "2026-11-18T181500Z-m3/source-manifest.json",
+  "scope": "Aligned comparison harness with byte-identical original M3 production sources in isolated temporary checkout",
+  "source_manifest_sha256": "1bace9180a5b93b7e656484f1d36397c34c09f3c0d51f24ee9beea989e90d3f0",
+  "test_binary_sha256": "10c7e483da3d31c62aed3ecce1d1b9d9058c67bf11a6453b3ffae8a5f8bf66f5"
+}

@@ -1,0 +1,7 @@
+{
+  "base_commit": "b3e68c44e1225c2237b1a59a380adf08811a9cec",
+  "native_effects": "Fake adapters for all app profiles",
+  "scope": "Compact scan buffers, immediate root restriction view, shared-ancestor tie comparison, no redundant standalone file-result sort; benchmark and two regression groups",
+  "source_manifest_sha256": "0dd7b3eb5af3f9e8a32f7d0e674eabbee91ece563b76f5bd4fe0354e913340a8",
+  "working_tree": "M3 review fix uncommitted; recheck pending"
+}

@@ -1,0 +1,62 @@
+{
+  "after_crawl_phys_footprint_bytes" : 63422992,
+  "after_load_phys_footprint_bytes" : 56967768,
+  "after_search_phys_footprint_bytes" : 65700440,
+  "baseline_phys_footprint_bytes" : 2212296,
+  "checksum" : "19000",
+  "crawl_and_prepare_ms" : 2006.667625,
+  "discovered_apps" : 0,
+  "entry_count" : 200000,
+  "failed_directories" : 0,
+  "footprint_sampling_ms" : 10,
+  "loaded_snapshot_prepare_ms" : 504.34295900000001,
+  "mode" : "synthetic",
+  "names" : {
+    "samples" : 243,
+    "statistics" : {
+      "max_ms" : 30.637708,
+      "median_ms" : 13.023,
+      "p95_ms" : 14.712334
+    }
+  },
+  "names_during_rebuild" : {
+    "samples" : 81,
+    "statistics" : {
+      "max_ms" : 14.406542,
+      "median_ms" : 12.996083,
+      "p95_ms" : 13.801542
+    }
+  },
+  "old_plus_updated_phys_footprint_bytes" : 66044504,
+  "old_updated_and_rebuilt_phys_footprint_bytes" : 115196528,
+  "paths" : {
+    "samples" : 96,
+    "statistics" : {
+      "max_ms" : 19.675542,
+      "median_ms" : 13.346209,
+      "p95_ms" : 17.920708999999999
+    }
+  },
+  "paths_during_rebuild" : {
+    "samples" : 32,
+    "statistics" : {
+      "max_ms" : 20.206959000000001,
+      "median_ms" : 13.65625,
+      "p95_ms" : 19.662165999999999
+    }
+  },
+  "real_data_policy" : "Projects read-only, aggregate counts\/timings only; mutations confined to synthetic or temporary fixtures",
+  "rebuild_peak_sampled_phys_footprint_bytes" : 115196528,
+  "recycle_prepared_chunks" : 5,
+  "result" : "Passed",
+  "retained_recycling_snapshots_phys_footprint_bytes" : 115688048,
+  "schema" : 1,
+  "scope" : "Core scoring, top-50 and highlights; excludes UI\/coordinator delivery; query parsing outside timer",
+  "seed" : "deterministic-17-31-v1",
+  "small_change_prepare_ms" : 5.7503330000000004,
+  "small_change_prepared_chunks" : 5,
+  "small_change_save_ms" : 46.967542000000002,
+  "sqlite_read_decode_ms" : 1145.377416,
+  "sqlite_save_ms" : 1878.742542,
+  "unavailable_entries" : 0
+}

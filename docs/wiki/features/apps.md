@@ -32,3 +32,9 @@ Automated coverage includes fixture sources, actual fixture-directory FSEvents a
 ## Verification history
 
 - [M2 automated verification](../verification/runs/2026-11-18T164000Z-m2.md).
+
+## M3 integration
+
+M3 also discovers .app packages inside indexed folders (DEC-041). They use the shared bundle metadata reader, rank/open as apps, remain terminal packages, and deduplicate against fixed-source app IDs. No separate user-added app-folder setting is introduced. See [file index](file-index.md).
+
+- [M3 verification](../verification/runs/2026-11-18T181500Z-m3.md).

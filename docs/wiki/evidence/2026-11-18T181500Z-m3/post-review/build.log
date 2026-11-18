@@ -1,0 +1,6 @@
+Building for production...
+[3 / 10] ApparateCore
+[5 / 11] ApparateCore
+Build complete! (11.36 sec)
+<project>/build/Apparate.app: replacing existing signature
+Built build/Apparate.app (0.1.0, arm64)

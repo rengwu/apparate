@@ -1,0 +1,62 @@
+{
+  "after_crawl_phys_footprint_bytes" : 64111120,
+  "after_load_phys_footprint_bytes" : 50233896,
+  "after_search_phys_footprint_bytes" : 50594344,
+  "baseline_phys_footprint_bytes" : 2179528,
+  "checksum" : "19000",
+  "crawl_and_prepare_ms" : 2013.541375,
+  "discovered_apps" : 0,
+  "entry_count" : 200000,
+  "failed_directories" : 0,
+  "footprint_sampling_ms" : 10,
+  "loaded_snapshot_prepare_ms" : 558.577583,
+  "mode" : "synthetic",
+  "names" : {
+    "samples" : 243,
+    "statistics" : {
+      "max_ms" : 2.4505409999999999,
+      "median_ms" : 1.6141669999999999,
+      "p95_ms" : 2.1764169999999998
+    }
+  },
+  "names_during_rebuild" : {
+    "samples" : 81,
+    "statistics" : {
+      "max_ms" : 7.9653749999999999,
+      "median_ms" : 1.913084,
+      "p95_ms" : 4.2788329999999997
+    }
+  },
+  "old_plus_updated_phys_footprint_bytes" : 50823720,
+  "old_updated_and_rebuilt_phys_footprint_bytes" : 104071768,
+  "paths" : {
+    "samples" : 96,
+    "statistics" : {
+      "max_ms" : 12.110458,
+      "median_ms" : 2.706709,
+      "p95_ms" : 8.8939579999999996
+    }
+  },
+  "paths_during_rebuild" : {
+    "samples" : 32,
+    "statistics" : {
+      "max_ms" : 9.6436670000000007,
+      "median_ms" : 3.2891249999999999,
+      "p95_ms" : 8.1774579999999997
+    }
+  },
+  "real_data_policy" : "Projects read-only, aggregate counts\/timings only; mutations confined to synthetic or temporary fixtures",
+  "rebuild_peak_sampled_phys_footprint_bytes" : 104071768,
+  "recycle_prepared_chunks" : 5,
+  "result" : "Passed",
+  "retained_recycling_snapshots_phys_footprint_bytes" : 104612440,
+  "schema" : 1,
+  "scope" : "Core scoring, top-50 and highlights; excludes UI\/coordinator delivery; query parsing outside timer",
+  "seed" : "deterministic-17-31-v1",
+  "small_change_prepare_ms" : 5.8934170000000003,
+  "small_change_prepared_chunks" : 5,
+  "small_change_save_ms" : 58.469833999999999,
+  "sqlite_read_decode_ms" : 1191.664458,
+  "sqlite_save_ms" : 1703.0732499999999,
+  "unavailable_entries" : 0
+}

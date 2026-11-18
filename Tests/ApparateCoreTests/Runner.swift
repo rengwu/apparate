@@ -37,6 +37,17 @@ func search(_ items: [SearchItem], _ text: String, config: AppConfig = AppConfig
 
 @main struct Runner {
     @MainActor static func main() async {
+        if CommandLine.arguments.contains("--file-comparison") {
+            do { try await runFileComparisonBenchmark() } catch { print("File comparison failed: \(error)"); exit(1) }
+            return
+        }
+        if CommandLine.arguments.contains("--file-benchmark") || CommandLine.arguments.contains("--file-idle") {
+            do {
+                if CommandLine.arguments.contains("--file-idle") { try await runFileIdle() }
+                else { try await runFileBenchmark() }
+            } catch { print("File measurement failed: \(type(of: error))"); exit(1) }
+            return
+        }
         if CommandLine.arguments.contains("--benchmark") {
             do { try runBenchmark() } catch { print("Benchmark failed: \(error)"); exit(1) }
             return
@@ -52,6 +63,8 @@ func search(_ items: [SearchItem], _ text: String, config: AppConfig = AppConfig
         await actionTests(h)
         await panelTests(h)
         await accessTests(h)
+        await ignoreTests(h)
+        await fileIndexTests(h)
         print("RESULT \(h.passed) passed; \(h.failed) failed")
         if h.failed > 0 { exit(1) }
     }

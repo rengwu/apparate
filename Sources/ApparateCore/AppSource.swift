@@ -25,12 +25,8 @@ public enum AppSource {
             watched.insert(original.path)
             watched.insert(url.path)
             do {
-                let info = try BundleData.dictionary(url.appendingPathComponent("Contents/Info.plist"))
-                let name = BundleData.name(url: url, info: info, preferences: languages)
-                let alternate = [original.deletingPathExtension().lastPathComponent, url.deletingPathExtension().lastPathComponent, info["CFBundleName"] as? String ?? ""]
-                let names = Array(Set(alternate.filter { !$0.isEmpty && $0 != name })).sorted()
-                let item = SearchItem(id: "app:" + url.path, kind: .app, name: name, alternateNames: names, path: url.path)
-                entries[item.id] = CatalogEntry(item: item, target: .application(url), location: url.deletingLastPathComponent().path, icon: .file(url.path))
+                let entry = try bundleEntry(at: original, languages: languages)
+                entries[entry.item.id] = entry
             } catch { skipped += 1 }
         }
         func folder(_ url: URL, nested: Bool) throws {
@@ -53,6 +49,17 @@ public enum AppSource {
         }
         for url in additionalApps { app(url) }
         return AppScan(entries: entries.values.sorted { $0.item.id < $1.item.id }, watchPaths: watched.sorted(), skippedBundles: skipped)
+    }
+
+    /// Reads metadata only. Shared by the fixed app folders and file-index package discovery.
+    public static func bundleEntry(at original: URL, languages: [String] = Locale.preferredLanguages) throws -> CatalogEntry {
+        let url = original.resolvingSymlinksInPath().standardizedFileURL
+        let info = try BundleData.dictionary(url.appendingPathComponent("Contents/Info.plist"))
+        let name = BundleData.name(url: url, info: info, preferences: languages)
+        let alternate = [original.deletingPathExtension().lastPathComponent, url.deletingPathExtension().lastPathComponent, info["CFBundleName"] as? String ?? ""]
+        let names = Array(Set(alternate.filter { !$0.isEmpty && $0 != name })).sorted()
+        let item = SearchItem(id: "app:" + url.path, kind: .app, name: name, alternateNames: names, path: url.path)
+        return CatalogEntry(item: item, target: .application(url), location: url.deletingLastPathComponent().path, icon: .file(url.path))
     }
 
     /// Also catches creation of a root that does not exist at launch.

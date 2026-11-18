@@ -2,7 +2,8 @@ import Foundation
 import SQLite3
 
 public struct UsageSnapshot: Sendable {
-    private let boosts: [String: Double]
+    let boosts: [String: Double]
+    let identity = UUID()
     public init(counts: [String: Double] = [:], lambda: Double = 0.5) {
         // The bound is part of ranking, even if a caller supplies an invalid count.
         boosts = counts.mapValues { count in
@@ -17,46 +18,16 @@ public struct UsageError: Error, CustomStringConvertible, Sendable {
     public let description: String
 }
 
-// The connection is used only by UsageStore's actor. The wrapper solely handles deinitialization;
-// no pointer, statement or unprotected operation is exposed to callers or another executor.
-private final class UsageConnection: @unchecked Sendable {
-    let db: OpaquePointer
-    init(_ url: URL) throws {
-        var pointer: OpaquePointer?
-        let status = sqlite3_open_v2(url.path, &pointer, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX, nil)
-        guard status == SQLITE_OK, let pointer else {
-            let message = pointer.map { String(cString: sqlite3_errmsg($0)) } ?? "Could not open usage database."
-            if let pointer { sqlite3_close(pointer) }
-            throw UsageError(description: message)
-        }
-        db = pointer
-        sqlite3_busy_timeout(db, 1000)
-    }
-    deinit { sqlite3_close(db) }
-}
-
 public actor UsageStore {
     public static let halfLife: TimeInterval = 30 * 24 * 60 * 60
-    private let connection: UsageConnection
+    private let connection: IndexConnection
     private let clock: @Sendable () -> TimeInterval
     private var db: OpaquePointer { connection.db }
 
     public init(directory: URL, clock: @escaping @Sendable () -> TimeInterval = { Date().timeIntervalSince1970 }) throws {
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
-        connection = try UsageConnection(directory.appendingPathComponent("index.sqlite"))
+        connection = try IndexConnection(directory.appendingPathComponent("index.sqlite"))
         self.clock = clock
-        let db = connection.db
-        var statement: OpaquePointer?
-        guard sqlite3_prepare_v2(db, "PRAGMA user_version", -1, &statement, nil) == SQLITE_OK else {
-            throw UsageError(description: String(cString: sqlite3_errmsg(db)))
-        }
-        let stepped = sqlite3_step(statement), version = sqlite3_column_int(statement, 0)
-        sqlite3_finalize(statement)
-        guard stepped == SQLITE_ROW, version == 0 || version == 1 else { throw UsageError(description: "Unsupported usage database version.") }
-        guard sqlite3_exec(db, "BEGIN; CREATE TABLE IF NOT EXISTS usage (item_id TEXT PRIMARY KEY, decayed_count REAL NOT NULL, last_update REAL NOT NULL); PRAGMA user_version = 1; COMMIT;", nil, nil, nil) == SQLITE_OK else {
-            sqlite3_exec(db, "ROLLBACK", nil, nil, nil)
-            throw UsageError(description: String(cString: sqlite3_errmsg(db)))
-        }
     }
 
     public func counts() throws -> [String: Double] { try counts(at: clock()) }

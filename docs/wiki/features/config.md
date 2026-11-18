@@ -36,3 +36,9 @@ Covered: first launch, defaults, semantic/type errors, future version, last-vali
 - [M1 build verification](../verification/runs/2026-11-18T154000Z-m1.md) — exact build, observed outcomes and evidence; Claude's review passed and the packaging fix is verified in the post-review note.
 
 - [M2 automated verification](../verification/runs/2026-11-18T164000Z-m2.md) — config applied to the session and safely replaced hotkey; M1 correctness groups retained.
+
+## M3 integration
+
+M3 applies folder/depth/ignore changes to file indexing; removing a root hides its solely owned results immediately and invalidates older load/crawl work. Explicitly configured home roots are supported; missing roots never widen into recursive home watches.
+
+- [M3 verification](../verification/runs/2026-11-18T181500Z-m3.md).

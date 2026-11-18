@@ -30,3 +30,9 @@ Native prompt behavior, denial/retry and grant survival after rebuilding cannot 
 ## Verification history
 
 - [M2 automated verification](../verification/runs/2026-11-18T164000Z-m2.md).
+
+## M3 integration
+
+M3 consumes Allowed observations as a gate for automatic protected-folder reads, including protected children reached from an ancestor root. Denied/not-found/error hints wait for an explicit retry. Completion of the access step retries indexing even when the saved Allowed status was already present.
+
+- [M3 verification](../verification/runs/2026-11-18T181500Z-m3.md).

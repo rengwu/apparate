@@ -1,0 +1,7 @@
+{
+  "base_commit": "b3e68c44e1225c2237b1a59a380adf08811a9cec",
+  "fixture_git": "Oracle only, isolated temporary repositories",
+  "native_effects": "Fake adapters in app profiles; no native actions or hotkey registrations",
+  "source_manifest_sha256": "dbdd2960de37286118c64b5ced143e4e963971cb900f0d397a4b5bc2381394bb",
+  "working_tree": "M3 source changes uncommitted; independent review pending"
+}

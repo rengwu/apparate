@@ -1,0 +1,8 @@
+{
+  "catalog_publications": 0,
+  "catalog_scans": 0,
+  "file_updates": 1,
+  "observation_seconds": 63.998596875000004,
+  "reason": "Hidden fixtures begin observation immediately on first readiness, unlike the live profile settling delay. This receipt includes one startup file update, so the owned Core fixture supplies the isolated quiet-interval result.",
+  "result": "Passed for hidden fixture integration; not a separate quiet-interval measurement"
+}

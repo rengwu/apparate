@@ -1,0 +1,33 @@
+{
+  "binary_hashes_matched": true,
+  "cleanup": "Owned app processes exited; test-created APPARATE_HOME directories and isolated baseline checkout removed",
+  "document_commands": [
+    "node <jstack>/skills/verify-change/scripts/check-reports.mjs docs/wiki",
+    "node docs/wiki/_build.mjs",
+    "node docs/wiki/_build.mjs --check",
+    "git diff --check"
+  ],
+  "headless_core": true,
+  "matched_corpus_equal": true,
+  "matched_prefixes_equal": 163,
+  "name_p95_within_2x": true,
+  "non_fixture_images_removed": true,
+  "private_text_scan": "Passed",
+  "private_text_scan_files": 37,
+  "receipts_checked": [
+    "panel-app/receipt.json",
+    "app-repeat-3/receipt.json",
+    "cache-relaunch/receipt.json",
+    "idle-app-fixture/receipt.json",
+    "diagnostic-app/receipt.json",
+    "panel-file/receipt.json",
+    "fixture-hidden/receipt.json",
+    "idle-app/receipt.json"
+  ],
+  "result": "Passed",
+  "scope": "Review-fix correctness, matched speed, safe fixture integration and owned-fixture quiet idle; additional live quiet-idle attempt remains Untested",
+  "source_changes_after_measurements": false,
+  "source_files_matched": 49,
+  "source_manifest_sha256": "5679a5f5f62b57156891b018a2c278ffcd40cc356d4b622ab714848b127fdf44",
+  "visual_review": "Retained file/app captures show exact synthetic queries and expected rows; existing long-location clipping remains M4"
+}

@@ -4,7 +4,7 @@ import Darwin
 public enum FilePresence: Sendable, Equatable { case present, missing, unknown }
 public func filePresence(_ url: URL) -> FilePresence {
     var info = stat()
-    if stat(url.path, &info) == 0 { return .present }
+    if lstat(url.path, &info) == 0 { return .present }
     return errno == ENOENT || errno == ENOTDIR ? .missing : .unknown
 }
 public enum ActionOperation: Sendable, Equatable { case open, reveal, copyPath }

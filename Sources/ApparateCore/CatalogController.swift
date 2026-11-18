@@ -227,7 +227,12 @@ private final class EventContext: Sendable {
                     self.snapshot = loaded.snapshot; self.metrics = loaded.metrics
                     self.onChange?(loaded.snapshot)
                 }
-            case .failure(let error): self.onError?(error.localizedDescription)
+            case .failure(let error):
+                self.onError?(error.localizedDescription)
+                if self.snapshot == nil, version == self.revision, let commands = try? CatalogSnapshot(entries: CatalogEntry.commands) {
+                    // A failed first attempt must not keep the other sources waiting forever.
+                    self.snapshot = commands; self.onChange?(commands)
+                }
             }
             if version != self.revision { self.launchScan() }
         }

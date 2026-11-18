@@ -34,3 +34,9 @@ The automated run checks native AppKit layout with fixture rows and an injected 
 ## Verification history
 
 - [M2 automated verification](../verification/runs/2026-11-18T164000Z-m2.md).
+
+## M3 integration
+
+M3 waits for the first complete local-source attempt, including explicit failure/waiting outcomes, before resolving a pending local query; a cached file snapshot satisfies readiness before replay. Explicit web queries bypass local readiness. File and discovered-app rows carry typed targets from the captured search data.
+
+- [M3 verification](../verification/runs/2026-11-18T181500Z-m3.md).

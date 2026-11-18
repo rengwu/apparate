@@ -1,0 +1,40 @@
+{
+  "cause": "Two diagnostic captures showed changed queries rather than the specified fixture query. The selected rows were web fallback, consistent with one fake URL open. External input during focused windows invalidated those attempts; no unexpected native action occurred.",
+  "diagnostic_attempts": [
+    {
+      "errors": 0,
+      "fake_actions": 1,
+      "fake_application_opens": 0,
+      "fake_url_opens": 1,
+      "query_matched_fixture_at_capture": false,
+      "result": "Interrupted by changed query",
+      "run": "app-repeat-1"
+    },
+    {
+      "errors": 0,
+      "fake_actions": 1,
+      "fake_application_opens": 0,
+      "fake_url_opens": 1,
+      "query_matched_fixture_at_capture": false,
+      "result": "Interrupted by changed query",
+      "run": "app-repeat-2"
+    },
+    {
+      "errors": 0,
+      "fake_actions": 1,
+      "fake_application_opens": 1,
+      "fake_url_opens": 0,
+      "query_matched_fixture_at_capture": "Not relied on",
+      "result": "Passed",
+      "run": "app-repeat-3"
+    }
+  ],
+  "followup": "No further visible runs while the desktop is in use. Hidden profiles continue.",
+  "initial_attempt": {
+    "reason": "Expected one fake application open; aggregate action check passed but application-adapter assertion failed. Driver removed its owned data before retaining the receipt.",
+    "result": "Failed"
+  },
+  "privacy": "All other diagnostic PNGs removed; no non-fixture query text retained. Remaining diagnostic receipts contain counts/flags/timings only.",
+  "result": "Passed after restoring the intended fixture input",
+  "retained_pass": "panel-app/receipt.json and panel-app/panel.png are copied from the diagnostic run whose captured query exactly matched the synthetic fixture and dispatched one fake application open."
+}

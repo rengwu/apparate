@@ -1,0 +1,47 @@
+{
+  "app_binary_hash_matched": true,
+  "cleanup": "All owned process commands returned normally; app driver removed each owned APPARATE_HOME; test harness fixtures removed by defer/TemporaryDirectory",
+  "documentation_and_diff_checks": [
+    {
+      "command": "node <projects>/jstack/skills/verify-change/scripts/check-reports.mjs docs/wiki",
+      "exit_code": 0,
+      "output": "{\n  \"reports\": 4,\n  \"errors\": []\n}"
+    },
+    {
+      "command": "node docs/wiki/_build.mjs",
+      "exit_code": 0,
+      "output": "Built <project>/docs/wiki/index.html: 32 pages, 938 KB."
+    },
+    {
+      "command": "node docs/wiki/_build.mjs --check",
+      "exit_code": 0,
+      "output": "Checked 32 pages and internal links; index.html is current."
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "output": ""
+    }
+  ],
+  "headless_core": true,
+  "private_text_scan": "Passed",
+  "private_text_scan_files": 18,
+  "receipts_checked": [
+    "panel-app/receipt.json",
+    "cache-relaunch/receipt.json",
+    "setup/receipt.json",
+    "panel-file/receipt.json",
+    "fixture-hidden/receipt.json",
+    "idle-app/receipt.json"
+  ],
+  "release_test_binary_hash_matched": true,
+  "result": "Passed",
+  "source_changes_after_final_verification": false,
+  "source_files_matched": 48,
+  "source_manifest_sha256": "dbdd2960de37286118c64b5ced143e4e963971cb900f0d397a4b5bc2381394bb",
+  "visual_review": [
+    "file panel: synthetic title, parent and footer readable",
+    "app panel: synthetic title and footer readable; long parent path clipped by basic M2 row, M4 follow-up",
+    "access view: synthetic allowed/denied/not-found outcomes readable"
+  ]
+}

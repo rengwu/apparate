@@ -78,12 +78,72 @@ Source: the user's submitted grill-form ("Apparate decisions — round 4"), aske
 | DEC-029 | When System Settings is already open, Apparate opens the settings link directly. It does not quit System Settings first, and there is no "Close and reopen" action. | User choice of Codex's option, with the note "just open directly, no need to close and reopen", citing jstack's `rule-lean`. Claude had preferred quitting first; Codex had proposed the extra action. |
 | DEC-030 | The web search prefix is `?`. | User choice; matched the recommendation. Confirms the prefix left open in DEC-017. |
 | DEC-031 | A query containing `/` searches full paths. Other queries match names only. | User choice; matched the recommendation (Codex's proposal in the [alignment](research/alignment.md)). |
-| DEC-032 | **Provisional:** no other default prefixes, so the defaults are `'` files and folders, `.` settings and `?` web. Users can add or change prefixes in settings. | Not answered: the question was left untouched, and grill-form treats that as unresolved, not as "none". These defaults match the recommendation and stand until the user answers. Asked again in round 5. |
+| DEC-032 | No other default prefixes: the defaults are `'` files and folders, `.` settings and `?` web. Users can add or change prefixes in settings. | Left untouched in round 4, so recorded as provisional; confirmed by the user in round 5 ("No others, just these three"). |
 | DEC-033 | `.gitignore` handling has a switch in the settings Folders tab, on by default. | User choice; matched the recommendation. Refines DEC-006. |
 | DEC-034 | The public repository uses the MIT licence. | User choice; matched the recommendation. |
 | DEC-035 | None of the four icon directions. Rework the icon as a serious, sleek direction, not in the style of Klip. | User's note ("rework. don't do it in the style of klip. do a serious, sleek direction"). A new set of four directions follows. |
 | DEC-036 | Codex builds and Claude reviews. Claude gives detailed guidance for each milestone, with visual and non-visual references. Codex follows it but can push back. Disagreements between them go to the user in a grill-form. | User choice with this note. It fixes the roles left open in DEC-011; Claude had recommended the reverse. |
 | DEC-037 | The project is under local git, with one commit per milestone. Nothing is pushed without the user's go-ahead. | User choice; matched the recommendation. |
+
+## Round 5 — 2026-11-19
+
+Source: the user's submitted grill-form ("Apparate icon — round 5").
+
+| ID | Decision | Basis |
+| --- | --- | --- |
+| DEC-038 | None of the four sleek icon directions. Start the icon again from scratch, with the work of designer Katya Neray (contra.com/katyaneray/work) as the reference; earlier icon briefs no longer apply. | User's note: "try again with the redesign. from scratch. ignore all previous instructions. heres your reference https://contra.com/katyaneray/work". |
+| DEC-039 | Confirms DEC-032: no default prefixes beyond `'`, `.` and `?`. | User choice; matched the recommendation. |
+
+## Round 6 — 2026-11-19
+
+Source: the user's submitted grill-form ("Apparate — round 6").
+
+| ID | Decision | Basis |
+| --- | --- | --- |
+| DEC-040 | None of the four reference-style icon directions yet; draw four more. | User's note: "give me four more". |
+| DEC-041 | No user-added app folders. An app found in an indexed folder ranks and opens as an app. | User choice; matched the recommendation. Changes the plan's M2 app sources and M3 file kinds. |
+| DEC-042 | Claude sets up local git and commits M1 and M2. | User choice; matched the recommendation. Done on 2026-11-19: `0a6a63e` (M1) and `b3e68c4` (M2). |
+
+## Round 7 — 2026-11-19
+
+Source: the user's submitted grill-form ("Apparate icon — round 7").
+
+| ID | Decision | Basis |
+| --- | --- | --- |
+| DEC-043 | The icon direction is F · Poof: the puff of smoke when you apparate, glowing on black. Explore more variations of it before refining. | User choice, with the note "lets explore more variations of poof". Claude had recommended E · Doorway. |
+
+## Round 8 — 2026-11-19
+
+Source: the user's submitted grill-form ("Apparate icon — round 8").
+
+| ID | Decision | Basis |
+| --- | --- | --- |
+| DEC-044 | None of the four Poof variations (glow, face, violet tile, prismatic). Explore different shapes instead of colours and decorations: the puff looked too symmetrical. | User's note: "i was wondering if we could have more shape variations, rather than just color or decorations. it looks too symmetrical". Round 9 offers four asymmetric silhouettes in one colour. |
+
+## Round 9 — 2026-11-19
+
+Source: the user's submitted grill-form ("Apparate icon — round 9").
+
+| ID | Decision | Basis |
+| --- | --- | --- |
+| DEC-045 | Keep the Poof a round-ish ball. The variations wanted are of that ball itself, like different random seeds of the same recipe, not new silhouettes (curl, burst, trail, ring). | User's note: "no, keep the smoke shape round-ish, like a normal ball of poof. i was just asking for more variations of that ball of poof, like different RNG seeds". Round 10 offers eight seeded balls. |
+
+## Round 10 — 2026-11-19
+
+Source: the user's submitted grill-form ("Apparate icon — round 10").
+
+| ID | Decision | Basis |
+| --- | --- | --- |
+| DEC-046 | The icon is the ball of poof generated from seed 10, in the round-7 glow on black. Reposition its sparkles so the composition is visually balanced but not symmetrical. | User choice (G · Seed 10), with the note "position the star/sparkles so that it looks visually balanced (but not symmetrical)". Round 11 offers two sparkle layouts and the menu bar glyph. |
+
+## Round 11 — 2026-11-19
+
+Source: the user's submitted grill-form ("Apparate icon — round 11").
+
+| ID | Decision | Basis |
+| --- | --- | --- |
+| DEC-047 | The icon's sparkles: the largest at the upper left, a medium one at the right, a small one at the lower left (layout B). The icon is final; see [App icon](design/icon.md). | User choice. Claude had recommended layout A. |
+| DEC-048 | The menu bar glyph is the puff's outline, as a template image. | User choice; matched the recommendation. |
 
 ## Observed from the reference apps
 
@@ -91,6 +151,4 @@ Klip, Yacht and Portia (in `~/Projects`) are SwiftPM packages built by a `build.
 
 ## Not yet decided
 
-- The app icon and menu bar glyph: a new set of serious, sleek directions ([DEC-035](#round-4-2026-11-18)), in round 5.
-- Whether there are default prefixes beyond `'`, `.` and `?` ([DEC-032](#round-4-2026-11-18) is provisional), in round 5.
 - Creating the GitHub repository and publishing a release need the user's go-ahead when M7 is reached.

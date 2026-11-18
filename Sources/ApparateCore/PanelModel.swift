@@ -70,14 +70,16 @@ public struct PanelModel: Sendable {
     private let coordinator: SearchCoordinator
     private let usage: @Sendable () async throws -> UsageSnapshot
     private var catalog: CatalogSnapshot?
+    private var files: FileIndexSnapshot?
+    private let requiresFiles: Bool
     private var config: AppConfig
     private var showing: UInt64 = 0
     private var usageSnapshot: UsageSnapshot?
     private var usageRead: Task<Void, Never>?
-    public var isCatalogReady: Bool { catalog != nil }
-    public init(config: AppConfig, coordinator: SearchCoordinator = SearchCoordinator(),
+    public var isCatalogReady: Bool { catalog != nil && (!requiresFiles || files != nil) }
+    public init(config: AppConfig, requiresFiles: Bool = false, coordinator: SearchCoordinator = SearchCoordinator(),
                 usage: @escaping @Sendable () async throws -> UsageSnapshot) {
-        self.config = config; self.coordinator = coordinator; self.usage = usage
+        self.requiresFiles = requiresFiles; self.config = config; self.coordinator = coordinator; self.usage = usage
     }
     public func show() {
         showing &+= 1; usageRead?.cancel(); usageSnapshot = nil
@@ -116,6 +118,10 @@ public struct PanelModel: Sendable {
         // Initial readiness completes the pending query, including a Return already queued for it.
         if first && model.visible && model.pending { submit() } else { restart() }
     }
+    public func setFiles(_ files: FileIndexSnapshot) {
+        let first = self.files == nil; self.files = files
+        if first && model.visible && model.pending { submit() } else { restart() }
+    }
     public func move(_ offset: Int) { model.move(offset); onChange?() }
     public func select(id: String?) { model.select(id: id); onChange?() }
     public func act(_ operation: ActionOperation, isRepeat: Bool = false) {
@@ -129,15 +135,23 @@ public struct PanelModel: Sendable {
     }
     private func submit() {
         coordinator.invalidate(); onChange?()
-        guard model.visible, let catalog, let usageSnapshot else { return }
-        let version = model.revision, query = ParsedQuery(model.query, config: config), config = config
-        coordinator.submit(index: catalog.index, query: query, usage: usageSnapshot) { [weak self] response in
+        guard model.visible, let usageSnapshot else { return }
+        let query = ParsedQuery(model.query, config: config)
+        guard query.scope == .web || isCatalogReady else { return }
+        guard let catalog = catalog ?? (try? CatalogSnapshot(entries: [])) else { return }
+        let version = model.revision, config = config, files = files
+        coordinator.submit(index: catalog.index, query: query, files: files, usage: usageSnapshot) { [weak self] response in
             guard let self, self.model.visible, self.model.revision == version else { return }
             let rows = response.results.compactMap { result -> PanelRow? in
                 let entry: CatalogEntry?
                 if let query = result.webQuery {
                     entry = CatalogEntry(item: result.item, target: .web(template: config.searchURL, query: query), location: "Search the web", icon: .symbol("globe"))
-                } else { entry = catalog.entries[result.item.id] }
+                } else if let existing = catalog.entries[result.item.id] { entry = existing }
+                else if let app = files?.applications?.entries[result.item.id] { entry = app }
+                else if let path = result.item.path, result.item.kind == .file || result.item.kind == .folder {
+                    entry = CatalogEntry(item: result.item, target: .file(URL(fileURLWithPath: path)),
+                                         location: URL(fileURLWithPath: path).deletingLastPathComponent().lastPathComponent, icon: .file(path))
+                } else { entry = nil }
                 return entry.map { PanelRow(result: result, entry: $0) }
             }
             let action = self.model.accept(rows, revision: version)

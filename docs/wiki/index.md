@@ -9,7 +9,7 @@ A minimal, very fast launcher for macOS. Planning notes, research, decisions, an
 ## Planning
 
 - [Requirements](requirements.md) — what the user asked for.
-- [Decisions](decisions.md) — accepted choices from rounds 1–4, the performance budgets, and what is still open.
+- [Decisions](decisions.md) — accepted choices through round 11, the performance budgets, and what is still open.
 - [Implementation plan](plan.md) — approved milestones from foundation to release 0.1.0, how the build runs, and progress.
 
 ## Build
@@ -17,14 +17,21 @@ A minimal, very fast launcher for macOS. Planning notes, research, decisions, an
 - [Build guides](build/index.md) — Claude's guide for each milestone, which Codex builds from.
 - [M1 guide](build/m1-foundation.md) — foundation, config, matching and ranking.
 - [M2 guide](build/m2-sources-actions-panel.md) — apps, settings items, actions, panel and access checks.
+- [M3 guide](build/m3-file-index.md) — the file index.
+- [M4 guide](build/m4-launcher-panel.md) — the finished launcher panel.
+
+## Design
+
+- [App icon](design/icon.md) — the glowing ball of poof, its menu bar outline, the files, and how it was chosen.
 
 ## Features and verification
 
 - [Feature map](features/index.md) — implemented behavior, entry points and repeatable recipes.
 - [Verification setup](verification/setup.md) — isolated builds, tests and measurements.
 - [M1 verification](verification/runs/2026-11-18T154000Z-m1.md) — outcomes and evidence for the foundation build.
-- [M2 automated verification](verification/runs/2026-11-18T164000Z-m2.md) — 43 passing groups after five review fixes; corrected measurements and recheck pending.
+- [M2 automated verification](verification/runs/2026-11-18T164000Z-m2.md) — 43 passing groups after five review fixes; [review passed](build/m2-sources-actions-panel.md#review), committed separately.
 - [M2 supervised checks](verification/runs/2026-11-18T164001Z-m2-supervised.md) — native effects, permissions, global keys and IME; Untested, required before M5.
+- [M3 automated verification](verification/runs/2026-11-18T181500Z-m3.md) — 63 passing groups and the verified search-speed fix; memory/end-to-end limits recorded; independent recheck passed.
 
 ## Research
 

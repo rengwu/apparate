@@ -1,0 +1,12 @@
+{
+  "change_latency_boundary" : "before fixture write to controller snapshot containing its path; checked at 10 ms intervals",
+  "completed_updates" : 0,
+  "cpu_percent_one_core" : 0.0019692569600232631,
+  "cpu_seconds" : 0.0013290000000000003,
+  "fixture_change_to_searchable_ms" : 258.10745900000001,
+  "observation_seconds" : 67.487383667000003,
+  "phys_footprint_bytes" : 3899920,
+  "publications" : 0,
+  "result" : "Passed",
+  "watch_healthy" : true
+}

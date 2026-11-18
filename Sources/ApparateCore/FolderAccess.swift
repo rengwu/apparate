@@ -27,6 +27,7 @@ public enum FolderAccessProbe {
     public private(set) var checking: AccessFolder?
     public private(set) var busy = false
     public var onChange: (() -> Void)?
+    public var onCompletion: (([AccessObservation]) -> Void)?
     public var onError: ((String) -> Void)?
     private let file: URL
     private let probe: @Sendable (AccessFolder) async -> AccessStatus
@@ -51,5 +52,6 @@ public enum FolderAccessProbe {
             let encoder = JSONEncoder(); encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
             try encoder.encode(observations).write(to: file, options: .atomic)
         } catch { onError?("Folder-access results could not be saved.") }
+        onCompletion?(observations)
     }
 }

@@ -1,0 +1,8 @@
+{
+  "base_commit": "b3e68c44e1225c2237b1a59a380adf08811a9cec",
+  "handoff_head": "f0147c726760d7d1de5b688401af0bb5ca305fe2",
+  "head_change_note": "Claude committed Resources only as f0147c7 after measurements. These icons are not consumed by the current package/build; recorded source and binary hashes are unchanged.",
+  "native_effects": "Fake adapters for all app profiles",
+  "source_manifest_sha256": "5679a5f5f62b57156891b018a2c278ffcd40cc356d4b622ab714848b127fdf44",
+  "working_tree": "M3 review fix uncommitted; recheck pending"
+}

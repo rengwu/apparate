@@ -188,4 +188,4 @@ Claude's proposals, not user decisions. Push back on any of them.
 2. The System Settings app icon for Battery and Headphones.
 3. Skipping the settings cache if parsing is fast.
 4. The selection rules living in a Core model.
-5. User-added app folders: not built in M2, pending the user's answer. Codex notes that an `.app` found in an M3 folder is not the same as configurable app folders; the question to the user will say so.
+5. User-added app folders: not built. **Decided by the user** ([DEC-041](../decisions.md#round-6-2026-11-19)): no such setting; an app found in an indexed folder ranks and opens as an app (M3).

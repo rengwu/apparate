@@ -1,0 +1,2517 @@
+{
+  "after_build_phys_footprint_bytes" : 125387352,
+  "after_search_phys_footprint_bytes" : 58688088,
+  "baseline_phys_footprint_bytes" : 1933792,
+  "checksum" : "750371096382710",
+  "corpus_generation_ms" : 285.02770800000002,
+  "corpus_sha256" : "56fb7726eb4e13632f181e3601cf78807455c25be65422eff4646e5e6b309b75",
+  "corpus_version" : 1,
+  "name_queries" : [
+    "code",
+    "terminal",
+    "calendar",
+    "calculator",
+    "readme",
+    "report",
+    "network",
+    "project",
+    "sources",
+    "settings",
+    "archive",
+    "notes",
+    "cafe",
+    "strasse",
+    "東京",
+    "zzqv"
+  ],
+  "names" : {
+    "cases" : [
+      {
+        "ms" : 2.9775,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.832125,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.033458,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8806250000000002,
+        "query" : "co",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8242090000000002,
+        "query" : "co",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0699169999999998,
+        "query" : "co",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0554169999999998,
+        "query" : "cod",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0865,
+        "query" : "cod",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0072920000000001,
+        "query" : "cod",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9692090000000002,
+        "query" : "code",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7535829999999999,
+        "query" : "code",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.715042,
+        "query" : "code",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9267500000000002,
+        "query" : "t",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9910000000000001,
+        "query" : "t",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8399169999999998,
+        "query" : "t",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7527499999999998,
+        "query" : "te",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7571669999999999,
+        "query" : "te",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.912833,
+        "query" : "te",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7959999999999998,
+        "query" : "ter",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7615829999999999,
+        "query" : "ter",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8396669999999999,
+        "query" : "ter",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5673339999999998,
+        "query" : "term",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5302920000000002,
+        "query" : "term",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5227080000000002,
+        "query" : "term",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5749170000000001,
+        "query" : "termi",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.691875,
+        "query" : "termi",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6056249999999999,
+        "query" : "termi",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5303330000000002,
+        "query" : "termin",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5880839999999998,
+        "query" : "termin",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6309999999999998,
+        "query" : "termin",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5370409999999999,
+        "query" : "termina",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5244580000000001,
+        "query" : "termina",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.629,
+        "query" : "termina",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.594417,
+        "query" : "terminal",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5702500000000001,
+        "query" : "terminal",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6240830000000002,
+        "query" : "terminal",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0209169999999999,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7437499999999999,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8982079999999999,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8888750000000001,
+        "query" : "ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7799160000000001,
+        "query" : "ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9542090000000001,
+        "query" : "ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7445840000000001,
+        "query" : "cal",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6888329999999998,
+        "query" : "cal",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8090419999999998,
+        "query" : "cal",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8025829999999998,
+        "query" : "cale",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8610000000000002,
+        "query" : "cale",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8219590000000001,
+        "query" : "cale",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7305839999999999,
+        "query" : "calen",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6426669999999999,
+        "query" : "calen",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6502089999999998,
+        "query" : "calen",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6637089999999999,
+        "query" : "calend",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.60825,
+        "query" : "calend",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.708542,
+        "query" : "calend",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6035409999999999,
+        "query" : "calenda",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.601,
+        "query" : "calenda",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7159580000000001,
+        "query" : "calenda",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7014999999999998,
+        "query" : "calendar",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7062089999999999,
+        "query" : "calendar",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7414589999999999,
+        "query" : "calendar",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.960791,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9283329999999999,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9744169999999999,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9677920000000002,
+        "query" : "ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9154589999999998,
+        "query" : "ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8802910000000002,
+        "query" : "ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8279589999999999,
+        "query" : "cal",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8290000000000002,
+        "query" : "cal",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8517079999999999,
+        "query" : "cal",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7422499999999999,
+        "query" : "calc",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6957080000000002,
+        "query" : "calc",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8036669999999999,
+        "query" : "calc",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.683792,
+        "query" : "calcu",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6042909999999999,
+        "query" : "calcu",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6585000000000001,
+        "query" : "calcu",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.653959,
+        "query" : "calcul",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7854999999999999,
+        "query" : "calcul",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8058749999999999,
+        "query" : "calcul",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.715125,
+        "query" : "calcula",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5902080000000001,
+        "query" : "calcula",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7186669999999999,
+        "query" : "calcula",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6832500000000001,
+        "query" : "calculat",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5974170000000001,
+        "query" : "calculat",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7786249999999999,
+        "query" : "calculat",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.77475,
+        "query" : "calculato",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6025420000000001,
+        "query" : "calculato",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7219169999999999,
+        "query" : "calculato",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6723340000000002,
+        "query" : "calculator",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6279170000000001,
+        "query" : "calculator",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6956669999999998,
+        "query" : "calculator",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8479999999999999,
+        "query" : "r",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6595409999999999,
+        "query" : "r",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7588750000000002,
+        "query" : "r",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7553329999999998,
+        "query" : "re",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6684999999999999,
+        "query" : "re",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7796660000000002,
+        "query" : "re",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0194169999999998,
+        "query" : "rea",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8010419999999998,
+        "query" : "rea",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.907292,
+        "query" : "rea",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8234170000000001,
+        "query" : "read",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6957080000000002,
+        "query" : "read",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8349160000000002,
+        "query" : "read",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5357090000000002,
+        "query" : "readm",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5115829999999999,
+        "query" : "readm",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7043750000000002,
+        "query" : "readm",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6970830000000001,
+        "query" : "readme",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6364580000000002,
+        "query" : "readme",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6695000000000002,
+        "query" : "readme",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0630419999999998,
+        "query" : "r",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6539169999999999,
+        "query" : "r",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8501249999999998,
+        "query" : "r",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7985000000000002,
+        "query" : "re",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8115000000000001,
+        "query" : "re",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8904999999999998,
+        "query" : "re",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8490000000000002,
+        "query" : "rep",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9119579999999998,
+        "query" : "rep",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9492919999999998,
+        "query" : "rep",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.948083,
+        "query" : "repo",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8261660000000002,
+        "query" : "repo",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9931670000000001,
+        "query" : "repo",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7430829999999999,
+        "query" : "repor",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6357499999999998,
+        "query" : "repor",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6896249999999999,
+        "query" : "repor",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8758330000000001,
+        "query" : "report",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6722920000000001,
+        "query" : "report",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6487910000000001,
+        "query" : "report",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0367090000000001,
+        "query" : "n",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.933875,
+        "query" : "n",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.1229170000000002,
+        "query" : "n",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.401125,
+        "query" : "ne",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.077334,
+        "query" : "ne",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0581670000000001,
+        "query" : "ne",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8477079999999999,
+        "query" : "net",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.117083,
+        "query" : "net",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0809160000000002,
+        "query" : "net",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5821670000000001,
+        "query" : "netw",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6339579999999998,
+        "query" : "netw",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8131249999999999,
+        "query" : "netw",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5812909999999998,
+        "query" : "netwo",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6188750000000001,
+        "query" : "netwo",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7233749999999999,
+        "query" : "netwo",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.628584,
+        "query" : "networ",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5950419999999998,
+        "query" : "networ",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6987920000000001,
+        "query" : "networ",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7004579999999998,
+        "query" : "network",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5470830000000002,
+        "query" : "network",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5677080000000001,
+        "query" : "network",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8992089999999999,
+        "query" : "p",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6947920000000001,
+        "query" : "p",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.931959,
+        "query" : "p",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8046250000000001,
+        "query" : "pr",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6928749999999999,
+        "query" : "pr",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9263750000000002,
+        "query" : "pr",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7896670000000001,
+        "query" : "pro",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7316669999999998,
+        "query" : "pro",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.905875,
+        "query" : "pro",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5899160000000001,
+        "query" : "proj",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5627080000000002,
+        "query" : "proj",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.710791,
+        "query" : "proj",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6032500000000001,
+        "query" : "proje",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5585830000000001,
+        "query" : "proje",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6477499999999998,
+        "query" : "proje",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5982090000000002,
+        "query" : "projec",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5433330000000001,
+        "query" : "projec",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6531250000000002,
+        "query" : "projec",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6087910000000001,
+        "query" : "project",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.516,
+        "query" : "project",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6331250000000002,
+        "query" : "project",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0037500000000001,
+        "query" : "s",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6994159999999998,
+        "query" : "s",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8750420000000001,
+        "query" : "s",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0657920000000001,
+        "query" : "so",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.865875,
+        "query" : "so",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9997919999999998,
+        "query" : "so",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8396669999999999,
+        "query" : "sou",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6928749999999999,
+        "query" : "sou",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8127499999999999,
+        "query" : "sou",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7392919999999998,
+        "query" : "sour",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6721249999999999,
+        "query" : "sour",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.809625,
+        "query" : "sour",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7501660000000001,
+        "query" : "sourc",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6758329999999999,
+        "query" : "sourc",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8150409999999999,
+        "query" : "sourc",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8730000000000002,
+        "query" : "source",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7167910000000002,
+        "query" : "source",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.857583,
+        "query" : "source",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7733750000000001,
+        "query" : "sources",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7175410000000002,
+        "query" : "sources",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8432499999999998,
+        "query" : "sources",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9281250000000001,
+        "query" : "s",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7207919999999999,
+        "query" : "s",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8838750000000002,
+        "query" : "s",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8541669999999999,
+        "query" : "se",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7531659999999998,
+        "query" : "se",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9228329999999998,
+        "query" : "se",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8742079999999999,
+        "query" : "set",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9791249999999998,
+        "query" : "set",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9271669999999999,
+        "query" : "set",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7924159999999998,
+        "query" : "sett",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8660000000000001,
+        "query" : "sett",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9210419999999999,
+        "query" : "sett",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6670419999999999,
+        "query" : "setti",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.72925,
+        "query" : "setti",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.757584,
+        "query" : "setti",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.648917,
+        "query" : "settin",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6937920000000002,
+        "query" : "settin",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.740875,
+        "query" : "settin",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6094590000000002,
+        "query" : "setting",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.665708,
+        "query" : "setting",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8538329999999998,
+        "query" : "setting",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8027500000000001,
+        "query" : "settings",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7781669999999998,
+        "query" : "settings",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6635,
+        "query" : "settings",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0627499999999999,
+        "query" : "a",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8912499999999999,
+        "query" : "a",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0956250000000001,
+        "query" : "a",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.911,
+        "query" : "ar",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0585,
+        "query" : "ar",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.1678329999999999,
+        "query" : "ar",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0502919999999998,
+        "query" : "arc",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.1386250000000002,
+        "query" : "arc",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.1092499999999998,
+        "query" : "arc",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8567079999999998,
+        "query" : "arch",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7789999999999999,
+        "query" : "arch",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.675125,
+        "query" : "arch",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.865542,
+        "query" : "archi",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6648329999999998,
+        "query" : "archi",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5701670000000001,
+        "query" : "archi",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5696659999999998,
+        "query" : "archiv",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6859579999999998,
+        "query" : "archiv",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6127500000000001,
+        "query" : "archiv",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.5507499999999999,
+        "query" : "archive",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.746292,
+        "query" : "archive",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6233330000000001,
+        "query" : "archive",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0415839999999998,
+        "query" : "n",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9682080000000002,
+        "query" : "n",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8919579999999998,
+        "query" : "n",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9209170000000002,
+        "query" : "no",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0455420000000002,
+        "query" : "no",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9896250000000002,
+        "query" : "no",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.936375,
+        "query" : "not",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.9816250000000002,
+        "query" : "not",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8557920000000001,
+        "query" : "not",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.905459,
+        "query" : "note",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0080420000000001,
+        "query" : "note",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8340830000000001,
+        "query" : "note",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7802920000000002,
+        "query" : "notes",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7887499999999998,
+        "query" : "notes",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.6932079999999998,
+        "query" : "notes",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.0656669999999999,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8835000000000002,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7342080000000002,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.95275,
+        "query" : "ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8885420000000002,
+        "query" : "ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7761659999999999,
+        "query" : "ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.9410409999999998,
+        "query" : "caf",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.9591669999999999,
+        "query" : "caf",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.9054579999999999,
+        "query" : "caf",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8072089999999998,
+        "query" : "cafe",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7857080000000001,
+        "query" : "cafe",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8802919999999999,
+        "query" : "cafe",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.903,
+        "query" : "s",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.7248749999999999,
+        "query" : "s",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.8976250000000001,
+        "query" : "s",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.7946669999999996,
+        "query" : "st",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.8917909999999996,
+        "query" : "st",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.9025829999999999,
+        "query" : "st",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.3706250000000004,
+        "query" : "str",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2971659999999998,
+        "query" : "str",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.3051250000000003,
+        "query" : "str",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.5044580000000001,
+        "query" : "stra",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.4941249999999999,
+        "query" : "stra",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.4830839999999998,
+        "query" : "stra",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.3845420000000002,
+        "query" : "stras",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.4871669999999999,
+        "query" : "stras",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.433875,
+        "query" : "stras",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.3065419999999999,
+        "query" : "strass",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.2960829999999999,
+        "query" : "strass",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.292125,
+        "query" : "strass",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.2717079999999998,
+        "query" : "strasse",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.2775829999999999,
+        "query" : "strasse",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.275083,
+        "query" : "strasse",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.0692499999999998,
+        "query" : "東",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.0592090000000001,
+        "query" : "東",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.0632079999999999,
+        "query" : "東",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.081375,
+        "query" : "東京",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.1018750000000002,
+        "query" : "東京",
+        "rows" : 50
+      },
+      {
+        "ms" : 2.0745,
+        "query" : "東京",
+        "rows" : 50
+      },
+      {
+        "ms" : 1.8639589999999999,
+        "query" : "z",
+        "rows" : 1
+      },
+      {
+        "ms" : 1.852292,
+        "query" : "z",
+        "rows" : 1
+      },
+      {
+        "ms" : 1.850125,
+        "query" : "z",
+        "rows" : 1
+      },
+      {
+        "ms" : 1.8460000000000001,
+        "query" : "zz",
+        "rows" : 1
+      },
+      {
+        "ms" : 1.8536250000000001,
+        "query" : "zz",
+        "rows" : 1
+      },
+      {
+        "ms" : 1.8438749999999999,
+        "query" : "zz",
+        "rows" : 1
+      },
+      {
+        "ms" : 1.853083,
+        "query" : "zzq",
+        "rows" : 1
+      },
+      {
+        "ms" : 1.851458,
+        "query" : "zzq",
+        "rows" : 1
+      },
+      {
+        "ms" : 1.8634999999999999,
+        "query" : "zzq",
+        "rows" : 1
+      },
+      {
+        "ms" : 1.851375,
+        "query" : "zzqv",
+        "rows" : 1
+      },
+      {
+        "ms" : 1.845167,
+        "query" : "zzqv",
+        "rows" : 1
+      },
+      {
+        "ms" : 1.8641669999999999,
+        "query" : "zzqv",
+        "rows" : 1
+      }
+    ],
+    "samples" : 300,
+    "statistics" : {
+      "max_ms" : 4.9025829999999999,
+      "median_ms" : 2.7799160000000001,
+      "p95_ms" : 3.3845420000000002
+    }
+  },
+  "path_queries" : [
+    "project/sources",
+    "project/tests",
+    "projects/readme",
+    "workspace/report",
+    "sources/network",
+    "docs/notes",
+    "archive/cafe",
+    "project/",
+    "sources/",
+    "p/s",
+    "s/r",
+    "zzqv/",
+    "project//sources"
+  ],
+  "paths" : {
+    "cases" : [
+      {
+        "ms" : 9.6685829999999999,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 9.5201670000000007,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 9.4410830000000008,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.4780829999999998,
+        "query" : "project/s",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.7385000000000002,
+        "query" : "project/s",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.8161670000000001,
+        "query" : "project/s",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.8511249999999997,
+        "query" : "project/so",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.6147499999999999,
+        "query" : "project/so",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.1038329999999998,
+        "query" : "project/so",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.4987079999999997,
+        "query" : "project/sou",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2552500000000002,
+        "query" : "project/sou",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2737499999999997,
+        "query" : "project/sou",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2923330000000002,
+        "query" : "project/sour",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.4021249999999998,
+        "query" : "project/sour",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2311670000000001,
+        "query" : "project/sour",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2556669999999999,
+        "query" : "project/sourc",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2275419999999997,
+        "query" : "project/sourc",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2016249999999999,
+        "query" : "project/sourc",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2424999999999997,
+        "query" : "project/source",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2365830000000004,
+        "query" : "project/source",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2402920000000002,
+        "query" : "project/source",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.3853330000000001,
+        "query" : "project/sources",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.4175420000000001,
+        "query" : "project/sources",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.3118749999999997,
+        "query" : "project/sources",
+        "rows" : 50
+      },
+      {
+        "ms" : 9.9861249999999995,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 10.526584,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 10.257458,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.5027920000000003,
+        "query" : "project/t",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.1072920000000002,
+        "query" : "project/t",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.7766659999999996,
+        "query" : "project/t",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.7890839999999999,
+        "query" : "project/te",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.7343330000000003,
+        "query" : "project/te",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.5910000000000002,
+        "query" : "project/te",
+        "rows" : 50
+      },
+      {
+        "ms" : 15.407958000000001,
+        "query" : "project/tes",
+        "rows" : 50
+      },
+      {
+        "ms" : 15.619249999999999,
+        "query" : "project/tes",
+        "rows" : 50
+      },
+      {
+        "ms" : 15.561999999999999,
+        "query" : "project/tes",
+        "rows" : 50
+      },
+      {
+        "ms" : 18.107292000000001,
+        "query" : "project/test",
+        "rows" : 50
+      },
+      {
+        "ms" : 18.154833,
+        "query" : "project/test",
+        "rows" : 50
+      },
+      {
+        "ms" : 17.83325,
+        "query" : "project/test",
+        "rows" : 50
+      },
+      {
+        "ms" : 11.067333,
+        "query" : "project/tests",
+        "rows" : 50
+      },
+      {
+        "ms" : 11.520667,
+        "query" : "project/tests",
+        "rows" : 50
+      },
+      {
+        "ms" : 11.120708,
+        "query" : "project/tests",
+        "rows" : 50
+      },
+      {
+        "ms" : 7.1812500000000004,
+        "query" : "projects/",
+        "rows" : 50
+      },
+      {
+        "ms" : 7.0749589999999998,
+        "query" : "projects/",
+        "rows" : 50
+      },
+      {
+        "ms" : 6.9990420000000002,
+        "query" : "projects/",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.3430410000000004,
+        "query" : "projects/r",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.3331249999999999,
+        "query" : "projects/r",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.3317079999999999,
+        "query" : "projects/r",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.4101660000000003,
+        "query" : "projects/re",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.3348329999999997,
+        "query" : "projects/re",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.3548330000000002,
+        "query" : "projects/re",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.886666,
+        "query" : "projects/rea",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.8552080000000002,
+        "query" : "projects/rea",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.863375,
+        "query" : "projects/rea",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.7229999999999999,
+        "query" : "projects/read",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.6031249999999999,
+        "query" : "projects/read",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.861542,
+        "query" : "projects/read",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.405084,
+        "query" : "projects/readm",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.503708,
+        "query" : "projects/readm",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.4336250000000001,
+        "query" : "projects/readm",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.4605419999999998,
+        "query" : "projects/readme",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.4343330000000001,
+        "query" : "projects/readme",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.3718750000000002,
+        "query" : "projects/readme",
+        "rows" : 50
+      },
+      {
+        "ms" : 7.873958,
+        "query" : "workspace/",
+        "rows" : 50
+      },
+      {
+        "ms" : 7.8674999999999997,
+        "query" : "workspace/",
+        "rows" : 50
+      },
+      {
+        "ms" : 7.8970419999999999,
+        "query" : "workspace/",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.7288750000000004,
+        "query" : "workspace/r",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.5269579999999996,
+        "query" : "workspace/r",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.7057919999999998,
+        "query" : "workspace/r",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.6667920000000001,
+        "query" : "workspace/re",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.7703749999999996,
+        "query" : "workspace/re",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.835375,
+        "query" : "workspace/re",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2014579999999997,
+        "query" : "workspace/rep",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.1661669999999997,
+        "query" : "workspace/rep",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.873084,
+        "query" : "workspace/rep",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.7286670000000002,
+        "query" : "workspace/repo",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.3575419999999996,
+        "query" : "workspace/repo",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.7753329999999998,
+        "query" : "workspace/repo",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.746667,
+        "query" : "workspace/repor",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.7727499999999998,
+        "query" : "workspace/repor",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.810416,
+        "query" : "workspace/repor",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.6375829999999998,
+        "query" : "workspace/report",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.7330830000000002,
+        "query" : "workspace/report",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.622792,
+        "query" : "workspace/report",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.1539580000000003,
+        "query" : "sources/",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.881958,
+        "query" : "sources/",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.9833749999999997,
+        "query" : "sources/",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.5188329999999999,
+        "query" : "sources/n",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.3538329999999998,
+        "query" : "sources/n",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.209416,
+        "query" : "sources/n",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.8387079999999996,
+        "query" : "sources/ne",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.8267499999999997,
+        "query" : "sources/ne",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.7744169999999997,
+        "query" : "sources/ne",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.690709,
+        "query" : "sources/net",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.7231670000000001,
+        "query" : "sources/net",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.7096660000000004,
+        "query" : "sources/net",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.7939159999999998,
+        "query" : "sources/netw",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.7765,
+        "query" : "sources/netw",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.7945419999999999,
+        "query" : "sources/netw",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.7892920000000001,
+        "query" : "sources/netwo",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.799833,
+        "query" : "sources/netwo",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.7322920000000002,
+        "query" : "sources/netwo",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.766375,
+        "query" : "sources/networ",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.7879160000000001,
+        "query" : "sources/networ",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.8080409999999998,
+        "query" : "sources/networ",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.7288749999999999,
+        "query" : "sources/network",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.7893750000000002,
+        "query" : "sources/network",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.7534589999999999,
+        "query" : "sources/network",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.619084,
+        "query" : "docs/",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.524375,
+        "query" : "docs/",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.5005829999999998,
+        "query" : "docs/",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.1045829999999999,
+        "query" : "docs/n",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.2348749999999997,
+        "query" : "docs/n",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.2512920000000003,
+        "query" : "docs/n",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.9609160000000001,
+        "query" : "docs/no",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.8097919999999998,
+        "query" : "docs/no",
+        "rows" : 50
+      },
+      {
+        "ms" : 6.0102919999999997,
+        "query" : "docs/no",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.9696249999999997,
+        "query" : "docs/not",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.7252910000000004,
+        "query" : "docs/not",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.7353750000000003,
+        "query" : "docs/not",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.5887089999999997,
+        "query" : "docs/note",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.439667,
+        "query" : "docs/note",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.5327089999999997,
+        "query" : "docs/note",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.250292,
+        "query" : "docs/notes",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.0512499999999996,
+        "query" : "docs/notes",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.2749170000000003,
+        "query" : "docs/notes",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.8181669999999999,
+        "query" : "archive/",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.99925,
+        "query" : "archive/",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.153041,
+        "query" : "archive/",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.0733750000000004,
+        "query" : "archive/c",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.1593330000000002,
+        "query" : "archive/c",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.8731249999999999,
+        "query" : "archive/c",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.5518749999999999,
+        "query" : "archive/ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.5247080000000004,
+        "query" : "archive/ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.4077080000000004,
+        "query" : "archive/ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 11.968040999999999,
+        "query" : "archive/caf",
+        "rows" : 50
+      },
+      {
+        "ms" : 12.757625000000001,
+        "query" : "archive/caf",
+        "rows" : 50
+      },
+      {
+        "ms" : 11.9125,
+        "query" : "archive/caf",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.2220420000000001,
+        "query" : "archive/cafe",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.3006660000000001,
+        "query" : "archive/cafe",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.250667,
+        "query" : "archive/cafe",
+        "rows" : 50
+      },
+      {
+        "ms" : 9.9681250000000006,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 9.8268330000000006,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 9.8209169999999997,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.9669999999999996,
+        "query" : "sources/",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.0054169999999996,
+        "query" : "sources/",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.9228329999999998,
+        "query" : "sources/",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.6601670000000004,
+        "query" : "p/",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.6267079999999998,
+        "query" : "p/",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.5362090000000004,
+        "query" : "p/",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.8550840000000002,
+        "query" : "p/s",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.8105419999999999,
+        "query" : "p/s",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.966583,
+        "query" : "p/s",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.2457919999999998,
+        "query" : "s/",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.0696250000000003,
+        "query" : "s/",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.1474169999999999,
+        "query" : "s/",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.677584,
+        "query" : "s/r",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.705959,
+        "query" : "s/r",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.5870839999999999,
+        "query" : "s/r",
+        "rows" : 50
+      },
+      {
+        "ms" : 9.1129580000000008,
+        "query" : "zzqv/",
+        "rows" : 1
+      },
+      {
+        "ms" : 9.0643340000000006,
+        "query" : "zzqv/",
+        "rows" : 1
+      },
+      {
+        "ms" : 9.0605829999999994,
+        "query" : "zzqv/",
+        "rows" : 1
+      },
+      {
+        "ms" : 9.8897910000000007,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 9.9381249999999994,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 9.8068329999999992,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 9.7722079999999991,
+        "query" : "project//",
+        "rows" : 50
+      },
+      {
+        "ms" : 9.9469159999999999,
+        "query" : "project//",
+        "rows" : 50
+      },
+      {
+        "ms" : 9.9653749999999999,
+        "query" : "project//",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.5844589999999998,
+        "query" : "project//s",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.6172089999999999,
+        "query" : "project//s",
+        "rows" : 50
+      },
+      {
+        "ms" : 5.5148339999999996,
+        "query" : "project//s",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.6760419999999998,
+        "query" : "project//so",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.6899160000000002,
+        "query" : "project//so",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.5510419999999998,
+        "query" : "project//so",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2186669999999999,
+        "query" : "project//sou",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2262919999999999,
+        "query" : "project//sou",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2292920000000001,
+        "query" : "project//sou",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2154999999999996,
+        "query" : "project//sour",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.1968750000000004,
+        "query" : "project//sour",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2572919999999996,
+        "query" : "project//sour",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2934580000000002,
+        "query" : "project//sourc",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2279999999999998,
+        "query" : "project//sourc",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2092910000000003,
+        "query" : "project//sourc",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2444170000000003,
+        "query" : "project//source",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2404999999999999,
+        "query" : "project//source",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2311670000000001,
+        "query" : "project//source",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2930419999999998,
+        "query" : "project//sources",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.2519580000000001,
+        "query" : "project//sources",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.3535000000000004,
+        "query" : "project//sources",
+        "rows" : 50
+      }
+    ],
+    "samples" : 189,
+    "statistics" : {
+      "max_ms" : 18.154833,
+      "median_ms" : 4.6899160000000002,
+      "p95_ms" : 11.520667
+    }
+  },
+  "preparation_includes" : "SearchIndex construction only; synthetic corpus generation measured separately",
+  "preparation_ms" : 628.48350000000005,
+  "result_limit" : 50,
+  "rounds" : 3,
+  "schema" : 1,
+  "scope" : "single-threaded core only; includes selection and highlights; excludes UI, data discovery and query parsing",
+  "seed_hex" : "4170706172617465",
+  "size" : 200000,
+  "usage_lambda" : 0.5,
+  "warmup_queries" : 5
+}

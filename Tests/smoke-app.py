@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
-"""Isolated M2 app driver. Native effects are disabled by the explicit app test profile."""
+"""Isolated app driver. Native effects are disabled by the explicit app test profile."""
 import argparse
 import json
 import os
+import plistlib
 from pathlib import Path
 import shutil
 import subprocess
 import tempfile
 
 parser = argparse.ArgumentParser()
+parser.add_argument('--fixture-app', action='store_true')
+parser.add_argument('--file-source', choices=['fixture', 'projects'])
 parser.add_argument('--mode', choices=['fixtures', 'live-readonly'], default='fixtures')
 parser.add_argument('--show', choices=['panel', 'setup'])
 parser.add_argument('--seconds', type=float, default=2)
@@ -20,16 +23,32 @@ args = parser.parse_args()
 assert 1 <= args.seconds <= 90
 assert 1 <= args.runs <= 3 and (args.runs == 1 or args.mode == 'live-readonly')
 assert not args.show or args.mode == 'fixtures'
+assert args.file_source != 'projects' or args.mode == 'live-readonly'
+assert not args.fixture_app or args.file_source == 'fixture'
 assert not args.action_open or args.show == 'panel'
 root = Path(__file__).resolve().parent.parent
 binary = root / 'build/Apparate.app/Contents/MacOS/Apparate'
 assert binary.is_file(), 'Run ./build.sh first'
 with tempfile.TemporaryDirectory(prefix='apparate-m2-app-') as directory:
     home = Path(directory)
+    folders = []
+    if args.file_source == 'fixture':
+        source = home / 'FixtureProjects'
+        source.mkdir()
+        (source / 'fixture-ledger.txt').write_text('fixture')
+        (source / 'Nested').mkdir()
+        (source / 'Nested' / 'fixture-report.md').write_text('fixture')
+        if args.fixture_app:
+            app_contents = source / 'FixtureEditor.app' / 'Contents'
+            app_contents.mkdir(parents=True)
+            (app_contents / 'Info.plist').write_bytes(plistlib.dumps({'CFBundleIdentifier': 'fixture.editor', 'CFBundlePackageType': 'APPL', 'CFBundleDisplayName': 'Fixture Editor', 'CFBundleName': 'FixtureEditor'}))
+        folders = [{'path': str(source), 'depth': 10}]
+    elif args.file_source == 'projects':
+        folders = [{'path': str(Path.home() / 'Projects'), 'depth': 10}]
     # Seed BEFORE launch. APPARATE_HOME alone does not prevent default shortcut registration.
     (home / 'config.json').write_text(json.dumps({
         'version': 1, 'hotKey': {'keyCode': 111, 'modifiers': 6400, 'display': '⌃⌥⌘F12'},
-        'folders': []
+        'folders': folders
     }))
     env = {k: v for k, v in os.environ.items() if not k.startswith('APPARATE_')}
     env.update(APPARATE_HOME=directory, APPARATE_TEST_MODE=args.mode,
@@ -42,7 +61,7 @@ with tempfile.TemporaryDirectory(prefix='apparate-m2-app-') as directory:
     for run in range(args.runs):
         process = subprocess.Popen([str(binary)], env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         try:
-            stdout, stderr = process.communicate(timeout=args.seconds + 20)
+            stdout, stderr = process.communicate(timeout=args.seconds + 65)
             assert process.returncode == 0, 'App did not exit normally'
             receipt = home / 'diagnostics.json'
             assert receipt.is_file(), 'App did not write its test receipt'
@@ -51,6 +70,17 @@ with tempfile.TemporaryDirectory(prefix='apparate-m2-app-') as directory:
             assert result['native_actions'] == result['native_hotkey_registrations'] == result['protected_folder_probes'] == 0
             assert result['fake_registrations'] == 1
             assert result['fake_actions'] == (1 if args.action_open else 0)
+            if args.file_source:
+                assert result['file_count'] > 0 and result['file_watch_healthy']
+                if run > 0:
+                    assert result['file_loaded_from_disk']
+            if args.file_source == 'fixture':
+                assert result['file_count'] == (5 if args.fixture_app else 4)
+                assert result['discovered_app_count'] == (1 if args.fixture_app else 0)
+                if args.action_open and args.query == 'fixture-ledger':
+                    assert result['fake_url_opens'] == 1
+                if args.action_open and args.fixture_app and args.query == 'Fixture Editor':
+                    assert result['fake_application_opens'] == 1
             if args.show:
                 assert result['capture_written'] and (home / (args.show + '.png')).is_file()
             if args.mode == 'live-readonly':

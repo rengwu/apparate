@@ -1,0 +1,10 @@
+{
+  "catalog_publications": 13,
+  "catalog_scans": 14,
+  "cpu_percent_one_core": 2.118471217522906,
+  "file_updates": 0,
+  "followup": "Use the independent owned-fixture idle result for the file watcher; remeasure the finished full app in a quiet interval for M6.",
+  "observation_seconds": 63.531238417,
+  "reason": "The observation contained active catalog work, so its CPU sample cannot establish quiet full-app idle. App/catalog source and watcher code did not change in this review fix; the cause of those events was not traced. No quiet full-app claim is made for this attempt.",
+  "result": "Untested for quiet full-app idle"
+}

@@ -13,7 +13,7 @@ private struct Candidate {
 extension SearchIndex {
     /// Complete top results, including display-character highlights. No I/O on the search path.
     /// A cancelled search returns no partial rows; the coordinator also guards final delivery.
-    public func search(_ query: ParsedQuery, usage: UsageSnapshot = UsageSnapshot(), limit: Int = 50,
+    public func search(_ query: ParsedQuery, usage: UsageSnapshot = UsageSnapshot(), limit: Int = 50, includeWebFallback: Bool = true,
                        isCancelled: @Sendable () -> Bool = { false }) -> [SearchResult] {
         guard !query.isEmpty, limit > 0, !isCancelled() else { return [] }
         if query.scope == .web { return [webResult(query.text)] }
@@ -118,7 +118,7 @@ extension SearchIndex {
             offer(candidate)
         }
         guard !isCancelled() else { return [] }
-        if heap.isEmpty { return query.scope == nil ? [webResult(query.text)] : [] }
+        if heap.isEmpty { return includeWebFallback && query.scope == nil ? [webResult(query.text)] : [] }
         heap.sort(by: better)
         return heap.map { candidate in
             let positions: [Int]

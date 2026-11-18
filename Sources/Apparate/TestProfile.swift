@@ -19,6 +19,16 @@ import Darwin
         guard !(config.hotKey.keyCode == 49 && config.hotKey.modifiers == 256) else {
             throw SourceError("Seed the alternate test shortcut before launching the test app.")
         }
+        let allowedProject = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Projects").path
+        let temporary = FileFolderWatcher.canonical(FileManager.default.temporaryDirectory.path)
+        for folder in config.folders {
+            let path = AppConfig.normalizedFolder(folder.path, home: FileManager.default.homeDirectoryForCurrentUser.path)
+            let canonical = FileFolderWatcher.canonical(path)
+            guard (canonical.hasPrefix(temporary + "/") || canonical.hasPrefix("/private/tmp/")) ||
+                  (mode == "live-readonly" && path == allowedProject) else {
+                throw SourceError("Test folders must be owned temporary fixtures, or Projects in read-only mode.")
+            }
+        }
         let show = env["APPARATE_SHOW"]
         guard mode == "fixtures" || show == nil else { throw SourceError("Visible test windows require fixture sources.") }
         return TestProfile(mode: mode, directory: directory, seconds: min(90, max(1, Double(env["APPARATE_TEST_SECONDS"] ?? "3") ?? 3)),
