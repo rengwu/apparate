@@ -10,7 +10,9 @@ import ApparateCore
     let session: LauncherSession?
     let panel: PanelController?
     let access: FolderAccessController?
-    let accessWindow: AccessWindow?
+    let setupWindow: SetupWindow?
+    let settingsWindow: SettingsWindow?
+    let menu: MenuController?
     let testEffects: TestEffects?
     var errors = 0, publications = 0
     private var readyAt: ContinuousClock.Instant?
@@ -20,9 +22,10 @@ import ApparateCore
     private var observationWatch = CatalogWatchDiagnostics()
     var shownMS: Double?, commitProxyMS: Double?
     private var captureWritten = false, testStarted = false, reportWritten = false
-    init(profile: TestProfile, catalog: CatalogController?, files: FileIndexController?, session: LauncherSession?, panel: PanelController?, access: FolderAccessController?, accessWindow: AccessWindow?, effects: TestEffects?) {
+    init(profile: TestProfile, catalog: CatalogController?, files: FileIndexController?, session: LauncherSession?, panel: PanelController?, access: FolderAccessController?, setupWindow: SetupWindow?, settingsWindow: SettingsWindow?, menu: MenuController?, effects: TestEffects?) {
         self.profile = profile; self.catalog = catalog; self.files = files; self.session = session; self.panel = panel
-        self.access = access; self.accessWindow = accessWindow; self.testEffects = effects
+        self.access = access; self.setupWindow = setupWindow; self.testEffects = effects
+        self.settingsWindow = settingsWindow; self.menu = menu
         DispatchQueue.main.asyncAfter(deadline: .now() + profile.seconds + 60) { [weak self] in self?.finishTest() }
     }
     func catalogPublished() { publications += 1; ready() }
@@ -39,12 +42,12 @@ import ApparateCore
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
                     guard let self else { return }
                     do {
-                        let file = profile.directory.appendingPathComponent("\(profile.show!).png")
+                        let file = profile.directory.appendingPathComponent("\(profile.show!).\(profile.show == "setup" ? "jpg" : "png")")
                         if profile.show == "panel" {
                             try self.panel?.verifyPendingPresentation()
                             try self.panel?.capture(to: file)
                         }
-                        else { try self.accessWindow?.capture(to: file) }
+                        else { try self.setupWindow?.capture(to: file) }
                         self.captureWritten = FileManager.default.fileExists(atPath: file.path)
                         if profile.performAction { self.session?.act(.open) }
                     } catch { self.errors += 1 }
@@ -70,8 +73,9 @@ import ApparateCore
     func finishTest() {
         guard let profile, !reportWritten else { return }; reportWritten = true
         var hidden = true
-        do { try panel?.verifyHidden(); try accessWindow?.verifyHidden() }
+        do { try panel?.verifyHidden(); try setupWindow?.verifyHidden(); try settingsWindow?.verifyHidden() }
         catch { hidden = false; errors += 1 }
+        if menu?.nativeItemCount != 0 { hidden = false; errors += 1 }
         let elapsed = readyAt.map { durationMS($0.duration(to: .now)) / 1000 } ?? 0
         let cpu = readyAt == nil ? 0 : ProcessMetrics.cpuSeconds() - readyCPU
         let metrics = catalog?.metrics ?? CatalogMetrics()
@@ -90,6 +94,7 @@ import ApparateCore
             "watch_healthy": catalog?.watchHealthy ?? false, "physical_footprint_bytes": ProcessMetrics.footprint(),
             "observation_seconds": elapsed, "cpu_seconds": cpu, "cpu_percent_one_core": elapsed > 0 ? cpu / elapsed * 100 : 0,
             "native_hotkey_registrations": 0, "native_actions": 0, "protected_folder_probes": 0,
+            "native_status_items": menu?.nativeItemCount ?? 0, "native_login_changes": 0, "symbolichotkeys_writes": 0,
             "fake_registrations": testEffects?.registrationCount ?? 0, "fake_actions": testEffects?.actionCount ?? 0,
             "capture_written": captureWritten, "focus_guards_checked": hidden, "visible_profile": "none", "render_profile": profile.show ?? "none",
             "timing_trigger": "hidden owned-view driver; no physical/global key event",
@@ -127,6 +132,6 @@ import ApparateCore
             let data = try JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys])
             try data.write(to: profile.directory.appendingPathComponent("diagnostics.json"), options: .atomic)
         } catch { NSLog("Test receipt could not be written.") }
-        panel?.hide(); accessWindow?.hide(); NSApp.terminate(nil)
+        panel?.hide(); setupWindow?.hide(); NSApp.terminate(nil)
     }
 }

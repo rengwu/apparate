@@ -57,7 +57,7 @@ private final class PanelActivity {
     private(set) var activityBegins = 0, activityEnds = 0
     var activityHeld: Bool { activity != nil }
     private var waitingForCatalog = false
-    var onHidden: (() -> Void)?, onQuit: (() -> Void)?
+    var onHidden: (() -> Void)?, onQuit: (() -> Void)?, onSettings: (() -> Void)?
     var onTiming: ((Double, Double?) -> Void)?
     var onUpdate: ((UInt64, Bool, Double) -> Void)?
     var onTextBegin: (() -> Void)?
@@ -210,6 +210,7 @@ private final class PanelActivity {
     func keyEquivalent(_ event: NSEvent) -> Bool {
         let flags = event.modifierFlags.intersection([.command, .control, .option, .shift])
         if flags == .command, event.charactersIgnoringModifiers?.lowercased() == "q" { onQuit?(); return true }
+        if flags == .command, event.charactersIgnoringModifiers == "," { hide(); onSettings?(); return true }
         guard !(editor?.hasMarkedText() ?? false) else { session.setComposing(true); return false }
         session.setComposing(false)
         if flags == .command {

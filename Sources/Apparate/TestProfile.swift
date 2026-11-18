@@ -10,6 +10,7 @@ import Darwin
     let show: String?
     let performAction: Bool
     let panelCheck: String?
+    let settingsCheck: Bool
     let panelCount: Int
     let opaque: Bool, warmUp: Bool
     let waitMS: Int
@@ -38,6 +39,8 @@ import Darwin
         let show = env["APPARATE_SHOW"]
         guard mode == "fixtures" || show == nil else { throw SourceError("Owned test renders require fixture sources.") }
         let panelCheck = env["APPARATE_PANEL_CHECK"]
+        let settingsCheck = env["APPARATE_SETTINGS_CHECK"] == "1"
+        guard !settingsCheck || (mode == "fixtures" && panelCheck == nil && show == nil && config.folders.isEmpty) else { throw SourceError("Settings checks require an isolated empty fixture config.") }
         let delivery = SearchDelivery(rawValue: env["APPARATE_PANEL_DELIVERY"] ?? "task")
         let count = Int(env["APPARATE_PANEL_COUNT"] ?? "20000") ?? 0
         let wait = Int(env["APPARATE_PANEL_WAIT_MS"] ?? "0") ?? -1
@@ -46,7 +49,7 @@ import Darwin
             throw SourceError("Invalid isolated panel-check configuration.")
         }
         return TestProfile(mode: mode, directory: directory, seconds: min(90, max(1, Double(env["APPARATE_TEST_SECONDS"] ?? "3") ?? 3)),
-                           query: env["APPARATE_TEST_QUERY"] ?? "term", show: show, performAction: env["APPARATE_TEST_ACTION"] == "open", panelCheck: panelCheck, panelCount: count,
+                           query: env["APPARATE_TEST_QUERY"] ?? "term", show: show, performAction: env["APPARATE_TEST_ACTION"] == "open", panelCheck: panelCheck, settingsCheck: settingsCheck, panelCount: count,
                            opaque: env["APPARATE_PANEL_OPAQUE"] == "1", warmUp: env["APPARATE_PANEL_NO_WARMUP"] != "1", waitMS: wait, activityEnabled: env["APPARATE_PANEL_NO_ACTIVITY"] != "1", delivery: delivery!)
     }
     nonisolated static func fixtureCatalog() throws -> CatalogSnapshot {

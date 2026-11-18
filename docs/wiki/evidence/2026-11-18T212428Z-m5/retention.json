@@ -1,0 +1,509 @@
+{
+  "policy": "Retain final receipts and preferences JPEGs, representative visual failures, failed native receipt/identity and concise build logs. Superseded duplicate rasters/raw diagnostic JSON and earlier panel PNGs stay outside the repo; hashes below preserve provenance. No logs/rasters from real user folders.",
+  "earlier_outputs": [
+    {
+      "attempt": "native-attempt1",
+      "file": "diagnostic.json",
+      "bytes": 1090,
+      "sha256": "9b90983635549f7cf5de28e691473e0b166f18a348cb39b7ce8653dd80c8240f"
+    },
+    {
+      "attempt": "native-attempt1",
+      "file": "receipt.json",
+      "bytes": 1205,
+      "sha256": "87eac9c630167a334e58ede69d528d1d9f66e9f55e1e36ad12f421cfb9afa05e"
+    },
+    {
+      "attempt": "native-attempt1",
+      "file": "settings-broken-config-dark.jpg",
+      "bytes": 44552,
+      "sha256": "28682a54e1e4b9a9c22316a4911ca07988a87549afabb24f3030e02931fca773"
+    },
+    {
+      "attempt": "native-attempt1",
+      "file": "settings-folders-dark.jpg",
+      "bytes": 69088,
+      "sha256": "008d1838dd0a5a7f259d74d89c9cdb9d55d2ddd011c5b0e94695c6f984bcad53"
+    },
+    {
+      "attempt": "native-attempt1",
+      "file": "settings-folders-light.jpg",
+      "bytes": 71013,
+      "sha256": "dc9a7e86bad0c8a9b738f3d0e6c440308ca9dc47ea359814d42d9526f5f93d2e"
+    },
+    {
+      "attempt": "native-attempt1",
+      "file": "settings-general-dark.jpg",
+      "bytes": 37604,
+      "sha256": "d4041968931269a81ff204bf6b0d5872df771984008f8f565bdcf4a49a17dc4d"
+    },
+    {
+      "attempt": "native-attempt1",
+      "file": "settings-general-light.jpg",
+      "bytes": 37683,
+      "sha256": "5b2e7bbad1c4626f3ff46df9c4b08d04ada45b38981cf0995215a081a770d8c0"
+    },
+    {
+      "attempt": "native-attempt1",
+      "file": "settings-login-approval-light.jpg",
+      "bytes": 29902,
+      "sha256": "c8503d718a654824029d1261dae2996582ed09800adf2b3066da9ec17b5a4012"
+    },
+    {
+      "attempt": "native-attempt1",
+      "file": "settings-search-dark.jpg",
+      "bytes": 54715,
+      "sha256": "ced4e2e46567a3dfa1d33b50298a9d7011afac777a43c2ba7ca93bc1854da551"
+    },
+    {
+      "attempt": "native-attempt1",
+      "file": "settings-search-light.jpg",
+      "bytes": 56332,
+      "sha256": "d6c7a64ff509bb63440e2aca9b75b5e03597421295de264563bd4e97317ef869"
+    },
+    {
+      "attempt": "native-attempt1",
+      "file": "settings-validation-dark.jpg",
+      "bytes": 74341,
+      "sha256": "b7ba3be550302b0cbace09bca30a50fe917f7d5117963bbd8ae8a8f6188c793d"
+    },
+    {
+      "attempt": "native-attempt1",
+      "file": "setup-incomplete-dark.jpg",
+      "bytes": 81295,
+      "sha256": "b94ce864ca62ddc430d7787dcda770a90b5b41472b5f97b17fdc5738dae45ab1"
+    },
+    {
+      "attempt": "native-attempt1",
+      "file": "setup-incomplete-light.jpg",
+      "bytes": 81467,
+      "sha256": "5673fc703cbf99ba272f2c7224407c0d8d3b41ad9b0539507682674e8e84a649"
+    },
+    {
+      "attempt": "native-attempt1",
+      "file": "setup-partial-light.jpg",
+      "bytes": 67642,
+      "sha256": "e0a9a927c8f5c666043f35120d9c55e24194266fb1722bb8220578ab5cc8f893"
+    },
+    {
+      "attempt": "native-attempt2",
+      "file": "diagnostic.json",
+      "bytes": 1090,
+      "sha256": "9b90983635549f7cf5de28e691473e0b166f18a348cb39b7ce8653dd80c8240f"
+    },
+    {
+      "attempt": "native-attempt2",
+      "file": "receipt.json",
+      "bytes": 1205,
+      "sha256": "87eac9c630167a334e58ede69d528d1d9f66e9f55e1e36ad12f421cfb9afa05e"
+    },
+    {
+      "attempt": "native-attempt2",
+      "file": "settings-broken-config-dark.jpg",
+      "bytes": 36066,
+      "sha256": "a855a1a6a3acae14a4c10694c10719147a2dc12ecdbcbb90357a5ee36a0ca0fa"
+    },
+    {
+      "attempt": "native-attempt2",
+      "file": "settings-folders-dark.jpg",
+      "bytes": 66876,
+      "sha256": "b8b9e6540b0da3547f033d074663e99e0ee021e64ceaabdc8e917f03de0ab355"
+    },
+    {
+      "attempt": "native-attempt2",
+      "file": "settings-folders-light.jpg",
+      "bytes": 68372,
+      "sha256": "c7eb236bf61ad8f129d260cd0f8bf7bcf5967c2fa75db2141404f5999539757c"
+    },
+    {
+      "attempt": "native-attempt2",
+      "file": "settings-general-dark.jpg",
+      "bytes": 32119,
+      "sha256": "cef2f30c77c453961efadfc76540d406faadc50baf9ca3ce95686250e0f0c3f6"
+    },
+    {
+      "attempt": "native-attempt2",
+      "file": "settings-general-light.jpg",
+      "bytes": 32366,
+      "sha256": "116e190c73b52f2ba8b2e9861231bbfe114ea7894c1773dba8b747e82b7977c1"
+    },
+    {
+      "attempt": "native-attempt2",
+      "file": "settings-login-approval-light.jpg",
+      "bytes": 23692,
+      "sha256": "d1bbb99df0a3bfe88d3158ecb6edc4b1b43fef5022307eb45d075f540c684ea6"
+    },
+    {
+      "attempt": "native-attempt2",
+      "file": "settings-search-dark.jpg",
+      "bytes": 53125,
+      "sha256": "20bfe5d554fc5c66bd0c11af5286bfd745d9d56b5675ee5c9cfcc6d7ffc96893"
+    },
+    {
+      "attempt": "native-attempt2",
+      "file": "settings-search-light.jpg",
+      "bytes": 54315,
+      "sha256": "ddd4c317e308e56464da44f53bc9d57216d3a50bb40d2b9c61285160981657dd"
+    },
+    {
+      "attempt": "native-attempt2",
+      "file": "settings-validation-dark.jpg",
+      "bytes": 72138,
+      "sha256": "8a313fa3184b8299b594768e791f3b77ea052c1ef404bc2b2498abc86be44f15"
+    },
+    {
+      "attempt": "native-attempt2",
+      "file": "setup-incomplete-dark.jpg",
+      "bytes": 81295,
+      "sha256": "b94ce864ca62ddc430d7787dcda770a90b5b41472b5f97b17fdc5738dae45ab1"
+    },
+    {
+      "attempt": "native-attempt2",
+      "file": "setup-incomplete-light.jpg",
+      "bytes": 81467,
+      "sha256": "5673fc703cbf99ba272f2c7224407c0d8d3b41ad9b0539507682674e8e84a649"
+    },
+    {
+      "attempt": "native-attempt2",
+      "file": "setup-partial-light.jpg",
+      "bytes": 67642,
+      "sha256": "e0a9a927c8f5c666043f35120d9c55e24194266fb1722bb8220578ab5cc8f893"
+    },
+    {
+      "attempt": "native-attempt3",
+      "file": "diagnostic.json",
+      "bytes": 551,
+      "sha256": "5702e66d69ff78b3e4977201c85549f302e6169c767c1554331d5a3fd1e250d6"
+    },
+    {
+      "attempt": "native-attempt3",
+      "file": "failure-identity.json",
+      "bytes": 347,
+      "sha256": "6a1eb3da012946473b79147b4319d9621906323df32bae7476334b4edcfb74f2"
+    },
+    {
+      "attempt": "native-attempt3",
+      "file": "failure.json",
+      "bytes": 107,
+      "sha256": "0a5ee02e3b2036ec284bbaf9242a053b6078c7e82534e7f4cf6ec1b96d49bc6a"
+    },
+    {
+      "attempt": "native-attempt3",
+      "file": "settings-folders-dark.jpg",
+      "bytes": 66876,
+      "sha256": "b8b9e6540b0da3547f033d074663e99e0ee021e64ceaabdc8e917f03de0ab355"
+    },
+    {
+      "attempt": "native-attempt3",
+      "file": "settings-folders-light.jpg",
+      "bytes": 68372,
+      "sha256": "c7eb236bf61ad8f129d260cd0f8bf7bcf5967c2fa75db2141404f5999539757c"
+    },
+    {
+      "attempt": "native-attempt3",
+      "file": "settings-general-dark.jpg",
+      "bytes": 32119,
+      "sha256": "cef2f30c77c453961efadfc76540d406faadc50baf9ca3ce95686250e0f0c3f6"
+    },
+    {
+      "attempt": "native-attempt3",
+      "file": "settings-general-light.jpg",
+      "bytes": 32366,
+      "sha256": "116e190c73b52f2ba8b2e9861231bbfe114ea7894c1773dba8b747e82b7977c1"
+    },
+    {
+      "attempt": "native-attempt3",
+      "file": "settings-login-approval-light.jpg",
+      "bytes": 23692,
+      "sha256": "d1bbb99df0a3bfe88d3158ecb6edc4b1b43fef5022307eb45d075f540c684ea6"
+    },
+    {
+      "attempt": "native-attempt3",
+      "file": "settings-search-dark.jpg",
+      "bytes": 53125,
+      "sha256": "20bfe5d554fc5c66bd0c11af5286bfd745d9d56b5675ee5c9cfcc6d7ffc96893"
+    },
+    {
+      "attempt": "native-attempt3",
+      "file": "settings-search-light.jpg",
+      "bytes": 54315,
+      "sha256": "ddd4c317e308e56464da44f53bc9d57216d3a50bb40d2b9c61285160981657dd"
+    },
+    {
+      "attempt": "native-attempt3",
+      "file": "settings-validation-dark.jpg",
+      "bytes": 72138,
+      "sha256": "8a313fa3184b8299b594768e791f3b77ea052c1ef404bc2b2498abc86be44f15"
+    },
+    {
+      "attempt": "native-attempt3",
+      "file": "setup-incomplete-dark.jpg",
+      "bytes": 81295,
+      "sha256": "b94ce864ca62ddc430d7787dcda770a90b5b41472b5f97b17fdc5738dae45ab1"
+    },
+    {
+      "attempt": "native-attempt3",
+      "file": "setup-incomplete-light.jpg",
+      "bytes": 81467,
+      "sha256": "5673fc703cbf99ba272f2c7224407c0d8d3b41ad9b0539507682674e8e84a649"
+    },
+    {
+      "attempt": "native-attempt3",
+      "file": "setup-partial-light.jpg",
+      "bytes": 67700,
+      "sha256": "1c42b211bf2d6558cc6c66a7d4fc9d2cba7a4edfb3a6917ac886b2bf329c0643"
+    },
+    {
+      "attempt": "native-final",
+      "file": "diagnostic.json",
+      "bytes": 1154,
+      "sha256": "e0b76dce926c888bc58cc1970042f3e870661ddae0cad13ba58b429041746d96"
+    },
+    {
+      "attempt": "native-final",
+      "file": "receipt.json",
+      "bytes": 1269,
+      "sha256": "2e4366b2529ae641c41eba22f121b5f28e21fca4609e9515bdf73645b8dcf8d7"
+    },
+    {
+      "attempt": "native-final",
+      "file": "settings-broken-config-dark.jpg",
+      "bytes": 36066,
+      "sha256": "a855a1a6a3acae14a4c10694c10719147a2dc12ecdbcbb90357a5ee36a0ca0fa"
+    },
+    {
+      "attempt": "native-final",
+      "file": "settings-folders-dark.jpg",
+      "bytes": 66876,
+      "sha256": "b8b9e6540b0da3547f033d074663e99e0ee021e64ceaabdc8e917f03de0ab355"
+    },
+    {
+      "attempt": "native-final",
+      "file": "settings-folders-light.jpg",
+      "bytes": 68372,
+      "sha256": "c7eb236bf61ad8f129d260cd0f8bf7bcf5967c2fa75db2141404f5999539757c"
+    },
+    {
+      "attempt": "native-final",
+      "file": "settings-general-dark.jpg",
+      "bytes": 32119,
+      "sha256": "cef2f30c77c453961efadfc76540d406faadc50baf9ca3ce95686250e0f0c3f6"
+    },
+    {
+      "attempt": "native-final",
+      "file": "settings-general-light.jpg",
+      "bytes": 32366,
+      "sha256": "116e190c73b52f2ba8b2e9861231bbfe114ea7894c1773dba8b747e82b7977c1"
+    },
+    {
+      "attempt": "native-final",
+      "file": "settings-login-approval-light.jpg",
+      "bytes": 23692,
+      "sha256": "d1bbb99df0a3bfe88d3158ecb6edc4b1b43fef5022307eb45d075f540c684ea6"
+    },
+    {
+      "attempt": "native-final",
+      "file": "settings-search-dark.jpg",
+      "bytes": 53125,
+      "sha256": "20bfe5d554fc5c66bd0c11af5286bfd745d9d56b5675ee5c9cfcc6d7ffc96893"
+    },
+    {
+      "attempt": "native-final",
+      "file": "settings-search-light.jpg",
+      "bytes": 54315,
+      "sha256": "ddd4c317e308e56464da44f53bc9d57216d3a50bb40d2b9c61285160981657dd"
+    },
+    {
+      "attempt": "native-final",
+      "file": "settings-validation-dark.jpg",
+      "bytes": 72138,
+      "sha256": "8a313fa3184b8299b594768e791f3b77ea052c1ef404bc2b2498abc86be44f15"
+    },
+    {
+      "attempt": "native-final",
+      "file": "setup-incomplete-dark.jpg",
+      "bytes": 81295,
+      "sha256": "b94ce864ca62ddc430d7787dcda770a90b5b41472b5f97b17fdc5738dae45ab1"
+    },
+    {
+      "attempt": "native-final",
+      "file": "setup-incomplete-light.jpg",
+      "bytes": 81467,
+      "sha256": "5673fc703cbf99ba272f2c7224407c0d8d3b41ad9b0539507682674e8e84a649"
+    },
+    {
+      "attempt": "native-final",
+      "file": "setup-partial-light.jpg",
+      "bytes": 67700,
+      "sha256": "1c42b211bf2d6558cc6c66a7d4fc9d2cba7a4edfb3a6917ac886b2bf329c0643"
+    },
+    {
+      "attempt": "setup-final",
+      "file": "diagnostic.json",
+      "bytes": 2193,
+      "sha256": "96e1c8afcd638d1ffe25460ba257c9e325dfbc2f0021d46b5810f004459391a2"
+    },
+    {
+      "attempt": "setup-final",
+      "file": "receipt.json",
+      "bytes": 2330,
+      "sha256": "702963fcfdec0502b334b94b36e220af714c79eb20403f1e8dab677b6a5cdb96"
+    },
+    {
+      "attempt": "setup-final",
+      "file": "setup.jpg",
+      "bytes": 68356,
+      "sha256": "07df1a29a2183e759a5a4a03ef9c58d2e65a54ca1842f866eba627c97688f8d9"
+    },
+    {
+      "attempt": "integration-final",
+      "file": "diagnostic.json",
+      "bytes": 2190,
+      "sha256": "ac63b075362c87b832e50cc8f2abfd61b20aecc03379deb2bcffb65d8fb293e4"
+    },
+    {
+      "attempt": "integration-final",
+      "file": "panel.png",
+      "bytes": 49669,
+      "sha256": "30fdc7d804f505eec042d13d646e517e92cb368dade66af4236f5cb518af1233"
+    },
+    {
+      "attempt": "integration-final",
+      "file": "receipt.json",
+      "bytes": 2327,
+      "sha256": "8ff28fa07d99e465df1ce232c8db518be9cb63e9e8ae7e1cae1305f67faa83dd"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "alternate-dark.png",
+      "bytes": 42463,
+      "sha256": "f47290d951e8ce46ad6809b0f957ed15e244df00e0c3d0e33f2a0a9f01c2d8b1"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "alternate-light.png",
+      "bytes": 42024,
+      "sha256": "ff9e285ab375855ff3c7a1aa1585aec1a5f7432ed63bee5c3d54426c48faadfb"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "diagnostic.json",
+      "bytes": 2467,
+      "sha256": "f7fb673376c9244259b8265b60874cdb9d84910898c70a7856443279cfc3d2f3"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "empty-dark.png",
+      "bytes": 21821,
+      "sha256": "715d4fec9e8a609f72aa0d57908ac568161beaf40c0b1319ea981a8c64a6635b"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "empty-light.png",
+      "bytes": 21664,
+      "sha256": "22623cd7bd36f8e8f6d5b108d8f00e66d51dcd44ac766259be0ddf82034af99a"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "layout-1-dark.png",
+      "bytes": 47591,
+      "sha256": "7c3fea860808cd188375301cc40a57de7b0155fdb2403900328b94f526472fac"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "layout-1-light.png",
+      "bytes": 47188,
+      "sha256": "88b54c7b8c3f2ba1da46e5bd5ef547ffdb8341e92b1524479a54f2ca13564714"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "layout-2-dark.png",
+      "bytes": 38835,
+      "sha256": "3544934ecbc9e06594ecceb9e44be3b4086c999d50727fb2ef586932471d1e61"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "layout-2-light.png",
+      "bytes": 38664,
+      "sha256": "5dc6b3cd8fbe3c62f2bfa62713cb1f2e05e11b7932a0ce9a01f11793e6fabc84"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "layout-3-dark.png",
+      "bytes": 38835,
+      "sha256": "3544934ecbc9e06594ecceb9e44be3b4086c999d50727fb2ef586932471d1e61"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "layout-3-light.png",
+      "bytes": 38664,
+      "sha256": "5dc6b3cd8fbe3c62f2bfa62713cb1f2e05e11b7932a0ce9a01f11793e6fabc84"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "loading-dark.png",
+      "bytes": 25443,
+      "sha256": "9dd03e90aba48f03c4fabd8a83444b045d836b197a064ea4a701699776848d9d"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "loading-light.png",
+      "bytes": 25068,
+      "sha256": "2c6424940865d39f18322fbf12724f0dc85fbb41d274d22caaaeff51db5020b3"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "matches-dark.png",
+      "bytes": 52662,
+      "sha256": "c7d08b89e913b085e2249ba93010ddcd3f855fd1287a2275b9a4fcec3dc1be89"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "matches-light.png",
+      "bytes": 51520,
+      "sha256": "b08d240dd1823ee92e943edbeeecdc400476f2c0635e4f11c9c89412fd69dfd3"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "no-results-dark.png",
+      "bytes": 22984,
+      "sha256": "f0cd520ceb19432a305bcaf3624c8657a646a4d0a6217277bd3e3f879ef1f58e"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "no-results-light.png",
+      "bytes": 22834,
+      "sha256": "623b72469c69694fc25f836ecaca9263cb41b7e0399aafaa0e9efd5546fc66af"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "receipt.json",
+      "bytes": 2582,
+      "sha256": "ace4fcd963dd9850756744654a66040b712918c16382af5a4d3f1fd2ea75f418"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "restart-dark.png",
+      "bytes": 36317,
+      "sha256": "73c3d48f726a24bb401a967f185d07cb7cce5b9b138525094a74db85a40f3de9"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "restart-light.png",
+      "bytes": 36235,
+      "sha256": "483ffd5f5bbd92ef2bba9ee8aa3c1e0878466b972e04440cc69e6aec156de960"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "web-dark.png",
+      "bytes": 31032,
+      "sha256": "161eecd9b199d6dc203614280b08aa9379082898614634e0cbf240a38e323297"
+    },
+    {
+      "attempt": "panel-final",
+      "file": "web-light.png",
+      "bytes": 30937,
+      "sha256": "dc997bb6ad743442937459b86e596a4edc63403b245e9a5fac9ff9104b38c224"
+    }
+  ]
+}

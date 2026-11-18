@@ -9,7 +9,7 @@ updated: 2026-11-19
 
 ## Entry points and prerequisites
 
-The app resolves `APPARATE_HOME` when nonempty, otherwise its Application Support folder, and creates `ConfigStore(directory:)`. Development runs must supply an isolated temporary `APPARATE_HOME`. The store owns `config.json`, offers `current`, `errors`, `save` and `onChange`, and runs on MainActor. `ConfigStore.decode` validates supplied JSON without filesystem access. The eventual settings window is not built yet.
+The app resolves `APPARATE_HOME` when nonempty, otherwise its Application Support folder, and creates `ConfigStore(directory:)`. Development runs must supply an isolated temporary `APPARATE_HOME`. The store owns `config.json`, offers `current`, `errors`, `save` and `onChange`, and runs on MainActor. `ConfigStore.decode` validates supplied JSON without filesystem access. [Settings](settings.md) applies validated, field-level updates against fresh disk state.
 
 ## Expected outcomes
 
@@ -17,9 +17,9 @@ The app resolves `APPARATE_HOME` when nonempty, otherwise its Application Suppor
 - The whole document is accepted or rejected. Broken JSON or a type error produces one error; structurally valid documents collect all value errors. A failure preserves the last valid config (defaults at first launch) and never overwrites the bad file. `save` also refuses to overwrite an existing broken or newer-version file.
 - Prefixes must be unique single symbols for known scopes, with no letters, digits, whitespace/control characters, `/` or `~`. Folder paths must be absolute after tilde expansion, lexically distinct, with depth 1–30. Validation does not check whether a folder exists. Search URLs require exactly one `{query}`, an HTTP(S) scheme and a nonempty host after sample substitution.
 - Saving is atomic, sorted and pretty-printed. File and directory vnode sources catch in-place writes, atomic replacement and deletion. Replacement rearms the file watch. Deleting the file recreates defaults. There is no polling.
-- An unchanged valid reload does not notify again. Fixing an invalid file clears errors and notifies even when its config equals the last valid value. Own saves produce no reload loop. The app logs config errors and retains the latest config error for the future M5 settings view, clearing it after valid recovery. Background config/catalog/usage errors do not show modal alerts.
+- An unchanged valid reload does not notify again. Fixing an invalid file clears errors and notifies even when its config equals the last valid value. Own saves produce no reload loop. The app logs config errors and retains the latest config error for the M5 settings view, clearing it after valid recovery. Background config/catalog/usage errors do not show modal alerts.
 
-Defaults include Command-Space, a visible menu-bar icon, four home-relative roots at depth 10, `.gitignore` handling enabled, and the DuckDuckGo URL template. M2 applies the hotkey, scopes and web template; menu-bar controls and the filesystem crawl arrive later. Test profiles replace native effects with fakes.
+Defaults include Command-Space, a visible menu-bar icon, four home-relative roots at depth 10, `.gitignore` handling enabled, and the DuckDuckGo URL template. M2 applies the hotkey, scopes and web template; M3 applies folder settings and M5 adds the menu-bar control. Test profiles replace native effects with fakes.
 
 ## Verification recipe
 
@@ -29,7 +29,7 @@ After `./build.sh`, run `python3 Tests/smoke-app.py`. The M2 driver pre-seeds an
 
 ## Coverage and limits
 
-Covered: first launch, defaults, semantic/type errors, future version, last-valid preservation, atomic serialization, real vnode notifications and recovery. Uncovered in M1: the future settings UI and write failures caused by real user folder permissions. The smoke helper verifies startup/config integration; optional fixture windows do not prove physical input or native effects.
+Covered: first launch, defaults, semantic/type errors, future version, last-valid preservation, atomic serialization, real vnode notifications and recovery. M5 adds transactional settings/UI and injected write-failure checks; real folder-permission write failures remain outside that coverage. The smoke helper verifies startup/config integration; optional fixture windows do not prove physical input or native effects.
 
 ## Verification history
 
@@ -42,3 +42,7 @@ Covered: first launch, defaults, semantic/type errors, future version, last-vali
 M3 applies folder/depth/ignore changes to file indexing; removing a root hides its solely owned results immediately and invalidates older load/crawl work. Explicitly configured home roots are supported; missing roots never widen into recursive home watches.
 
 - [M3 verification](../verification/runs/2026-11-18T181500Z-m3.md).
+
+## M5 integration
+
+Settings commits text on Return/end editing, switches immediately, and preserves unrelated external changes. A same-field conflict is rejected; a broken file is never overwritten. Hotkey registration, persistence and rollback are coordinated through the same save boundary. [M5 verification](../verification/runs/2026-11-18T212428Z-m5.md).

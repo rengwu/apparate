@@ -307,8 +307,8 @@ Following jstack conventions:
 | M1 Foundation, matching and ranking | [written](build/m1-foundation.md) | [yes](verification/runs/2026-11-18T154000Z-m1.md) | [passed](build/m1-foundation.md#review); [fix verified](verification/runs/2026-11-18T154000Z-m1.md#post-review-fix) | `0a6a63e` |
 | M2 Apps, settings, actions, first panel | [written](build/m2-sources-actions-panel.md) | [automated checks passed](verification/runs/2026-11-18T164000Z-m2.md); [supervised pending](verification/runs/2026-11-18T164001Z-m2-supervised.md) | [passed after five fixes](build/m2-sources-actions-panel.md#review) | `b3e68c4` |
 | M3 File index | [written](build/m3-file-index.md) | [automated checks passed; performance limits recorded](verification/runs/2026-11-18T181500Z-m3.md) | [passed after a speed fix](build/m3-file-index.md#review) | `ef9f683` |
-| M4 Launcher panel | [written](build/m4-launcher-panel.md) | [yes](verification/runs/2026-11-18T200340Z-m4.md) | [passed; latency carried to M6](build/m4-launcher-panel.md#review) | to commit |
-| M5 Settings, menu bar, first run | — | — | — | — |
+| M4 Launcher panel | [written](build/m4-launcher-panel.md) | [yes](verification/runs/2026-11-18T200340Z-m4.md) | [passed; latency carried to M6](build/m4-launcher-panel.md#review) | `e1543de` |
+| M5 Settings, menu bar, first run | [written](build/m5-settings-menu-first-run.md) | [automated checks passed](verification/runs/2026-11-18T212428Z-m5.md); supervised pending | [approved after row-layout fix](verification/runs/2026-11-18T212428Z-m5.md#post-review-fix) | This M5 milestone commit |
 | M6 Performance qualification | — | — | — | — |
 | M7 Release 0.1.0 | — | — | — | — |
 

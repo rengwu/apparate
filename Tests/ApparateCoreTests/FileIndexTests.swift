@@ -355,6 +355,32 @@ func crawlFixture(_ directory: URL, depth: Int = 10, respect: Bool = true, reade
         try await eventually({ third.metrics.completedUpdates > 0 }, timeout: 8)
         try expect(third.metrics.listedDirectories > 0)
     }
+    await h.test("files: settings status observes start finish config changes and restored time") {
+        let dir = try temporaryDirectory(); defer { try? FileManager.default.removeItem(at: dir) }
+        let root = dir.appendingPathComponent("root"), data = dir.appendingPathComponent("data")
+        try makeFile(root, ".gitignore", "skip.txt\n"); try makeFile(root, "keep.txt"); try makeFile(root, "skip.txt")
+        var config = AppConfig(); config.folders = [.init(path: root.path)]
+        let controller = FileIndexController(config: config, store: try FileIndexStore(directory: data), access: fixtureAccess, watcher: FixtureFileWatcher())
+        var states: [Bool] = []
+        controller.onStatusChange = { [weak controller] in if let controller { states.append(controller.isIndexing) } }
+        controller.start(); defer { controller.stop() }
+        try await eventually({ controller.metrics.completedUpdates == 1 && !controller.isIndexing }, timeout: 8)
+        let before = controller.snapshot!.count
+        try expect(states.contains(true) && states.last == false && controller.snapshot?.lastUpdate != nil)
+        config.respectGitignore = false; controller.setConfig(config)
+        try expect(controller.isIndexing)
+        try await eventually({ controller.metrics.completedUpdates == 2 && !controller.isIndexing }, timeout: 8)
+        try expect(controller.snapshot?.count == before + 1 && states.last == false)
+        let updated = controller.snapshot!.lastUpdate
+        controller.stop()
+        let resumed = FileIndexController(config: config, store: try FileIndexStore(directory: data), access: fixtureAccess, watcher: FixtureFileWatcher())
+        resumed.start(); defer { resumed.stop() }
+        try await eventually({ resumed.metrics.loadedFromDisk && !resumed.isIndexing }, timeout: 8)
+        try expect(resumed.snapshot?.lastUpdate == updated)
+        resumed.rebuild(); config.folders = []; resumed.setConfig(config)
+        try expect(resumed.snapshot?.count == 0)
+        try await eventually({ !resumed.isIndexing && resumed.snapshot?.roots.isEmpty == true }, timeout: 8)
+    }
     await h.test("files: ignored-directory churn does not enumerate, save or publish") {
         let dir = try temporaryDirectory(); defer { try? FileManager.default.removeItem(at: dir) }
         let root = dir.appendingPathComponent("root"), data = dir.appendingPathComponent("data")

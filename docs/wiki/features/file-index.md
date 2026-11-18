@@ -45,10 +45,16 @@ The release harness supplies `--file-benchmark synthetic`, `--file-benchmark pro
 
 ## Coverage and limits
 
-These checks establish Core behavior and isolated signed-app integration. Native opens, keyboard delivery/focus, physical IME, real protected-folder grants and their persistence across normally launched rebuilds remain in the [supervised run](../verification/runs/2026-11-18T164001Z-m2-supervised.md), required before M5. M6 owns the end-to-end performance verdict. Sampled memory peaks are lower bounds on the true instantaneous peak; timing results describe the recorded corpus and machine.
+These checks establish Core behavior and isolated signed-app integration. Native opens, keyboard delivery/focus, physical IME, real protected-folder grants and their persistence across normally launched rebuilds remain in the [supervised run](../verification/runs/2026-11-18T164001Z-m2-supervised.md), required before M7 release. M6 owns the end-to-end performance verdict. Sampled memory peaks are lower bounds on the true instantaneous peak; timing results describe the recorded corpus and machine.
 
 ## Verification history
 
 - [M3 automated verification](../verification/runs/2026-11-18T181500Z-m3.md) — build-specific tests, signed-app checks, measurements and source fingerprints; independent review passed.
 
 - [M3 search-speed review fix](../verification/runs/2026-11-18T181500Z-m3.md#post-review-search-fix) — compact scan buffers, matched-corpus equality and final performance measurements; independent recheck passed.
+
+**2026-11-19 gate update:** Claude moved the pending native checks to the M7 release gate in the [M5 guide](../build/m5-settings-menu-first-run.md). Their recorded outcomes remain unchanged.
+
+## M5 status integration
+
+A separate status callback publishes loading/rebuild start, completion and failure for Settings. The snapshot supplies count and saved update time, including after reopening. Rebuild disables while active; changing ignore behavior rebuilds asynchronously. A Core fixture verifies start/finish, restored time, ignore changes and root removal during a rebuild. [M5 verification](../verification/runs/2026-11-18T212428Z-m5.md).

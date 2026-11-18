@@ -13,6 +13,7 @@ rm -rf "$bundle"
 mkdir -p "$bundle/Contents/MacOS" "$bundle/Contents/Resources"
 cp "$bin/Apparate" "$bundle/Contents/MacOS/Apparate"
 cp "$root/THIRD_PARTY_NOTICES.txt" "$bundle/Contents/Resources/"
+cp "$root/Resources/MenuBarIconTemplate.png" "$root/Resources/MenuBarIconTemplate@2x.png" "$bundle/Contents/Resources/"
 cat > "$bundle/Contents/Info.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">

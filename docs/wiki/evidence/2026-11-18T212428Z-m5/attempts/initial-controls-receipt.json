@@ -1,0 +1,55 @@
+{
+  "capture_method": "hidden owned preferences content; native toolbar chrome/menu appearance remain supervised",
+  "cleanup": "Owned process exited; test-created APPARATE_HOME removed",
+  "errors": 0,
+  "fake_access_probes": 3,
+  "fake_actions": 0,
+  "fake_login_changes": 2,
+  "fake_picker_calls": 2,
+  "fake_registrations": 3,
+  "fake_reveals": 1,
+  "focus_guards_checked": true,
+  "menu_graph": [
+    {
+      "key_equivalent": "k",
+      "title": "Open Apparate"
+    },
+    {
+      "key_equivalent": ",",
+      "title": "Settings\u2026"
+    },
+    {
+      "key_equivalent": "",
+      "title": ""
+    },
+    {
+      "key_equivalent": "q",
+      "title": "Quit Apparate"
+    }
+  ],
+  "mode": "fixtures",
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "native_login_changes": 0,
+  "native_status_items": 0,
+  "protected_folder_probes": 0,
+  "ready": true,
+  "result": "Passed",
+  "routes": [
+    "open",
+    "settings:Folders",
+    "quit",
+    "settings:Folders",
+    "settings:Folders"
+  ],
+  "settings_check": true,
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "symbolichotkeys_writes": 0,
+  "toolbar_tabs": [
+    "General",
+    "Search",
+    "Folders"
+  ],
+  "visible_profile": "none"
+}

@@ -1,0 +1,89 @@
+{
+  "policy": "Retain the post-review receipt, build/source identity, build log and only five affected Search/Folders renders; unchanged General/setup outputs stay outside the repo. Original pre-review evidence remains intact.",
+  "outputs": [
+    {
+      "name": "diagnostic.json",
+      "bytes": 1154,
+      "sha256": "e0b76dce926c888bc58cc1970042f3e870661ddae0cad13ba58b429041746d96",
+      "retained": false
+    },
+    {
+      "name": "receipt.json",
+      "bytes": 1269,
+      "sha256": "2e4366b2529ae641c41eba22f121b5f28e21fca4609e9515bdf73645b8dcf8d7",
+      "retained": true
+    },
+    {
+      "name": "settings-broken-config-dark.jpg",
+      "bytes": 36066,
+      "sha256": "a855a1a6a3acae14a4c10694c10719147a2dc12ecdbcbb90357a5ee36a0ca0fa",
+      "retained": false
+    },
+    {
+      "name": "settings-folders-dark.jpg",
+      "bytes": 68089,
+      "sha256": "0395f762ca81c43f1c23c014aeaeccba52dfe9d38614790ec1118788f8bef2e6",
+      "retained": true
+    },
+    {
+      "name": "settings-folders-light.jpg",
+      "bytes": 69509,
+      "sha256": "ca274e7c30ccd7f95a4a5485ecc563453d04cc3d84cc2f1d14755b62ac665401",
+      "retained": true
+    },
+    {
+      "name": "settings-general-dark.jpg",
+      "bytes": 32119,
+      "sha256": "cef2f30c77c453961efadfc76540d406faadc50baf9ca3ce95686250e0f0c3f6",
+      "retained": false
+    },
+    {
+      "name": "settings-general-light.jpg",
+      "bytes": 32366,
+      "sha256": "116e190c73b52f2ba8b2e9861231bbfe114ea7894c1773dba8b747e82b7977c1",
+      "retained": false
+    },
+    {
+      "name": "settings-login-approval-light.jpg",
+      "bytes": 23692,
+      "sha256": "d1bbb99df0a3bfe88d3158ecb6edc4b1b43fef5022307eb45d075f540c684ea6",
+      "retained": false
+    },
+    {
+      "name": "settings-search-dark.jpg",
+      "bytes": 50836,
+      "sha256": "eaa5b69a1f993e38d9376f8f4033c73299b3a970b99d55fda6bf88b62b411398",
+      "retained": true
+    },
+    {
+      "name": "settings-search-light.jpg",
+      "bytes": 52036,
+      "sha256": "a3c0f743402228f00b3533a8469faf796ac8ac4197ec9e55800c54f30a3be23b",
+      "retained": true
+    },
+    {
+      "name": "settings-validation-dark.jpg",
+      "bytes": 70485,
+      "sha256": "2c66fd43bb5ec851f5686f9bedc23d141ed24e9729f1c78caa789c178e8433e1",
+      "retained": true
+    },
+    {
+      "name": "setup-incomplete-dark.jpg",
+      "bytes": 81295,
+      "sha256": "b94ce864ca62ddc430d7787dcda770a90b5b41472b5f97b17fdc5738dae45ab1",
+      "retained": false
+    },
+    {
+      "name": "setup-incomplete-light.jpg",
+      "bytes": 81345,
+      "sha256": "8d1af2fb0f11e83b0638e3beaaeb0c5975b2694260af32c9362e349f9afacbb1",
+      "retained": false
+    },
+    {
+      "name": "setup-partial-light.jpg",
+      "bytes": 67642,
+      "sha256": "e0a9a927c8f5c666043f35120d9c55e24194266fb1722bb8220578ab5cc8f893",
+      "retained": false
+    }
+  ]
+}

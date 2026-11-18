@@ -57,6 +57,7 @@ func search(_ items: [SearchItem], _ text: String, config: AppConfig = AppConfig
         await unicodeTests(h)
         await alignmentTests(h)
         await configTests(h)
+        await settingsTests(h)
         await usageTests(h)
         await coordinatorTests(h)
         await sourceTests(h)

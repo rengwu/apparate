@@ -9,7 +9,10 @@ import ApparateCore
     private var session: LauncherSession?
     private var panel: PanelController?
     private var access: FolderAccessController?
-    private var accessWindow: AccessWindow?
+    private var setupWindow: SetupWindow?
+    private var settingsWindow: SettingsWindow?
+    private var settingsModel: SettingsModel?
+    private var menu: MenuController?
     private var hotkey: HotKeyRegistration?
     private var nativeRegistrar: NativeHotKeyRegistrar?
     private var actions: ActionDispatcher?
@@ -28,6 +31,9 @@ import ApparateCore
             if let profile, profile.panelCheck != nil {
                 Task(priority: .userInitiated) { await PanelVerification.run(profile) }
                 return
+            }
+            if let profile, profile.settingsCheck {
+                Task { await SettingsVerification.run(profile) }; return
             }
             let directory = AppConfig.dataDirectory(environment: env)
             let firstRun = !FileManager.default.fileExists(atPath: directory.appendingPathComponent("config.json").path)
@@ -50,7 +56,6 @@ import ApparateCore
                 access = FolderAccessController(directory: directory)
             }
             access?.onError = { [weak self] message in self?.logError(message) }
-            accessWindow = AccessWindow(controller: access!, presentationAllowed: profile == nil)
             let presence: @Sendable (URL) -> FilePresence
             if profile == nil { presence = { url in filePresence(url) } }
             else { presence = { _ in FilePresence.present } }
@@ -71,12 +76,40 @@ import ApparateCore
                 }
             }
             hotkey = HotKeyRegistration(registrar: registrar)
-            do { try hotkey?.replace(with: store.current.hotKey) } catch { alertError(error.localizedDescription, title: "Shortcut unavailable") }
+            let settings = SettingsModel(store: store, hotkey: hotkey!, access: access!,
+                login: profile == nil ? NativeLoginService() : FixtureLoginService(),
+                readSpotlight: profile == nil ? NativeLoginService.spotlight : { .disabled })
+            settingsModel = settings
+            settingsWindow = SettingsWindow(model: settings, presentationAllowed: profile == nil)
+            setupWindow = SetupWindow(model: settings, presentationAllowed: profile == nil)
+            let menu = MenuController(presentationAllowed: profile == nil); self.menu = menu
+            settings.onChange = { [weak self] in self?.refreshPreferences() }
+            settings.retryHotkey()
+            if settings.hotkeyError != nil && !(firstRun && settings.spotlightNotice) {
+                alertError(settings.hotkeyError!, title: "Shortcut unavailable")
+            }
+            menu.onOpen = { [weak self] in self?.panel?.show() }
+            menu.onSettings = { [weak self] in self?.showSettings() }
+            menu.onQuit = { NSApp.terminate(nil) }
+            panel.onSettings = { [weak self] in self?.showSettings() }
+            setupWindow?.onChooseFolders = { [weak self] in self?.showSettings(tab: .folders) }
+            settingsWindow?.onRevealConfig = { [weak self] in self?.preferencesAction { try await executor.reveal(store.file) } }
+            let keyboard = URL(string: "x-apple.systempreferences:com.apple.Keyboard-Settings.extension?Shortcuts")!
+            settingsWindow?.onKeyboardShortcuts = { [weak self] in self?.preferencesAction { try await executor.openURL(keyboard) } }
+            setupWindow?.onKeyboardShortcuts = settingsWindow?.onKeyboardShortcuts
+            settingsWindow?.onPickFolders = { [weak self] window, completion in
+                guard self?.profile == nil else { completion([]); return }
+                let picker = NSOpenPanel(); picker.canChooseFiles = false; picker.canChooseDirectories = true
+                picker.allowsMultipleSelection = true; picker.treatsFilePackagesAsDirectories = false
+                picker.beginSheetModal(for: window) { response in
+                    MainActor.assumeIsolated { completion(response == .OK ? picker.urls.map(\.path) : []) }
+                }
+            }
             store.onChange = { [weak self] value, problems in
                 guard let self else { return }
                 self.session?.setConfig(value)
                 self.files?.setConfig(value)
-                do { try self.hotkey?.replace(with: value.hotKey) } catch { self.alertError(error.localizedDescription, title: "Shortcut unavailable") }
+                self.settingsModel?.configChanged()
                 self.latestConfigError = problems.last
                 for problem in problems { self.logError(problem) }
             }
@@ -97,9 +130,13 @@ import ApparateCore
             files = fileController
             fileController.onError = { [weak self] in self?.logError($0) }
             fileController.onChange = { [weak self] snapshot in
-                self?.session?.setFiles(snapshot); self?.diagnostics?.ready()
+                self?.session?.setFiles(snapshot); self?.refreshIndexStatus(); self?.diagnostics?.ready()
             }
             access?.onCompletion = { [weak self] observations in self?.files?.setAccess(FileAccessPolicy(observations: observations)) }
+            access?.onChange = { [weak self] in self?.refreshPreferences() }
+            fileController.onStatusChange = { [weak self] in self?.refreshIndexStatus() }
+            settings.onRebuild = { [weak fileController] in fileController?.rebuild() }
+            refreshPreferences()
             catalog?.onError = { [weak self] message in self?.logError(message) }
             catalog?.onChange = { [weak self] snapshot in
                 guard let self else { return }
@@ -107,11 +144,11 @@ import ApparateCore
             }
             if let profile {
                 diagnostics = AppTestDiagnostics(profile: profile, catalog: catalog, files: files, session: session, panel: panel,
-                                                 access: access, accessWindow: accessWindow, effects: testEffects)
+                                                 access: access, setupWindow: setupWindow, settingsWindow: settingsWindow, menu: menu, effects: testEffects)
             }
             fileController.start(); catalog?.start()
             if profile == nil {
-                if firstRun || env["APPARATE_SHOW"] == "setup" { accessWindow?.show() }
+                if SetupWindow.shouldShow(configExisted: !firstRun, override: env["APPARATE_SHOW"]) { setupWindow?.show() }
                 else if env["APPARATE_SHOW"] == "panel" { panel.show() }
             }
 
@@ -121,8 +158,29 @@ import ApparateCore
         }
     }
     private func hotkeyPressed() {
+        if settingsWindow?.recording == true { settingsWindow?.recordCurrentShortcut(); return }
+        if let key = hotkey?.active, let window = NSApp.keyWindow,
+           window === settingsWindow?.window || window === setupWindow?.window,
+           menu?.performWindowCommand(key, close: { window.performClose(nil) }) == true { return }
+        if let key = hotkey?.active, panel?.isVisible == true,
+           menu?.performWindowCommand(key, close: { panel?.hide() }) == true { return }
         let start = ContinuousClock.now
         if panel?.isVisible == true { panel?.hide() } else { panel?.show(start: start) }
+    }
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool { showSettings(); return false }
+    private func showSettings(tab: SettingsWindow.Tab? = nil) { panel?.hide(); settingsWindow?.show(tab: tab) }
+    private func refreshPreferences() {
+        if settingsWindow?.window.isVisible == true { settingsWindow?.refresh() }
+        if setupWindow?.window.isVisible == true { setupWindow?.refresh() }
+        if let settingsModel { menu?.update(visible: settingsModel.config.showMenuBarIcon, activeKey: hotkey?.active) }
+    }
+    private func refreshIndexStatus() {
+        guard let files else { return }
+        settingsModel?.index = SettingsIndexState(count: files.snapshot?.count ?? 0, updated: files.snapshot?.lastUpdate,
+            roots: files.rootStatuses, indexing: files.isIndexing, error: files.lastError)
+    }
+    private func preferencesAction(_ action: @escaping () async throws -> Void) {
+        Task { do { try await action() } catch { settingsModel?.report(error.localizedDescription) } }
     }
     private func logError(_ reason: String) {
         diagnostics?.errors += 1

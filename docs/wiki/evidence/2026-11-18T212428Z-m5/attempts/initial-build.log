@@ -1,0 +1,58 @@
+Building for debugging...
+[Planning deferred tasks]
+[5 / 17] ApparateCore
+[16 / 28] ApparateCore
+[19 / 31] ApparateCore
+[21 / 33] ApparateFixtures
+[24 / 33] ApparateFixtures
+[25 / 33] ApparateCore
+[26 / 45]
+[35 / 45] Apparate-product
+[36 / 45] Apparate-product
+[40 / 45] Apparate-product
+error: SwiftCompile normal arm64 <project>/Sources/Apparate/SettingsWindow.swift failed with a nonzero exit code. Command line:     cd <home>/Projects
+    builtin-SwiftPerFileCompile SettingsWindow.swift
+<project>/Sources/Apparate/SettingsWindow.swift:53:59: warning: value 'self' was defined but never used; consider replacing with boolean test [#NoUsage]
+ 51 |         bind(keyboard) { [weak self] _ in self?.onKeyboardShortcuts?() }
+ 52 |         bind(login) { [weak self] control in self?.model.setLogin((control as! NSButton).state == .on) }
+ 53 |         bind(menuIcon) { [weak self] control in guard let self else { return }; model.set(\.showMenuBarIcon, from: model.config.showMenuBarIcon, to: (control as! NSButton).state == .on) }
+    |                                                           `- warning: value 'self' was defined but never used; consider replacing with boolean test [#NoUsage]
+ 54 |         login.allowsMixedState = true; loginStatus.textColor = .secondaryLabelColor
+ 55 |         pages[.general] = grid([[label("Hotkey"), shortcut], [label(""), activeKey], [label(""), vertical([spotlight, keyboard])], [label(""), vertical([login, loginStatus])], [label(""), menuIcon]])
+
+<project>/Sources/Apparate/SettingsWindow.swift:74:58: warning: value 'self' was defined but never used; consider replacing with boolean test [#NoUsage]
+ 72 |         bind(folderAdd) { [weak self] _ in guard let self else { return }; onPickFolders?(window) { [weak self] paths in self?.model.addFolders(paths) } }
+ 73 |         bind(folderRemove) { [weak self] _ in self?.removeFolder() }
+ 74 |         bind(respect) { [weak self] control in guard let self else { return }; model.set(\.respectGitignore, from: model.config.respectGitignore, to: (control as! NSButton).state == .on) }
+    |                                                          `- warning: value 'self' was defined but never used; consider replacing with boolean test [#NoUsage]
+ 75 |         bind(rebuild) { [weak self] _ in self?.model.rebuild() }
+ 76 |         bind(allow) { [weak self] _ in guard let self else { return }; Task { await model.access.check() } }
+
+<project>/Sources/Apparate/SettingsWindow.swift:76:50: warning: value 'self' was defined but never used; consider replacing with boolean test [#NoUsage]
+ 74 |         bind(respect) { [weak self] control in guard let self else { return }; model.set(\.respectGitignore, from: model.config.respectGitignore, to: (control as! NSButton).state == .on) }
+ 75 |         bind(rebuild) { [weak self] _ in self?.model.rebuild() }
+ 76 |         bind(allow) { [weak self] _ in guard let self else { return }; Task { await model.access.check() } }
+    |                                                  `- warning: value 'self' was defined but never used; consider replacing with boolean test [#NoUsage]
+ 77 |         pages[.folders] = vertical([folderScroll, horizontal([folderAdd, folderRemove, allow]), respect, horizontal([label("Index"), indexText, rebuild]), indexError])
+ 78 |         controls = [shortcut, keyboard, login, menuIcon, presets, url, prefixAdd, prefixRemove, folderAdd, folderRemove, respect, rebuild, allow]
+
+<project>/Sources/Apparate/SettingsWindow.swift:84:54: error: value of type 'NSButton' has no member 'buttonType'
+ 82 |     private func bind(_ control: NSControl, _ action: @escaping (NSControl) -> Void) {
+ 83 |         let handler = ControlAction(action); handlers.append(handler); control.target = handler; control.action = #selector(ControlAction.fire(_:))
+ 84 |         if let button = control as? NSButton, button.buttonType != .switch { button.bezelStyle = .rounded }
+    |                                                      `- error: value of type 'NSButton' has no member 'buttonType'
+ 85 |     }
+ 86 |     private func label(_ text: String) -> NSTextField { NSTextField(labelWithString: text) }
+
+<project>/Sources/Apparate/SettingsWindow.swift:84:69: error: reference to member 'switch' cannot be resolved without a contextual type
+ 82 |     private func bind(_ control: NSControl, _ action: @escaping (NSControl) -> Void) {
+ 83 |         let handler = ControlAction(action); handlers.append(handler); control.target = handler; control.action = #selector(ControlAction.fire(_:))
+ 84 |         if let button = control as? NSButton, button.buttonType != .switch { button.bezelStyle = .rounded }
+    |                                                                     `- error: reference to member 'switch' cannot be resolved without a contextual type
+ 85 |     }
+ 86 |     private func label(_ text: String) -> NSTextField { NSTextField(labelWithString: text) }
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+Failed frontend command:
+/Library/Developer/CommandLineTools/usr/bin/swift-frontend -frontend -c <project>/Sources/Apparate/AppTestDiagnostics.swift <project>/Sources/Apparate/IconLoader.swift <project>/Sources/Apparate/MenuController.swift <project>/Sources/Apparate/NativeEffects.swift <project>/Sources/Apparate/PanelController.swift <project>/Sources/Apparate/PanelRowDrawing.swift <project>/Sources/Apparate/PanelRows.swift <project>/Sources/Apparate/PanelVerification.swift <project>/Sources/Apparate/PreferencesSupport.swift -primary-file <project>/Sources/Apparate/SettingsWindow.swift <project>/Sources/Apparate/SetupWindow.swift <project>/Sources/Apparate/TestProfile.swift <project>/Sources/Apparate/main.swift -emit-dependencies-path <project>/.build/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsWindow.d -emit-const-values-path <project>/.build/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsWindow.swiftconstvalues -emit-reference-dependencies-path <project>/.build/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsWindow.swiftdeps -serialize-diagnostics-path <project>/.build/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsWindow.dia -target arm64-apple-macos27.0 -disable-cross-import-overlay-search -swift-module-cross-import Darwin /Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk/usr/include/Darwin.swiftcrossimport/xlocale.swiftoverlay -load-resolved-plugin /Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/libObservationMacros.dylib\#\#ObservationMacros -load-resolved-plugin /Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/libSwiftMacros.dylib\#\#SwiftMacros -disable-implicit-swift-modules -Xcc -fno-implicit-modules -Xcc -fno-implicit-module-maps -explicit-swift-module-map-file <project>/.build/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/Apparate-dependencies-1.json -Xllvm -aarch64-use-tbi -enable-objc-interop -stack-check -sdk /Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk -I <project>/.build/out/Products/Debug -Isystem /Library/Developer/CommandLineTools/Developer/usr/lib -F <project>/.build/out/Products/Debug/PackageFrameworks -F <project>/.build/out/Products/Debug -F /Library/Developer/CommandLineTools/Library/Developer/Frameworks -F /Library/Developer/CommandLineTools/Developer/Library/Frameworks -module-cache-path <project>/.build/out/Intermediates.noindex/SwiftExplicitPrecompiledModules -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\=dwarf -dwarf-version\=5 -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D Xcode -serialize-debugging-options -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -validate-clang-modules-once -clang-build-session-file <project>/.build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc <home>/Projects -enable-anonymous-context-mangled-names -file-compilation-dir <home>/Projects -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -ivfsstatcache -Xcc <project>/.build/out/SDKStatCaches.noindex/macosx27.2-26B118-1aa54e4a50e311dbd51de5aafe7eca3d5818d34bafcb1249783cb8b2c4efe0a2.sdkstatcache -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -Xcc -I<project>/.build/out/Products/Debug/include -Xcc -I<project>/.build/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/DerivedSources-normal/arm64 -Xcc -I<project>/.build/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/DerivedSources/arm64 -Xcc -I<project>/.build/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\=1 -no-auto-bridging-header-chaining -module-name Apparate -package-name apparate -const-gather-protocols-file <project>/.build/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/Apparate_const_extract_protocols.json -disable-clang-spi -clang-target arm64-apple-macos27.2 -target-sdk-version 27.2 -target-sdk-name macosx27.2 -in-process-plugin-server-path /Library/Developer/CommandLineTools/usr/lib/swift/host/libSwiftInProcPluginServer.dylib -o <project>/.build/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsWindow.o -debug-module-path <project>/.build/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/Apparate.swiftmodule -index-unit-output-path /Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsWindow.o -index-store-path <project>/.build/out -index-system-modules
+error: Build failed

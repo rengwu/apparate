@@ -1,0 +1,19 @@
+{
+  "capture_method": "hidden owned preferences content; native toolbar chrome/menu appearance remain supervised",
+  "errors": 1,
+  "failure": "Setup status column stretched",
+  "fake_actions": 0,
+  "fake_registrations": 1,
+  "focus_guards_checked": true,
+  "mode": "fixtures",
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "native_login_changes": 0,
+  "native_status_items": 0,
+  "protected_folder_probes": 0,
+  "ready": false,
+  "result": "Failed",
+  "settings_check": true,
+  "symbolichotkeys_writes": 0,
+  "visible_profile": "none"
+}

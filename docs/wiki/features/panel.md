@@ -56,7 +56,7 @@ The functional profile injects text directly into its hidden owned field editor,
 
 ## Supervised recipes — Untested
 
-These require the user's explicit supervised slot. They are not part of the automated driver; the [pending M2 native checks](../verification/runs/2026-11-18T164001Z-m2-supervised.md) still apply before M5. Use an agreed safe config and synthetic fixture folder, restore the user's config afterward, and do not approve real Restart/Lock/Sleep merely to test panel presentation.
+These require the user's explicit supervised slot. They are not part of the automated driver; the [pending M2 native checks](../verification/runs/2026-11-18T164001Z-m2-supervised.md) still apply before M7 release. Use an agreed safe config and synthetic fixture folder, restore the user's config afterward, and do not approve real Restart/Lock/Sleep merely to test panel presentation.
 
 1. **Hotkey, focus and first show:** with another app focused, launch the agreed build, press the configured global hotkey, type a fixture query, and verify that the search field receives text. Record the first real show after launch separately from later shows. Esc clears, then closes; focus returns to the previous app. A click in another app closes the panel. M6's presentation harness must qualify actual latency; a stopwatch or hidden bitmap does not.
 2. **Spaces, full-screen and monitors:** from each agreed Space and a full-screen app, invoke the launcher. Repeat with keyboard focus on each display. Verify it appears on the expected screen, does not switch Spaces, is centered in that screen's visible frame, and keeps its fixed size.
@@ -77,3 +77,9 @@ The [post-review investigation](../verification/runs/2026-11-18T200340Z-m4.md#po
 - [M2 automated verification](../verification/runs/2026-11-18T164000Z-m2.md).
 - [M3 integration](../verification/runs/2026-11-18T181500Z-m3.md): initial local-source readiness, compact files and typed discovered-app targets.
 - [M4 verification](../verification/runs/2026-11-18T200340Z-m4.md): final panel, renderer comparison, native fixture checks and supervised recipes.
+
+**2026-11-19 gate update:** Claude moved the pending native checks to the M7 release gate in the [M5 guide](../build/m5-settings-menu-first-run.md). Their recorded outcomes remain unchanged.
+
+## M5 Settings route
+
+⌘, hides the launcher, releases its foreground activity and opens the retained [Settings window](settings.md). The hidden native fixture checks this route; global key delivery and focus remain supervised. [M5 verification](../verification/runs/2026-11-18T212428Z-m5.md).

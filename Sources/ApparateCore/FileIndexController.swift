@@ -22,6 +22,8 @@ public struct FileIndexMetrics: Sendable {
     }
     public var onChange: ((FileIndexSnapshot) -> Void)?
     public var onError: ((String) -> Void)?
+    public var onStatusChange: (() -> Void)?
+    public private(set) var lastError: String? { didSet { onStatusChange?() } }
     private let store: FileIndexStore
     private let watcher: any FileWatching
     private let crawler: FileCrawler
@@ -34,9 +36,11 @@ public struct FileIndexMetrics: Sendable {
     private var pendingCheckpoints: [String: FileCheckpoint] = [:]
     private var dirty: Set<String> = []
     private var pending: [String: Bool] = [:]
-    private var full = false, rearm = false, stopped = true, loading = false
+    private var full = false, rearm = false, stopped = true
+    private var loading = false { didSet { onStatusChange?() } }
     private var revision: UInt64 = 0
-    private var task: Task<Void, Never>?, debounce: Task<Void, Never>?
+    private var task: Task<Void, Never>? { didSet { onStatusChange?() } }
+    private var debounce: Task<Void, Never>?
     public init(config: AppConfig, store: FileIndexStore, access: FileAccessPolicy = FileAccessPolicy(),
                 watcher: any FileWatching = FileFolderWatcher(), crawler: FileCrawler = FileCrawler()) {
         self.store = store; self.access = access; self.watcher = watcher; self.crawler = crawler
@@ -90,6 +94,7 @@ public struct FileIndexMetrics: Sendable {
     }
     public func rebuild() {
         guard !stopped else { return }
+        lastError = nil
         revision &+= 1; task?.cancel(); task = nil; loading = false; full = true; pending = [:]; pendingCheckpoints = [:]
         watch(); launch()
     }
@@ -170,6 +175,7 @@ public struct FileIndexMetrics: Sendable {
                 }
                 try await store.save(result, signature: signature, checkpoints: nextCheckpoints, replacing: replace)
                 guard self.revision == version, !self.stopped else { return }
+                self.lastError = nil
                 self.checkpoints = nextCheckpoints; self.dirty = result.dirtyPaths
                 self.metrics.completedUpdates += 1; self.metrics.listedDirectories += result.listedDirectories
                 self.metrics.preparedChunks = result.preparedChunks; self.metrics.crawlMS = crawlMS
@@ -182,6 +188,7 @@ public struct FileIndexMetrics: Sendable {
             } catch is CancellationError { }
             catch {
                 guard let self, self.revision == version, !self.stopped else { return }
+                self.lastError = "Could not update the index. Previous results are still available."
                 self.onError?("The file index could not be updated; its previous snapshot is retained.")
                 if self.snapshot == nil { self.publish(FileIndexSnapshot()) }
                 self.task = nil; self.full = true

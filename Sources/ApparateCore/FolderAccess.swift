@@ -31,6 +31,8 @@ public enum FolderAccessProbe {
     public var onError: ((String) -> Void)?
     private let file: URL
     private let probe: @Sendable (AccessFolder) async -> AccessStatus
+    private var checkGeneration: UInt64 = 0
+    public func cancelPending() { checkGeneration &+= 1 }
     public init(directory: URL, probe: @escaping @Sendable (AccessFolder) async -> AccessStatus = { folder in
         await Task.detached(priority: .utility) {
             FolderAccessProbe.check(FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(folder.rawValue))
@@ -40,9 +42,11 @@ public enum FolderAccessProbe {
         if let data = try? Data(contentsOf: file), let saved = try? JSONDecoder().decode([AccessObservation].self, from: data) { observations = saved }
     }
     public func check() async {
-        guard !busy else { return }
+        guard !busy && !Task.isCancelled else { return }
+        checkGeneration &+= 1; let generation = checkGeneration
         busy = true; defer { busy = false; checking = nil; onChange?() }
         for folder in AccessFolder.allCases {
+            guard generation == checkGeneration && !Task.isCancelled else { break }
             checking = folder; onChange?()
             let status = await probe(folder)
             observations.removeAll { $0.folder == folder }

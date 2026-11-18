@@ -19,6 +19,7 @@ A minimal, very fast launcher for macOS. Planning notes, research, decisions, an
 - [M2 guide](build/m2-sources-actions-panel.md) — apps, settings items, actions, panel and access checks.
 - [M3 guide](build/m3-file-index.md) — the file index.
 - [M4 guide](build/m4-launcher-panel.md) — the finished launcher panel.
+- [M5 guide](build/m5-settings-menu-first-run.md) — settings, menu bar and first run.
 
 ## Design
 
@@ -28,12 +29,16 @@ A minimal, very fast launcher for macOS. Planning notes, research, decisions, an
 
 - [Feature map](features/index.md) — implemented behavior, entry points and repeatable recipes.
 - [Verification setup](verification/setup.md) — isolated builds, tests and measurements.
+- [Supervised session](verification/supervised-session.md) — the on-screen and real-action checks the user runs with Claude before release.
 - [M1 verification](verification/runs/2026-11-18T154000Z-m1.md) — outcomes and evidence for the foundation build.
 - [M2 automated verification](verification/runs/2026-11-18T164000Z-m2.md) — 43 passing groups after five review fixes; [review passed](build/m2-sources-actions-panel.md#review), committed separately.
-- [M2 supervised checks](verification/runs/2026-11-18T164001Z-m2-supervised.md) — native effects, permissions, global keys and IME; Untested, required before M5.
+- [M2 supervised checks](verification/runs/2026-11-18T164001Z-m2-supervised.md) — native effects, permissions, global keys and IME; Untested, required before M7 release.
 - [M3 automated verification](verification/runs/2026-11-18T181500Z-m3.md) — 63 passing groups and the verified search-speed fix; memory/end-to-end limits recorded; independent recheck passed.
 
 - [Catalog follow-up](verification/runs/2026-11-18T191222Z-catalog.md) — unchanged metadata reuse, event traces and publication checks.
+
+- [M4 verification](verification/runs/2026-11-18T200340Z-m4.md) — approved and committed; hidden proxy latency remains failed and carried to M6.
+- [M5 verification](verification/runs/2026-11-18T212428Z-m5.md) — Settings, menu and setup; automated checks and review fix passed; included in the M5 milestone commit; native checks pending before M7.
 
 ## Research
 
@@ -48,3 +53,5 @@ Claude and Codex researched the whole topic independently, at the user's request
 - [UI design spike](spikes/2026-11-18-ui-design.md) — interactive variations of the five interfaces, and verified settings names and icons.
 - [Settings deep-link spike](spikes/2026-11-18-settings-deep-links.md) — do settings links open the exact item? Mostly yes; the pane always opens.
 - [Panel latency spike](spikes/2026-11-18-panel-latency.md) — measured show, keystroke, memory and idle CPU against the budgets.
+
+**2026-11-19 gate update:** Claude moved the pending native checks to the M7 release gate in the [M5 guide](build/m5-settings-menu-first-run.md). Their recorded outcomes remain unchanged.

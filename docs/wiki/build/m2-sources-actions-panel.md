@@ -156,7 +156,7 @@ Codex's pushback of 2026-11-18, all accepted. Where these differ from the sectio
 | 7 | While the field has marked text (an input method is composing), Return and the arrows belong to the input method: no opening, arming or moving. | Accepted; a real IME check becomes a supervised recipe. |
 | 8 | Folder probes run only from the access button, one at a time, off the main thread, with distinct denied, not-found and error results. Saved results are hints, never grounds for probing at launch. Add the three folder usage descriptions to Info.plist. The grant check uses the normally launched signed app, and never resets TCC. | Accepted. Usage text, plain: "Apparate searches file and folder names in your Desktop folder." (and the same for Documents and Downloads). |
 
-**Runs.** The M2 verification run covers the automated checks, and its review and commit follow from it. The supervised checks (real commands, real opens, folder access and rebuild persistence, a real IME) go in a separate run once the user has run them. They must pass before M5 builds on first run.
+**Runs.** The M2 verification run covers the automated checks, and its review and commit follow from it. The supervised checks (real commands, real opens, folder access and rebuild persistence, a real IME) go in a separate run once the user has run them. They must pass before M7 release.
 
 ## Review
 
@@ -189,3 +189,5 @@ Claude's proposals, not user decisions. Push back on any of them.
 3. Skipping the settings cache if parsing is fast.
 4. The selection rules living in a Core model.
 5. User-added app folders: not built. **Decided by the user** ([DEC-041](../decisions.md#round-6-2026-11-19)): no such setting; an app found in an indexed folder ranks and opens as an app (M3).
+
+**2026-11-19 gate update:** Claude moved the pending native checks to the M7 release gate in the [M5 guide](m5-settings-menu-first-run.md). Their recorded outcomes remain unchanged.

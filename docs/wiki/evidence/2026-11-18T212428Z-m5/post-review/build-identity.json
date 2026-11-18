@@ -1,0 +1,36 @@
+{
+  "base_commit": "e1543de5bda1d956712aa93f5083aff492964ca2",
+  "recorded_utc": "2026-11-18T21:40:57.242283+00:00",
+  "app_sha256": "772fee7e5b76d29d2fb72317a469743ec8f8100475d25edfcabcc514f2d303ea",
+  "test_binary_sha256": "4bb7167c1073f9269a4c7868f5843d0f242cabe3d58b5306f43a3acd5092ed0d",
+  "source_manifest_sha256": "c7d7084165d41d181ef5a2ae8b4e8846f3ba0795de3d11cf3789de920b8dc8fb",
+  "bundle_metadata": {
+    "CFBundleName": "Apparate",
+    "CFBundleIdentifier": "local.apparate",
+    "CFBundleExecutable": "Apparate",
+    "CFBundlePackageType": "APPL",
+    "CFBundleShortVersionString": "0.1.0",
+    "CFBundleVersion": "0.1.0",
+    "LSMinimumSystemVersion": "27.0",
+    "LSUIElement": true,
+    "NSDesktopFolderUsageDescription": "Apparate searches file and folder names in your Desktop folder.",
+    "NSDocumentsFolderUsageDescription": "Apparate searches file and folder names in your Documents folder.",
+    "NSDownloadsFolderUsageDescription": "Apparate searches file and folder names in your Downloads folder."
+  },
+  "architecture": "arm64",
+  "resource_matches": {
+    "MenuBarIconTemplate.png": true,
+    "MenuBarIconTemplate@2x.png": true,
+    "THIRD_PARTY_NOTICES.txt": true
+  },
+  "os": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A5368g",
+  "sdk": "27.2",
+  "swift": "Apple Swift version 6.4.2 (swiftlang-6.4.2.1.9 clang-2100.4.1.1)\nTarget: arm64-apple-macosx27.0.0",
+  "designated_requirement": "designated => identifier \"local.apparate\"\nExecutable=<project>/build/Apparate.app/Contents/MacOS/Apparate",
+  "result": "Passed",
+  "changed_inputs": [
+    "Sources/Apparate/SettingsVerification.swift",
+    "Sources/Apparate/SettingsWindow.swift"
+  ],
+  "verification_scope": "Native Settings fixture regression and Search/Folders light/dark content renders; Core unchanged from 83/83 debug/release runs"
+}

@@ -11,8 +11,10 @@ public final class ConfigStore {
     private var folderWatch: (any DispatchSourceFileSystemObject)?
     private var fileWatch: (any DispatchSourceFileSystemObject)?
     private var fileIdentity: (dev_t, ino_t)?
+    private let writeData: (Data, URL) throws -> Void
 
-    public init(directory: URL) throws {
+    public init(directory: URL, writeData: @escaping (Data, URL) throws -> Void = { try $0.write(to: $1, options: .atomic) }) throws {
+        self.writeData = writeData
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         file = directory.appendingPathComponent("config.json")
         // Watch before reading, closing the window where a first external save could be missed.
@@ -48,6 +50,17 @@ public final class ConfigStore {
         reload()
     }
 
+    /// Edit fresh disk state, not a stale copy held by a control. The mutation checks
+    /// its own expected field value; unrelated external edits remain intact.
+    public func update(_ mutation: (inout AppConfig) throws -> Void,
+                       persist: ((AppConfig) throws -> Void)? = nil) throws {
+        var latest = try Self.decode(Data(contentsOf: file))
+        try mutation(&latest)
+        let problems = latest.validationErrors()
+        guard problems.isEmpty else { throw ConfigError(messages: problems) }
+        if let persist { try persist(latest) } else { try save(latest) }
+    }
+
     public static func decode(_ data: Data) throws -> AppConfig {
         let decoded: AppConfig
         do { decoded = try JSONDecoder().decode(AppConfig.self, from: data) }
@@ -64,7 +77,7 @@ public final class ConfigStore {
     private func write(_ config: AppConfig) throws {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
-        try encoder.encode(config).write(to: file, options: .atomic)
+        try writeData(encoder.encode(config), file)
     }
 
     private func watch(_ url: URL, events: DispatchSource.FileSystemEvent) throws -> any DispatchSourceFileSystemObject {

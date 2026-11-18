@@ -10,11 +10,15 @@ import Foundation
     private let registrar: any HotKeyRegistering
     public init(registrar: any HotKeyRegistering) { self.registrar = registrar }
     isolated deinit { stop() }
-    public func replace(with key: AppConfig.HotKey) throws {
-        if active?.keyCode == key.keyCode && active?.modifiers == key.modifiers { active = key; return }
+    public func replace(with key: AppConfig.HotKey, persist: () throws -> Void = {}) throws {
+        if active?.keyCode == key.keyCode && active?.modifiers == key.modifiers { try persist(); active = key; return }
         let replacement = try registrar.register(key)
-        if let token { registrar.unregister(token) }
+        let previousToken = token, previousKey = active
+        // The synchronous config callback sees the reservation and cannot register it twice.
         token = replacement; active = key
+        do { try persist() }
+        catch { token = previousToken; active = previousKey; registrar.unregister(replacement); throw error }
+        if let previousToken { registrar.unregister(previousToken) }
     }
     public func stop() { if let token { registrar.unregister(token) }; token = nil; active = nil }
 }
