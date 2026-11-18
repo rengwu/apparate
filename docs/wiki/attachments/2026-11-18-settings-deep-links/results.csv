@@ -1,0 +1,77 @@
+screenshot,pane bundle id,anchor,first item title for the anchor,result,window title,seconds until a titled window,note
+00,com.apple.Keyboard-Settings.extension,,Keyboard,baseline (no anchor),Keyboard,1.63,
+01,com.apple.Keyboard-Settings.extension,InputSources,Show input menu in menu bar,named control shown after navigation,,1.60,The same anchor is used for Keyboard layouts
+02,com.apple.Keyboard-Settings.extension,Spelling,Spelling and prediction,named control shown after navigation,,1.61,
+03,com.apple.Keyboard-Settings.extension,TextReplacements,Text replacements,named control shown after navigation,Keyboard,1.48,
+04,com.apple.Keyboard-Settings.extension,TouchBarSettings,Touch Bar typing suggestions,pane opened; named control not reached,Keyboard,1.38,This Mac has no Touch Bar
+05,com.apple.Keyboard-Settings.extension,UseSmartQuotes,Use smart quotes and dashes,named control shown after navigation,,1.55,
+06,com.apple.Keyboard-Settings.extension,Keyboard,Set up Bluetooth keyboard,pane opened; named control not reached,Keyboard,1.37,Bluetooth keyboard setup is not on screen
+07,com.apple.Keyboard-Settings.extension,ModifierKeys,Reset modifier keys,named control shown after navigation,,1.73,
+08,com.apple.Keyboard-Settings.extension,CustomizeModifierKeys,Customize modifier keys,named control shown after navigation,,1.62,
+09,com.apple.Keyboard-Settings.extension,LanguageInputMethods,Language input methods,named control shown after navigation,,1.63,
+10,com.apple.Keyboard-Settings.extension,Shortcuts,App and system keyboard shortcuts,right sheet or subpage; named control not shown,,1.55,Keyboard Shortcuts sheet opened on its last-used category (Modifier Keys)
+11,com.apple.Keyboard-Settings.extension,Dictation,Dictation,pane opened; named control not reached,Keyboard,1.30,Only the Dictation heading is visible at the bottom edge
+12,com.apple.Keyboard-Settings.extension,FunctionKeys,Function Keys,named control shown after navigation,,1.41,
+13,com.apple.Keyboard-Settings.extension,CapsLockInputSources,Use Caps Lock to switch input sources,right sheet or subpage; named control not shown,,1.54,Input Sources sheet opened; no Caps Lock switching control shown
+14,com.apple.Keyboard-Settings.extension,Spotlight,Spotlight keyboard shortcuts,named control shown after navigation,,1.51,
+15,com.apple.Keyboard-Settings.extension,Accessibility,Accessibility keyboard shortcuts,named control shown after navigation,,1.60,
+16,com.apple.Keyboard-Settings.extension,Services,Services keyboard shortcuts,named control shown after navigation,,1.47,
+17,com.apple.settings.PrivacySecurity.extension,,Privacy,baseline (no anchor),Privacy & Security,1.56,
+18,com.apple.settings.PrivacySecurity.extension,Privacy_Camera,Allow applications to access the camera,named control shown after navigation,Camera,1.19,
+19,com.apple.settings.PrivacySecurity.extension,Privacy_FilesAndFolders,Allow applications to access user files,named control shown after navigation,Files & Folders,1.18,
+20,com.apple.settings.PrivacySecurity.extension,Privacy_ScreenCapture,Allow applications to record your screen,named control shown after navigation,Screen & System Audio Recording,1.26,
+21,com.apple.settings.PrivacySecurity.extension,FileVault,FileVault,named control shown after navigation,FileVault,1.22,
+22,com.apple.settings.PrivacySecurity.extension,LockdownMode,Lockdown Mode,named control shown after navigation,Lockdown Mode,1.20,
+23,com.apple.settings.PrivacySecurity.extension,Advanced,Lock System Settings,named control shown after navigation,Privacy & Security,1.17,
+24,com.apple.Displays-Settings.extension,,Displays,baseline (no anchor),Displays,1.78,
+25,com.apple.Displays-Settings.extension,nightShiftSection,Night Shift options,named control shown after navigation,,1.72,
+26,com.apple.Displays-Settings.extension,resolutionSection,Screen Resolution,pane opened; named control already visible,Displays,1.60,
+27,com.apple.Displays-Settings.extension,advancedSection,Advanced Settings,named control shown after navigation,,1.61,
+28,com.apple.Desktop-Settings.extension,,Desktop,baseline (no anchor),Desktop & Dock,1.24,
+29,com.apple.Desktop-Settings.extension,HotCorners,Hot Corner Shortcuts,named control shown after navigation,Desktop & Dock,1.58,
+30,com.apple.Desktop-Settings.extension,Dock,Dock settings,pane opened; named control already visible,Desktop & Dock,1.20,Dock controls are also visible in the baseline
+31,com.apple.Desktop-Settings.extension,Applications,Default web browser,pane opened; named control not reached,Desktop & Dock,1.19,Scrolled to Windows; Default web browser not visible
+32,com.apple.Desktop-Settings.extension,MissionControl,Set up Spaces,named control shown after navigation,Desktop & Dock,1.22,
+33,com.apple.ControlCenter-Settings.extension,,ControlCenterSettings,baseline (no anchor),Menu Bar,1.27,
+34,com.apple.ControlCenter-Settings.extension,Battery,Show battery status in the menu bar,pane opened; named control not reached,Menu Bar,1.20,"Scrolled to the app list, not the Battery control"
+35,com.apple.ControlCenter-Settings.extension,Clock,Show date,named control shown after navigation,,1.26,
+36,com.apple.ControlCenter-Settings.extension,MenuBar,Automatically hide and show the menu bar,pane opened; named control already visible,Menu Bar,1.27,
+37,com.apple.Network-Settings.extension,,Network,baseline (no anchor),Network,0.96,
+38,com.apple.Network-Settings.extension,Firewall,Turn firewall on or off,pane opened; named control already visible,Network,0.89,
+39,com.apple.Network-Settings.extension,DNS,DNS servers,named control shown after navigation,,0.98,Opened Wi-Fi Details on the DNS tab
+40,com.apple.Network-Settings.extension,Proxies,Proxies,named control shown after navigation,,0.94,Opened Wi-Fi Details on the Proxies tab
+41,com.apple.Sound-Settings.extension,,Sound,baseline (no anchor),Sound,1.08,
+42,com.apple.Sound-Settings.extension,input,Sound input,named control shown after navigation,Sound,1.06,
+43,com.apple.Sound-Settings.extension,balance,Output balance,pane opened; named control already visible,Sound,1.15,
+44,com.apple.Sound-Settings.extension,effects,Alerts and sound effects,pane opened; named control already visible,Sound,1.85,
+45,com.apple.Lock-Screen-Settings.extension,,LockScreen,baseline (no anchor),Lock Screen,1.05,
+46,com.apple.Lock-Screen-Settings.extension,LoginWindow,Login options,pane opened; named control already visible,Lock Screen,0.96,
+47,com.apple.Lock-Screen-Settings.extension,LockScreenMessage,Lock screen message,pane opened; named control already visible,Lock Screen,1.03,
+48,com.apple.Battery-Settings.extension,,PowerPreferences,baseline (no anchor),Battery,0.98,
+49,com.apple.Battery-Settings.extension,batteryhealth,Battery Health,named control shown after navigation,,1.10,
+50,com.apple.Battery-Settings.extension,options,Power Nap,right sheet or subpage; named control not shown,,1.08,Battery Options sheet opened; no Power Nap control shown on this Mac
+51,com.apple.Screen-Time-Settings.extension,,Screen Time,baseline (no anchor),Screen Time,1.40,
+52,com.apple.Screen-Time-Settings.extension,path=app-limits,Choose app limits in Screen Time,pane opened; named control not reached,Screen Time,1.05,No navigation
+53,com.apple.Screen-Time-Settings.extension,path=downtime,Schedule downtime in Screen Time,pane opened; named control not reached,Screen Time,1.18,No navigation
+54,com.apple.Sharing-Settings.extension,,Sharing,baseline (no anchor),Sharing,1.27,
+55,com.apple.Sharing-Settings.extension,Services_RemoteLogin,Remote login,named control shown after navigation,,1.32,
+56,com.apple.Sharing-Settings.extension,Hostname,Hostname,pane opened; named control not reached,Sharing,1.18,No navigation; Hostname row below the fold
+57,com.apple.Users-Groups-Settings.extension,,UsersGroups,baseline (no anchor),Users & Groups,1.25,
+58,com.apple.Users-Groups-Settings.extension,loginOptionsPref,Allow network users at login window,pane opened; named control not reached,Users & Groups,1.01,"Network account server shown, not the named control"
+59,com.apple.Wallpaper-Settings.extension,,Wallpaper,baseline (no anchor),Wallpaper,1.07,
+60,com.apple.Wallpaper-Settings.extension,ScreenSaver,Change the screen saver,named control shown after navigation,,1.31,
+61,com.apple.Spotlight-Settings.extension,,Spotlight,baseline (no anchor),Spotlight,1.03,
+62,com.apple.Spotlight-Settings.extension,privacy,Block search of private files,named control shown after navigation,,1.06,
+63,com.apple.Localization-Settings.extension,,Language & Region,baseline (no anchor),Language & Region,1.20,
+64,com.apple.Localization-Settings.extension,Region,Date and number formats,pane opened; named control already visible,Language & Region,1.11,
+65,com.apple.LoginItems-Settings.extension,,LoginItems,baseline (no anchor),Login Items,1.44,
+66,com.apple.LoginItems-Settings.extension,ExtensionItems,Extensions,pane opened; named control not reached,Login Items,1.11,No navigation; Extensions section below the fold
+67,com.apple.Accessibility-Settings.extension,,AccessibilitySettingsExtension,baseline (no anchor),Accessibility,1.08,
+68,com.apple.Accessibility-Settings.extension,zoomControls,Controls,named control shown after navigation,Zoom,1.16,
+69,com.apple.Accessibility-Settings.extension,AX_SPEECH_VOICES,Voice (Read & Speak),right sheet or subpage; named control not shown,,1.41,A Voice / Phrase / Delay sheet opened; the main system voice selector was not verified
+70,com.apple.Accessibility-Settings.extension,AX_LIVE_SPEECH_CATEGORIES,Categories,named control shown after navigation,Live Speech,1.17,
+71,com.apple.Accessibility-Settings.extension,AX_SPRING_LOADING_DELAY,Spring-loading speed,named control shown after navigation,Pointer Control,1.62,
+72,com.apple.Date-Time-Settings.extension,,DateAndTime Extension,baseline (no anchor),Date & Time,1.02,
+73,com.apple.Date-Time-Settings.extension,TimeZonePref,Set time zone,pane opened; named control already visible,Date & Time,0.96,
+74,com.apple.AirDrop-Handoff-Settings.extension,,AirDropHandoffExtension,baseline (no anchor),AirDrop & Continuity,1.03,
+75,com.apple.AirDrop-Handoff-Settings.extension,AirPlay_Receiver,AirPlay Receiver,pane opened; named control already visible,AirDrop & Continuity,1.10,

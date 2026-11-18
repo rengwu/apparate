@@ -1,0 +1,22 @@
+{
+  "Package.swift": "6663dbab0a3852ba6a49ad4be66a22f496f3e000e483d5eef755b5203c159ff7",
+  "Sources/Apparate/main.swift": "267f7a07ad703ccb51725c890a19383a3816b47ebfb7c2bfd36a23c01692bdae",
+  "Sources/ApparateCore/Config.swift": "b0242c628489e9403b60f28bf3ce8fefe97008f042eb62fe9067c658556a1940",
+  "Sources/ApparateCore/ConfigStore.swift": "b2c14494cd5a5f7894254cb639729e9025e7e729abfd4f2e162efd0b44a79bb7",
+  "Sources/ApparateCore/FuzzyMatcher.swift": "08f8875a4d53ff6266978b481d2272f5c5ba56ee4ed2cc02c942194e9a227d38",
+  "Sources/ApparateCore/Item.swift": "dee033f80ad7b9f4c54a148e3e0526edc1d331fb51afca1ffcc0eaf6799656c1",
+  "Sources/ApparateCore/PreparedText.swift": "e313ac59fa4318461785bc820839aeee04b246f77d8604e475a709f0e2895217",
+  "Sources/ApparateCore/Search.swift": "32955b0303f6c897f8e28e4da5c0ea280fa5fd979f233c6d7e6292c939d729c5",
+  "Sources/ApparateCore/SearchCoordinator.swift": "4fe19f24d38a9dad65e874f9bdf25dae5d654fede1cecb2dfa35fa1e334c745d",
+  "Sources/ApparateCore/SearchIndex.swift": "4bfe2f0fd578e38f4cb67a3650ad84181cd805e810ef40b46400f0076619571a",
+  "Sources/ApparateCore/UsageStore.swift": "a86194d2f7bd3cec901f184afdc174d1a872ae09c88bda65ecdadcd8c23c6667",
+  "THIRD_PARTY_NOTICES.txt": "af4c2ef0ee74e694e9f1227bba88c2f28c5f0fed69d026e8c1c1e6ca913f78fb",
+  "Tests/ApparateCoreTests/AlignmentTests.swift": "3bc2db6af26811a4a3771b7ce9bd70d6797b4e1fa93f8de6b05f44c2ea6dbddf",
+  "Tests/ApparateCoreTests/Benchmark.swift": "26236db60be037ad6cdc8d22a79935ab8040dbe77c696be5c0705bfd4c5351b2",
+  "Tests/ApparateCoreTests/ConfigTests.swift": "e6439e7bff01e9bd409a8b023433450e799f0ebf009119604efc96dd8a6f25dd",
+  "Tests/ApparateCoreTests/Runner.swift": "17d1cd731937588e42932600760c25cf06f4fdea83ebbe6754c4fd3b93409105",
+  "Tests/ApparateCoreTests/SearchTests.swift": "6947ed5f87bc6981b6a88d675b91e47cc40f33bd5945b385c4985b6ef1098d5a",
+  "Tests/ApparateCoreTests/StateTests.swift": "befba83471223aec5ee69ecd026c247bbcd4bf147dcc4a1450d29cf027645eb9",
+  "VERSION": "e9dd8507f4bf0c6f42458e41aea833ad0bd3f6127272335eee9bf4d58541ed67",
+  "build.sh": "d931ef22e822eb0db54a871435b94a4d0ec2a0c2a4e2e44a26ffc5086fb38cf8"
+}

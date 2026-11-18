@@ -1,0 +1,12 @@
+{
+  "cleanup": "Process stopped; only the test-created temporary folder removed",
+  "config_sha256": "cc07895b2de9df1b9a583cd970a9a3c8e36de06b15364608f69964bcc214f261",
+  "created_files": [
+    "config.json"
+  ],
+  "launch": "direct bundle executable; accessory app stub; no window or action entry points",
+  "readiness": "Process alive; defaults written only under APPARATE_HOME",
+  "result": "Passed",
+  "stderr_bytes": 0,
+  "stdout_bytes": 0
+}

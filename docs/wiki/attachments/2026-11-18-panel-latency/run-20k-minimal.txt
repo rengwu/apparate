@@ -1,0 +1,22 @@
+N=20000 items, index build 10.3 ms, background vibrancy, rows none (minimal window)
+panel built at launch in 25.4 ms (hidden)
+first show (commit) 26.03 ms
+screen capture: on (display 1, 640x335 pt region, refresh 120 Hz max)
+show → commit (in process): n=30 median 11.98 p95 19.31 max 28.14 ms
+show → first captured frame with panel (ScreenCaptureKit): n=30 median 33.04 p95 44.25 max 44.43 ms
+keystroke text echo: delivered through the field editor 0, fallback 0
+keystroke → results committed (in process): no samples
+keystroke → typed letter on screen (ScreenCaptureKit): no samples
+keystroke → last change of result rows on screen (ScreenCaptureKit): no samples
+burst of 12 keys 15 ms apart: 0 result publishes; top results 
+memory phys_footprint MiB: start 5.0, index loaded + panel built 13.5, after shows 14.9, end (incl. capture buffers) 14.7
+idle CPU with panel hidden, 5 s: 0.104%
+captured frames: 1715
+  stage 5 reloadData: n=1 median 0.51 p95 0.51 max 0.51 ms
+  stage 6 select: n=1 median 0.00 p95 0.00 max 0.00 ms
+  stage 7 layout+draw (displayIfNeeded): n=1 median 0.00 p95 0.00 max 0.00 ms
+  stage 8 CATransaction.flush: n=1 median 0.00 p95 0.00 max 0.00 ms
+  stage s1 makeKeyAndOrderFront: n=32 median 11.69 p95 14.64 max 15.23 ms
+  stage s2 first responder: n=32 median 0.01 p95 0.06 max 9.98 ms
+  stage s3 displayIfNeeded: n=32 median 0.03 p95 0.05 max 2.07 ms
+  stage s4 flush: n=32 median 0.20 p95 2.23 max 10.76 ms

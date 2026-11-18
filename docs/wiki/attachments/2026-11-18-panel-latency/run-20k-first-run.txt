@@ -1,0 +1,16 @@
+N=20000 items, index build 10.0 ms, display vibrancy
+panel built at launch in 94.6 ms (hidden)
+first show (commit) 216.36 ms
+screen capture: on (display 1, 640x335 pt region, refresh 120 Hz max)
+show → commit (in process): n=30 median 18.96 p95 31.38 max 32.36 ms
+show → display-link target frame: n=30 median 56.75 p95 85.03 max 92.68 ms
+show → first captured frame with panel (ScreenCaptureKit): n=30 median 49.30 p95 63.91 max 70.95 ms
+keystroke text echo: delivered through the field editor 55, fallback 0
+keystroke → results committed (in process): n=55 median 42.68 p95 57.74 max 61.32 ms
+keystroke → display-link target frame after results: n=55 median 58.69 p95 76.31 max 78.89 ms
+keystroke → typed letter on screen (ScreenCaptureKit): n=54 median 24.33 p95 72.40 max 80.65 ms
+keystroke → last change of result rows on screen (ScreenCaptureKit): n=55 median 58.79 p95 301.45 max 318.48 ms
+burst of 12 keys 15 ms apart: 12 result publishes; top results Keyboard layouts
+memory phys_footprint MiB: start 4.7, index loaded + panel built 13.9, after shows 36.1, end (incl. capture buffers) 42.3
+idle CPU with panel hidden, 10 s: 0.099%
+captured frames: 1885

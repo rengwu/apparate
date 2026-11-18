@@ -1,0 +1,24 @@
+import AppKit
+func apps() -> [NSRunningApplication] { NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.systempreferences") }
+func title() -> String? {
+    let l = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as! [[String: Any]]
+    return l.first { ($0[kCGWindowOwnerName as String] as? String) == "System Settings" && ($0[kCGWindowLayer as String] as? Int) == 0 }.map { $0[kCGWindowName as String] as? String ?? "" }
+}
+func open(_ s: String) { NSWorkspace.shared.open(URL(string: s)!) }
+open("x-apple.systempreferences:com.apple.Keyboard-Settings.extension?InputSources")
+sleep(3)
+print("sheet open, title:", title() ?? "nil")
+for mode in ["terminate", "forceTerminate"] {
+    let t0 = Date()
+    for a in apps() { if mode == "terminate" { _ = a.terminate() } else { _ = a.forceTerminate() } }
+    while !apps().isEmpty && Date().timeIntervalSince(t0) < 5 { usleep(20_000) }
+    let quit = Date().timeIntervalSince(t0)
+    print(mode, "quit took", String(format: "%.2f s", quit), "still running:", !apps().isEmpty)
+    if !apps().isEmpty { continue }
+    open("x-apple.systempreferences:com.apple.Displays-Settings.extension?nightShiftSection")
+    while Date().timeIntervalSince(t0) < 8 { if let t = title(), !t.isEmpty || Date().timeIntervalSince(t0) > 1.5 { break }; usleep(20_000) }
+    usleep(1_500_000)
+    let p = Process(); p.executableURL = URL(fileURLWithPath: "/bin/sh"); p.arguments = ["-c", "true"]; try! p.run(); p.waitUntilExit()
+    print(mode, "window appeared after", String(format: "%.2f s", Date().timeIntervalSince(t0) - 1.5), "title:", title() ?? "nil")
+    break
+}

@@ -1,0 +1,21 @@
+PASS ranking: golden queries, tiers and kind order
+PASS ranking: keyword tier, split keywords and word prefixes
+PASS ranking: deterministic ties, duplicate names and bounded top 50
+PASS scopes and fallback: explicit prefixes, reconfiguration and whitespace
+PASS path mode: ordered segments, roots, trailing and repeated separators
+PASS cancellation: no partial results
+PASS top selection: tier pruning agrees with exhaustive results across scopes and paths
+PASS Unicode: normalization, expansion and displayed-character highlights
+PASS matching: no inherited name or query length caps
+PASS mask property: 1200 random Unicode subsequences survive filtering
+PASS scoring and traceback: exhaustive alignment oracle on 300 short names
+PASS config: first launch, defaults, missing keys and deterministic save
+PASS config: semantic validation collects all errors; wrong types reject
+PASS config: invalid file and newer version preserved; last valid survives
+PASS config watches: in-place write, atomic replacement, rearm and error recovery
+PASS usage: finite scores, bounded boost and tier/kind boundaries
+PASS usage: injected decay clock, snapshots and persistence after reopening
+PASS usage: 2000-record bound and deterministic eviction
+PASS generations: slow work and a query burst publish only the newest
+PASS generations: invalidation after scoring and before owner delivery
+RESULT 20 passed; 0 failed

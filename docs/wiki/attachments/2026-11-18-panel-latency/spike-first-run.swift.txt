@@ -1,0 +1,546 @@
+// Apparate panel latency + memory spike. Throwaway research code, not product code.
+// Build: swiftc -O spike.swift -o spike   Run: ./spike <N> <apps.txt> <settings.txt> <files.txt> [--opaque]
+// Shows a non-activating panel built at launch, measures show and keystroke latency
+// (in-process commit time and ScreenCaptureKit display time), memory and idle CPU.
+import AppKit
+import CoreMedia
+import QuartzCore
+import ScreenCaptureKit
+
+// MARK: time
+var timebase = mach_timebase_info_data_t()
+mach_timebase_info(&timebase)
+@inline(__always) func ticks() -> UInt64 { mach_absolute_time() }
+func ms(_ a: UInt64, _ b: UInt64) -> Double {
+    let d = Double(Int64(bitPattern: b &- a)) * Double(timebase.numer) / Double(timebase.denom)
+    return d / 1e6
+}
+func footprintMiB() -> Double {
+    var info = task_vm_info_data_t()
+    var count = mach_msg_type_number_t(MemoryLayout<task_vm_info_data_t>.size / MemoryLayout<natural_t>.size)
+    let kr = withUnsafeMutablePointer(to: &info) {
+        $0.withMemoryRebound(to: integer_t.self, capacity: Int(count)) { task_info(mach_task_self_, task_flavor_t(TASK_VM_INFO), $0, &count) }
+    }
+    return kr == KERN_SUCCESS ? Double(info.phys_footprint) / 1048576 : -1
+}
+func cpuSeconds() -> Double {
+    var u = rusage(); getrusage(RUSAGE_SELF, &u)
+    return Double(u.ru_utime.tv_sec) + Double(u.ru_utime.tv_usec) / 1e6 + Double(u.ru_stime.tv_sec) + Double(u.ru_stime.tv_usec) / 1e6
+}
+
+// MARK: index (same layout as the research benchmark)
+struct Corpus {
+    var lower: [UInt8] = [], cls: [UInt8] = [], start: [Int32] = [], len: [UInt16] = []
+    var mask: [UInt64] = [], names: [String] = [], kind: [UInt8] = [], loc: [UInt8] = []
+    var count: Int { start.count }
+    mutating func add(_ s: String, kind k: UInt8, loc l: UInt8) {
+        let raw = Array(s.utf8.prefix(255))
+        start.append(Int32(lower.count)); len.append(UInt16(raw.count))
+        var m: UInt64 = 0; var prev: UInt8 = 0x2F
+        for b in raw {
+            let low = (b >= 65 && b <= 90) ? b + 32 : b
+            lower.append(low)
+            var c: UInt8 = 0
+            if prev == 0x2F || prev == 0x20 || prev == 0x2D || prev == 0x5F { c = 1 }
+            else if prev == 0x2E { c = 3 }
+            else if (b >= 65 && b <= 90) && (prev >= 97 && prev <= 122) { c = 2 }
+            cls.append(c); m |= bit(low); prev = b
+        }
+        mask.append(m); names.append(s); kind.append(k); loc.append(l)
+    }
+}
+@inline(__always) func bit(_ b: UInt8) -> UInt64 {
+    if b >= 97 && b <= 122 { return 1 << UInt64(b - 97) }
+    if b >= 48 && b <= 57 { return 1 << UInt64(26 + b - 48) }
+    return 1 << 63
+}
+let locations = ["Applications", "System Settings", "~/Projects/apparate", "~/Projects/klip/Sources", "~/Documents", "~/Downloads", "~/Desktop", "~/Projects/yacht/docs"]
+
+let gapLeading: Float = -0.005, gapTrailing: Float = -0.005, gapInner: Float = -0.01, matchConsecutive: Float = 1.0
+let bonusFor: [Float] = [0, 0.8, 0.7, 0.6]
+final class Scratch { var D = [Float](repeating: 0, count: 256 * 32); var M = [Float](repeating: 0, count: 256 * 32) }
+
+@inline(__always) func isSubsequence(_ q: UnsafeBufferPointer<UInt8>, _ t: UnsafeBufferPointer<UInt8>) -> Bool {
+    var j = 0
+    for c in q { while j < t.count && t[j] != c { j += 1 }; if j == t.count { return false }; j += 1 }
+    return true
+}
+func fzy(_ q: UnsafeBufferPointer<UInt8>, _ t: UnsafeBufferPointer<UInt8>, _ cls: UnsafeBufferPointer<UInt8>, _ s: Scratch) -> Float {
+    let n = q.count, m = t.count
+    if n == m { return Float.infinity }
+    if m > 255 || n > 32 { return -Float.infinity }
+    return s.D.withUnsafeMutableBufferPointer { D in s.M.withUnsafeMutableBufferPointer { M in
+        for i in 0..<n {
+            var prevScore = -Float.infinity
+            let gap = (i == n - 1) ? gapTrailing : gapInner
+            for j in 0..<m {
+                let idx = i * 256 + j
+                if q[i] == t[j] {
+                    var sc = -Float.infinity
+                    let bonus = bonusFor[Int(cls[j])]
+                    if i == 0 { sc = Float(j) * gapLeading + bonus }
+                    else if j > 0 { sc = max(M[(i - 1) * 256 + j - 1] + bonus, D[(i - 1) * 256 + j - 1] + matchConsecutive) }
+                    D[idx] = sc; prevScore = max(sc, prevScore + gap); M[idx] = prevScore
+                } else { D[idx] = -Float.infinity; prevScore = prevScore + gap; M[idx] = prevScore }
+            }
+        }
+        return M[(n - 1) * 256 + m - 1]
+    } }
+}
+// Tier: 0 exact, 1 prefix, 2 word-start/acronym, 3 fuzzy
+@inline(__always) func tierOf(_ q: UnsafeBufferPointer<UInt8>, _ t: UnsafeBufferPointer<UInt8>, _ cls: UnsafeBufferPointer<UInt8>) -> UInt8 {
+    if q.count <= t.count {
+        var pre = true
+        for i in 0..<q.count where q[i] != t[i] { pre = false; break }
+        if pre { return q.count == t.count ? 0 : 1 }
+    }
+    var i = 0
+    for j in 0..<t.count where i < q.count && (j == 0 || cls[j] != 0) && t[j] == q[i] { i += 1 }
+    return i == q.count ? 2 : 3
+}
+struct Hit { var idx: Int32; var tier: UInt8; var kind: UInt8; var score: Float; var len: UInt16 }
+@inline(__always) func better(_ a: Hit, _ b: Hit) -> Bool {
+    if a.tier != b.tier { return a.tier < b.tier }
+    if a.kind != b.kind { return a.kind < b.kind }
+    if a.score != b.score { return a.score > b.score }
+    if a.len != b.len { return a.len < b.len }
+    return a.idx < b.idx
+}
+func insertTop(_ best: inout [Hit], _ h: Hit, _ k: Int) {
+    if best.count == k, !better(h, best[k - 1]) { return }
+    var i = best.count
+    while i > 0 && better(h, best[i - 1]) { i -= 1 }
+    best.insert(h, at: i)
+    if best.count > k { best.removeLast() }
+}
+
+var stage: [String: [Double]] = [:]
+func mark(_ k: String, _ a: UInt64, _ b: UInt64) { stage[k, default: []].append(ms(a, b)) }
+var tKeyDown: UInt64 = 0
+final class Generation: @unchecked Sendable { var value = 0 }   // spike only: racy read for cancellation
+let generation = Generation()
+
+/// Searches with cancellation; returns nil if a newer keystroke arrived.
+func search(_ c: Corpus, _ query: [UInt8], gen: Int, k: Int, threads: Int) -> [Hit]? {
+    var qm: UInt64 = 0
+    for b in query { qm |= bit(b) }
+    let chunks = max(1, threads)
+    var parts = [[Hit]](repeating: [], count: chunks)
+    var cancelled = false
+    c.lower.withUnsafeBufferPointer { L in c.cls.withUnsafeBufferPointer { C in query.withUnsafeBufferPointer { Q in
+        parts.withUnsafeMutableBufferPointer { P in
+            DispatchQueue.concurrentPerform(iterations: chunks) { part in
+                let s = Scratch(); var best: [Hit] = []; best.reserveCapacity(k + 1)
+                let lo = c.count * part / chunks, hi = c.count * (part + 1) / chunks
+                var i = lo
+                while i < hi {
+                    if (i & 4095) == 0 && generation.value != gen { return }
+                    if (c.mask[i] & qm) == qm {
+                        let st = Int(c.start[i]), ln = Int(c.len[i])
+                        let T = UnsafeBufferPointer(rebasing: L[st..<st + ln])
+                        if isSubsequence(Q, T) {
+                            let CL = UnsafeBufferPointer(rebasing: C[st..<st + ln])
+                            let h = Hit(idx: Int32(i), tier: tierOf(Q, T, CL), kind: c.kind[i], score: fzy(Q, T, CL, s), len: c.len[i])
+                            insertTop(&best, h, k)
+                        }
+                    }
+                    i += 1
+                }
+                P[part] = best
+            }
+        }
+    } } }
+    if generation.value != gen { cancelled = true }
+    if cancelled { return nil }
+    var merged: [Hit] = []
+    for p in parts { for h in p { insertTop(&merged, h, k) } }
+    return merged
+}
+
+// MARK: UI
+final class Panel: NSPanel {
+    override var canBecomeKey: Bool { true }
+    override var canBecomeMain: Bool { false }
+}
+final class RowView: NSTableCellView {
+    let icon = NSImageView(), label = NSTextField(labelWithString: ""), hint = NSTextField(labelWithString: "")
+    override init(frame: NSRect) {
+        super.init(frame: frame)
+        for v in [icon, label, hint] as [NSView] { v.translatesAutoresizingMaskIntoConstraints = false; addSubview(v) }
+        label.lineBreakMode = .byTruncatingTail; label.font = .systemFont(ofSize: 14)
+        hint.font = .systemFont(ofSize: 12); hint.textColor = .tertiaryLabelColor; hint.alignment = .right
+        label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        NSLayoutConstraint.activate([
+            icon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10), icon.centerYAnchor.constraint(equalTo: centerYAnchor),
+            icon.widthAnchor.constraint(equalToConstant: 20), icon.heightAnchor.constraint(equalToConstant: 20),
+            label.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 8), label.centerYAnchor.constraint(equalTo: centerYAnchor),
+            hint.leadingAnchor.constraint(greaterThanOrEqualTo: label.trailingAnchor, constant: 8),
+            hint.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12), hint.centerYAnchor.constraint(equalTo: centerYAnchor),
+        ])
+    }
+    required init?(coder: NSCoder) { fatalError() }
+}
+
+final class Controller: NSObject, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
+    let corpus: Corpus
+    let panel: Panel
+    let field = NSTextField()
+    let table = NSTableView()
+    let footer = NSTextField(labelWithString: "")
+    let queue = DispatchQueue(label: "search", qos: .userInteractive)
+    var rows: [Hit] = []
+    var query: [UInt8] = []
+    let threads: Int
+    let icons: [NSImage]
+    var lastPublishEnd: UInt64 = 0
+    var lastPublishGen = 0
+    var publishCount = 0
+    var onPublish: ((Int, UInt64) -> Void)?
+    var link: CADisplayLink?
+    var linkWaiters: [(CFTimeInterval, (CFTimeInterval) -> Void)] = []
+    static let rowH: CGFloat = 28, visible = 9, width: CGFloat = 640, fieldH: CGFloat = 52, footerH: CGFloat = 28
+
+    init(corpus: Corpus, opaque: Bool) {
+        self.corpus = corpus
+        threads = corpus.count > 50_000 ? 4 : 1
+        icons = [NSWorkspace.shared.icon(for: .application), NSWorkspace.shared.icon(forFile: "/System/Applications/System Settings.app"),
+                 NSWorkspace.shared.icon(for: .folder), NSWorkspace.shared.icon(for: .plainText)]
+        for i in icons { i.size = NSSize(width: 20, height: 20) }
+        let h = Controller.fieldH + Controller.rowH * CGFloat(Controller.visible) + Controller.footerH + 2
+        let screen = NSScreen.main!.frame
+        let rect = NSRect(x: screen.midX - Controller.width / 2, y: screen.maxY - screen.height * 0.22 - h, width: Controller.width, height: h)
+        panel = Panel(contentRect: rect, styleMask: [.nonactivatingPanel, .borderless], backing: .buffered, defer: false)
+        super.init()
+        panel.level = .floating; panel.isFloatingPanel = true; panel.hidesOnDeactivate = false
+        panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .transient]
+        panel.isOpaque = false; panel.backgroundColor = .clear; panel.hasShadow = true
+        panel.appearance = NSAppearance(named: .darkAqua)
+        let bg: NSView
+        if opaque {
+            let v = NSView(); v.wantsLayer = true; v.layer?.backgroundColor = NSColor(white: 0.13, alpha: 1).cgColor; bg = v
+        } else {
+            let v = NSVisualEffectView(); v.material = .hudWindow; v.blendingMode = .behindWindow; v.state = .active; bg = v
+        }
+        bg.wantsLayer = true; bg.layer?.cornerRadius = 12; bg.layer?.masksToBounds = true
+        panel.contentView = bg
+        field.isBordered = false; field.drawsBackground = false; field.focusRingType = .none
+        field.font = .systemFont(ofSize: 22, weight: .regular); field.placeholderString = "Search"
+        field.delegate = self
+        let scroll = NSScrollView(); scroll.drawsBackground = false; scroll.hasVerticalScroller = false
+        table.headerView = nil; table.backgroundColor = .clear; table.rowHeight = Controller.rowH
+        table.intercellSpacing = .zero; table.style = .plain; table.selectionHighlightStyle = .regular
+        table.addTableColumn(NSTableColumn(identifier: .init("c")))
+        table.dataSource = self; table.delegate = self
+        scroll.documentView = table
+        footer.font = .systemFont(ofSize: 11); footer.textColor = .secondaryLabelColor
+        footer.stringValue = "↩ Open   ⌘↩ Reveal   ⌘C Copy path"
+        let sep = NSBox(); sep.boxType = .separator
+        for v in [field, sep, scroll, footer] as [NSView] { v.translatesAutoresizingMaskIntoConstraints = false; bg.addSubview(v) }
+        NSLayoutConstraint.activate([
+            field.leadingAnchor.constraint(equalTo: bg.leadingAnchor, constant: 16), field.trailingAnchor.constraint(equalTo: bg.trailingAnchor, constant: -16),
+            field.centerYAnchor.constraint(equalTo: bg.topAnchor, constant: Controller.fieldH / 2),
+            sep.topAnchor.constraint(equalTo: bg.topAnchor, constant: Controller.fieldH), sep.leadingAnchor.constraint(equalTo: bg.leadingAnchor), sep.trailingAnchor.constraint(equalTo: bg.trailingAnchor),
+            scroll.topAnchor.constraint(equalTo: sep.bottomAnchor), scroll.leadingAnchor.constraint(equalTo: bg.leadingAnchor, constant: 6), scroll.trailingAnchor.constraint(equalTo: bg.trailingAnchor, constant: -6),
+            scroll.heightAnchor.constraint(equalToConstant: Controller.rowH * CGFloat(Controller.visible)),
+            footer.topAnchor.constraint(equalTo: scroll.bottomAnchor, constant: 6), footer.leadingAnchor.constraint(equalTo: bg.leadingAnchor, constant: 16),
+        ])
+        link = bg.displayLink(target: self, selector: #selector(tick(_:)))
+        link?.add(to: .main, forMode: .common)
+        link?.isPaused = true
+    }
+
+    // Display-link estimate of presentation: the first frame's target time after a commit.
+    func afterNextFrame(_ commitMedia: CFTimeInterval, _ f: @escaping (CFTimeInterval) -> Void) {
+        linkWaiters.append((commitMedia, f)); link?.isPaused = false
+    }
+    @objc func tick(_ l: CADisplayLink) {
+        let ready = linkWaiters.filter { $0.0 <= l.timestamp }
+        linkWaiters.removeAll { $0.0 <= l.timestamp }
+        for w in ready { w.1(l.targetTimestamp) }
+        if linkWaiters.isEmpty { l.isPaused = true }
+    }
+
+    func show() {
+        let a = ticks()
+        panel.makeKeyAndOrderFront(nil)
+        let b = ticks()
+        panel.makeFirstResponder(field)
+        field.currentEditor()?.selectAll(nil)
+        let c = ticks()
+        panel.displayIfNeeded()
+        let d = ticks()
+        CATransaction.flush()
+        let e = ticks()
+        mark("s1 makeKeyAndOrderFront", a, b); mark("s2 first responder", b, c); mark("s3 displayIfNeeded", c, d); mark("s4 flush", d, e)
+    }
+    func hide() { panel.orderOut(nil) }
+
+    func controlTextDidChange(_ obj: Notification) { queryChanged(field.stringValue) }
+    func queryChanged(_ s: String) {
+        generation.value += 1
+        let gen = generation.value
+        let q = Array(s.lowercased().utf8)
+        query = q
+        if q.isEmpty { publish([], gen: gen); return }
+        let c = corpus, k = 50, thr = threads
+        let tq = ticks(); if tKeyDown != 0 { mark("1 keyDown → text change callback", tKeyDown, tq) }
+        queue.async {
+            let ts = ticks()
+            guard let r = search(c, q, gen: gen, k: k, threads: thr) else { return }
+            let te = ticks()
+            mark("2 queue hop to search start", tq, ts); mark("3 search", ts, te)
+            DispatchQueue.main.async { [weak self] in
+                guard let self, gen == generation.value else { return }
+                mark("4 hop back to main", te, ticks())
+                self.publish(r, gen: gen)
+            }
+        }
+    }
+    func publish(_ r: [Hit], gen: Int) {
+        let selectedID = table.selectedRow >= 0 && table.selectedRow < rows.count ? rows[table.selectedRow].idx : -1
+        rows = r
+        let a = ticks()
+        table.reloadData()
+        let b = ticks()
+        let keep = rows.firstIndex { $0.idx == selectedID } ?? 0
+        if !rows.isEmpty { table.selectRowIndexes([keep], byExtendingSelection: false); table.scrollRowToVisible(keep) }
+        let c = ticks()
+        panel.displayIfNeeded()
+        let d = ticks()
+        CATransaction.flush()
+        let e = ticks()
+        mark("5 reloadData", a, b); mark("6 select", b, c); mark("7 layout+draw (displayIfNeeded)", c, d); mark("8 CATransaction.flush", d, e)
+        lastPublishEnd = ticks(); lastPublishGen = gen; publishCount += 1
+        onPublish?(gen, lastPublishEnd)
+    }
+
+    func numberOfRows(in tableView: NSTableView) -> Int { rows.count }
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let v = (tableView.makeView(withIdentifier: .init("r"), owner: nil) as? RowView) ?? {
+            let r = RowView(frame: .zero); r.identifier = .init("r"); return r }()
+        let h = rows[row], i = Int(h.idx)
+        let name = corpus.names[i]
+        let s = NSMutableAttributedString(string: name, attributes: [.font: NSFont.systemFont(ofSize: 14), .foregroundColor: NSColor.labelColor])
+        // bold the greedy-matched letters (display only)
+        let bytes = Array(name.utf8)
+        var qi = 0, j = 0
+        let utf16 = Array(name.utf16)
+        if bytes.count == utf16.count {
+            while j < bytes.count && qi < query.count {
+                let b = bytes[j], low = (b >= 65 && b <= 90) ? b + 32 : b
+                if low == query[qi] { s.addAttribute(.font, value: NSFont.boldSystemFont(ofSize: 14), range: NSRange(location: j, length: 1)); qi += 1 }
+                j += 1
+            }
+        }
+        s.append(NSAttributedString(string: "   " + locations[Int(corpus.loc[i])], attributes: [.font: NSFont.systemFont(ofSize: 12), .foregroundColor: NSColor.tertiaryLabelColor]))
+        v.label.attributedStringValue = s
+        v.icon.image = icons[min(Int(corpus.kind[i]), 3)]
+        v.hint.stringValue = row < 9 ? "⌘\(row + 1)" : ""
+        return v
+    }
+}
+
+// MARK: screen capture of the panel region
+final class Recorder: NSObject, SCStreamOutput, @unchecked Sendable {
+    struct Frame { var t: UInt64; var fieldChanged: Int; var rowsChanged: Int; var allChanged: Int }
+    let lock = NSLock()
+    var frames: [Frame] = []
+    var prev: [UInt8] = []
+    var fieldRows = 0
+    func stream(_ stream: SCStream, didOutputSampleBuffer sb: CMSampleBuffer, of type: SCStreamOutputType) {
+        guard type == .screen,
+              let atts = CMSampleBufferGetSampleAttachmentsArray(sb, createIfNecessary: false) as? [[SCStreamFrameInfo: Any]],
+              let a = atts.first, let raw = a[.status] as? Int, SCFrameStatus(rawValue: raw) == .complete,
+              let dt = (a[.displayTime] as? NSNumber)?.uint64Value,
+              let pb = CMSampleBufferGetImageBuffer(sb) else { return }
+        CVPixelBufferLockBaseAddress(pb, .readOnly)
+        let w = CVPixelBufferGetWidth(pb), h = CVPixelBufferGetHeight(pb), bpr = CVPixelBufferGetBytesPerRow(pb)
+        let base = CVPixelBufferGetBaseAddress(pb)!.assumingMemoryBound(to: UInt8.self)
+        var lum = [UInt8](repeating: 0, count: w * h)
+        for y in 0..<h { let row = base + y * bpr; for x in 0..<w { let p = row + x * 4; lum[y * w + x] = UInt8((Int(p[0]) + 2 * Int(p[1]) + Int(p[2])) >> 2) } }
+        CVPixelBufferUnlockBaseAddress(pb, .readOnly)
+        var f = Frame(t: dt, fieldChanged: 0, rowsChanged: 0, allChanged: 0)
+        if prev.count == lum.count {
+            let split = fieldRows * w
+            for i in 0..<lum.count where abs(Int(lum[i]) - Int(prev[i])) > 40 {
+                f.allChanged += 1
+                if i < split { f.fieldChanged += 1 } else { f.rowsChanged += 1 }
+            }
+        } else { f.allChanged = Int.max / 2 }
+        prev = lum
+        lock.lock(); frames.append(f); lock.unlock()
+    }
+    func snapshot() -> [Frame] { lock.lock(); defer { lock.unlock() }; return frames }
+}
+
+func pct(_ xs: [Double], _ p: Double) -> Double {
+    if xs.isEmpty { return .nan }
+    let s = xs.sorted(); return s[min(s.count - 1, Int((Double(s.count - 1) * p).rounded()))]
+}
+func stats(_ name: String, _ xs: [Double]) -> String {
+    guard !xs.isEmpty else { return "\(name): no samples" }
+    return String(format: "%@: n=%d median %.2f p95 %.2f max %.2f ms", name, xs.count, pct(xs, 0.5), pct(xs, 0.95), xs.max()!)
+}
+
+// MARK: main
+let args = CommandLine.arguments
+let N = Int(args[1])!
+let opaque = args.contains("--opaque")
+func lines(_ p: String) -> [String] { (try? String(contentsOfFile: p, encoding: .utf8))?.split(separator: "\n").map(String.init) ?? [] }
+let apps = lines(args[2]), settings = lines(args[3]), files = lines(args[4])
+let memStart = footprintMiB()
+let tBuild = ticks()
+var corpus = Corpus()
+for a in apps { corpus.add(a, kind: 0, loc: 0) }
+for s in settings { corpus.add(s, kind: 1, loc: 1) }
+var fi = 0
+while corpus.count < N {
+    let f = files[fi % files.count]
+    corpus.add(fi < files.count ? f : "\(f) \(fi / files.count)", kind: f.contains(".") ? 3 : 2, loc: UInt8(2 + fi % 6))
+    fi += 1
+}
+let buildMs = ms(tBuild, ticks())
+
+let app = NSApplication.shared
+app.setActivationPolicy(.accessory)
+var report: [String] = []
+func log(_ s: String) { report.append(s); print(s); fflush(stdout) }
+log(String(format: "N=%d items, index build %.1f ms, display %@", corpus.count, buildMs, opaque ? "opaque" : "vibrancy"))
+let tUI = ticks()
+let ctl = Controller(corpus: corpus, opaque: opaque)
+log(String(format: "panel built at launch in %.1f ms (hidden)", ms(tUI, ticks())))
+
+func sleepMs(_ x: Double) async { try? await Task.sleep(nanoseconds: UInt64(x * 1e6)) }
+
+@MainActor func run() async {
+    let memIndexed = footprintMiB()
+    // First show after launch (cold-ish), then hide.
+    var t0 = ticks(); ctl.show(); let firstShow = ms(t0, ticks())
+    await sleepMs(300); ctl.hide(); await sleepMs(300)
+    log(String(format: "first show (commit) %.2f ms", firstShow))
+
+    // Start screen capture of the panel region.
+    let rec = Recorder()
+    var stream: SCStream?
+    do {
+        if args.contains("--nocapture") { throw NSError(domain: "disabled by --nocapture", code: 0) }
+        let content = try await SCShareableContent.excludingDesktopWindows(false, onScreenWindowsOnly: true)
+        let screen = NSScreen.main!
+        let did = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! CGDirectDisplayID
+        guard let display = content.displays.first(where: { $0.displayID == did }) else { throw NSError(domain: "nodisplay", code: 1) }
+        let f = ctl.panel.frame
+        let cfg = SCStreamConfiguration()
+        cfg.sourceRect = CGRect(x: f.minX - screen.frame.minX, y: screen.frame.maxY - f.maxY, width: f.width, height: f.height)
+        cfg.width = Int(f.width); cfg.height = Int(f.height)
+        cfg.minimumFrameInterval = CMTime(value: 1, timescale: 240)
+        cfg.queueDepth = 8; cfg.showsCursor = false; cfg.pixelFormat = kCVPixelFormatType_32BGRA
+        rec.fieldRows = Int(Controller.fieldH)
+        let s = SCStream(filter: SCContentFilter(display: display, excludingWindows: []), configuration: cfg, delegate: nil)
+        try s.addStreamOutput(rec, type: .screen, sampleHandlerQueue: DispatchQueue(label: "sck", qos: .userInteractive))
+        try await s.startCapture()
+        stream = s
+        log("screen capture: on (display \(did), \(Int(f.width))x\(Int(f.height)) pt region, refresh \(screen.maximumFramesPerSecond) Hz max)")
+    } catch { log("screen capture: unavailable (\(error)); display-link estimates only") }
+    await sleepMs(600)
+
+    // Warm show test.
+    var showCommit: [Double] = [], showLink: [Double] = [], showTimes: [UInt64] = []
+    for _ in 0..<30 {
+        t0 = ticks(); let m0 = CACurrentMediaTime()
+        ctl.show()
+        let t1 = ticks(); showCommit.append(ms(t0, t1)); showTimes.append(t0)
+        let commitMedia = CACurrentMediaTime()
+        ctl.afterNextFrame(commitMedia) { target in showLink.append((target - m0) * 1000) }
+        await sleepMs(260); ctl.hide(); await sleepMs(260)
+    }
+    let memShown = footprintMiB()
+
+    // Keystroke test: type words with 220 ms between keys.
+    ctl.show(); await sleepMs(300)
+    let words = ["vsc", "visual", "keyboard la", "readme", "apparate", "pjapp", "sysset", "term", "safa", "dl"]
+    var keyTimes: [(UInt64, Int)] = []   // (time, generation expected)
+    var keyCommit: [Double] = [], keyLink: [Double] = [], echoOK = 0, echoFail = 0
+    for w in words {
+        ctl.field.stringValue = ""; ctl.queryChanged(""); await sleepMs(250)
+        for ch in w {
+            let s = String(ch)
+            let code: UInt16 = 0
+            let ev = NSEvent.keyEvent(with: .keyDown, location: .zero, modifierFlags: [], timestamp: ProcessInfo.processInfo.systemUptime,
+                                      windowNumber: ctl.panel.windowNumber, context: nil, characters: s, charactersIgnoringModifiers: s, isARepeat: false, keyCode: code)!
+            let before = ctl.field.stringValue
+            let m0 = CACurrentMediaTime()
+            t0 = ticks()
+            let expectedGen = generation.value + 1
+            var published: UInt64 = 0
+            ctl.onPublish = { gen, t in if gen == expectedGen { published = t } }
+            tKeyDown = ticks()
+            ctl.panel.sendEvent(ev)
+            tKeyDown = 0
+            if ctl.field.stringValue == before + s { echoOK += 1 } else {
+                echoFail += 1; ctl.field.stringValue = before + s; ctl.queryChanged(ctl.field.stringValue)
+            }
+            keyTimes.append((t0, expectedGen))
+            let deadline = ticks() + UInt64(200e6 * Double(timebase.denom) / Double(timebase.numer))
+            while published == 0 && ticks() < deadline { await sleepMs(0.5) }
+            if published != 0 {
+                keyCommit.append(ms(t0, published))
+                let commitMedia = CACurrentMediaTime()
+                ctl.afterNextFrame(commitMedia) { target in keyLink.append((target - m0) * 1000) }
+            }
+            await sleepMs(220)
+        }
+    }
+    ctl.onPublish = nil
+    // Burst test: 12 keys 15 ms apart; stale searches must be dropped, only final generation shown.
+    ctl.field.stringValue = ""; ctl.queryChanged(""); await sleepMs(250)
+    let publishesBefore = ctl.publishCount
+    for ch in "keyboard lay" {
+        let s = String(ch)
+        let ev = NSEvent.keyEvent(with: .keyDown, location: .zero, modifierFlags: [], timestamp: ProcessInfo.processInfo.systemUptime,
+                                  windowNumber: ctl.panel.windowNumber, context: nil, characters: s, charactersIgnoringModifiers: s, isARepeat: false, keyCode: 0)!
+        ctl.panel.sendEvent(ev)
+        await sleepMs(15)
+    }
+    await sleepMs(300)
+    let burstPublishes = ctl.publishCount - publishesBefore
+    let topAfterBurst = ctl.rows.prefix(3).map { corpus.names[Int($0.idx)] }.joined(separator: " | ")
+    ctl.hide()
+    await sleepMs(400)
+    if let s = stream { try? await s.stopCapture() }
+    let frames = rec.snapshot()
+
+    // Analyse captured frames.
+    var showSCK: [Double] = []
+    for t in showTimes {
+        if let f = frames.first(where: { $0.t > t && $0.allChanged > 500 }) { showSCK.append(ms(t, f.t)) }
+    }
+    var keyEchoSCK: [Double] = [], keyStableSCK: [Double] = []
+    for (i, k) in keyTimes.enumerated() {
+        let next = i + 1 < keyTimes.count ? keyTimes[i + 1].0 : k.0 + UInt64(400e6 * Double(timebase.denom) / Double(timebase.numer))
+        let inWin = frames.filter { $0.t > k.0 && $0.t < next }
+        if let e = inWin.first(where: { $0.fieldChanged > 3 }) { keyEchoSCK.append(ms(k.0, e.t)) }
+        if let last = inWin.last(where: { $0.rowsChanged > 20 }) { keyStableSCK.append(ms(k.0, last.t)) }
+    }
+    // Idle CPU with panel hidden.
+    let c0 = cpuSeconds(); await sleepMs(10_000); let idleCPU = (cpuSeconds() - c0) / 10 * 100
+    let memEnd = footprintMiB()
+
+    log(stats("show → commit (in process)", showCommit))
+    log(stats("show → display-link target frame", showLink))
+    log(stats("show → first captured frame with panel (ScreenCaptureKit)", showSCK))
+    log("keystroke text echo: delivered through the field editor \(echoOK), fallback \(echoFail)")
+    log(stats("keystroke → results committed (in process)", keyCommit))
+    log(stats("keystroke → display-link target frame after results", keyLink))
+    log(stats("keystroke → typed letter on screen (ScreenCaptureKit)", keyEchoSCK))
+    log(stats("keystroke → last change of result rows on screen (ScreenCaptureKit)", keyStableSCK))
+    log("burst of 12 keys 15 ms apart: \(burstPublishes) result publishes; top results \(topAfterBurst)")
+    log(String(format: "memory phys_footprint MiB: start %.1f, index loaded + panel built %.1f, after shows %.1f, end (incl. capture buffers) %.1f", memStart, memIndexed, memShown, memEnd))
+    log(String(format: "idle CPU with panel hidden, 10 s: %.3f%%", idleCPU))
+    log("captured frames: \(frames.count)")
+    for k in stage.keys.sorted() { log(stats("  stage " + k, stage[k]!)) }
+    let out = args.firstIndex(of: "--out").map { args[$0 + 1] }
+    if let out { try? report.joined(separator: "\n").write(toFile: out, atomically: true, encoding: .utf8) }
+    exit(0)
+}
+Task { @MainActor in await run() }
+app.run()

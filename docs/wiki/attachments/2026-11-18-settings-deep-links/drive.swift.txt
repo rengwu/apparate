@@ -1,0 +1,50 @@
+// Deep-link spike driver: opens x-apple.systempreferences:<bundle>?<anchor>, captures the System Settings window.
+import AppKit
+import CoreGraphics
+
+let args = CommandLine.arguments
+let samples = args[1], outDir = args[2], mode = args.count > 3 ? args[3] : "cold"
+try? FileManager.default.createDirectory(atPath: outDir, withIntermediateDirectories: true)
+
+func settingsApps() -> [NSRunningApplication] { NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.systempreferences") }
+func kill() {
+    for a in settingsApps() { a.forceTerminate() }
+    let t0 = Date(); while !settingsApps().isEmpty && Date().timeIntervalSince(t0) < 5 { usleep(100_000) }
+    usleep(300_000)
+}
+func window() -> (Int, String)? {
+    guard let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]] else { return nil }
+    for w in list where (w[kCGWindowOwnerName as String] as? String) == "System Settings" && (w[kCGWindowLayer as String] as? Int) == 0 {
+        if let b = w[kCGWindowBounds as String] as? [String: Double], (b["Height"] ?? 0) > 200 {
+            return (w[kCGWindowNumber as String] as! Int, w[kCGWindowName as String] as? String ?? "")
+        }
+    }
+    return nil
+}
+var results: [String] = []
+let lines = try! String(contentsOfFile: samples, encoding: .utf8).split(separator: "\n")
+for (i, line) in lines.enumerated() {
+    let f = line.split(separator: "\t", omittingEmptySubsequences: false).map(String.init)
+    let bundle = f[0], anchor = f[1]
+    if mode == "cold" { kill() }
+    var s = "x-apple.systempreferences:" + bundle
+    if !anchor.isEmpty { s += "?" + (anchor.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? anchor) }
+    let url = URL(string: s)!
+    let t0 = Date()
+    NSWorkspace.shared.open(url)
+    var w: (Int, String)? = nil
+    while Date().timeIntervalSince(t0) < 8 { if let x = window(), !x.1.isEmpty, x.1 != "System Settings" { w = x; break }; usleep(50_000) }
+    let appeared = Date().timeIntervalSince(t0)
+    usleep(2_200_000)
+    let name = String(format: "%02d", i)
+    if let w = window() ?? w {
+        let p = Process(); p.executableURL = URL(fileURLWithPath: "/usr/sbin/screencapture")
+        p.arguments = ["-x", "-o", "-l", String(w.0), "\(outDir)/\(name).png"]; try! p.run(); p.waitUntilExit()
+        results.append([name, bundle, anchor, f[2], f[3], w.1, String(format: "%.2f", appeared)].joined(separator: "\t"))
+    } else {
+        results.append([name, bundle, anchor, f[2], f[3], "NO WINDOW", String(format: "%.2f", appeared)].joined(separator: "\t"))
+    }
+    print(results.last!); fflush(stdout)
+}
+if mode == "cold" { kill() }
+try! results.joined(separator: "\n").write(toFile: "\(outDir)/results.tsv", atomically: true, encoding: .utf8)

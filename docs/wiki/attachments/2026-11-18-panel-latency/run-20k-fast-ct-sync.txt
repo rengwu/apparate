@@ -1,0 +1,26 @@
+N=20000 items, index build 14.3 ms, background vibrancy, rows 9 drawn rows (Core Text), wait ≤4 ms for search on main
+panel built at launch in 37.4 ms (hidden)
+first show (commit) 41.95 ms
+screen capture: on (display 1, 640x335 pt region, refresh 120 Hz max)
+show → commit (in process): n=30 median 14.83 p95 21.53 max 21.53 ms
+show → first captured frame with panel (ScreenCaptureKit): n=30 median 33.69 p95 49.31 max 63.07 ms
+keystroke text echo: delivered through the field editor 55, fallback 0
+keystroke → results committed (in process): n=55 median 17.84 p95 26.31 max 35.76 ms
+keystroke → typed letter on screen (ScreenCaptureKit): n=55 median 32.27 p95 43.34 max 52.39 ms
+keystroke → last change of result rows on screen (ScreenCaptureKit): n=55 median 32.27 p95 46.74 max 282.58 ms
+burst of 12 keys 15 ms apart: 12 result publishes; top results Keyboard layouts
+memory phys_footprint MiB: start 5.0, index loaded + panel built 14.1, after shows 20.3, end (incl. capture buffers) 30.5
+idle CPU with panel hidden, 5 s: 0.118%
+captured frames: 1944
+  stage 1 keyDown → text change callback: n=55 median 2.90 p95 7.26 max 13.10 ms
+  stage 2 queue hop to search start: n=67 median 0.05 p95 0.10 max 0.48 ms
+  stage 3 search: n=67 median 0.41 p95 1.90 max 4.57 ms
+  stage 4' waited on main for search: n=67 median 0.55 p95 1.96 max 4.66 ms
+  stage 5 reloadData: n=78 median 1.90 p95 3.63 max 6.92 ms
+  stage 6 select: n=78 median 0.00 p95 0.00 max 0.00 ms
+  stage 7 layout+draw (displayIfNeeded): n=78 median 2.38 p95 4.21 max 8.63 ms
+  stage 8 CATransaction.flush: n=78 median 6.98 p95 14.06 max 23.87 ms
+  stage s1 makeKeyAndOrderFront: n=32 median 12.01 p95 15.95 max 33.80 ms
+  stage s2 first responder: n=32 median 1.31 p95 5.61 max 9.06 ms
+  stage s3 displayIfNeeded: n=32 median 0.35 p95 0.96 max 1.40 ms
+  stage s4 flush: n=32 median 0.54 p95 1.51 max 5.24 ms

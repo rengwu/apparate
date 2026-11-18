@@ -1,0 +1,887 @@
+{
+  "after_build_phys_footprint_bytes" : 124879472,
+  "after_search_phys_footprint_bytes" : 58786416,
+  "baseline_phys_footprint_bytes" : 1950176,
+  "checksum" : "750371096195461",
+  "corpus_generation_ms" : 306.71029099999998,
+  "corpus_sha256" : "56fb7726eb4e13632f181e3601cf78807455c25be65422eff4646e5e6b309b75",
+  "corpus_version" : 1,
+  "name_queries" : [
+    "code",
+    "terminal",
+    "calendar",
+    "calculator",
+    "readme",
+    "report",
+    "network",
+    "project",
+    "sources",
+    "settings",
+    "archive",
+    "notes",
+    "cafe",
+    "strasse",
+    "東京",
+    "zzqv"
+  ],
+  "names" : {
+    "cases" : [
+      {
+        "ms" : 40.347000000000001,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 46.590625000000003,
+        "query" : "co",
+        "rows" : 50
+      },
+      {
+        "ms" : 29.675625,
+        "query" : "cod",
+        "rows" : 50
+      },
+      {
+        "ms" : 21.253458999999999,
+        "query" : "code",
+        "rows" : 50
+      },
+      {
+        "ms" : 47.537416999999998,
+        "query" : "t",
+        "rows" : 50
+      },
+      {
+        "ms" : 44.131915999999997,
+        "query" : "te",
+        "rows" : 50
+      },
+      {
+        "ms" : 36.599584,
+        "query" : "ter",
+        "rows" : 50
+      },
+      {
+        "ms" : 26.173500000000001,
+        "query" : "term",
+        "rows" : 50
+      },
+      {
+        "ms" : 22.452915999999998,
+        "query" : "termi",
+        "rows" : 50
+      },
+      {
+        "ms" : 26.406500000000001,
+        "query" : "termin",
+        "rows" : 50
+      },
+      {
+        "ms" : 30.139458999999999,
+        "query" : "termina",
+        "rows" : 50
+      },
+      {
+        "ms" : 32.243000000000002,
+        "query" : "terminal",
+        "rows" : 50
+      },
+      {
+        "ms" : 39.059291999999999,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 32.735582999999998,
+        "query" : "ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 31.996333,
+        "query" : "cal",
+        "rows" : 50
+      },
+      {
+        "ms" : 27.279,
+        "query" : "cale",
+        "rows" : 50
+      },
+      {
+        "ms" : 27.086708000000002,
+        "query" : "calen",
+        "rows" : 50
+      },
+      {
+        "ms" : 25.986916999999998,
+        "query" : "calend",
+        "rows" : 50
+      },
+      {
+        "ms" : 29.062542000000001,
+        "query" : "calenda",
+        "rows" : 50
+      },
+      {
+        "ms" : 33.907499999999999,
+        "query" : "calendar",
+        "rows" : 50
+      },
+      {
+        "ms" : 38.696334,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 31.891458,
+        "query" : "ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 32.769750000000002,
+        "query" : "cal",
+        "rows" : 50
+      },
+      {
+        "ms" : 25.208209,
+        "query" : "calc",
+        "rows" : 50
+      },
+      {
+        "ms" : 24.24925,
+        "query" : "calcu",
+        "rows" : 50
+      },
+      {
+        "ms" : 27.001000000000001,
+        "query" : "calcul",
+        "rows" : 50
+      },
+      {
+        "ms" : 31.111332999999998,
+        "query" : "calcula",
+        "rows" : 50
+      },
+      {
+        "ms" : 36.207917000000002,
+        "query" : "calculat",
+        "rows" : 50
+      },
+      {
+        "ms" : 38.742834000000002,
+        "query" : "calculato",
+        "rows" : 50
+      },
+      {
+        "ms" : 41.804749999999999,
+        "query" : "calculator",
+        "rows" : 50
+      },
+      {
+        "ms" : 50.924042,
+        "query" : "r",
+        "rows" : 50
+      },
+      {
+        "ms" : 74.894458999999998,
+        "query" : "re",
+        "rows" : 50
+      },
+      {
+        "ms" : 40.325249999999997,
+        "query" : "rea",
+        "rows" : 50
+      },
+      {
+        "ms" : 34.650708999999999,
+        "query" : "read",
+        "rows" : 50
+      },
+      {
+        "ms" : 25.399291999999999,
+        "query" : "readm",
+        "rows" : 50
+      },
+      {
+        "ms" : 25.078375000000001,
+        "query" : "readme",
+        "rows" : 50
+      },
+      {
+        "ms" : 50.978166000000002,
+        "query" : "r",
+        "rows" : 50
+      },
+      {
+        "ms" : 73.015124999999998,
+        "query" : "re",
+        "rows" : 50
+      },
+      {
+        "ms" : 43.383665999999998,
+        "query" : "rep",
+        "rows" : 50
+      },
+      {
+        "ms" : 22.723958,
+        "query" : "repo",
+        "rows" : 50
+      },
+      {
+        "ms" : 22.813874999999999,
+        "query" : "repor",
+        "rows" : 50
+      },
+      {
+        "ms" : 26.422291000000001,
+        "query" : "report",
+        "rows" : 50
+      },
+      {
+        "ms" : 43.781167000000003,
+        "query" : "n",
+        "rows" : 50
+      },
+      {
+        "ms" : 46.805208,
+        "query" : "ne",
+        "rows" : 50
+      },
+      {
+        "ms" : 43.300834000000002,
+        "query" : "net",
+        "rows" : 50
+      },
+      {
+        "ms" : 20.141207999999999,
+        "query" : "netw",
+        "rows" : 50
+      },
+      {
+        "ms" : 21.669791,
+        "query" : "netwo",
+        "rows" : 50
+      },
+      {
+        "ms" : 25.623875000000002,
+        "query" : "networ",
+        "rows" : 50
+      },
+      {
+        "ms" : 27.985209000000001,
+        "query" : "network",
+        "rows" : 50
+      },
+      {
+        "ms" : 24.917458,
+        "query" : "p",
+        "rows" : 50
+      },
+      {
+        "ms" : 28.939708,
+        "query" : "pr",
+        "rows" : 50
+      },
+      {
+        "ms" : 26.151375000000002,
+        "query" : "pro",
+        "rows" : 50
+      },
+      {
+        "ms" : 18.781334000000001,
+        "query" : "proj",
+        "rows" : 50
+      },
+      {
+        "ms" : 21.608167000000002,
+        "query" : "proje",
+        "rows" : 50
+      },
+      {
+        "ms" : 24.566792,
+        "query" : "projec",
+        "rows" : 50
+      },
+      {
+        "ms" : 28.400832999999999,
+        "query" : "project",
+        "rows" : 50
+      },
+      {
+        "ms" : 36.770125,
+        "query" : "s",
+        "rows" : 50
+      },
+      {
+        "ms" : 41.759625,
+        "query" : "so",
+        "rows" : 50
+      },
+      {
+        "ms" : 30.474125000000001,
+        "query" : "sou",
+        "rows" : 50
+      },
+      {
+        "ms" : 34.870333000000002,
+        "query" : "sour",
+        "rows" : 50
+      },
+      {
+        "ms" : 42.980457999999999,
+        "query" : "sourc",
+        "rows" : 50
+      },
+      {
+        "ms" : 49.454416999999999,
+        "query" : "source",
+        "rows" : 50
+      },
+      {
+        "ms" : 56.015833000000001,
+        "query" : "sources",
+        "rows" : 50
+      },
+      {
+        "ms" : 37.274166999999998,
+        "query" : "s",
+        "rows" : 50
+      },
+      {
+        "ms" : 46.757666,
+        "query" : "se",
+        "rows" : 50
+      },
+      {
+        "ms" : 42.087166000000003,
+        "query" : "set",
+        "rows" : 50
+      },
+      {
+        "ms" : 33.089333000000003,
+        "query" : "sett",
+        "rows" : 50
+      },
+      {
+        "ms" : 24.881875000000001,
+        "query" : "setti",
+        "rows" : 50
+      },
+      {
+        "ms" : 27.847458,
+        "query" : "settin",
+        "rows" : 50
+      },
+      {
+        "ms" : 29.280457999999999,
+        "query" : "setting",
+        "rows" : 50
+      },
+      {
+        "ms" : 32.965833000000003,
+        "query" : "settings",
+        "rows" : 50
+      },
+      {
+        "ms" : 39.609583999999998,
+        "query" : "a",
+        "rows" : 50
+      },
+      {
+        "ms" : 52.547958000000001,
+        "query" : "ar",
+        "rows" : 50
+      },
+      {
+        "ms" : 38.6785,
+        "query" : "arc",
+        "rows" : 50
+      },
+      {
+        "ms" : 35.974125000000001,
+        "query" : "arch",
+        "rows" : 50
+      },
+      {
+        "ms" : 26.057165999999999,
+        "query" : "archi",
+        "rows" : 50
+      },
+      {
+        "ms" : 23.998833000000001,
+        "query" : "archiv",
+        "rows" : 50
+      },
+      {
+        "ms" : 28.288333000000002,
+        "query" : "archive",
+        "rows" : 50
+      },
+      {
+        "ms" : 43.513584000000002,
+        "query" : "n",
+        "rows" : 50
+      },
+      {
+        "ms" : 39.037042,
+        "query" : "no",
+        "rows" : 50
+      },
+      {
+        "ms" : 34.917000000000002,
+        "query" : "not",
+        "rows" : 50
+      },
+      {
+        "ms" : 20.667625000000001,
+        "query" : "note",
+        "rows" : 50
+      },
+      {
+        "ms" : 22.376166999999999,
+        "query" : "notes",
+        "rows" : 50
+      },
+      {
+        "ms" : 39.112875000000003,
+        "query" : "c",
+        "rows" : 50
+      },
+      {
+        "ms" : 32.911290999999999,
+        "query" : "ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 14.949916,
+        "query" : "caf",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.5784579999999999,
+        "query" : "cafe",
+        "rows" : 50
+      },
+      {
+        "ms" : 36.905957999999998,
+        "query" : "s",
+        "rows" : 50
+      },
+      {
+        "ms" : 42.621833000000002,
+        "query" : "st",
+        "rows" : 50
+      },
+      {
+        "ms" : 15.744166999999999,
+        "query" : "str",
+        "rows" : 50
+      },
+      {
+        "ms" : 8.0425419999999992,
+        "query" : "stra",
+        "rows" : 50
+      },
+      {
+        "ms" : 6.0049590000000004,
+        "query" : "stras",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.9078330000000001,
+        "query" : "strass",
+        "rows" : 50
+      },
+      {
+        "ms" : 4.7766659999999996,
+        "query" : "strasse",
+        "rows" : 50
+      },
+      {
+        "ms" : 1.896625,
+        "query" : "東",
+        "rows" : 50
+      },
+      {
+        "ms" : 1.9655,
+        "query" : "東京",
+        "rows" : 50
+      },
+      {
+        "ms" : 1.6881660000000001,
+        "query" : "z",
+        "rows" : 1
+      },
+      {
+        "ms" : 1.686375,
+        "query" : "zz",
+        "rows" : 1
+      },
+      {
+        "ms" : 1.7086250000000001,
+        "query" : "zzq",
+        "rows" : 1
+      },
+      {
+        "ms" : 1.68675,
+        "query" : "zzqv",
+        "rows" : 1
+      }
+    ],
+    "samples" : 100,
+    "statistics" : {
+      "max_ms" : 74.894458999999998,
+      "median_ms" : 30.474125000000001,
+      "p95_ms" : 50.924042
+    }
+  },
+  "path_queries" : [
+    "project/sources",
+    "project/tests",
+    "projects/readme",
+    "workspace/report",
+    "sources/network",
+    "docs/notes",
+    "archive/cafe",
+    "project/",
+    "sources/",
+    "p/s",
+    "s/r",
+    "zzqv/",
+    "project//sources"
+  ],
+  "paths" : {
+    "cases" : [
+      {
+        "ms" : 267.75604099999998,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 204.001541,
+        "query" : "project/s",
+        "rows" : 50
+      },
+      {
+        "ms" : 141.89762500000001,
+        "query" : "project/so",
+        "rows" : 50
+      },
+      {
+        "ms" : 84.191999999999993,
+        "query" : "project/sou",
+        "rows" : 50
+      },
+      {
+        "ms" : 84.651792,
+        "query" : "project/sour",
+        "rows" : 50
+      },
+      {
+        "ms" : 93.278084000000007,
+        "query" : "project/sourc",
+        "rows" : 50
+      },
+      {
+        "ms" : 98.082499999999996,
+        "query" : "project/source",
+        "rows" : 50
+      },
+      {
+        "ms" : 106.591917,
+        "query" : "project/sources",
+        "rows" : 50
+      },
+      {
+        "ms" : 267.09025000000003,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 253.97995800000001,
+        "query" : "project/t",
+        "rows" : 50
+      },
+      {
+        "ms" : 154.02254099999999,
+        "query" : "project/te",
+        "rows" : 50
+      },
+      {
+        "ms" : 99.528334000000001,
+        "query" : "project/tes",
+        "rows" : 50
+      },
+      {
+        "ms" : 57.971874999999997,
+        "query" : "project/test",
+        "rows" : 50
+      },
+      {
+        "ms" : 12.344666999999999,
+        "query" : "project/tests",
+        "rows" : 50
+      },
+      {
+        "ms" : 169.362167,
+        "query" : "projects/",
+        "rows" : 50
+      },
+      {
+        "ms" : 191.51266699999999,
+        "query" : "projects/r",
+        "rows" : 50
+      },
+      {
+        "ms" : 190.55954199999999,
+        "query" : "projects/re",
+        "rows" : 50
+      },
+      {
+        "ms" : 82.776083,
+        "query" : "projects/rea",
+        "rows" : 50
+      },
+      {
+        "ms" : 62.768374999999999,
+        "query" : "projects/read",
+        "rows" : 50
+      },
+      {
+        "ms" : 41.739209000000002,
+        "query" : "projects/readm",
+        "rows" : 50
+      },
+      {
+        "ms" : 42.506833999999998,
+        "query" : "projects/readme",
+        "rows" : 50
+      },
+      {
+        "ms" : 192.74683300000001,
+        "query" : "workspace/",
+        "rows" : 50
+      },
+      {
+        "ms" : 210.458292,
+        "query" : "workspace/r",
+        "rows" : 50
+      },
+      {
+        "ms" : 206.45625000000001,
+        "query" : "workspace/re",
+        "rows" : 50
+      },
+      {
+        "ms" : 95.681624999999997,
+        "query" : "workspace/rep",
+        "rows" : 50
+      },
+      {
+        "ms" : 43.775458,
+        "query" : "workspace/repo",
+        "rows" : 50
+      },
+      {
+        "ms" : 40.237457999999997,
+        "query" : "workspace/repor",
+        "rows" : 50
+      },
+      {
+        "ms" : 43.246499999999997,
+        "query" : "workspace/report",
+        "rows" : 50
+      },
+      {
+        "ms" : 93.114166999999995,
+        "query" : "sources/",
+        "rows" : 50
+      },
+      {
+        "ms" : 103.978375,
+        "query" : "sources/n",
+        "rows" : 50
+      },
+      {
+        "ms" : 87.710959000000003,
+        "query" : "sources/ne",
+        "rows" : 50
+      },
+      {
+        "ms" : 65.776832999999996,
+        "query" : "sources/net",
+        "rows" : 50
+      },
+      {
+        "ms" : 28.921333000000001,
+        "query" : "sources/netw",
+        "rows" : 50
+      },
+      {
+        "ms" : 30.543417000000002,
+        "query" : "sources/netwo",
+        "rows" : 50
+      },
+      {
+        "ms" : 33.392000000000003,
+        "query" : "sources/networ",
+        "rows" : 50
+      },
+      {
+        "ms" : 35.311332999999998,
+        "query" : "sources/network",
+        "rows" : 50
+      },
+      {
+        "ms" : 69.268500000000003,
+        "query" : "docs/",
+        "rows" : 50
+      },
+      {
+        "ms" : 87.393541999999997,
+        "query" : "docs/n",
+        "rows" : 50
+      },
+      {
+        "ms" : 60.498666999999998,
+        "query" : "docs/no",
+        "rows" : 50
+      },
+      {
+        "ms" : 48.714790999999998,
+        "query" : "docs/not",
+        "rows" : 50
+      },
+      {
+        "ms" : 27.687667000000001,
+        "query" : "docs/note",
+        "rows" : 50
+      },
+      {
+        "ms" : 28.412958,
+        "query" : "docs/notes",
+        "rows" : 50
+      },
+      {
+        "ms" : 74.919833999999994,
+        "query" : "archive/",
+        "rows" : 50
+      },
+      {
+        "ms" : 86.427041000000003,
+        "query" : "archive/c",
+        "rows" : 50
+      },
+      {
+        "ms" : 53.399290999999998,
+        "query" : "archive/ca",
+        "rows" : 50
+      },
+      {
+        "ms" : 20.222375,
+        "query" : "archive/caf",
+        "rows" : 50
+      },
+      {
+        "ms" : 3.4074580000000001,
+        "query" : "archive/cafe",
+        "rows" : 50
+      },
+      {
+        "ms" : 268.94008300000002,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 93.001417000000004,
+        "query" : "sources/",
+        "rows" : 50
+      },
+      {
+        "ms" : 107.49250000000001,
+        "query" : "p/",
+        "rows" : 50
+      },
+      {
+        "ms" : 101.334458,
+        "query" : "p/s",
+        "rows" : 50
+      },
+      {
+        "ms" : 100.748583,
+        "query" : "s/",
+        "rows" : 50
+      },
+      {
+        "ms" : 134.59804199999999,
+        "query" : "s/r",
+        "rows" : 50
+      },
+      {
+        "ms" : 63.056167000000002,
+        "query" : "zzqv/",
+        "rows" : 1
+      },
+      {
+        "ms" : 266.91995800000001,
+        "query" : "project/",
+        "rows" : 50
+      },
+      {
+        "ms" : 267.044083,
+        "query" : "project//",
+        "rows" : 50
+      },
+      {
+        "ms" : 206.443791,
+        "query" : "project//s",
+        "rows" : 50
+      },
+      {
+        "ms" : 139.78491600000001,
+        "query" : "project//so",
+        "rows" : 50
+      },
+      {
+        "ms" : 82.359499999999997,
+        "query" : "project//sou",
+        "rows" : 50
+      },
+      {
+        "ms" : 84.895124999999993,
+        "query" : "project//sour",
+        "rows" : 50
+      },
+      {
+        "ms" : 92.471625000000003,
+        "query" : "project//sourc",
+        "rows" : 50
+      },
+      {
+        "ms" : 99.345917,
+        "query" : "project//source",
+        "rows" : 50
+      },
+      {
+        "ms" : 106.47737499999999,
+        "query" : "project//sources",
+        "rows" : 50
+      }
+    ],
+    "samples" : 63,
+    "statistics" : {
+      "max_ms" : 268.94008300000002,
+      "median_ms" : 92.471625000000003,
+      "p95_ms" : 267.044083
+    }
+  },
+  "preparation_includes" : "SearchIndex construction only; synthetic corpus generation measured separately",
+  "preparation_ms" : 496.65520900000001,
+  "result_limit" : 50,
+  "rounds" : 1,
+  "schema" : 1,
+  "scope" : "single-threaded core only; includes selection and highlights; excludes UI, data discovery and query parsing",
+  "seed_hex" : "4170706172617465",
+  "size" : 200000,
+  "usage_lambda" : 0.5,
+  "warmup_queries" : 5
+}

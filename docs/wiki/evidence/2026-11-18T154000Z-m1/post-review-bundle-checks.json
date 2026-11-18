@@ -1,0 +1,35 @@
+{
+  "app_binary_sha256": "382674a4ac53d64cd2f588828adb39fe0d4f5a133e46f90719c72e06d1cf5d1a",
+  "app_binary_unchanged": false,
+  "architecture": "arm64",
+  "bundle_files": [
+    "Contents/Info.plist",
+    "Contents/MacOS/Apparate",
+    "Contents/Resources/THIRD_PARTY_NOTICES.txt",
+    "Contents/_CodeSignature/CodeResources"
+  ],
+  "changed_inputs": [
+    "build.sh"
+  ],
+  "dependencies": "build/Apparate.app/Contents/MacOS/Apparate:\n\t/usr/lib/libsqlite3.dylib (compatibility version 9.0.0, current version 408.0.0)\n\t/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation (compatibility version 300.0.0, current version 5027.1.8)\n\t/usr/lib/libobjc.A.dylib (compatibility version 1.0.0, current version 228.0.0)\n\t/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1359.40.3)\n\t/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit (compatibility version 45.0.0, current version 2775.20.133)\n\t/usr/lib/swift/libswiftCore.dylib (compatibility version 0.0.0, current version 0.0.0)\n\t/usr/lib/swift/libswiftCoreFoundation.dylib (compatibility version 1.0.0, current version 120.100.0, weak)\n\t/usr/lib/swift/libswiftCoreImage.dylib (compatibility version 1.0.0, current version 3.0.0, weak)\n\t/usr/lib/swift/libswiftDarwin.dylib (compatibility version 1.0.0, current version 428.40.1)\n\t/usr/lib/swift/libswiftDispatch.dylib (compatibility version 1.0.0, current version 1605.40.4)\n\t/usr/lib/swift/libswiftIOKit.dylib (compatibility version 1.0.0, current version 1.0.0, weak)\n\t/usr/lib/swift/libswiftMetal.dylib (compatibility version 1.0.0, current version 383.1.0, weak)\n\t/usr/lib/swift/libswiftOSLog.dylib (compatibility version 1.0.0, current version 10.0.0, weak)\n\t/usr/lib/swift/libswiftObjectiveC.dylib (compatibility version 1.0.0, current version 973.1.0, weak)\n\t/usr/lib/swift/libswiftQuartzCore.dylib (compatibility version 1.0.0, current version 5.0.0, weak)\n\t/usr/lib/swift/libswiftSpatial.dylib (compatibility version 1.0.0, current version 1.0.0, weak)\n\t/usr/lib/swift/libswiftSynchronization.dylib (compatibility version 0.0.0, current version 0.0.0)\n\t/usr/lib/swift/libswiftUniformTypeIdentifiers.dylib (compatibility version 1.0.0, current version 917.1.12, weak)\n\t/usr/lib/swift/libswiftXPC.dylib (compatibility version 1.0.0, current version 167.0.2, weak)\n\t/usr/lib/swift/libswift_Builtin_float.dylib (compatibility version 0.0.0, current version 0.0.0, weak)\n\t/usr/lib/swift/libswift_Concurrency.dylib (compatibility version 0.0.0, current version 0.0.0)\n\t/usr/lib/swift/libswift_DarwinFoundation1.dylib (compatibility version 1.0.0, current version 428.40.1)\n\t/usr/lib/swift/libswiftos.dylib (compatibility version 1.0.0, current version 1090.40.3, weak)\n\t/usr/lib/swift/libswiftsimd.dylib (compatibility version 1.0.0, current version 25.0.0, weak)",
+  "fingerprint_note": "App relinked during build; new hash recorded and isolated startup rechecked. Core/test inputs and release test binary are unchanged.",
+  "plist": {
+    "CFBundleExecutable": "Apparate",
+    "CFBundleIdentifier": "local.apparate",
+    "CFBundleName": "Apparate",
+    "CFBundlePackageType": "APPL",
+    "CFBundleShortVersionString": "0.1.0",
+    "CFBundleVersion": "0.1.0",
+    "LSMinimumSystemVersion": "27.0",
+    "LSUIElement": true
+  },
+  "requirement": "designated => identifier \"local.apparate\"\nExecutable=<project>/build/Apparate.app/Contents/MacOS/Apparate",
+  "result": "Passed",
+  "script_syntax": "",
+  "signature": "",
+  "source_manifest_sha256": "5cc7eb8a21e1abc358c55c86a48021ae1b1e33cade22a8762911ca7f8afc65fc",
+  "stale_resource_absent_after_build": true,
+  "stale_resource_created_before_build": true,
+  "tests_binary_sha256": "48e5f63d3f3d30cc183b384559e35a508e0c48d7dc4caf85dc8b44fde9a116e7",
+  "tests_binary_unchanged": true
+}
