@@ -19,13 +19,13 @@ codesign -d -r- build/Apparate.app
 
 Expected: identifier `local.apparate`, version `0.1.0`, minimum system `27.0`, arm64 only, `LSUIElement` true, designated requirement `identifier "local.apparate"`. The bundle includes the three folder-purpose strings and fzy notice. `build.sh` removes the old bundle after successful compilation and before assembly. It signs/verifies but never launches or installs the app.
 
-Read-only git status/diff/log are authorized in this project. M3’s commit waits for independent review. The ignore oracle may initialize Git only inside its disposable fixture directories; no project git mutation is part of verification. Each run's input manifest identifies its package, build, source and test files. The current M3 manifest is `docs/wiki/evidence/2026-11-18T181500Z-m3/post-review/source-manifest.json`. Check it before relying on that run:
+Read-only git status/diff/log are authorized in this project. M3 was reviewed and committed as `ef9f683`; its catalog follow-up was separately authorized for implementation and commit. The ignore oracle may initialize Git only inside its disposable fixture directories; no project git mutation is part of verification. Each run's input manifest identifies its package, build, source and test files. The catalog follow-up manifest is `docs/wiki/evidence/2026-11-18T191222Z-catalog/source-manifest.json`. Check it before relying on that run:
 
 ```sh
 python3 - <<'PY'
 import hashlib, json
 from pathlib import Path
-manifest = json.loads(Path('docs/wiki/evidence/2026-11-18T181500Z-m3/post-review/source-manifest.json').read_text())
+manifest = json.loads(Path('docs/wiki/evidence/2026-11-18T191222Z-catalog/source-manifest.json').read_text())
 changed = [name for name, expected in manifest.items()
            if not Path(name).is_file() or hashlib.sha256(Path(name).read_bytes()).hexdigest() != expected]
 assert not changed, 'Inputs differ: ' + ', '.join(changed)
@@ -33,7 +33,7 @@ print('Source manifest matches')
 PY
 ```
 
-M1 and M2 records remain immutable history; their reviewed trees are committed separately. Their fingerprints do not describe M3. Never overwrite their evidence with current results.
+M1 and M2 records remain immutable history; their reviewed trees are committed separately. Their fingerprints do not describe M3; M3 fingerprints likewise do not describe the catalog follow-up. Never overwrite their evidence with current results.
 
 ## Core correctness
 
@@ -119,3 +119,17 @@ Run these serially without other build/test/profile jobs. The synthetic reader s
 The Projects mode reads metadata and ignore/app resources only; no user project is modified. The idle mode uses a real temporary directory, waits for initial readiness and settling, then observes 64 quiet seconds. Its mutation latency starts immediately before a fixture write and ends when the controller snapshot contains the entry (10 ms observation resolution). The test process and temporary directories are removed on completion.
 
 For the M3 search-speed review, also run `"$apparate_bin/ApparateCoreTests" --file-comparison`. This reuses M1's generator and complete query lists. The first 240 app/settings names are treated as files, and 7,203 structural directories are included in both representations, for 207,203 identical entries. The actual crawler prepares the file snapshot; `SearchIndex` prepares the flat reference from the same child-batch-before-descent order. Every timed prefix first verifies complete row equality outside timing. Three measurements alternate engine order. The output includes the matched corpus hash, per-query samples and whether file-name p95 is within twice the flat reference. Run the unchanged `--benchmark 200000 --rounds 3` alongside it as the original mixed M1 baseline; do not label its different corpus as the matched comparison. These comparison processes retain both representations and are not memory measurements; use `--file-benchmark synthetic` for load/rebuild footprint.
+
+## Catalog metadata churn
+
+Use the full Core suite above, or `APPARATE_TEST_FILTER='catalog metadata churn' swift run ApparateCoreTests` to isolate the real event regression. It creates one owned bundle, applies xattr-only, timestamp-only and combined touches, waits for actual rescans and asserts zero metadata reads/publications. A later Info.plist edit must publish the new name. The `CATALOG_TOUCH_TRACE` line retains aggregate counts/flags only. Cleanup removes the fixture and stops its watcher.
+
+For the signed application, run these serially, without a concurrent build, test or profile job:
+
+```sh
+python3 Tests/smoke-app.py --file-source fixture --fixture-app --seconds 2
+python3 Tests/smoke-app.py --mode live-readonly --seconds 2 --runs 2
+python3 Tests/smoke-app.py --mode live-readonly --seconds 60
+```
+
+These runs remain hidden; do not add `--show`. The driver seeds a disposable config, installs fake effects/hotkey/access adapters and deletes its temporary home after process exit. Live runs read only the fixed app/settings sources; these commands do not index user folders. Receipts include an observation-window event histogram, reuse/read/publication counters and CPU/footprint. Startup is excluded from the long observation by the existing one-second delay. No app names or event paths are recorded. See the [catalog follow-up run](runs/2026-11-18T191222Z-catalog.md) for interpretation limits.

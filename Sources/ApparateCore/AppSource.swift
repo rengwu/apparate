@@ -5,6 +5,8 @@ public struct AppScan: Sendable {
     public let entries: [CatalogEntry]
     public let watchPaths: [String]
     public let skippedBundles: Int
+    public let metadataReads: Int
+    public let reusedBundles: Int
 }
 
 public enum AppSource {
@@ -17,7 +19,14 @@ public enum AppSource {
 
     public static func scan(roots: [URL] = defaultRoots, additionalApps: [URL] = [finder],
                             languages: [String] = Locale.preferredLanguages) throws -> AppScan {
+        var cache = AppSourceCache()
+        return try scan(roots: roots, additionalApps: additionalApps, languages: languages, cache: &cache)
+    }
+    public static func scan(roots: [URL] = defaultRoots, additionalApps: [URL] = [finder],
+                            languages: [String] = Locale.preferredLanguages, cache: inout AppSourceCache) throws -> AppScan {
         var entries: [String: CatalogEntry] = [:], watched = Set<String>(), skipped = 0
+        var seen = Set<String>(), reads = 0, reused = 0
+        var updatedCache = cache
         func app(_ original: URL) {
             let url = original.resolvingSymlinksInPath().standardizedFileURL
             guard url.pathExtension.lowercased() == "app", entries["app:" + url.path] == nil else { return }
@@ -25,9 +34,11 @@ public enum AppSource {
             watched.insert(original.path)
             watched.insert(url.path)
             do {
-                let entry = try bundleEntry(at: original, languages: languages)
+                seen.insert(original.standardizedFileURL.path)
+                let (entry, hit) = try updatedCache.entry(at: original, canonical: url, languages: languages)
+                if hit { reused += 1 } else { reads += 1 }
                 entries[entry.item.id] = entry
-            } catch { skipped += 1 }
+            } catch { skipped += 1; reads += 1 }
         }
         func folder(_ url: URL, nested: Bool) throws {
             let children: [URL]
@@ -48,7 +59,9 @@ public enum AppSource {
             try folder(root, nested: false)
         }
         for url in additionalApps { app(url) }
-        return AppScan(entries: entries.values.sorted { $0.item.id < $1.item.id }, watchPaths: watched.sorted(), skippedBundles: skipped)
+        updatedCache.retain(seen); cache = updatedCache
+        return AppScan(entries: entries.values.sorted { $0.item.id < $1.item.id }, watchPaths: watched.sorted(), skippedBundles: skipped,
+                       metadataReads: reads, reusedBundles: reused)
     }
 
     /// Reads metadata only. Shared by the fixed app folders and file-index package discovery.

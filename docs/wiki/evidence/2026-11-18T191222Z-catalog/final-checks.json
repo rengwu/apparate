@@ -1,0 +1,21 @@
+{
+  "app_and_test_hashes_matched": true,
+  "cleanup": "Driver removed isolated app homes; Core suite removed owned fixtures; no visible profiles or native effects",
+  "document_commands": [
+    "node <jstack>/skills/verify-change/scripts/check-reports.mjs docs/wiki",
+    "node docs/wiki/_build.mjs",
+    "node docs/wiki/_build.mjs --check",
+    "git diff --check"
+  ],
+  "headless_core": true,
+  "no_source_changes_after_final_build": true,
+  "owned_app_processes_remaining": 0,
+  "private_path_scan": "Passed",
+  "private_path_scan_files": 33,
+  "result": "Passed",
+  "safe_hidden_receipts_checked": 4,
+  "source_inputs_matched": 50,
+  "source_manifest_sha256": "5e0ff8ea06ea933ea69f5aa1518cc57d45c5c3b611a0b9b40af3cfe1fa799cab",
+  "tests_debug": 67,
+  "tests_release": 67
+}

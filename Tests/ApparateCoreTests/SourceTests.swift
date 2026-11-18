@@ -1,6 +1,7 @@
 import Foundation
 import ApparateCore
 import Synchronization
+import Darwin
 
 func writePlist(_ value: [String: Any], to url: URL) throws {
     try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
@@ -69,6 +70,143 @@ func waitCalls(_ gate: ScanGate, _ count: Int) async throws {
         let after = try AppSource.scan(roots: [root], additionalApps: [])
         try expect(!after.entries.contains { $0.item.id == localized.item.id })
         try expect(after.entries.count == 4)
+    }
+    await h.test("app cache: metadata touches, localized changes, replacement, aliases and locale changes") {
+        let dir = try temporaryDirectory().resolvingSymlinksInPath(); defer { try? FileManager.default.removeItem(at: dir) }
+        let root = dir.appendingPathComponent("Applications"), app = root.appendingPathComponent("Fixture.app")
+        try bundleFixture(app, info: ["CFBundleName": "Original"], names: ["en": ["CFBundleName": "English"], "fr": ["CFBundleName": "Français"]])
+        var cache = AppSourceCache()
+        func scan(_ languages: [String] = ["fr"]) throws -> AppScan {
+            try AppSource.scan(roots: [root], additionalApps: [], languages: languages, cache: &cache)
+        }
+        let first = try scan(), warm = try scan()
+        try expect(first.metadataReads == 1 && warm.metadataReads == 0 && warm.reusedBundles == 1 && first.entries == warm.entries)
+        for i in 0..<4 {
+            try FileManager.default.setAttributes([.modificationDate: Date().addingTimeInterval(Double(i))], ofItemAtPath: app.path)
+            var value = UInt8(i)
+            try expect(setxattr(app.path, "com.apparate.fixture", &value, 1, 0, 0) == 0)
+            let touched = try scan()
+            try expect(touched.metadataReads == 0 && touched.reusedBundles == 1 && touched.entries == first.entries)
+        }
+        let strings = app.appendingPathComponent("Contents/Resources/fr.lproj/InfoPlist.strings")
+        let oldDate = try FileManager.default.attributesOfItem(atPath: strings.path)[.modificationDate]!
+        try writePlist(["CFBundleName": "Nouveau"], to: strings)
+        try FileManager.default.setAttributes([.modificationDate: oldDate], ofItemAtPath: strings.path)
+        let edited = try scan()
+        try expect(edited.metadataReads == 1 && edited.entries.first?.item.name == "Nouveau")
+        let english = try scan(["en"])
+        try expect(english.metadataReads == 1 && english.entries.first?.item.name == "English")
+        let japaneseFallback = try scan(["ja"])
+        try expect(japaneseFallback.entries.first?.item.name == "English")
+        try writePlist(["CFBundleName": "日本語"], to: app.appendingPathComponent("Contents/Resources/ja.lproj/InfoPlist.strings"))
+        let added = try scan(["ja"])
+        try expect(added.metadataReads == 1 && added.entries.first?.item.name == "日本語")
+        try FileManager.default.removeItem(at: app.appendingPathComponent("Contents/Resources/ja.lproj"))
+        let removed = try scan(["ja"])
+        try expect(removed.metadataReads == 1 && removed.entries.first?.item.name == "English")
+        let plist = app.appendingPathComponent("Contents/Info.plist")
+        try Data("broken".utf8).write(to: plist)
+        let malformed = try scan()
+        try expect(malformed.entries.isEmpty && malformed.skippedBundles == 1 && malformed.metadataReads == 1)
+        try writePlist(["CFBundleName": "Recovered"], to: plist)
+        let repaired = try scan()
+        try expect(repaired.metadataReads == 1 && repaired.entries.first?.item.alternateNames.contains("Recovered") == true)
+        // Replace the whole bundle with preserved resource attributes.
+        let copy = dir.appendingPathComponent("Replacement.app")
+        try FileManager.default.copyItem(at: app, to: copy)
+        try FileManager.default.removeItem(at: app)
+        try FileManager.default.moveItem(at: copy, to: app)
+        try expect(try scan().metadataReads == 1)
+        let target = try bundleFixture(dir.appendingPathComponent("Outside/Target.app"), info: ["CFBundleName": "Target"])
+        try FileManager.default.removeItem(at: app)
+        try FileManager.default.createSymbolicLink(at: app, withDestinationURL: target)
+        let linked = try scan()
+        try expect(linked.metadataReads == 1 && linked.entries.first?.item.name == "Target" && linked.entries.first?.item.alternateNames == ["Fixture"])
+        try expect(try scan().reusedBundles == 1)
+        try FileManager.default.removeItem(at: app)
+        try expect(try scan().entries.isEmpty)
+        try FileManager.default.createSymbolicLink(at: app, withDestinationURL: target)
+        try expect(try scan().metadataReads == 1, "Removed bundles must not remain cached")
+    }
+    await h.test("app cache: selected localization fast path and malformed fallback dependencies") {
+        let dir = try temporaryDirectory(); defer { try? FileManager.default.removeItem(at: dir) }
+        let app = try bundleFixture(dir.appendingPathComponent("Fixture.app"), info: ["CFBundleName": "Baseline"], names: ["fr": [:], "en": ["CFBundleName": "English"]])
+        let selected = app.appendingPathComponent("Contents/Resources/fr.lproj/InfoPlist.strings")
+        let other = app.appendingPathComponent("Contents/Resources/en.lproj/InfoPlist.strings")
+        var cache = AppSourceCache()
+        func scan() throws -> AppScan { try AppSource.scan(roots: [], additionalApps: [app], languages: ["fr"], cache: &cache) }
+        let first = try scan()
+        try expect(first.entries.first?.item.name == "Baseline")
+        try writePlist(["CFBundleName": "Changed English"], to: other)
+        let unused = try scan()
+        try expect(unused.metadataReads == 0 && unused.entries == first.entries, "A valid empty selected dictionary uses Info.plist, not another translation")
+        try Data("malformed".utf8).write(to: selected)
+        let fallback = try scan()
+        try expect(fallback.metadataReads == 1 && fallback.entries == [try AppSource.bundleEntry(at: app, languages: ["fr"])])
+        try expect(try scan().reusedBundles == 1)
+        try writePlist(["CFBundleName": "Another English"], to: other)
+        try expect(try scan().metadataReads == 1, "Fallback must observe other localization resources")
+        try writePlist(["CFBundleName": "Français"], to: selected)
+        let repaired = try scan()
+        try expect(repaired.metadataReads == 1 && repaired.entries.first?.item.name == "Français")
+    }
+    await h.test("catalog: unchanged fresh snapshots do not publish; changed targets still publish") {
+        let watcher = WatcherFake(), gate = ScanGate()
+        let controller = CatalogController(paths: [], watcher: watcher, loader: { try await gate.load() })
+        var publications = 0; controller.onChange = { _ in publications += 1 }
+        controller.start(); defer { controller.stop() }
+        try await waitCalls(gate, 1); await gate.finish(1, try loadFixture("Stable"))
+        try await eventually { publications == 1 }
+        controller.removeMissing("absent")
+        try expect(publications == 1)
+        for call in 2...4 {
+            watcher.send(); try await waitCalls(gate, call)
+            await gate.finish(call, try loadFixture("Stable"))
+            try await eventually { controller.completedScans == call }
+            try expect(publications == 1)
+        }
+        watcher.send(); try await waitCalls(gate, 5)
+        let changed = entryFixture("Stable", target: .application(URL(fileURLWithPath: "/fixture/replaced.app")))
+        await gate.finish(5, try CatalogLoad(snapshot: CatalogSnapshot(entries: [changed]), watchPaths: []))
+        try await eventually { publications == 2 }
+        try expect(controller.snapshot?.entries[changed.item.id] == changed)
+    }
+    await h.test("catalog metadata churn: real directory events rescan with reuse and zero publications") {
+        let dir = try temporaryDirectory().resolvingSymlinksInPath(); defer { try? FileManager.default.removeItem(at: dir) }
+        let root = dir.appendingPathComponent("Applications")
+        let app = try bundleFixture(root.appendingPathComponent("Fixture.app"), info: ["CFBundleName": "Before"])
+        let cache = Mutex(AppSourceCache())
+        let controller = CatalogController(paths: [root.path], loader: {
+            try await Task.detached {
+                let scan = try cache.withLock { try AppSource.scan(roots: [root], additionalApps: [], cache: &$0) }
+                var metrics = CatalogMetrics(); metrics.appMetadataReads = scan.metadataReads; metrics.reusedApps = scan.reusedBundles
+                return try CatalogLoad(snapshot: CatalogSnapshot(entries: scan.entries), watchPaths: scan.watchPaths, metrics: metrics)
+            }.value
+        })
+        var publications = 0; controller.onChange = { _ in publications += 1 }
+        controller.start(); defer { controller.stop() }
+        try await eventually({ controller.snapshot != nil }, timeout: 6)
+        try await Task.sleep(for: .milliseconds(500))
+        let initialPublications = publications, reads = controller.metadataReads, trace = controller.watchDiagnostics
+        for i in 0..<3 {
+            let scans = controller.completedScans
+            var value = UInt8(i)
+            if i != 1 { try expect(setxattr(app.path, "com.apparate.fixture", &value, 1, 0, 0) == 0) }
+            if i != 0 { try FileManager.default.setAttributes([.modificationDate: Date().addingTimeInterval(Double(i))], ofItemAtPath: app.path) }
+            try await eventually({ controller.completedScans > scans }, timeout: 6)
+            try expect(publications == initialPublications && controller.metadataReads == reads && controller.metrics.reusedApps == 1)
+        }
+        let events = controller.watchDiagnostics.since(trace)
+        try expect(events.relevantEvents > 0 && events.bundleEvents + events.rootEvents > 0)
+        // This trace contains counts and flags only, including for the owned fixture.
+        let flags = Dictionary(uniqueKeysWithValues: events.flags.map { (String(format: "0x%08x", $0.key), $0.value) })
+        let data = try JSONSerialization.data(withJSONObject: ["batches": events.batches, "events": events.events,
+            "bundle_events": events.bundleEvents, "root_events": events.rootEvents, "flags": flags,
+            "metadata_reads": controller.metadataReads - reads, "publications": publications - initialPublications], options: [.sortedKeys])
+        print("CATALOG_TOUCH_TRACE " + String(decoding: data, as: UTF8.self))
+        try bundleFixture(app, info: ["CFBundleName": "After"])
+        try await eventually({ controller.snapshot?.entries.values.first?.item.name == "After" }, timeout: 6)
+        try expect(publications == initialPublications + 1 && controller.metadataReads > reads)
     }
     await h.test("settings: one matched locale, English fallback, duplicate keywords and malformed records") {
         let dir = try temporaryDirectory(); defer { try? FileManager.default.removeItem(at: dir) }

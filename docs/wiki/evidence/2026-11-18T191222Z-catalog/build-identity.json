@@ -1,0 +1,27 @@
+{
+  "app_sha256": "aa57be024164fb760c1c1fe8d0f18ae0f3b397ff295943cce4d065e1fb41e0de",
+  "architecture": "arm64",
+  "base_commit": "ef9f6834c3d598d664097761ac0ffa7c57de6a19",
+  "bundle_metadata": {
+    "CFBundleExecutable": "Apparate",
+    "CFBundleIdentifier": "local.apparate",
+    "CFBundleName": "Apparate",
+    "CFBundlePackageType": "APPL",
+    "CFBundleShortVersionString": "0.1.0",
+    "CFBundleVersion": "0.1.0",
+    "LSMinimumSystemVersion": "27.0",
+    "LSUIElement": true,
+    "NSDesktopFolderUsageDescription": "Apparate searches file and folder names in your Desktop folder.",
+    "NSDocumentsFolderUsageDescription": "Apparate searches file and folder names in your Documents folder.",
+    "NSDownloadsFolderUsageDescription": "Apparate searches file and folder names in your Downloads folder."
+  },
+  "designated_requirement": "designated => identifier \"local.apparate\"\nExecutable=<project>/build/Apparate.app/Contents/MacOS/Apparate",
+  "notices_match": true,
+  "os": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A5368g",
+  "result": "Passed",
+  "sdk": "27.2",
+  "signature_verify": "",
+  "source_manifest_sha256": "5e0ff8ea06ea933ea69f5aa1518cc57d45c5c3b611a0b9b40af3cfe1fa799cab",
+  "swift": "Apple Swift version 6.4.2 (swiftlang-6.4.2.1.9 clang-2100.4.1.1)\nTarget: arm64-apple-macosx27.0.0\nswift-driver version: 1.168.6",
+  "test_binary_sha256": "21bc603842cdba5ccdaa2303ae9b5c3842251cb3bbbeb5fc1838bb264f3f610a"
+}

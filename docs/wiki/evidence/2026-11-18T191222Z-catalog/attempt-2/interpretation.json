@@ -1,0 +1,6 @@
+{
+  "result": "Failed",
+  "scope": "Cheaper repeated scans",
+  "correctness": "66 debug/release groups passed; zero metadata loads/publications during two actual live event batches",
+  "limitation": "Reusing precomputed POSIX paths improved warm startup scans (13\u201332 ms), but the latest live event scan was 80.53 ms. Reduce stamps to the actual localized-name dependency where valid; retain conservative all-localization checks for the Bundle fallback."
+}

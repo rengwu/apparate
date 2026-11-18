@@ -1,0 +1,11 @@
+Building for production...
+[3 / 10] ApparateCore
+[5 / 11] ApparateCore
+<project>/Package.swift: ApparateCore: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[9 / 12] ApparateCoreTests-product
+[11 / 13] ApparateCoreTests-product
+<project>/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+<project>/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[13 / 13] ApparateCoreTests-product
+[14 / 15] ApparateCoreTests-product
+Build complete! (23.20 sec)

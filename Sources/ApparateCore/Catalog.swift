@@ -63,6 +63,9 @@ enum BundleData {
     static func language(in resources: URL, preferences: [String]) -> String {
         let available = ((try? FileManager.default.contentsOfDirectory(atPath: resources.path)) ?? [])
             .filter { $0.hasSuffix(".lproj") }.map { String($0.dropLast(6)) }.sorted()
+        return language(available: available, preferences: preferences)
+    }
+    static func language(available: [String], preferences: [String]) -> String {
         // Include an English candidate even if absent, so unmatched preferences never select
         // an arbitrary other translation. A missing English resource is handled by the reader.
         return Bundle.preferredLocalizations(from: Array(Set(available + ["en"])).sorted(), forPreferences: preferences + ["en"]).first ?? "en"

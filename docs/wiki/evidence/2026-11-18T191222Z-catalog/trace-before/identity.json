@@ -1,0 +1,5 @@
+{
+  "app_sha256": "095e1a70825681ce42e8be18ebeb3a5c7216b5ab5246dcc403b9d644cab331a5",
+  "base": "ef9f6834c3d598d664097761ac0ffa7c57de6a19",
+  "changes": "Aggregate watcher counts/flags instrumentation and rejection of retired-stream callbacks by generation; original scan and publication behavior"
+}

@@ -1,0 +1,7 @@
+{
+  "result": "Failed",
+  "scope": "Cheaper repeated scans",
+  "correctness": "66 debug/release groups passed; zero publications and metadata reads on unchanged events",
+  "limitation": "Checking every localization with repeated Foundation URL construction still costs 49\u2013102 ms for a warm 96-app scan; optimization remains necessary",
+  "live_trace": "One batch, two events: one root and one bundle-content event; flags 0x00000000 and 0x00400000. One scan, zero publications."
+}

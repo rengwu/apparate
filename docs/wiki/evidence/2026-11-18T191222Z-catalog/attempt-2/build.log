@@ -1,0 +1,10 @@
+Building for production...
+[2 / 5] Apparate-product
+[4 / 6] Apparate-product
+<project>/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+<project>/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[6 / 6] Apparate-product
+[7 / 8] Apparate-product
+Build complete! (3.22 sec)
+<project>/build/Apparate.app: replacing existing signature
+Built build/Apparate.app (0.1.0, arm64)

@@ -16,6 +16,8 @@ import ApparateCore
     private var readyAt: ContinuousClock.Instant?
     private var readyCPU = 0.0
     private var observationPublications = 0, observationScans = 0, observationFileUpdates = 0
+    private var observationReads = 0, observationReuses = 0, observationSnapshots = 0
+    private var observationWatch = CatalogWatchDiagnostics()
     var shownMS: Double?, commitProxyMS: Double?
     private var captureWritten = false, testStarted = false, reportWritten = false
     init(profile: TestProfile, catalog: CatalogController?, files: FileIndexController?, session: LauncherSession?, panel: PanelController?, access: FolderAccessController?, accessWindow: AccessWindow?, effects: TestEffects?) {
@@ -51,6 +53,10 @@ import ApparateCore
             let observe: @MainActor @Sendable () -> Void = { [weak self] in
                 guard let self else { return }
                 self.readyAt = .now; self.readyCPU = ProcessMetrics.cpuSeconds()
+                self.observationReads = self.catalog?.metadataReads ?? 0
+                self.observationReuses = self.catalog?.reusedApps ?? 0
+                self.observationSnapshots = self.catalog?.reusedSnapshots ?? 0
+                self.observationWatch = self.catalog?.watchDiagnostics ?? CatalogWatchDiagnostics()
                 self.observationFileUpdates = self.files?.metrics.completedUpdates ?? 0
                 self.observationPublications = self.publications; self.observationScans = self.catalog?.completedScans ?? 0
                 DispatchQueue.main.asyncAfter(deadline: .now() + profile.seconds) { [weak self] in self?.finishTest() }
@@ -86,6 +92,18 @@ import ApparateCore
             "timing_trigger": "injected callback entry; no physical/global key event",
             "commit_measurement": "next implicit non-animated transaction completion; commit proxy, not presentation",
             "capture_method": "app-owned view bitmap; vibrancy can differ from on-screen composition"]
+        report["app_metadata_reads"] = metrics.appMetadataReads
+        report["reused_app_bundles"] = metrics.reusedApps
+        report["snapshot_reused"] = metrics.snapshotReused
+        report["settings_memory_hit"] = metrics.settingsMemoryHit
+        report["observation_app_metadata_reads"] = (catalog?.metadataReads ?? 0) - observationReads
+        report["observation_reused_app_bundles"] = (catalog?.reusedApps ?? 0) - observationReuses
+        report["observation_reused_snapshots"] = (catalog?.reusedSnapshots ?? 0) - observationSnapshots
+        let events = (catalog?.watchDiagnostics ?? CatalogWatchDiagnostics()).since(observationWatch)
+        report["catalog_events"] = ["batches": events.batches, "events": events.events, "relevant_events": events.relevantEvents,
+            "reset_batches": events.resetBatches, "creation_checks": events.creationChecks,
+            "root_events": events.rootEvents, "bundle_events": events.bundleEvents, "bundle_content_events": events.bundleContentEvents,
+            "flags": Dictionary(uniqueKeysWithValues: events.flags.map { (String(format: "0x%08x", $0.key), $0.value) })]
         report["fake_application_opens"] = testEffects?.applicationOpens ?? 0
         report["fake_url_opens"] = testEffects?.urlOpens ?? 0
         report["file_unavailable_roots"] = files?.snapshot?.roots.filter { $0.status != .indexed }.count ?? 0

@@ -33,6 +33,8 @@ A minimal, very fast launcher for macOS. Planning notes, research, decisions, an
 - [M2 supervised checks](verification/runs/2026-11-18T164001Z-m2-supervised.md) — native effects, permissions, global keys and IME; Untested, required before M5.
 - [M3 automated verification](verification/runs/2026-11-18T181500Z-m3.md) — 63 passing groups and the verified search-speed fix; memory/end-to-end limits recorded; independent recheck passed.
 
+- [Catalog follow-up](verification/runs/2026-11-18T191222Z-catalog.md) — unchanged metadata reuse, event traces and publication checks.
+
 ## Research
 
 Claude and Codex researched the whole topic independently, at the user's request, and then compared conclusions.

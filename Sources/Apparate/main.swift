@@ -83,9 +83,8 @@ import ApparateCore
                 })
             } else {
                 let paths = AppSource.defaultRoots.map(\.path) + [AppSource.finder.path]
-                catalog = CatalogController(paths: paths, loader: {
-                    try await Task.detached(priority: .utility) { try CatalogLoad.system(cacheDirectory: directory) }.value
-                })
+                let source = SystemCatalogSource(cacheDirectory: directory)
+                catalog = CatalogController(paths: paths, loader: { try await source.load() })
             }
             let fileStore = try FileIndexStore(directory: directory)
             let fileController = FileIndexController(config: store.current, store: fileStore,
