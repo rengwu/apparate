@@ -1,0 +1,19 @@
+{
+  "result": "Passed",
+  "checked_at_utc": "2026-11-18T16:59:56.356578+00:00",
+  "source_manifest_matches": true,
+  "app_and_test_binary_hashes_match": true,
+  "core_has_no_appkit": true,
+  "debug_release_groups": 40,
+  "safe_receipts_checked": 9,
+  "quiet_observation_verified": true,
+  "private_path_scan_passed": true,
+  "visual_checks": [
+    "Populated panel: selected Terminal, three rows and path-action footer readable",
+    "Empty panel: placeholder and Close footer, no stray result text",
+    "Explicit settings miss: No results and Close footer readable",
+    "Explicit web: Unicode/special characters and web action row readable",
+    "Access: purpose text, three outcomes and Allow folder access button readable"
+  ],
+  "capture_limitation": "App-owned views; native global input and window-server composition not certified"
+}

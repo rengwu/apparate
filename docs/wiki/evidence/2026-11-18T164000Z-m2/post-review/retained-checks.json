@@ -1,0 +1,16 @@
+{
+  "result": "Passed",
+  "scope": "Previously completed UI, error-routing and watcher checks; final resource-precedence change does not alter these inputs",
+  "unchanged_sources": [
+    "Sources/Apparate/main.swift",
+    "Sources/Apparate/PanelController.swift",
+    "Sources/Apparate/AccessWindow.swift",
+    "Sources/ApparateCore/AppSource.swift",
+    "Sources/ApparateCore/CatalogController.swift",
+    "Sources/ApparateCore/PanelModel.swift"
+  ],
+  "visual_evidence": "before-resource-order/",
+  "routing_audit": "before-resource-order/routing-audit.json",
+  "repeated_watch_tests": "attempt-1/watch-repeated.log",
+  "final_core_tests": "tests-release.log"
+}

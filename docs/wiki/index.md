@@ -1,6 +1,6 @@
 ---
 title: Apparate
-updated: 2026-11-18
+updated: 2026-11-19
 ---
 # Apparate
 
@@ -16,12 +16,15 @@ A minimal, very fast launcher for macOS. Planning notes, research, decisions, an
 
 - [Build guides](build/index.md) — Claude's guide for each milestone, which Codex builds from.
 - [M1 guide](build/m1-foundation.md) — foundation, config, matching and ranking.
+- [M2 guide](build/m2-sources-actions-panel.md) — apps, settings items, actions, panel and access checks.
 
 ## Features and verification
 
-- [Feature map](features/index.md) — search and config behavior, entry points and recipes.
+- [Feature map](features/index.md) — implemented behavior, entry points and repeatable recipes.
 - [Verification setup](verification/setup.md) — isolated builds, tests and measurements.
 - [M1 verification](verification/runs/2026-11-18T154000Z-m1.md) — outcomes and evidence for the foundation build.
+- [M2 automated verification](verification/runs/2026-11-18T164000Z-m2.md) — 43 passing groups after five review fixes; corrected measurements and recheck pending.
+- [M2 supervised checks](verification/runs/2026-11-18T164001Z-m2-supervised.md) — native effects, permissions, global keys and IME; Untested, required before M5.
 
 ## Research
 

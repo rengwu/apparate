@@ -1,0 +1,12 @@
+{
+  "scope": "Static mechanism checks; no native command executed",
+  "sdk": "MacOSX27.2.sdk",
+  "lock_export_found": true,
+  "sleep_declarations_found": true,
+  "native_code_compiled": true,
+  "exclusive_hotkey_option_present": true,
+  "restart_mechanism": "Apple event: system process, core event class, kAERestart; reply checked",
+  "runtime_commands": "Untested; fake executor only",
+  "runtime_global_hotkey": "Untested; fake registrar only",
+  "result": "Passed"
+}

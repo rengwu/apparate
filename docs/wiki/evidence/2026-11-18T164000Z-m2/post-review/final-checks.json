@@ -1,0 +1,16 @@
+{
+  "result": "Passed",
+  "checked_at_utc": "2026-11-18T17:27:12.748301+00:00",
+  "source_manifest_matches": true,
+  "binary_hashes_match": true,
+  "debug_release_groups": 43,
+  "date_time_panes": 1,
+  "date_time_records": 4,
+  "legacy_date_time_targets": 0,
+  "quiet_observation_seconds": 63.999672708,
+  "quiet_scans": 0,
+  "quiet_publications": 0,
+  "private_path_scan_passed": true,
+  "retained_ui_checks": "before-resource-order; unchanged panel, app wiring and model fingerprints verified in retained-checks.json",
+  "native_effects": "Not executed; remain supervised"
+}

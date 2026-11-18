@@ -1,0 +1,8 @@
+{
+  "scope": "Read-only public system resource audit; no URLs opened",
+  "english_extension_terms": 3,
+  "english_legacy_terms": 3,
+  "resources_equal": true,
+  "separate_legacy_catalog_removed": true,
+  "expected_duplicate_rows_removed": 4
+}

@@ -1,0 +1,44 @@
+PASS ranking: golden queries, tiers and kind order
+PASS ranking: keyword tier, split keywords and word prefixes
+PASS ranking: deterministic ties, duplicate names and bounded top 50
+PASS scopes and fallback: explicit prefixes, reconfiguration and whitespace
+PASS path mode: ordered segments, roots, trailing and repeated separators
+PASS cancellation: no partial results
+PASS top selection: tier pruning agrees with exhaustive results across scopes and paths
+PASS Unicode: normalization, expansion and displayed-character highlights
+PASS matching: no inherited name or query length caps
+PASS mask property: 1200 random Unicode subsequences survive filtering
+PASS scoring and traceback: exhaustive alignment oracle on 300 short names
+PASS config: first launch, defaults, missing keys and deterministic save
+PASS config: semantic validation collects all errors; wrong types reject
+PASS config: invalid file and newer version preserved; last valid survives
+PASS config watches: in-place write, atomic replacement, rearm and error recovery
+PASS usage: finite scores, bounded boost and tier/kind boundaries
+PASS usage: injected decay clock, snapshots and persistence after reopening
+PASS usage: 2000-record bound and deterministic eviction
+PASS generations: slow work and a query burst publish only the newest
+PASS generations: invalidation after scoring and before owner delivery
+PASS apps: localized names, alternates, canonical links, one-level nesting and removal
+PASS settings: one matched locale, English fallback, duplicate keywords and malformed records
+PASS settings: pane overrides and modern date/time target with legacy resources
+PASS settings cache: persisted round trip, OS/language/schema invalidation and corrupt/write-failure fallback
+PASS catalog: watch before scan, changes mid-scan, coalescing, failed-read retention and recovery
+PASS catalog: newly discovered targets are watched before verifying scan; failed watch is visible
+PASS missing app root: no recursive parent watch or sibling-churn scans, creation switches to FSEvents
+PASS FSEvents: fixture app creation, external alias target edit and removal refresh live snapshots
+PASS URLs: exact query-value encoding and settings links
+PASS actions: typed dispatch for every kind, primary-open usage only
+PASS actions: failure vs missing, no failed usage, history write errors do not undo success
+PASS hotkey: unchanged no-op, failed replacement retains old key, successful replacement before removal
+PASS panel: selection follows ID, falls back and rejects stale results
+PASS panel: pending Return/reveal/copy acts only on current generation; typing and movement cancel
+PASS panel: Restart requires two fresh Returns, bound to selection and result generation
+PASS panel: marked text owns Return/arrows and clears queued actions and Restart arming
+PASS session: initial catalog readiness holds immediate Return instead of opening web fallback
+PASS session: one usage read per showing across keystrokes, refresh after accepted open
+PASS session: a stale showing's usage read cannot overwrite a newer showing or queued Return
+PASS session: source/config changes cancel queued actions while sharing the showing's usage read
+PASS session: usage read failure reports once per showing and keeps typing usable
+PASS access: no launch probes, explicit sequential check, saved hints and duplicate click guard
+PASS access: other errors stay distinct and persistence failure is reported
+RESULT 43 passed; 0 failed

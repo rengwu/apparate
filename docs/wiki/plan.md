@@ -1,7 +1,7 @@
 ---
 title: Implementation plan
 section: Planning
-updated: 2026-11-18
+updated: 2026-11-19
 status: Approved
 ---
 # Implementation plan
@@ -304,7 +304,7 @@ Following jstack conventions:
 | Milestone | Guide | Built | Reviewed | Commit |
 | --- | --- | --- | --- | --- |
 | M1 Foundation, matching and ranking | [written](build/m1-foundation.md) | [yes](verification/runs/2026-11-18T154000Z-m1.md) | [passed](build/m1-foundation.md#review); [fix verified](verification/runs/2026-11-18T154000Z-m1.md#post-review-fix) | waiting for git |
-| M2 Apps, settings, actions, first panel | draft | — | — | — |
+| M2 Apps, settings, actions, first panel | [written](build/m2-sources-actions-panel.md) | [automated checks passed](verification/runs/2026-11-18T164000Z-m2.md); [supervised pending](verification/runs/2026-11-18T164001Z-m2-supervised.md) | [passed after five fixes](build/m2-sources-actions-panel.md#review) | on hold |
 | M3 File index | — | — | — | — |
 | M4 Launcher panel | — | — | — | — |
 | M5 Settings, menu bar, first run | — | — | — | — |

@@ -25,6 +25,9 @@ cat > "$bundle/Contents/Info.plist" <<EOF
 <key>CFBundleVersion</key><string>$version</string>
 <key>LSMinimumSystemVersion</key><string>27.0</string>
 <key>LSUIElement</key><true/>
+<key>NSDesktopFolderUsageDescription</key><string>Apparate searches file and folder names in your Desktop folder.</string>
+<key>NSDocumentsFolderUsageDescription</key><string>Apparate searches file and folder names in your Documents folder.</string>
+<key>NSDownloadsFolderUsageDescription</key><string>Apparate searches file and folder names in your Downloads folder.</string>
 </dict></plist>
 EOF
 codesign --force --deep --sign - --requirements '=designated => identifier "local.apparate"' "$bundle"

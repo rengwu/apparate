@@ -1,11 +1,11 @@
 ---
 title: Verification setup
 section: Verification
-updated: 2026-11-18
+updated: 2026-11-19
 ---
 # Verification setup
 
-Run these commands from the Apparate project root. M1 needs macOS 27 on arm64, Swift 6.4.2 Command Line Tools, Python 3 for the app-stub smoke helper, and Node.js 22+ for the wiki. No package downloads, account, network service or full Xcode installation are needed. The tests use an executable harness because XCTest and Swift Testing are unavailable in the checked Command Line Tools environment.
+Run from the Apparate project root on macOS 27 arm64 with Swift 6.4.2 Command Line Tools, Python 3 and Node.js 22+. There are no downloaded packages or runtime services. The executable Core harness is used because XCTest and Swift Testing are unavailable in this Command Line Tools installation.
 
 ## Build and identity
 
@@ -17,15 +17,15 @@ codesign --verify --deep --strict build/Apparate.app
 codesign -d -r- build/Apparate.app
 ```
 
-The bundle must identify as `local.apparate`, version `0.1.0`, minimum system `27.0`, arm64 only, with `LSUIElement` true and designated requirement `identifier "local.apparate"`. `build.sh` validates VERSION, builds release arm64, removes the old bundle before assembly, includes the fzy notice, signs ad hoc and verifies the bundle. It does not install or launch it.
+Expected: identifier `local.apparate`, version `0.1.0`, minimum system `27.0`, arm64 only, `LSUIElement` true, designated requirement `identifier "local.apparate"`. The bundle includes the three folder-purpose strings and fzy notice. `build.sh` removes the old bundle after successful compilation and before assembly. It signs/verifies but never launches or installs the app.
 
-There is no git revision for the initial M1 handoff. The [run](runs/2026-11-18T154000Z-m1.md) links a SHA-256 manifest of every package, build, source and test input. Verify it before treating the recorded outcome as evidence for a checkout:
+No git command is part of verification; commits remain on hold. Each run's input manifest identifies its package, build, source and test files. The current M2 manifest is `docs/wiki/evidence/2026-11-18T164000Z-m2/post-review/source-manifest.json`. Check it before relying on that run:
 
 ```sh
 python3 - <<'PY'
 import hashlib, json
 from pathlib import Path
-manifest = json.loads(Path('docs/wiki/evidence/2026-11-18T154000Z-m1/post-review-source-manifest.json').read_text())
+manifest = json.loads(Path('docs/wiki/evidence/2026-11-18T164000Z-m2/post-review/source-manifest.json').read_text())
 changed = [name for name, expected in manifest.items()
            if not Path(name).is_file() or hashlib.sha256(Path(name).read_bytes()).hexdigest() != expected]
 assert not changed, 'Inputs differ: ' + ', '.join(changed)
@@ -33,43 +33,58 @@ print('Source manifest matches')
 PY
 ```
 
-## Correctness and isolation
+Original M2 evidence remains intact; the current inputs and corrected measurements are under its `post-review/` evidence directory. Earlier M1 evidence is immutable history and does not match an M2 tree. Its reviewed tree was separately archived by Claude.
+
+## Core correctness
 
 ```sh
 swift run ApparateCoreTests
 swift build -c release --product ApparateCoreTests
 apparate_bin="$(swift build -c release --show-bin-path)"
 "$apparate_bin/ApparateCoreTests"
-python3 Tests/smoke-app.py
 ```
 
-The harness prints `PASS`/`FAIL` for each group, a final count, and exits nonzero on failure. Fixtures include only synthetic paths and public app names. Every persistence scenario creates a UUID temporary directory and removes it after checking results. It never discovers apps, crawls folders, opens URLs, invokes system actions or reads real launcher data.
+The harness prints each group and a final count, and exits nonzero on failure. `APPARATE_TEST_FILTER=FSEvents` optionally selects groups containing that text for diagnosis; the final run must leave the filter unset. Fixtures use UUID temporary directories and synthetic bundle/config/search data, removed after each check. There is no user-folder crawl, global shortcut registration, native open, clipboard access or system command.
 
-The smoke helper starts only the built bundle executable, with its own temporary `APPARATE_HOME`. Readiness means the process remains alive and version-1 `config.json` appears there. It checks defaults, file contents and the created-file list; it stops only its own process and removes only its own directory. It prints a small JSON receipt without temporary paths or account names. No UI is implemented in this stub. Never run the app against its default data folder for M1 verification.
+M1 coverage remains: matching/ranking/Unicode, config validation and actual vnode replacement events, usage persistence, and coordinated generation races. M2 adds app/settings fixtures, cache invalidation, real fixture-directory FSEvents, typed fake actions, exact URLs, selection/queued actions/Restart/composition, hotkey replacement and sequential access observations. Post-review cases also check one usage read per showing, modern Date & Time targets, invalidation of the old cache and no recursive parent watches or sibling-churn scans. Controlled continuations force asynchronous reads/scans to finish out of order; event tests await observable state.
 
-The config-watch scenario uses real file operations and awaits the store's observed state for up to three seconds. It checks in-place writes, atomic saves, rearming, deletion/recreation, invalid-file recovery and notification settling. The generation tests hold the worker or owner with explicit semaphores/fences; they do not depend on a lucky typing delay.
+## Isolated app profiles
 
-## Release measurements
+**Use the driver for every unattended app run.** APPARATE_HOME by itself isolates persistence, not hotkeys, opens or privacy grants. The driver seeds an alternate shortcut before launch and sets APPARATE_TEST_MODE. The app validates that profile before creating adapters and uses fake actions, a fake global registrar and fake protected-folder probes. Invalid test setup quits before those effects can be installed. Native behavior belongs to the separate [supervised run](runs/2026-11-18T164001Z-m2-supervised.md).
 
-Run after the release build, without concurrent build/test jobs. Each size gets a fresh process:
+```sh
+python3 Tests/smoke-app.py
+python3 Tests/smoke-app.py --show panel --query term --action-open --output /private/tmp/apparate-panel-check
+python3 Tests/smoke-app.py --show setup --output /private/tmp/apparate-setup-check
+python3 Tests/smoke-app.py --mode live-readonly --runs 2 --seconds 2 --output /private/tmp/apparate-cache-check
+python3 Tests/smoke-app.py --mode live-readonly --seconds 60 --output /private/tmp/apparate-idle-check
+```
+
+Default mode is `fixtures`; `--show panel|setup` is allowed only in that mode. Visible checks last two seconds by default, render the app's own view to PNG without Screen Recording permission, and quit. The panel check asserts unchanged actual rows/footer/empty label across three pending edits, and can execute one fake open after capture. The setup check supplies fake Allowed/Denied/Not found outcomes. A bitmap may differ from the screen's composited vibrancy; inspect it without claiming physical input or on-screen latency coverage.
+
+`live-readonly` reads only application metadata and system settings resources. It keeps windows hidden; native effects remain fake. Its receipt exports counts, timings and memory/CPU, never real item names/paths. `--runs 2` relaunches the app using the same isolated cache and requires the second launch’s first load to be a cache hit; earlier receipts appear under `previous_runs`. A disposable settings cache lives inside the test APPARATE_HOME and is removed with it.
+
+Readiness requires a complete catalog, no reported errors and a receipt from the owned process. The driver validates fake registration/action counts, no native effects, optional image existence and nonempty live catalogs. It waits at most the requested duration plus 20 seconds, stops only its owned process if necessary, and removes only its created APPARATE_HOME. `--output` retains the sanitized receipt and optional PNG; remove only those chosen outputs after inspection or retain them as evidence. The production data folder is never used.
+
+## Measurements
+
+Final app measurements run without concurrent builds/tests. The 60-second hidden profile begins CPU accounting at the first complete catalog; CPU is process user+system time divided by elapsed monotonic time, expressed as a percentage of one core. Physical memory is `TASK_VM_INFO.phys_footprint`, not peak allocation. Record catalog publication/scan counts to identify unexpected activity. Record first app/settings scan time and the subsequent verifying scan separately; a fresh cache miss includes parsing and cache writing, a hit includes file read/decode. Do not label a hit as a fresh parse.
+
+The visible fixture profile injects the same callback entry used by the hotkey, measures `makeKeyAndOrderFront` returning, then completion of the next implicit nonanimated Core Animation transaction. Completion is a **commit proxy**, not an exact commit/presentation timestamp. The timing does not include global-key delivery and is not an end-to-end budget pass. M6 owns the on-screen harness.
+
+The unchanged M1 Core benchmark remains available:
 
 ```sh
 apparate_bin="$(swift build -c release --show-bin-path)"
-"$apparate_bin/ApparateCoreTests" --benchmark 20000 --rounds 3 > /private/tmp/apparate-m1-20k.json
-"$apparate_bin/ApparateCoreTests" --benchmark 200000 --rounds 3 > /private/tmp/apparate-m1-200k.json
+"$apparate_bin/ApparateCoreTests" --benchmark 20000 --rounds 3 > /private/tmp/apparate-20k.json
+"$apparate_bin/ApparateCoreTests" --benchmark 200000 --rounds 3 > /private/tmp/apparate-200k.json
 ```
 
-Benchmark corpus version 1 uses seed `4170706172617465` (hex), 120 synthetic apps, 120 synthetic settings and a mix of folders/files under 900 synthetic project names. Names include ASCII, accents, expansions, CJK and emoji. Directory chains repeat; names and IDs remain unique. The JSON includes the corpus SHA-256, full query lists and every timed keystroke. It times complete top-50 selection and displayed-character highlights; result checksums are consumed after timing. It excludes `ParsedQuery` construction, coordinator queue delay, discovery, actions and UI. Internal query folding and matching are included. There are five warmup searches and three repetitions per typed prefix.
-
-Path samples start when the first slash is typed, including trailing slash, common short segments, repeated separators and no-hit paths. Names and paths are summarized separately with median, p95 and maximum. `preparation_ms` is SearchIndex construction only; fixture generation is separate. `phys_footprint` is reported at process baseline, immediately after construction, and after searching. It is process physical footprint, not a Swift allocation count or peak-memory measurement.
-
-Keep the complete JSON in the run's evidence directory, together with sanitized build/test output and a source manifest. Do not claim an end-to-end latency pass from these core-only measurements.
+Its seeded synthetic corpus, query lists, checksums and timing boundary are described in the [M1 run](runs/2026-11-18T154000Z-m1.md#release-measurements). M2 does not change matching/ranking, so its correctness tests are retained without repeating those performance claims.
 
 ## Records and cleanup
 
-The current run lives under `verification/runs/`; linked evidence is under `evidence/<run-id>/`. The test and smoke helpers clean their temporary data automatically. Preserve the bundle, sources and evidence for review. No state-changing git command is part of this procedure; commit only after the independent milestone review and repository authorization.
-
-After editing wiki pages or evidence:
+Runs live in `verification/runs/`, evidence in `evidence/<run-id>/`. Preserve the bundle, reviewed inputs and evidence. Sanitized logs omit account/project-root prefixes. No TCC reset, user-app termination or cleanup of user files is part of verification.
 
 ```sh
 node "$JSTACK/skills/verify-change/scripts/check-reports.mjs" docs/wiki
@@ -77,4 +92,4 @@ node docs/wiki/_build.mjs
 node docs/wiki/_build.mjs --check
 ```
 
-Set `JSTACK` to the reader's own jstack checkout for the metadata checker; it is local tooling, not a product dependency. Wiki checks establish document structure, not product correctness.
+Set `JSTACK` to the reader's jstack checkout. These commands validate document structure, not product behavior.

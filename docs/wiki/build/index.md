@@ -10,6 +10,7 @@ Build guides, one per milestone of the [implementation plan](../plan.md). Claude
 | Milestone | Guide | Status |
 | --- | --- | --- |
 | M1 Foundation, matching and ranking | [M1 guide](m1-foundation.md) | Reviewed: passed; fix verified; commit waits for git |
+| M2 Apps, settings, actions, first panel | [M2 guide](m2-sources-actions-panel.md) | [Built; automated checks passed](../verification/runs/2026-11-18T164000Z-m2.md); [reviewed: passed after five fixes](m2-sources-actions-panel.md#review); supervised checks pending |
 
 ## How a guide is used
 

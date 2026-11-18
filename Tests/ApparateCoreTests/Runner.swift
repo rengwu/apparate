@@ -29,6 +29,7 @@ func search(_ items: [SearchItem], _ text: String, config: AppConfig = AppConfig
 @MainActor final class Harness {
     var passed = 0, failed = 0
     func test(_ name: String, _ body: () async throws -> Void) async {
+        if let filter = ProcessInfo.processInfo.environment["APPARATE_TEST_FILTER"], !name.localizedCaseInsensitiveContains(filter) { return }
         do { try await body(); passed += 1; print("PASS \(name)") }
         catch { failed += 1; print("FAIL \(name): \(error)") }
     }
@@ -47,6 +48,10 @@ func search(_ items: [SearchItem], _ text: String, config: AppConfig = AppConfig
         await configTests(h)
         await usageTests(h)
         await coordinatorTests(h)
+        await sourceTests(h)
+        await actionTests(h)
+        await panelTests(h)
+        await accessTests(h)
         print("RESULT \(h.passed) passed; \(h.failed) failed")
         if h.failed > 0 { exit(1) }
     }

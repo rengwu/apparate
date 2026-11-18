@@ -1,0 +1,18 @@
+missing app root: attempt 1
+PASS missing app root: no recursive parent watch or sibling-churn scans, creation switches to FSEvents
+RESULT 1 passed; 0 failed
+missing app root: attempt 2
+PASS missing app root: no recursive parent watch or sibling-churn scans, creation switches to FSEvents
+RESULT 1 passed; 0 failed
+missing app root: attempt 3
+PASS missing app root: no recursive parent watch or sibling-churn scans, creation switches to FSEvents
+RESULT 1 passed; 0 failed
+FSEvents:: attempt 1
+PASS FSEvents: fixture app creation, external alias target edit and removal refresh live snapshots
+RESULT 1 passed; 0 failed
+FSEvents:: attempt 2
+PASS FSEvents: fixture app creation, external alias target edit and removal refresh live snapshots
+RESULT 1 passed; 0 failed
+FSEvents:: attempt 3
+PASS FSEvents: fixture app creation, external alias target edit and removal refresh live snapshots
+RESULT 1 passed; 0 failed

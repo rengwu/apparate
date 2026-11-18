@@ -1,0 +1,9 @@
+{
+  "result": "Failed",
+  "scope": "Development live-catalog regression check; earlier fixture checks passed but missed this resource case",
+  "observed_settings_count": 156,
+  "observed_malformed_resources": 26,
+  "finding": "Always using a declared legacy pane lost terms for modern extensions that retain an obsolete legacy name. The previous catalog had 734 settings items, including one duplicate Date & Time pane.",
+  "repair": "Use an available declared legacy resource, otherwise fall back to the extension resource; always retain the modern extension target. Add a retired-legacy-name fixture.",
+  "limits": "This directory preserves the development attempt; final evidence lives in the parent post-review directory."
+}

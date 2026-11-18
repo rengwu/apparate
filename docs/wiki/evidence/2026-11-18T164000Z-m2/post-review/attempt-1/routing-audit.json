@@ -1,0 +1,13 @@
+{
+  "scope": "Source audit; no native modal alert or activation executed",
+  "result": "Passed",
+  "modal_calls": [
+    "Failed user action",
+    "Initial hotkey registration failure",
+    "Replacement hotkey registration failure"
+  ],
+  "activation_precedes_alert": true,
+  "background_errors": "Config/catalog/usage/access persistence call logError only",
+  "latest_config_error": "Retained from initial errors and subsequent changes; cleared on valid recovery",
+  "file_level_fsevents_flag_absent": true
+}

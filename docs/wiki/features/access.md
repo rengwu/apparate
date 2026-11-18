@@ -1,0 +1,32 @@
+---
+title: Folder access
+section: Features
+updated: 2026-11-19
+---
+# Folder access
+
+**FEAT-access.** Let the user explicitly check Desktop, Documents and Downloads before M3 file discovery. Basis: [M2 access guide](../build/m2-sources-actions-panel.md#6-access-step) and the accepted no-launch-probe contract. M5 supplies the complete first-run layout and hotkey step.
+
+## Entry points and prerequisites
+
+The Folder Access window appears when config is first created, or with `APPARATE_SHOW=setup`. Its **Allow folder access** button starts `FolderAccessController.check`. Only that explicit request performs protected-folder reads in production. The signed bundle includes the three plain folder usage descriptions. `APPARATE_HOME` redirects app persistence; it does not isolate macOS privacy grants.
+
+## Expected outcomes
+
+Probes read one folder at a time off MainActor, keeping the window responsive. Outcomes distinguish Allowed, Denied, Not found and Could not check. The button is disabled during the sequence and repeated requests cannot overlap. Status changes appear beside each folder.
+
+Observations and dates persist atomically to `access.json`, apart from config. Reopening shows them as **Last check** hints. Loading hints never probes or claims that a previous grant is still valid. Persistence failure is reported. No TCC reset or automatic re-prompt is performed.
+
+## Verification recipe
+
+Follow [setup](../verification/setup.md). Core tests use sequential delayed fake probes to exercise mixed statuses, duplicate requests, persistence/reopening, other errors and save failure. Real probe code reads only synthetic temporary fixtures for allowed, missing and non-directory cases. No protected user folder is read.
+
+`python3 Tests/smoke-app.py --show setup --seconds 2 --output /private/tmp/apparate-access-check` shows a brief fixture window with Allowed/Denied/Not found states, captures its own view and quits. Remove that output after inspection. This exercises display and fake-check wiring without changing privacy decisions.
+
+## Coverage and limitations
+
+Native prompt behavior, denial/retry and grant survival after rebuilding cannot be inferred from fake probes or code signing. The normally launched signed app and actual user decisions are required. See the separate [supervised run](../verification/runs/2026-11-18T164001Z-m2-supervised.md); these recipes are unvalidated and must pass before M5 builds on first run. No file crawl is part of M2.
+
+## Verification history
+
+- [M2 automated verification](../verification/runs/2026-11-18T164000Z-m2.md).
