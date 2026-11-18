@@ -1,0 +1,42 @@
+[
+  {
+    "run": "full-200000-r1",
+    "exit_code": 0
+  },
+  {
+    "run": "pipeline-20000",
+    "exit_code": 0
+  },
+  {
+    "run": "baseline-20000-r1",
+    "exit_code": 0
+  },
+  {
+    "run": "baseline-20000-r2",
+    "exit_code": 0
+  },
+  {
+    "run": "pipeline-200000",
+    "exit_code": 0
+  },
+  {
+    "run": "baseline-200000-r1",
+    "exit_code": 0
+  },
+  {
+    "run": "baseline-200000-r2",
+    "exit_code": 0
+  },
+  {
+    "run": "full-200000-r2",
+    "exit_code": 0
+  },
+  {
+    "run": "full-20000-r1",
+    "exit_code": 0
+  },
+  {
+    "run": "full-20000-r2",
+    "exit_code": 0
+  }
+]

@@ -1,7 +1,7 @@
 import Foundation
 
 public struct FileIndexMetrics: Sendable {
-    public var completedUpdates = 0, publications = 0, listedDirectories = 0, preparedChunks = 0
+    public var completedScans = 0, completedUpdates = 0, publications = 0, listedDirectories = 0, preparedChunks = 0
     public var crawlMS = 0.0, diskReadMS = 0.0, prepareMS = 0.0, saveMS = 0.0
     public var loadedFromDisk = false
     public init() {}
@@ -168,6 +168,7 @@ public struct FileIndexMetrics: Sendable {
                 try Task.checkCancellation()
                 guard let self, self.revision == version, !self.stopped else { return }
                 let crawlMS = durationMS(began.duration(to: .now)), saveStart = ContinuousClock.now
+                self.metrics.completedScans += 1; self.metrics.listedDirectories += result.listedDirectories
                 if !replace && result.changedChunks.isEmpty && result.dirtyPaths == dirty {
                     // Ignored-path churn needs no database write or search publication. A
                     // restart may replay these harmless events from the older disk cursor.
@@ -177,7 +178,7 @@ public struct FileIndexMetrics: Sendable {
                 guard self.revision == version, !self.stopped else { return }
                 self.lastError = nil
                 self.checkpoints = nextCheckpoints; self.dirty = result.dirtyPaths
-                self.metrics.completedUpdates += 1; self.metrics.listedDirectories += result.listedDirectories
+                self.metrics.completedUpdates += 1
                 self.metrics.preparedChunks = result.preparedChunks; self.metrics.crawlMS = crawlMS
                 self.metrics.saveMS = durationMS(saveStart.duration(to: .now))
                 self.publish(result.snapshot); self.task = nil

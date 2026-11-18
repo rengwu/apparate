@@ -1,5 +1,6 @@
 import Foundation
 import ApparateCore
+import ApparateFixtures
 import CoreServices
 import SQLite3
 import Synchronization
@@ -42,6 +43,21 @@ func crawlFixture(_ directory: URL, depth: Int = 10, respect: Bool = true, reade
 }
 
 @MainActor func fileIndexTests(_ h: Harness) async {
+    await h.test("files: unchanged rebuild reuses prepared chunks; real changes retain old snapshot") {
+        let fixture = SyntheticFiles(count: 2_000), folders = [AppConfig.Folder(path: "/Fixture/Projects")]
+        let crawler = FileCrawler(reader: fixture.reader)
+        let first = try await crawler.crawl(folders: folders, respectGitignore: true, access: fixtureAccess)
+        let unchanged = try await crawler.crawl(folders: folders, respectGitignore: true, access: fixtureAccess, previous: first.snapshot)
+        try expect(unchanged.preparedChunks == 0 && unchanged.snapshot.count == 2_000)
+        try expect(ObservationClock.digest(unchanged.snapshot.search(ParsedQuery("readme"))) == ObservationClock.digest(first.snapshot.search(ParsedQuery("readme"))))
+        fixture.change.withLock { $0 = 1 }
+        let changed = try await crawler.crawl(folders: folders, respectGitignore: true, access: fixtureAccess, previous: unchanged.snapshot)
+        try expect(changed.preparedChunks > 0 && changed.preparedChunks < first.preparedChunks)
+        try expect(changed.snapshot.count == 2_001 && changed.snapshot.search(ParsedQuery("new-entry")).count == 1)
+        try expect(first.snapshot.search(ParsedQuery("new-entry")).isEmpty)
+        let stable = try await crawler.crawl(folders: folders, respectGitignore: true, access: fixtureAccess, previous: changed.snapshot)
+        try expect(stable.preparedChunks == 0)
+    }
     await h.test("files: depth, packages, hidden flags, links and duplicate names") {
         let dir = try temporaryDirectory(); defer { try? FileManager.default.removeItem(at: dir) }
         try makeFile(dir, "a/b/deep.txt"); try makeFile(dir, "a/same.txt"); try makeFile(dir, "other/same.txt")
@@ -352,8 +368,9 @@ func crawlFixture(_ directory: URL, depth: Int = 10, respect: Bool = true, reade
         let absent = FixtureFileWatcher(); absent.uuid = nil
         let third = FileIndexController(config: config, store: try FileIndexStore(directory: data), access: fixtureAccess, watcher: absent)
         third.start(); defer { third.stop() }
-        try await eventually({ third.metrics.completedUpdates > 0 }, timeout: 8)
-        try expect(third.metrics.listedDirectories > 0)
+        try await eventually({ third.metrics.completedScans > 0 && !third.isIndexing }, timeout: 8)
+        try expect(third.metrics.listedDirectories > 0 && third.metrics.completedUpdates == 0)
+        try expect(third.snapshot?.contains(path: root.appendingPathComponent("unreported.txt").path) == true)
     }
     await h.test("files: settings status observes start finish config changes and restored time") {
         let dir = try temporaryDirectory(); defer { try? FileManager.default.removeItem(at: dir) }

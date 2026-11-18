@@ -11,6 +11,9 @@ import Darwin
     let performAction: Bool
     let panelCheck: String?
     let settingsCheck: Bool
+    let performance: String?
+    let bareField: Bool
+    let stageProbes: Bool
     let panelCount: Int
     let opaque: Bool, warmUp: Bool
     let waitMS: Int
@@ -40,6 +43,11 @@ import Darwin
         guard mode == "fixtures" || show == nil else { throw SourceError("Owned test renders require fixture sources.") }
         let panelCheck = env["APPARATE_PANEL_CHECK"]
         let settingsCheck = env["APPARATE_SETTINGS_CHECK"] == "1"
+        let performance = env["APPARATE_PERFORMANCE"]
+        guard performance == nil || (["latency", "pipeline", "prepare", "full"].contains(performance!) && show == nil && panelCheck == nil && !settingsCheck && env["APPARATE_TEST_ACTION"] == nil),
+              performance != "latency" && performance != "pipeline" || (mode == "fixtures" && config.folders.isEmpty),
+              performance != "full" && performance != "prepare" || mode == "live-readonly" else { throw SourceError("Invalid hidden performance profile.") }
+
         guard !settingsCheck || (mode == "fixtures" && panelCheck == nil && show == nil && config.folders.isEmpty) else { throw SourceError("Settings checks require an isolated empty fixture config.") }
         let delivery = SearchDelivery(rawValue: env["APPARATE_PANEL_DELIVERY"] ?? "task")
         let count = Int(env["APPARATE_PANEL_COUNT"] ?? "20000") ?? 0
@@ -49,7 +57,7 @@ import Darwin
             throw SourceError("Invalid isolated panel-check configuration.")
         }
         return TestProfile(mode: mode, directory: directory, seconds: min(90, max(1, Double(env["APPARATE_TEST_SECONDS"] ?? "3") ?? 3)),
-                           query: env["APPARATE_TEST_QUERY"] ?? "term", show: show, performAction: env["APPARATE_TEST_ACTION"] == "open", panelCheck: panelCheck, settingsCheck: settingsCheck, panelCount: count,
+                           query: env["APPARATE_TEST_QUERY"] ?? "term", show: show, performAction: env["APPARATE_TEST_ACTION"] == "open", panelCheck: panelCheck, settingsCheck: settingsCheck, performance: performance, bareField: env["APPARATE_BARE_FIELD"] == "1", stageProbes: env["APPARATE_STAGE_PROBES"] == "1", panelCount: count,
                            opaque: env["APPARATE_PANEL_OPAQUE"] == "1", warmUp: env["APPARATE_PANEL_NO_WARMUP"] != "1", waitMS: wait, activityEnabled: env["APPARATE_PANEL_NO_ACTIVITY"] != "1", delivery: delivery!)
     }
     nonisolated static func fixtureCatalog() throws -> CatalogSnapshot {
@@ -68,7 +76,7 @@ import Darwin
 }
 
 enum ProcessMetrics {
-    static func footprint() -> UInt64 {
+    static func footprint() throws -> UInt64 {
         var info = task_vm_info_data_t()
         var count = mach_msg_type_number_t(MemoryLayout<task_vm_info_data_t>.size / MemoryLayout<integer_t>.size)
         let status = withUnsafeMutablePointer(to: &info) { pointer in
@@ -76,7 +84,14 @@ enum ProcessMetrics {
                 task_info(mach_task_self_, task_flavor_t(TASK_VM_INFO), $0, &count)
             }
         }
-        return status == KERN_SUCCESS ? info.phys_footprint : 0
+        guard status == KERN_SUCCESS else { throw SourceError("Physical footprint is unavailable (task_info failed).") }; return info.phys_footprint
+    }
+    static func wakeups() -> (interrupts: UInt64, packageIdle: UInt64)? {
+        var info = rusage_info_v4()
+        let status = withUnsafeMutablePointer(to: &info) { pointer in
+            pointer.withMemoryRebound(to: rusage_info_t?.self, capacity: 1) { proc_pid_rusage(getpid(), RUSAGE_INFO_V4, $0) }
+        }
+        return status == 0 ? (info.ri_interrupt_wkups, info.ri_pkg_idle_wkups) : nil
     }
     static func cpuSeconds() -> Double {
         var usage = rusage(); getrusage(RUSAGE_SELF, &usage)

@@ -53,6 +53,7 @@ func search(_ items: [SearchItem], _ text: String, config: AppConfig = AppConfig
             return
         }
         let h = Harness()
+        await observationTests(h)
         await rankingTests(h)
         await unicodeTests(h)
         await alignmentTests(h)

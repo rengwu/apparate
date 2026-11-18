@@ -48,7 +48,7 @@ private final class PanelActivity {
     let session: LauncherSession
     let rows: ResultsView
     private let panel: LauncherPanel
-    private let search = NSSearchField()
+    private let search: NSTextField
     private let footer = NSTextField(labelWithString: ""), empty = NSTextField(labelWithString: "")
     private let background = PanelBackground(frame: NSRect(x: 0, y: 0, width: 640, height: 334))
     private let opaque: Bool
@@ -56,6 +56,8 @@ private final class PanelActivity {
     private var activity: PanelActivity?
     private(set) var activityBegins = 0, activityEnds = 0
     var activityHeld: Bool { activity != nil }
+    var observationRun: UInt64?
+    private(set) var observationShow: UInt64 = 0
     private var waitingForCatalog = false
     var onHidden: (() -> Void)?, onQuit: (() -> Void)?, onSettings: (() -> Void)?
     var onTiming: ((Double, Double?) -> Void)?
@@ -76,8 +78,9 @@ private final class PanelActivity {
 
     init(session: LauncherSession, icons: IconLoader, presentationAllowed: Bool = true,
          opaque: Bool = false, warmUp: Bool = true, activityEnabled: Bool = true,
-         initialAppearance: NSAppearance.Name? = nil) {
+         initialAppearance: NSAppearance.Name? = nil, bareField: Bool = false) {
         self.session = session; self.opaque = opaque; self.activityEnabled = activityEnabled
+        search = bareField ? NSTextField() : NSSearchField()
         rows = ResultsView(icons: icons)
         panel = LauncherPanel(presentationAllowed: presentationAllowed)
         super.init()
@@ -114,8 +117,10 @@ private final class PanelActivity {
         search.frame = NSRect(x: 43, y: 301, width: 580, height: 24)
         search.font = .systemFont(ofSize: 16); search.isBezeled = false; search.drawsBackground = false
         search.cell?.usesSingleLineMode = true
-        search.maximumRecents = 0; search.searchMenuTemplate = nil
-        search.sendsSearchStringImmediately = true; search.sendsWholeSearchString = false
+        if let search = search as? NSSearchField {
+            search.maximumRecents = 0; search.searchMenuTemplate = nil
+            search.sendsSearchStringImmediately = true; search.sendsWholeSearchString = false
+        }
         if let cell = search.cell as? NSSearchFieldCell { cell.searchButtonCell = nil; cell.cancelButtonCell = nil }
         search.allowsWritingTools = false; search.allowsWritingToolsAffordance = false
         search.isAutomaticTextCompletionEnabled = false
@@ -157,6 +162,7 @@ private final class PanelActivity {
         } }
     }
     private func beginShowing() {
+        observationShow &+= 1
         if activityEnabled && activity == nil { activity = PanelActivity(); activityBegins += 1 }
         editor?.unmarkText(); search.stringValue = ""; editor?.string = ""
         editor?.setSelectedRange(NSRange(location: 0, length: 0))
@@ -234,6 +240,10 @@ private final class PanelActivity {
             return
         }
         rows.apply(session.model)
+        if let run = observationRun {
+            rows.observationMarker = FrameMarker(run: run, show: observationShow, revision: session.model.revision,
+                digest: ObservationClock.digest(session.model.rows.map(\.result)))
+        }
         let blank = session.model.query.isEmpty
         waitingForCatalog = !blank && session.model.pending && !session.isCatalogReady
         empty.isHidden = blank || !session.model.rows.isEmpty

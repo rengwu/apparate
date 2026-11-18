@@ -145,6 +145,15 @@ Source: the user's submitted grill-form ("Apparate icon — round 11").
 | DEC-047 | The icon's sparkles: the largest at the upper left, a medium one at the right, a small one at the lower left (layout B). The icon is final; see [App icon](design/icon.md). | User choice. Claude had recommended layout A. |
 | DEC-048 | The menu bar glyph is the puff's outline, as a template image. | User choice; matched the recommendation. |
 
+## Round 12 — 2026-11-19
+
+Source: the user's submitted grill-form ("Apparate — round 12").
+
+| ID | Decision | Basis |
+| --- | --- | --- |
+| DEC-049 | M6's on-screen speed runs happen unattended, and only after the user says in the chat that they are away. | User choice; matched the recommendation. |
+| DEC-050 | The supervised session's optional checks are launch at login and switching ⌘Space from Spotlight. The input method, VoiceOver, Lock Screen, Sleep and a real Restart are left out; they stay Untested and the release notes say so. Arming and cancelling Restart is still checked. | User choice. Claude had also recommended Lock Screen and Sleep. |
+
 ## Observed from the reference apps
 
 Klip, Yacht and Portia (in `~/Projects`) are SwiftPM packages built by a `build.sh` script with Command Line Tools only. They are pure AppKit (no SwiftUI) menu bar apps. Each is released as a zip or DMG on GitHub Releases, ad-hoc signed and not notarized. Klip signs with a fixed designated requirement (`identifier "local.klip"`), which keeps privacy grants valid across rebuilds. These are observations, not decisions for Apparate; round 2 asks whether to follow them.

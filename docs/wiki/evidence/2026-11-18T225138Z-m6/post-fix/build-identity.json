@@ -1,0 +1,31 @@
+{
+  "base_commit": "a784dad313f819f61a63a03340c0b4c7e0af7155",
+  "dirty": true,
+  "app_sha256": "bc94ebed63522f36ee2bfe820c512c76ede1c20dda331a1f542c70f9374f6799",
+  "source_manifest_sha256": "937eb1ce0cad4db11ef6a6fb643e1985f6b1cd48a760aaa251395ec723a9c0bc",
+  "recorded_utc": "2026-11-18T23:16:01.739562+00:00",
+  "system": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A5368g",
+  "swift": "Apple Swift version 6.4.2 (swiftlang-6.4.2.1.9 clang-2100.4.1.1)\nTarget: arm64-apple-macosx27.0.0",
+  "sdk": "27.2",
+  "model": "MacBookPro18,1",
+  "memory_bytes": "17179869184",
+  "logical_cpu": "10",
+  "architecture": "arm64",
+  "bundle_metadata": {
+    "CFBundleName": "Apparate",
+    "CFBundleIdentifier": "local.apparate",
+    "CFBundleExecutable": "Apparate",
+    "CFBundlePackageType": "APPL",
+    "CFBundleShortVersionString": "0.1.0",
+    "CFBundleVersion": "0.1.0",
+    "LSMinimumSystemVersion": "27.0",
+    "LSUIElement": true,
+    "NSDesktopFolderUsageDescription": "Apparate searches file and folder names in your Desktop folder.",
+    "NSDocumentsFolderUsageDescription": "Apparate searches file and folder names in your Documents folder.",
+    "NSDownloadsFolderUsageDescription": "Apparate searches file and folder names in your Downloads folder."
+  },
+  "shared_machine_activity": "uncontrolled; no concurrent agent-run build or test during each performance process",
+  "signature": "Executable=<repo>/build/Apparate.app/Contents/MacOS/Apparate\nIdentifier=local.apparate\nFormat=app bundle with Mach-O thin (arm64)\nCodeDirectory v=20400 size=6087 flags=0x2(adhoc) hashes=184+3 location=embedded\nSignature=adhoc\nInfo.plist entries=11\nTeamIdentifier=not set\nSealed Resources version=2 rules=13 files=3\nTotal signatures=1\nChosen signature=1\n",
+  "ApparateCoreTests_sha256": "dc0eb475d357cce1b4181d4b234c9b9485697f76379815be676f393db2c4293f",
+  "observer_note": "Observer self-test is the pre-fix build; pixel/marker/observer sources unchanged by file-node optimization."
+}

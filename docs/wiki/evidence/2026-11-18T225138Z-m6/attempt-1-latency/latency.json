@@ -1,0 +1,87 @@
+{
+  "bare_field": false,
+  "clock": "mach_absolute_time",
+  "count": 20000,
+  "delivery": "task",
+  "elapsed_seconds": 5.873556875,
+  "errors": 0,
+  "fixed_statuses": {
+    "superseded": 73,
+    "view-state": 47
+  },
+  "focus_guards_checked": true,
+  "hidden_cold_show_ms": 0.6225833333333334,
+  "hidden_warm_show_ms": {
+    "count": 100,
+    "max": 0.10225,
+    "median": 0.04958333333333333,
+    "p95": 0.078625
+  },
+  "input_handler_ms": {
+    "count": 120,
+    "max": 71.022125,
+    "median": 0.5411666666666666,
+    "p95": 2.5425416666666667
+  },
+  "input_to_view_ms": {
+    "count": 47,
+    "max": 68.56345833333333,
+    "median": 2.150625,
+    "p95": 8.828666666666667
+  },
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "native_login_changes": 0,
+  "native_status_items": 0,
+  "noop_main_queue_ms": {
+    "count": 120,
+    "max": 81.14941666666667,
+    "median": 1.6556666666666668,
+    "p95": 6.219166666666667
+  },
+  "on_screen_budgets": "Untested",
+  "profile": "latency",
+  "protected_folder_probes": 0,
+  "result": "Passed",
+  "result_mismatches": 0,
+  "scheduled_to_input_ms": {
+    "count": 120,
+    "max": 281.168375,
+    "median": 65.58391666666667,
+    "p95": 229.12975
+  },
+  "schema": 1,
+  "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Cross-clock mapped worker-to-main is diagnostic only.",
+  "search_ms": {
+    "count": 107,
+    "max": 3.091208,
+    "median": 0.661959,
+    "p95": 2.226208
+  },
+  "stage_probes": true,
+  "statuses": {
+    "superseded": 108,
+    "view-state": 52
+  },
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "symbolichotkeys_writes": 0,
+  "thermal_end": 0,
+  "thermal_start": 0,
+  "timebase_denom": 3,
+  "timebase_numer": 125,
+  "visible_profile": "none",
+  "worker_queue_ms": {
+    "count": 107,
+    "max": 1.266458,
+    "median": 0.032917,
+    "p95": 0.542666
+  },
+  "worker_to_main_ms": {
+    "count": 54,
+    "max": 64.46516733333328,
+    "median": 0.1259583333333012,
+    "p95": 7.067583999999442
+  },
+  "writing_tools_images": 2
+}

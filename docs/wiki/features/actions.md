@@ -28,7 +28,7 @@ After the signed build, `python3 Tests/smoke-app.py --show panel --query term --
 
 ## Coverage and limitations
 
-Native mechanisms are compiled and checked against local SDK declarations/export metadata. Lock has a private ABI; successful return cannot prove that the screen locked. Reveal has no success result. None of the real opens or system commands have been run unattended. Their [supervised recipes](../verification/runs/2026-11-18T164001Z-m2-supervised.md) remain unvalidated, including Restart cancellation/acceptance and settings navigation.
+Native mechanisms are compiled and checked against local SDK declarations/export metadata. Lock has a private ABI; successful return cannot prove that the screen locked. Reveal has no success result. None of the real opens or system commands have been run unattended. Their [supervised recipes](../verification/runs/2026-11-18T164001Z-m2-supervised.md) remain unvalidated. DEC-050 excludes real Lock, Sleep and Restart from the session; they remain Untested and must be disclosed in release notes. Restart arming/cancellation and settings navigation remain eligible session checks. The historical recipes do not authorize excluded actions.
 
 ## Verification history
 

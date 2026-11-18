@@ -1,0 +1,96 @@
+{
+  "bare_field": false,
+  "clock": "mach_absolute_time",
+  "count": 20000,
+  "delivery": "task",
+  "elapsed_seconds": 6.081381958000001,
+  "errors": 0,
+  "fixed_statuses": {
+    "view-state": 120
+  },
+  "focus_guards_checked": true,
+  "hidden_cold_show_ms": 0.607625,
+  "hidden_warm_show_ms": {
+    "count": 100,
+    "max": 1.5381666666666667,
+    "median": 0.05325,
+    "p95": 0.072875
+  },
+  "input_handler_ms": {
+    "count": 120,
+    "max": 40.60775,
+    "median": 4.203875,
+    "p95": 9.522666666666666
+  },
+  "input_to_view_ms": {
+    "count": 120,
+    "max": 34.713875,
+    "median": 9.629625,
+    "p95": 15.366958333333335
+  },
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "native_login_changes": 0,
+  "native_marker_round_trips": 5,
+  "native_status_items": 0,
+  "noop_main_queue_ms": {
+    "count": 0
+  },
+  "on_screen_budgets": "Untested",
+  "profile": "latency",
+  "protected_folder_probes": 0,
+  "result": "Passed",
+  "result_mismatches": 0,
+  "scheduled_to_input_ms": {
+    "count": 120,
+    "max": 15.372791666666666,
+    "median": 0.2675,
+    "p95": 4.490583333333333
+  },
+  "scheduler_to_main_ms": {
+    "count": 120,
+    "max": 15.32075,
+    "median": 0.11604166666666667,
+    "p95": 4.285625
+  },
+  "schema": 1,
+  "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+  "search_ms": {
+    "count": 114,
+    "max": 8.394458,
+    "median": 2.69425,
+    "p95": 5.995167
+  },
+  "stage_probes": false,
+  "statuses": {
+    "superseded": 36,
+    "view-state": 124
+  },
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "symbolichotkeys_writes": 0,
+  "thermal_end": 0,
+  "thermal_start": 0,
+  "timebase_denom": 3,
+  "timebase_numer": 125,
+  "timer_lateness_ms": {
+    "count": 120,
+    "max": 2.2188333333333334,
+    "median": 0.12258333333333332,
+    "p95": 0.9381666666666666
+  },
+  "visible_profile": "none",
+  "worker_queue_ms": {
+    "count": 114,
+    "max": 2.114791,
+    "median": 0.0455,
+    "p95": 0.141709
+  },
+  "worker_to_main_ms": {
+    "count": 114,
+    "max": 8.955083333333334,
+    "median": 1.9219166666666667,
+    "p95": 4.449583333333333
+  },
+  "writing_tools_images": 2
+}

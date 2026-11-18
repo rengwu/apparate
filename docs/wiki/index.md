@@ -20,6 +20,7 @@ A minimal, very fast launcher for macOS. Planning notes, research, decisions, an
 - [M3 guide](build/m3-file-index.md) — the file index.
 - [M4 guide](build/m4-launcher-panel.md) — the finished launcher panel.
 - [M5 guide](build/m5-settings-menu-first-run.md) — settings, menu bar and first run.
+- [M6 guide](build/m6-performance.md) — measuring the finished app against the budgets.
 
 ## Design
 
@@ -55,3 +56,5 @@ Claude and Codex researched the whole topic independently, at the user's request
 - [Panel latency spike](spikes/2026-11-18-panel-latency.md) — measured show, keystroke, memory and idle CPU against the budgets.
 
 **2026-11-19 gate update:** Claude moved the pending native checks to the M7 release gate in the [M5 guide](build/m5-settings-menu-first-run.md). Their recorded outcomes remain unchanged.
+
+- [M6 hidden-stage results](verification/runs/2026-11-18T225138Z-m6.md): functional checks passed; 20k target and 200k rebuild limit missed; on-screen qualification pending.

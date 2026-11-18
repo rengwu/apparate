@@ -178,3 +178,34 @@ python3 Tests/smoke-app.py --panel-check functional --output /private/tmp/appara
 Inspect the twelve light/dark/state JPEG content renders and the receipt. Expected: Passed, no errors, focus guards checked, zero native actions/registrations/login changes/status items/probes/symbolichotkeys writes. The driver removes its own temporary home on both success and failure; `--output` is deliberately retained for inspection. Before a release, run the separate supervised recipes in [Settings](../features/settings.md#supervised-recipes-untested), [Menu bar](../features/menu.md#supervised-recipes-untested) and [First run](../features/first-run.md#supervised-recipes-untested), together with the earlier native checks. Test profiles remain development-only code until their M7 packaging exclusion.
 
 The [M5 run](runs/2026-11-18T212428Z-m5.md) links its source/binary manifest, receipts, compact retained failures and renders. Its automated pass does not replace any native check or the open M6 latency gate.
+
+
+## M6 hidden performance
+
+Use `Tests/performance.py` with the signed app from `./build.sh`. It creates a temporary home, seeds an alternate fake shortcut before launch, runs with prohibited activation and non-presenting windows, and cleans up its owned process and files. No protected-folder read, global event, login change, status item or Screen Recording request is permitted. Output directories must be new so failed attempts remain intact.
+
+```sh
+./build.sh
+python3 Tests/performance.py pipeline --count 200000 --output <new-evidence-directory>
+python3 Tests/performance.py latency --count 20000 --output <new-evidence-directory>
+python3 Tests/performance.py latency --count 20000 --probes --output <new-evidence-directory>
+python3 Tests/performance.py latency --count 20000 --probes --bare --output <new-evidence-directory>
+python3 Tests/performance.py latency --count 20000 --probes --delivery dispatch --output <new-evidence-directory>
+python3 Tests/performance.py full --count 200000 --output <new-evidence-directory>
+python3 Tests/performance.py full --projects --output <new-evidence-directory>
+```
+
+The matched pipeline uses the same compact snapshot, parsed query, empty usage snapshot and top-50 limit. Hashing and the independent reference run outside timing; the stage probe is a separate invocation. Native input uses a strict independent timer, 120 fixed 40 ms inputs plus 40 separately labelled 1 ms stress inputs. Every scheduled event remains in CSV, including superseded or timed-out events. It never waits for a result before scheduling another input. Five native marker raster checks run after timing; no raster or forced transaction is in the timing path. Repeat each native workload twice at each size; reverse control order for the second pass. Completed-only percentiles are conditional, not budget passes.
+
+`full` first creates an actual 20,000/200,000-entry temporary filesystem corpus, builds the persisted SQLite index in a preparation process, then starts a fresh measured process with the full AppDelegate graph. The generator is outside the app and retains no in-app corpus. Real app/settings catalogs, config/file/catalog watchers, retained preferences/setup, and real usage/index stores remain; global effects are fake and usage history is empty. Projects is read-only; receipts contain counts only. Readiness is bounded before timing. Footprint is recorded after load, 120 inputs, hidden preference layout, and rebuild. The requested 25 ms sampled peak is a lower bound with actual gap statistics. The sampler is stopped before at least 64 quiet seconds, without polling or latency activity. Report the first interval even if busy, then repeat it once. Metric failure is unavailable/Failed, never zero. A Passed receipt validates the harness and isolation, not the provisional budgets.
+
+Observer and decoder checks do not use Screen Recording:
+
+```sh
+swift run -c release ApparateObserver --self-test
+python3 Tests/observe-performance.py --self-test
+```
+
+The external observer's explicit capture mode targets only an exact PID/window ID whose bundle is Apparate, uses a desktop-independent window filter, preflights its actual launch identity without prompting, bounds duration and saves metadata/markers only. Its separate offline correlator checks run/show/revision/digest and input deadlines; stale, duplicate, out-of-order or absent frames cannot become a completed-only pass. Live scale/content-rectangle calibration and vibrancy composition remain unverified. A desktop-independent window may not prove the live backdrop; bring the alternative to Claude before changing capture scope.
+
+**DEC-049:** do not run capture or present the panel until Claude sends an explicit “on-screen window open” after the user says they are away. The visible callback driver and its own key-window watchdog must be connected and validated in that stage; another application's frontmost status does not prove a nonactivating panel lost the key window. Then pair capture-on/off timings, inspect actual refresh/frame gaps, use fresh processes for cold shows and run the agreed opaque/vibrancy pair. Physical-key delivery remains a separate supervised observation. Hidden results cannot close these gates.

@@ -1,0 +1,19 @@
+{
+  "hidden": {
+    "sizes": [
+      20000,
+      200000
+    ],
+    "pipeline": "one process per size; two opposite-order passes of 120 queries",
+    "latency": "two serial fresh-process repeats per size, 120 fixed 40ms inputs + 40 stress 1ms inputs, 100 warm hidden show calls",
+    "controls": "two repeats per size: NSSearchField vs NSTextField with separate stage/no-op probes; task vs dispatch delivery using the same probe workload",
+    "full_graph": "two serial fresh persisted-index repeats per fixture size; one Projects read-only run; each idle window 64 seconds, busy interval repeated once"
+  },
+  "visible": {
+    "status": "Untested: awaiting user answer",
+    "planned": "two serial repeats per size/workload, >=100 fixed inputs and warm shows; fresh-process cold; one opaque/vibrancy pair in opposite order; capture-on/off paired internal timings"
+  },
+  "censoring": "every event retained; completed-only percentiles are conditional and never qualify a budget with missing events",
+  "concurrency": "no other agent-run builds/tests/measurements while timing; shared machine activity uncontrolled",
+  "post_fix": "After skipping unchanged node writes: repeat pipeline, baseline input, full graph at both sizes twice; controls remain pre-fix diagnostics because field/delivery code is unchanged. Native functional regression and debug/release suite repeat. Projects uses the final build."
+}

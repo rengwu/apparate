@@ -45,3 +45,6 @@ These checks exercise real Core entry points and SQLite persistence, using synth
 - [M3 search-speed review fix](../verification/runs/2026-11-18T181500Z-m3.md#post-review-search-fix) — primitive file scan buffers, shared-ancestor tie ordering and matched-corpus performance; recheck pending.
 
 - [M4 panel verification](../verification/runs/2026-11-18T200340Z-m4.md) — alternate-winner title highlights and complete-result hashes across native renderer/background/wait controls.
+
+
+- [M6 hidden performance](../verification/runs/2026-11-18T225138Z-m6.md) — shared production pipeline, matched file/pipeline/reference hashes and separate stage probes. The previous benchmark/live gap is not established as merge or catalog overhead; the remaining paced native scan difference is reported without a speculative optimization. Displayed-frame qualification remains pending.

@@ -8,6 +8,9 @@ public struct SearchRequest: Sendable {
     public let query: ParsedQuery
     public let files: FileIndexSnapshot?
     public let usage: UsageSnapshot
+    package init(generation: UInt64, index: SearchIndex, query: ParsedQuery, files: FileIndexSnapshot?, usage: UsageSnapshot) {
+        self.generation = generation; self.index = index; self.query = query; self.files = files; self.usage = usage
+    }
 }
 public struct SearchResponse: Sendable {
     public let generation: UInt64
@@ -19,6 +22,8 @@ public struct SearchTrace: Sendable {
     public let submitted: ContinuousClock.Instant, started: ContinuousClock.Instant, finished: ContinuousClock.Instant
     public let cancelled: Bool
     public let cpuNanoseconds: UInt64
+    package let stages: [String: Double]
+    package let submittedTicks: UInt64, startedTicks: UInt64, finishedTicks: UInt64
 }
 package enum SearchDelivery: String, Sendable { case task, dispatch }
 private final class SearchGeneration: Sendable { let value = Atomic<UInt64>(0) }
@@ -35,7 +40,8 @@ public final class SearchCoordinator {
     package var onDelivery: ((UInt64, ContinuousClock.Instant) -> Void)?
     private let engine: Engine?
     private let observe: (@Sendable (SearchTrace) -> Void)?
-    private let fileUsage = FileUsageCache()
+    private let pipeline = SearchPipeline()
+    package var measureStages = false
     public init(engine: Engine? = nil, observe: (@Sendable (SearchTrace) -> Void)? = nil) { self.engine = engine; self.observe = observe }
 
     @discardableResult public func invalidate() -> UInt64 {
@@ -44,24 +50,21 @@ public final class SearchCoordinator {
 
     @discardableResult public func submit(index: SearchIndex, query: ParsedQuery, files: FileIndexSnapshot? = nil, usage: UsageSnapshot = UsageSnapshot(),
                                          deliver: @escaping @MainActor @Sendable (SearchResponse) -> Void) -> UInt64 {
-        let number = invalidate(), token = generation, engine = engine, fileUsage = fileUsage, observe = observe, delivery = delivery
+        let number = invalidate(), token = generation, engine = engine, pipeline = pipeline, observe = observe, delivery = delivery, measureStages = measureStages
         let submitted = ContinuousClock.now
+        let submittedTicks = observe == nil ? 0 : ObservationClock.now
         let request = SearchRequest(generation: number, index: index, query: query, files: files, usage: usage)
         worker.async { [weak self] in
             let cancelled: @Sendable () -> Bool = { token.value.load(ordering: .relaxed) != number }
             guard !cancelled() else { return }
             let started = ContinuousClock.now
+            let startedTicks = observe == nil ? 0 : ObservationClock.now
             let cpuStart = observe == nil ? 0 : clock_gettime_nsec_np(CLOCK_THREAD_CPUTIME_ID)
+            var stages: [String: Double] = [:]
             let results: [SearchResult]
             if let engine { results = engine(request, cancelled) }
-            else if let files = request.files, request.query.scope != .web {
-                let local = request.index.search(request.query, usage: request.usage, includeWebFallback: false, isCancelled: cancelled)
-                let fileRows = files.search(request.query, boosts: fileUsage.resolve(files, request.usage), isCancelled: cancelled)
-                let discoveredApps = files.applications?.index.search(request.query, usage: request.usage, includeWebFallback: false, isCancelled: cancelled) ?? []
-                let merged = SearchResult.merge([local, fileRows, discoveredApps])
-                results = merged.isEmpty ? request.index.search(request.query, usage: request.usage, isCancelled: cancelled) : merged
-            } else { results = request.index.search(request.query, usage: request.usage, isCancelled: cancelled) }
-            observe?(SearchTrace(generation: number, submitted: submitted, started: started, finished: .now, cancelled: cancelled(), cpuNanoseconds: clock_gettime_nsec_np(CLOCK_THREAD_CPUTIME_ID) - cpuStart))
+            else { results = pipeline.search(request, isCancelled: cancelled, stage: measureStages ? { stages[$0] = $1 } : nil) }
+            observe?(SearchTrace(generation: number, submitted: submitted, started: started, finished: .now, cancelled: cancelled(), cpuNanoseconds: clock_gettime_nsec_np(CLOCK_THREAD_CPUTIME_ID) - cpuStart, stages: stages, submittedTicks: submittedTicks, startedTicks: startedTicks, finishedTicks: ObservationClock.now))
             guard !cancelled() else { return }
             let publish: @MainActor @Sendable () -> Void = { [weak self] in
                 guard let self else { return }

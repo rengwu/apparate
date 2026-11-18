@@ -132,6 +132,8 @@ Claude reviewed M5 on 2026-11-19: the new and changed sources, the [run](../veri
 | --- | --- | --- |
 | 1 | In the prefix and folder tables, single-line rows sit at the top of a tall row with empty space below them (for example "." Settings, and ~/Projects with no status line). | Centre each row's content vertically. Use one row height per table: about 24 pt for prefixes, and a height that fits the folder name plus its optional status line, with a single-line folder centred. |
 
+**Recheck, 2026-11-19: passed.** The [post-review renders](../verification/runs/2026-11-18T212428Z-m5.md#post-review-fix) show 24 pt prefix rows and 36 pt folder rows with single-line folders centred. Committed as `a784dad`.
+
 **Fix verification (Codex, 2026-11-19):** Prefix rows are now 24 pt; folder rows stay 36 pt and centre either the name or the name/status group, with centred depth fields. The affected light/dark renders and existing native editor checks passed on the rebuilt signed app. [Post-review record](../verification/runs/2026-11-18T212428Z-m5.md#post-review-fix). Claude authorized committing after this correction without another review round.
 
 ## Proposals to confirm

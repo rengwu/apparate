@@ -1,0 +1,38 @@
+{
+  "clock": "mach_absolute_time",
+  "count": 20000,
+  "elapsed_seconds": 0.792469375,
+  "errors": 0,
+  "file": {
+    "count": 240,
+    "max": 1.2802083333333332,
+    "median": 0.4483333333333333,
+    "p95": 0.94075
+  },
+  "focus_guards_checked": true,
+  "matched_hashes": 240,
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "native_login_changes": 0,
+  "native_status_items": 0,
+  "on_screen_budgets": "Untested",
+  "pipeline": {
+    "count": 240,
+    "max": 1.2818333333333332,
+    "median": 0.474875,
+    "p95": 0.972625
+  },
+  "profile": "pipeline",
+  "protected_folder_probes": 0,
+  "result": "Passed",
+  "schema": 1,
+  "scope": "Same snapshot, parsed query, empty usage, top-50 limit; file-only vs production pipeline; independent reference hash outside timers; stage-probe third invocation separate. Opposite orders, not an end-to-end latency verdict.",
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "symbolichotkeys_writes": 0,
+  "thermal_end": 0,
+  "thermal_start": 0,
+  "timebase_denom": 3,
+  "timebase_numer": 125,
+  "visible_profile": "none"
+}

@@ -38,7 +38,7 @@ Text appears immediately. Complete result sets arrive asynchronously; no product
 | No local matches | Unprefixed queries get web fallback; scoped queries show “No results”. |
 | New showing | Empty query, no selection and viewport at the top. |
 
-While text is marked, the input method owns Return, arrows and Esc. It cannot trigger an action or arm Restart. Real input-method candidate interaction remains a supervised check.
+While text is marked, the input method owns Return, arrows and Esc. It cannot trigger an action or arm Restart. Real input-method candidate interaction is Untested and excluded from the session by DEC-050; release notes must retain that limitation.
 
 The result container exposes all up-to-50 accessibility rows, a separate visible subset, full title/location/kind/position, selected state and a press action. Elements keep identity by item ID. Selecting an offscreen element brings it into view; press validates its current ID. Selection-change notifications are posted only when the selection changes and the real panel is visible. Hidden checks use a notification counter and inspect the owned tree, without synthesizing VoiceOver speech.
 
@@ -56,15 +56,15 @@ The functional profile injects text directly into its hidden owned field editor,
 
 ## Supervised recipes — Untested
 
-These require the user's explicit supervised slot. They are not part of the automated driver; the [pending M2 native checks](../verification/runs/2026-11-18T164001Z-m2-supervised.md) still apply before M7 release. Use an agreed safe config and synthetic fixture folder, restore the user's config afterward, and do not approve real Restart/Lock/Sleep merely to test panel presentation.
+These require the user’s explicit supervised slot. DEC-050 excludes real IME, VoiceOver, Lock, Sleep and Restart from that session; they remain Untested and must appear in release notes. Other [pending M2 native checks](../verification/runs/2026-11-18T164001Z-m2-supervised.md) still apply before M7 release. Use an agreed safe config and synthetic fixture folder, restore the user's config afterward, and do not approve real Restart/Lock/Sleep merely to test panel presentation.
 
 1. **Hotkey, focus and first show:** with another app focused, launch the agreed build, press the configured global hotkey, type a fixture query, and verify that the search field receives text. Record the first real show after launch separately from later shows. Esc clears, then closes; focus returns to the previous app. A click in another app closes the panel. M6's presentation harness must qualify actual latency; a stopwatch or hidden bitmap does not.
 2. **Spaces, full-screen and monitors:** from each agreed Space and a full-screen app, invoke the launcher. Repeat with keyboard focus on each display. Verify it appears on the expected screen, does not switch Spaces, is centered in that screen's visible frame, and keeps its fixed size.
-3. **Appearance:** inspect light/dark mode, the user's accent color, Reduce Transparency, Retina/non-Retina or mixed-scale displays if available. Check corners, symbol/file icons, contrast, separators, truncation and full paths. Compare vibrancy and plain background only in an explicitly agreed supervised build; hidden captures do not measure WindowServer composition.
+3. **Appearance:** inspect light/dark mode, the user's accent color, Reduce Transparency, Retina/non-Retina or mixed-scale displays if available. Check corners, symbol/file icons, contrast, separators, truncation and full paths. Compare vibrancy and plain background only in an explicitly authorized on-screen window under DEC-049; hidden captures do not measure WindowServer composition.
 4. **Keyboard and mouse:** reach row 50 with arrows, scroll back by wheel, invoke ⌘1 and ⌘9, and click after scrolling. Confirm hints identify the visible rows. Type quickly while a query is pending and activate a known ID; a removed result must not open a replacement. Use fixture files and the M2 action recipes for actual opens/reveal/copy.
-5. **IME:** enable the user's chosen input method. Enter marked text and navigate its candidates with arrows/Return/Esc; no result opens or moves behind it. Commit text and verify normal navigation resumes. Confirm ⌘Q can quit during composition, then relaunch only within the supervised slot.
-6. **VoiceOver:** enable VoiceOver with the user. Navigate the result container and verify full labels, kind, position and selected state. Move beyond row 9, activate a fixture file, and verify the selected row is revealed. Check that ordinary selection changes are announced once and unrelated rerenders do not create repeated announcements.
-7. **Restart presentation:** arm Restart with Return, click and ⌘N separately. Verify repeat keys/clicks/number shortcuts do not confirm. Esc must first disarm while retaining the query. Stop at cancellation; actual acceptance remains the separately authorized M2 destructive-action recipe.
+5. **IME — excluded by DEC-050; Untested, future recipe only:** enable the user's chosen input method. Enter marked text and navigate its candidates with arrows/Return/Esc; no result opens or moves behind it. Commit text and verify normal navigation resumes. Confirm ⌘Q can quit during composition, then relaunch only within the supervised slot.
+6. **VoiceOver — excluded by DEC-050; Untested, future recipe only:** enable VoiceOver with the user. Navigate the result container and verify full labels, kind, position and selected state. Move beyond row 9, activate a fixture file, and verify the selected row is revealed. Check that ordinary selection changes are announced once and unrelated rerenders do not create repeated announcements.
+7. **Restart presentation:** arm Restart with Return, click and ⌘N separately. Verify repeat keys/clicks/number shortcuts do not confirm. Esc must first disarm while retaining the query. Stop at cancellation; actual acceptance is excluded by DEC-050 and remains Untested.
 
 ## Coverage and limitations
 
@@ -83,3 +83,8 @@ The [post-review investigation](../verification/runs/2026-11-18T200340Z-m4.md#po
 ## M5 Settings route
 
 ⌘, hides the launcher, releases its foreground activity and opens the retained [Settings window](settings.md). The hidden native fixture checks this route; global key delivery and focus remain supervised. [M5 verification](../verification/runs/2026-11-18T212428Z-m5.md).
+
+
+## M6 hidden instrumentation
+
+[Hidden-stage verification](../verification/runs/2026-11-18T225138Z-m6.md) uses independently scheduled owned field-editor inputs and preserves all event outcomes. Its run/show/revision/result-digest marker is drawn in the result view’s own draw path, with full invalidation, and is absent in normal operation. Native bitmap round trips cover empty, repeated, web and no-result states after timing. The external observer and bounded decoder are self-tested without capture. On-screen integration and calibration remain Untested; visible runs require DEC-049’s explicit open window. NSSearchField, its public service-disable flags, input methods and accessibility remain intact.

@@ -21,6 +21,7 @@ import ApparateCore
     private var icons: IconLoader!
     private var diagnostics: AppTestDiagnostics?
     private var files: FileIndexController?
+    private var performance: FullPerformance?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         do {
@@ -28,6 +29,9 @@ import ApparateCore
             profile = try TestProfile.read(env)
             NSApp.setActivationPolicy(profile == nil ? .accessory : .prohibited)
             icons = IconLoader(fixtureOnly: profile?.mode == "fixtures")
+            if let profile, profile.performance == "pipeline" || profile.performance == "latency" {
+                Task(priority: .userInitiated) { await PerformanceVerification.run(profile) }; return
+            }
             if let profile, profile.panelCheck != nil {
                 Task(priority: .userInitiated) { await PanelVerification.run(profile) }
                 return
@@ -142,11 +146,17 @@ import ApparateCore
                 guard let self else { return }
                 self.icons.invalidate(); self.session?.setCatalog(snapshot); self.diagnostics?.catalogPublished()
             }
-            if let profile {
+            if let profile, profile.performance == nil {
                 diagnostics = AppTestDiagnostics(profile: profile, catalog: catalog, files: files, session: session, panel: panel,
                                                  access: access, setupWindow: setupWindow, settingsWindow: settingsWindow, menu: menu, effects: testEffects)
             }
             fileController.start(); catalog?.start()
+            if let profile, profile.performance == "full" || profile.performance == "prepare" {
+                let measurement = FullPerformance(profile: profile, catalog: catalog!, files: fileController, session: session, panel: panel,
+                    settings: settingsWindow!, setup: setupWindow!, menu: menu, effects: testEffects!)
+                performance = measurement
+                Task { await measurement.run() }
+            }
             if profile == nil {
                 if SetupWindow.shouldShow(configExisted: !firstRun, override: env["APPARATE_SHOW"]) { setupWindow?.show() }
                 else if env["APPARATE_SHOW"] == "panel" { panel.show() }
@@ -184,6 +194,7 @@ import ApparateCore
     }
     private func logError(_ reason: String) {
         diagnostics?.errors += 1
+        performance?.errors += 1
         if profile == nil { NSLog("Apparate: %@", reason) }
     }
     private func alertError(_ reason: String, title: String) {

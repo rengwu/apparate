@@ -12,7 +12,7 @@ The detailed recipes stay where they were written: [M2 supervised checks](runs/2
 
 ## How it works
 
-- **About 45 minutes**, in four parts. Each part can be done on its own day.
+- **About 35 minutes**, in four parts. Each part can be done on its own day. The optional checks are the ones the user chose in [DEC-050](../decisions.md#round-12-2026-11-19).
 - **You press the keys; Claude prepares and records.** Claude builds the signed app, launches it, tells you each step and what should happen, and writes down what you observe. Screenshots are taken only with your OK, of the Apparate window only.
 - **Your real settings are untouched.** The app runs with its own test data folder, and a test shortcut (for example ⌃⌥⌘F12) until the step that is about ⌘Space.
 - **Anything with lasting effects asks first:** launch at login, folder permissions, Lock, Sleep, Restart.
@@ -24,7 +24,7 @@ The detailed recipes stay where they were written: [M2 supervised checks](runs/2
 3. **Panel.** Press the test shortcut from another app. Type, and check the text appears at once. Arrows down to row 50 and back, scroll with the trackpad, ⌘1 and ⌘9, click a row, Esc (clears, then closes). Matched letters bold, folder paths shown.
 4. **Settings.** ⌘, from the panel. General, Search and Folders tabs; record a new shortcut, cancel one with Esc; edit a prefix (and an invalid one); switch the search engine; add a folder with the picker, change its depth, remove it.
 5. **Hidden icon.** Turn off Show menu bar icon; reach Settings with ⌘, in the panel and by opening the app again; turn it back on.
-6. **Launch at login** (asks first). Turn it on, see its real state (including "Approval required" if macOS asks), turn it off.
+6. **Launch at login.** Turn it on, see its real state (including "Approval required" if macOS asks), turn it off.
 
 ## Part 2 · Opening things and folder access (about 10 minutes)
 
@@ -38,13 +38,14 @@ The detailed recipes stay where they were written: [M2 supervised checks](runs/2
 ## Part 3 · Where the panel appears (about 10 minutes)
 
 1. **Spaces and full screen:** call the panel from another Space and from a full-screen app; with two displays, from each.
-2. **⌘Space** (optional). If you are ready to switch from Spotlight: Open Keyboard Shortcuts… from setup, turn off Spotlight's shortcut, return, and check that step 1 completes and ⌘Space opens Apparate.
-3. **Input method** (if you use one). Compose text: arrows and Return belong to the input method; after committing, Return opens normally.
-4. **VoiceOver** (optional). The result list reads title, location, kind and position; selection beyond row 9 is announced and revealed.
+2. **⌘Space.** Switching from Spotlight: Open Keyboard Shortcuts… from setup, turn off Spotlight's shortcut, return, and check that step 1 completes and ⌘Space opens Apparate.
+Left out by the user ([DEC-050](../decisions.md#round-12-2026-11-19)), and Untested in the release notes: the input method and VoiceOver.
 
-## Part 4 · System commands (optional, each on its own)
+## Part 4 · System commands (about 2 minutes)
 
-Show Trash first; it is harmless. Lock Screen, Sleep and Restart only when you choose, with your work saved: Return arms Restart and a second fresh Return confirms it, and arming can be cancelled. Running the real Restart is a separate choice.
+Show Trash opens the Trash. Restart: Return arms it, typing, the arrows or Esc cancel it, and holding Return does not confirm it; stop before confirming.
+
+Left out by the user ([DEC-050](../decisions.md#round-12-2026-11-19)), and Untested in the release notes: Lock Screen, Sleep and a real Restart.
 
 ## Recording
 

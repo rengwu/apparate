@@ -48,7 +48,7 @@ private final class PanelSearchTrace: Sendable {
             report["failure"] = (error as? PanelCheckFailure)?.message ?? String(describing: error)
         }
         report["fake_actions"] = 0
-        report["physical_footprint_bytes"] = ProcessMetrics.footprint()
+        do { report["physical_footprint_bytes"] = try ProcessMetrics.footprint() } catch { report["errors"] = 1; report["result"] = "Failed"; report["physical_footprint_bytes"] = NSNull() }
         do { try JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys]).write(to: profile.directory.appendingPathComponent("diagnostics.json"), options: .atomic) }
         catch { NSLog("Panel check receipt could not be written.") }
     }
@@ -194,7 +194,7 @@ private final class PanelSearchTrace: Sendable {
             return try await FileCrawler(reader: fixture.reader).crawl(folders: [.init(path: fixture.root, depth: 10)],
                 respectGitignore: true, access: FileAccessPolicy(observations: [])).snapshot
         }.value
-        let loadMS = durationMS(loadStart.duration(to: .now)), loadedFootprint = ProcessMetrics.footprint()
+        let loadMS = durationMS(loadStart.duration(to: .now)), loadedFootprint = try ProcessMetrics.footprint()
         let catalog = try TestProfile.fixtureCatalog()
         let trace = PanelSearchTrace(), coordinator = SearchCoordinator(observe: { trace.record($0) })
         coordinator.delivery = profile.delivery
@@ -215,7 +215,7 @@ private final class PanelSearchTrace: Sendable {
             shows.append(durationMS(start.duration(to: .now)))
             panel.hide(); await Task.yield()
         }
-        let afterShows = ProcessMetrics.footprint()
+        let afterShows = try ProcessMetrics.footprint()
         try panel.beginHiddenShowing()
         // Editor setup belongs to showing, before the first physical key in production.
         let editorStart = ContinuousClock.now
@@ -292,7 +292,7 @@ private final class PanelSearchTrace: Sendable {
         try await phase(prefixes, cadenceMS: 40, label: "fixed-40ms")
         try await phase(prefixes, cadenceMS: 40, label: "raster-40ms", raster: true)
         try await phase(["n", "ne", "net", "netw", "netwo", "networ", "network", "networ", "netwo", "netw", "net", "network"], cadenceMS: 1, label: "overlap-1ms")
-        let afterTyping = ProcessMetrics.footprint()
+        let afterTyping = try ProcessMetrics.footprint()
         panel.onUpdate = nil; panel.onTextBegin = nil; coordinator.onDelivery = nil; session.onResponse = nil; session.onResults = nil; session.onSubmitted = nil; panel.onText = nil
         let traces = trace.values.withLock { $0 }, cpuAtFinish = trace.processCPUAtFinish.withLock { $0 }
         for revision in order {

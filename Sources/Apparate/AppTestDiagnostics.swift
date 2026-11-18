@@ -76,6 +76,8 @@ import ApparateCore
         do { try panel?.verifyHidden(); try setupWindow?.verifyHidden(); try settingsWindow?.verifyHidden() }
         catch { hidden = false; errors += 1 }
         if menu?.nativeItemCount != 0 { hidden = false; errors += 1 }
+        let footprint: Any
+        do { footprint = try ProcessMetrics.footprint() } catch { footprint = NSNull(); errors += 1 }
         let elapsed = readyAt.map { durationMS($0.duration(to: .now)) / 1000 } ?? 0
         let cpu = readyAt == nil ? 0 : ProcessMetrics.cpuSeconds() - readyCPU
         let metrics = catalog?.metrics ?? CatalogMetrics()
@@ -91,7 +93,7 @@ import ApparateCore
             "completed_scans": catalog?.completedScans ?? 0,
             "first_app_scan_ms": firstMetrics.appScanMS, "first_settings_load_ms": firstMetrics.settingsLoadMS,
             "first_settings_cache_hit": firstMetrics.settingsCacheHit,
-            "watch_healthy": catalog?.watchHealthy ?? false, "physical_footprint_bytes": ProcessMetrics.footprint(),
+            "watch_healthy": catalog?.watchHealthy ?? false, "physical_footprint_bytes": footprint,
             "observation_seconds": elapsed, "cpu_seconds": cpu, "cpu_percent_one_core": elapsed > 0 ? cpu / elapsed * 100 : 0,
             "native_hotkey_registrations": 0, "native_actions": 0, "protected_folder_probes": 0,
             "native_status_items": menu?.nativeItemCount ?? 0, "native_login_changes": 0, "symbolichotkeys_writes": 0,

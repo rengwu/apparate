@@ -22,18 +22,21 @@ public struct FileMetadata: Codable, Sendable, Equatable {
         self.type = type; self.device = device; self.inode = inode; self.modified = modified; self.hidden = hidden
     }
 }
-final class FileApplication: Codable, Sendable {
+final class FileApplication: Codable, Sendable, Equatable {
     let name: String
     let alternates: [String]
     let path: String
     init(_ entry: CatalogEntry) { name = entry.item.name; alternates = entry.item.alternateNames; path = entry.item.path! }
+    static func == (lhs: FileApplication, rhs: FileApplication) -> Bool {
+        lhs.name == rhs.name && lhs.alternates == rhs.alternates && lhs.path == rhs.path
+    }
     var entry: CatalogEntry {
         let url = URL(fileURLWithPath: path)
         return CatalogEntry(item: SearchItem(id: "app:" + path, kind: .app, name: name, alternateNames: alternates, path: path),
                             target: .application(url), location: url.deletingLastPathComponent().path, icon: .file(path))
     }
 }
-struct FileNode: Codable, Sendable {
+struct FileNode: Codable, Sendable, Equatable {
     var name: String
     var parent: Int32
     var metadata: FileMetadata
@@ -184,6 +187,9 @@ struct FileIndexBuilder {
     }
     mutating func set(_ id: Int32, _ value: FileNode?) {
         let old = node(id)
+        // A scan can visit every node without changing it. Preserve shared chunks
+        // until metadata, membership, children or application presentation changes.
+        guard old != value else { return }
         if old?.visible == true { count -= 1 }
         if value?.visible == true { count += 1 }
         let chunk = Int(id) / FileChunk.size, offset = Int(id) % FileChunk.size

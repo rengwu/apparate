@@ -282,6 +282,7 @@ These are judged against DEC-008, kept as goals by [DEC-028](decisions.md#round-
 
 - The [app icon](design/icon.md) is final ([DEC-047](decisions.md#round-11-2026-11-19)): add `Resources/AppIcon.icns` to the bundle. M5 uses `MenuBarIconTemplate.png` for the menu bar item ([DEC-048](decisions.md#round-11-2026-11-19)).
 - README with install and update steps, and the MIT licence ([DEC-034](decisions.md#round-4-2026-11-18)).
+- The release notes list what was not checked on a real Mac: the input method, VoiceOver, Lock Screen, Sleep and a real Restart ([DEC-050](decisions.md#round-12-2026-11-19)).
 - Release builds leave out the test profiles, diagnostics and synthetic fixtures ([M4 review](build/m4-launcher-panel.md#review)).
 - A clean install check:
   - version and minimum macOS are consistent;
@@ -308,8 +309,8 @@ Following jstack conventions:
 | M2 Apps, settings, actions, first panel | [written](build/m2-sources-actions-panel.md) | [automated checks passed](verification/runs/2026-11-18T164000Z-m2.md); [supervised pending](verification/runs/2026-11-18T164001Z-m2-supervised.md) | [passed after five fixes](build/m2-sources-actions-panel.md#review) | `b3e68c4` |
 | M3 File index | [written](build/m3-file-index.md) | [automated checks passed; performance limits recorded](verification/runs/2026-11-18T181500Z-m3.md) | [passed after a speed fix](build/m3-file-index.md#review) | `ef9f683` |
 | M4 Launcher panel | [written](build/m4-launcher-panel.md) | [yes](verification/runs/2026-11-18T200340Z-m4.md) | [passed; latency carried to M6](build/m4-launcher-panel.md#review) | `e1543de` |
-| M5 Settings, menu bar, first run | [written](build/m5-settings-menu-first-run.md) | [automated checks passed](verification/runs/2026-11-18T212428Z-m5.md); supervised pending | [approved after row-layout fix](verification/runs/2026-11-18T212428Z-m5.md#post-review-fix) | This M5 milestone commit |
-| M6 Performance qualification | — | — | — | — |
+| M5 Settings, menu bar, first run | [written](build/m5-settings-menu-first-run.md) | [yes](verification/runs/2026-11-18T212428Z-m5.md) | [passed after one fix](build/m5-settings-menu-first-run.md#review) | `a784dad` |
+| M6 Performance qualification | [written](build/m6-performance.md) | [hidden stage](verification/runs/2026-11-18T225138Z-m6.md); on-screen stage waits for the user | [hidden stage approved](build/m6-performance.md#review-of-the-hidden-stage) | part 1; on-screen pending |
 | M7 Release 0.1.0 | — | — | — | — |
 
 ## Risks

@@ -1,0 +1,24 @@
+{
+  "signal": "SIGTRAP",
+  "queue": "local.apparate.performance.scheduler",
+  "symbols": [
+    "_dispatch_assert_queue_fail",
+    "dispatch_assert_queue$V2.cold.1",
+    "dispatch_assert_queue",
+    "_swift_task_checkIsolatedSwift",
+    "swift_task_isCurrentExecutorWithFlagsImpl(swift::SerialExecutorRef, swift::swift_task_is_current_executor_flag)",
+    "closure #1 in closure #12 in static PerformanceVerification.latency(_:files:catalog:report:)",
+    "thunk for @escaping @callee_guaranteed () -> ()",
+    "_dispatch_client_callout",
+    "_dispatch_continuation_pop",
+    "_dispatch_source_latch_and_call",
+    "_dispatch_source_invoke",
+    "_dispatch_lane_serial_drain",
+    "_dispatch_lane_invoke",
+    "_dispatch_root_queue_drain_deferred_wlh",
+    "_dispatch_workloop_worker_thread",
+    "_pthread_wqthread",
+    "start_wqthread"
+  ],
+  "cause": "Timer callback inferred MainActor isolation; explicitly Sendable callback required on scheduler queue"
+}

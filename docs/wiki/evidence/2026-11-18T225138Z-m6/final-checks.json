@@ -1,0 +1,12 @@
+{
+  "source_manifest_matches": true,
+  "app_sha256_matches": true,
+  "final_performance_receipts_passed": 11,
+  "native_effects_zero": true,
+  "cleanup_receipts_passed": true,
+  "headless_core": true,
+  "evidence_bytes_before_this_receipt": 1818220,
+  "observer_capture_and_preflight_executed": false,
+  "budget_result": "Failed: after-use 20k target and sampled 200k rebuild limit",
+  "on_screen_result": "Untested"
+}

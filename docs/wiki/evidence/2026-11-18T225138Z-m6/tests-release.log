@@ -1,0 +1,88 @@
+PASS observation: marker identity checksum and corrupt frames
+PASS observation: bounded first frame rejects stale duplicate out-of-order and missing
+PASS observation: pixels support scale offset and reject crop/corruption
+PASS ranking: sorted-source merge matches exhaustive sort with duplicates and ties
+PASS ranking: golden queries, tiers and kind order
+PASS ranking: keyword tier, split keywords and word prefixes
+PASS ranking: deterministic ties, duplicate names and bounded top 50
+PASS scopes and fallback: explicit prefixes, reconfiguration and whitespace
+PASS path mode: ordered segments, roots, trailing and repeated separators
+PASS cancellation: no partial results
+PASS top selection: tier pruning agrees with exhaustive results across scopes and paths
+PASS Unicode: normalization, expansion and displayed-character highlights
+PASS matching: no inherited name or query length caps
+PASS mask property: 1200 random Unicode subsequences survive filtering
+PASS scoring and traceback: exhaustive alignment oracle on 300 short names
+PASS config: first launch, defaults, missing keys and deterministic save
+PASS config: semantic validation collects all errors; wrong types reject
+PASS config: invalid file and newer version preserved; last valid survives
+PASS config watches: in-place write, atomic replacement, rearm and error recovery
+PASS settings: fresh field updates preserve unrelated external edits and reject conflicts
+PASS settings: hotkey reservation rolls back save failure and avoids config-callback double registration
+PASS settings: prefix validation and presets share config rules
+PASS settings: folders normalize, retain depths, conflict independently and gate rebuild
+PASS settings: Spotlight tri-state binding and shortcut readiness
+PASS settings: login states are observed independently of config; failures do not fake success
+PASS settings: access refresh never probes; explicit check, cancel and saved hints
+PASS settings: index text uses snapshot dates and distinguishes loading from empty
+PASS usage: finite scores, bounded boost and tier/kind boundaries
+PASS usage: injected decay clock, snapshots and persistence after reopening
+PASS usage: 2000-record bound and deterministic eviction
+PASS generations (task): slow work and a query burst publish only the newest
+PASS generations (task): invalidation after scoring and before owner delivery
+PASS generations (dispatch): slow work and a query burst publish only the newest
+PASS generations (dispatch): invalidation after scoring and before owner delivery
+PASS apps: localized names, alternates, canonical links, one-level nesting and removal
+PASS app cache: metadata touches, localized changes, replacement, aliases and locale changes
+PASS app cache: selected localization fast path and malformed fallback dependencies
+PASS catalog: unchanged fresh snapshots do not publish; changed targets still publish
+CATALOG_TOUCH_TRACE {"batches":3,"bundle_events":0,"events":3,"flags":{"0x00000000":3},"metadata_reads":0,"publications":0,"root_events":3}
+PASS catalog metadata churn: real directory events rescan with reuse and zero publications
+PASS settings: one matched locale, English fallback, duplicate keywords and malformed records
+PASS settings: pane overrides and modern date/time target with legacy resources
+PASS settings cache: persisted round trip, OS/language/schema invalidation and corrupt/write-failure fallback
+PASS catalog: watch before scan, changes mid-scan, coalescing, failed-read retention and recovery
+PASS catalog: newly discovered targets are watched before verifying scan; failed watch is visible
+PASS missing app root: no recursive parent watch or sibling-churn scans, creation switches to FSEvents
+PASS FSEvents: fixture app creation, external alias target edit and removal refresh live snapshots
+PASS URLs: exact query-value encoding and settings links
+PASS actions: typed dispatch for every kind, primary-open usage only
+PASS actions: failure vs missing, no failed usage, history write errors do not undo success
+PASS hotkey: unchanged no-op, failed replacement retains old key, successful replacement before removal
+PASS panel M4: 50-row viewport, numbered actions, clamping and reset
+PASS panel M4: explicit pending actions follow ID and cancel if removed or superseded
+PASS panel M4: explicit Restart arms but only Return confirms; Esc and empty state precedence
+PASS panel M4: title highlight graphemes and home-abbreviated full locations
+PASS panel: selection follows ID, falls back and rejects stale results
+PASS panel: pending Return/reveal/copy acts only on current generation; typing and movement cancel
+PASS panel: Restart requires two fresh Returns, bound to selection and result generation
+PASS panel: marked text owns Return/arrows and clears queued actions and Restart arming
+PASS session: initial catalog readiness holds immediate Return instead of opening web fallback
+PASS session: one usage read per showing across keystrokes, refresh after accepted open
+PASS session: a stale showing's usage read cannot overwrite a newer showing or queued Return
+PASS session: source/config changes cancel queued actions while sharing the showing's usage read
+PASS session: usage read failure reports once per showing and keeps typing usable
+PASS access: no launch probes, explicit sequential check, saved hints and duplicate click guard
+PASS access: other errors stay distinct and persistence failure is reported
+PASS gitignore: real Git oracle, nested rules, escapes, globstars, classes and case modes
+PASS gitignore: linked rule files are never read and excluded parents stay excluded
+PASS files: depth, packages, hidden flags, links and duplicate names
+PASS files: independent overlapping roots, union depths and stable path IDs
+PASS files: discovered apps use bundle names, app ranking and targets, deduplicate and persist
+PASS files: moved-in trees, same-path replacement, rule removal and unchanged snapshots
+PASS files: failed reads retain entries, persisted dirty work retries without new events
+PASS files: protected roots and ancestor traversal never call a blocked reader
+PASS files: SQLite migration, rollback, relaunch equality and concurrent usage during staging
+PASS files: existing v1 usage migrates intact and newer schemas are rejected
+PASS files: compact top-50, Unicode highlights and usage match the existing search engine
+PASS files: scan buffers preserve restricted roots, changed kinds and reused slots
+PASS files: path tie order matches flat IDs across punctuation, Unicode and disjoint roots
+PASS files: merged ranking, usage, fallback, startup Return and explicit web readiness
+PASS files: first catalog failure completes local readiness and later recovers
+PASS files: event flags, device UUID routing and sentinel checkpoints
+PASS files: changes during crawl, thousand-event coalescing and UUID recovery
+PASS files: settings status observes start finish config changes and restored time
+PASS files: ignored-directory churn does not enumerate, save or publish
+PASS files: failed stream scans once and config removal immediately hides its entries
+PASS files: real FSEvents create rename delete replay and missing-root sibling isolation
+RESULT 86 passed; 0 failed

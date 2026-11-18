@@ -58,3 +58,10 @@ These checks establish Core behavior and isolated signed-app integration. Native
 ## M5 status integration
 
 A separate status callback publishes loading/rebuild start, completion and failure for Settings. The snapshot supplies count and saved update time, including after reopening. Rebuild disables while active; changing ignore behavior rebuilds asynchronously. A Core fixture verifies start/finish, restored time, ignore changes and root removal during a rebuild. [M5 verification](../verification/runs/2026-11-18T212428Z-m5.md).
+
+
+## M6 resource qualification
+
+[Full-app hidden measurements](../verification/runs/2026-11-18T225138Z-m6.md) include persisted SQLite, real watchers/catalogs, retained preferences/setup, typing and sampled rebuild overlap at 20,000 and 200,000 entries. The fixture generator is outside the measured process. Projects is read-only and only counts enter evidence. These full-graph figures supersede no historical Core-only measurements; they expose additional app costs against DEC-008.
+
+Unchanged file-node writes preserve the existing prepared chunk, including equal application metadata. Actual metadata/membership/children/application changes still create an edit and preserve older snapshots. Completed scans are counted separately from persisted updates, so a no-change recovery scan is observable without an unnecessary publication. The M6 regression checks both unchanged rebuilds and real additions.

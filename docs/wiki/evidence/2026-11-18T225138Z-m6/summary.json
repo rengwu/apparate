@@ -1,0 +1,2929 @@
+{
+  "attempt-1-latency/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "delivery": "task",
+    "elapsed_seconds": 5.873556875,
+    "errors": 0,
+    "fixed_statuses": {
+      "superseded": 73,
+      "view-state": 47
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.6225833333333334,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.10225,
+      "median": 0.04958333333333333,
+      "p95": 0.078625
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 71.022125,
+      "median": 0.5411666666666666,
+      "p95": 2.5425416666666667
+    },
+    "input_to_view_ms": {
+      "count": 47,
+      "max": 68.56345833333333,
+      "median": 2.150625,
+      "p95": 8.828666666666667
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 120,
+      "max": 81.14941666666667,
+      "median": 1.6556666666666668,
+      "p95": 6.219166666666667
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 281.168375,
+      "median": 65.58391666666667,
+      "p95": 229.12975
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Cross-clock mapped worker-to-main is diagnostic only.",
+    "search_ms": {
+      "count": 107,
+      "max": 3.091208,
+      "median": 0.661959,
+      "p95": 2.226208
+    },
+    "stage_probes": true,
+    "statuses": {
+      "superseded": 108,
+      "view-state": 52
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 107,
+      "max": 1.266458,
+      "median": 0.032917,
+      "p95": 0.542666
+    },
+    "worker_to_main_ms": {
+      "count": 54,
+      "max": 64.46516733333328,
+      "median": 0.1259583333333012,
+      "p95": 7.067583999999442
+    },
+    "writing_tools_images": 2
+  },
+  "attempt-1-pipeline/pipeline.json": {
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "elapsed_seconds": 4.070828375,
+    "errors": 0,
+    "file": {
+      "count": 240,
+      "max": 2.9844166666666667,
+      "median": 1.6420833333333333,
+      "p95": 2.505
+    },
+    "focus_guards_checked": true,
+    "matched_hashes": 240,
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_status_items": 0,
+    "on_screen_budgets": "Untested",
+    "pipeline": {
+      "count": 240,
+      "max": 2.9566666666666666,
+      "median": 1.672875,
+      "p95": 2.5250833333333333
+    },
+    "profile": "pipeline",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "schema": 1,
+    "scope": "Same snapshot, parsed query, empty usage, top-50 limit; file-only vs production pipeline; independent reference hash outside timers; stage-probe third invocation separate. Opposite orders, not an end-to-end latency verdict.",
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "visible_profile": "none"
+  },
+  "bare-probes-20000-r1/latency.json": {
+    "bare_field": true,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "delivery": "task",
+    "elapsed_seconds": 6.04151275,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.5680416666666667,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.14075,
+      "median": 0.05358333333333334,
+      "p95": 0.06966666666666667
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 36.65154166666667,
+      "median": 1.617625,
+      "p95": 5.760291666666667
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 30.262375,
+      "median": 4.166166666666666,
+      "p95": 8.992541666666666
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 120,
+      "max": 56.85766666666667,
+      "median": 3.07275,
+      "p95": 6.539541666666667
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 17.01725,
+      "median": 0.17033333333333334,
+      "p95": 1.2499583333333333
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 16.963416666666667,
+      "median": 0.08558333333333333,
+      "p95": 0.9485833333333333
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 6.830459,
+      "median": 1.299875,
+      "p95": 2.787625
+    },
+    "stage_probes": true,
+    "statuses": {
+      "superseded": 37,
+      "view-state": 123
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 6.606125,
+      "median": 0.07416666666666667,
+      "p95": 0.29741666666666666
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.381667,
+      "median": 0.035375,
+      "p95": 0.102125
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 10.748416666666666,
+      "median": 0.9245,
+      "p95": 3.0550416666666664
+    },
+    "writing_tools_images": 2
+  },
+  "bare-probes-20000-r2/latency.json": {
+    "bare_field": true,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "delivery": "task",
+    "elapsed_seconds": 6.026884792,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.6904583333333334,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.14170833333333335,
+      "median": 0.06325,
+      "p95": 0.10633333333333334
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 21.80475,
+      "median": 2.2970833333333336,
+      "p95": 5.947708333333333
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 16.908833333333334,
+      "median": 5.271,
+      "p95": 9.154625
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 120,
+      "max": 41.784333333333336,
+      "median": 3.834,
+      "p95": 7.797833333333333
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 4.944916666666667,
+      "median": 0.23616666666666666,
+      "p95": 1.307
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 4.825333333333333,
+      "median": 0.0975,
+      "p95": 0.9034583333333334
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 4.128083,
+      "median": 1.500791,
+      "p95": 3.357709
+    },
+    "stage_probes": true,
+    "statuses": {
+      "superseded": 37,
+      "view-state": 123
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 1.9239583333333332,
+      "median": 0.10579166666666667,
+      "p95": 0.480375
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.451542,
+      "median": 0.0365,
+      "p95": 0.124292
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 8.605666666666666,
+      "median": 1.1409166666666668,
+      "p95": 2.5321666666666665
+    },
+    "writing_tools_images": 2
+  },
+  "bare-probes-200000-r1/latency.json": {
+    "bare_field": true,
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "delivery": "task",
+    "elapsed_seconds": 7.874502041,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.648625,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.102,
+      "median": 0.05266666666666667,
+      "p95": 0.06970833333333333
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 27.981166666666667,
+      "median": 1.953125,
+      "p95": 7.215416666666667
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 22.155291666666667,
+      "median": 5.672041666666667,
+      "p95": 10.530625
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 120,
+      "max": 48.71225,
+      "median": 3.4530833333333333,
+      "p95": 8.111083333333333
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 8.862,
+      "median": 0.165125,
+      "p95": 0.8196666666666667
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 8.820458333333335,
+      "median": 0.07916666666666668,
+      "p95": 0.6495
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 7.993041,
+      "median": 3.500542,
+      "p95": 6.607666
+    },
+    "stage_probes": true,
+    "statuses": {
+      "superseded": 37,
+      "view-state": 123
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 0.430125,
+      "median": 0.08054166666666668,
+      "p95": 0.19008333333333335
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.272625,
+      "median": 0.032541,
+      "p95": 0.112584
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 6.470916666666667,
+      "median": 0.0535,
+      "p95": 3.202
+    },
+    "writing_tools_images": 2
+  },
+  "bare-probes-200000-r2/latency.json": {
+    "bare_field": true,
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "delivery": "task",
+    "elapsed_seconds": 7.857350584000001,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 2.035375,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.12466666666666668,
+      "median": 0.056541666666666664,
+      "p95": 0.08379166666666667
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 26.41858333333333,
+      "median": 2.1900833333333334,
+      "p95": 5.217416666666667
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 20.832125,
+      "median": 6.955958333333333,
+      "p95": 9.820166666666665
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 120,
+      "max": 46.712625,
+      "median": 4.189916666666666,
+      "p95": 6.992708333333333
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 6.854125,
+      "median": 0.21016666666666667,
+      "p95": 0.7827083333333333
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 6.812708333333333,
+      "median": 0.09929166666666667,
+      "p95": 0.559
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 8.042834,
+      "median": 4.268209,
+      "p95": 6.86925
+    },
+    "stage_probes": true,
+    "statuses": {
+      "superseded": 36,
+      "view-state": 124
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 0.4184583333333333,
+      "median": 0.09454166666666668,
+      "p95": 0.33466666666666667
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.266625,
+      "median": 0.035834,
+      "p95": 0.096083
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 3.7045833333333333,
+      "median": 0.05466666666666666,
+      "p95": 2.380125
+    },
+    "writing_tools_images": 2
+  },
+  "baseline-20000-r1/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "delivery": "task",
+    "elapsed_seconds": 6.034672209,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.653375,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.21425,
+      "median": 0.051958333333333336,
+      "p95": 0.068625
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 42.377833333333335,
+      "median": 2.53975,
+      "p95": 5.546
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 36.12354166666666,
+      "median": 5.369416666666667,
+      "p95": 8.925875
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 0
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 12.905625,
+      "median": 0.25458333333333333,
+      "p95": 2.2657916666666664
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 12.856875,
+      "median": 0.128,
+      "p95": 2.1270416666666665
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 4.890291,
+      "median": 1.861292,
+      "p95": 3.108417
+    },
+    "stage_probes": false,
+    "statuses": {
+      "superseded": 25,
+      "view-state": 135
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 4.201458333333333,
+      "median": 0.09279166666666668,
+      "p95": 0.3494166666666667
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.27725,
+      "median": 0.041625,
+      "p95": 0.123209
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 8.83375,
+      "median": 0.6039583333333334,
+      "p95": 2.1442916666666667
+    },
+    "writing_tools_images": 2
+  },
+  "baseline-20000-r2/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "delivery": "task",
+    "elapsed_seconds": 6.0164093329999995,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.6245416666666667,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.14116666666666666,
+      "median": 0.0635,
+      "p95": 0.10575
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 24.645166666666668,
+      "median": 2.716125,
+      "p95": 6.049875
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 19.214166666666667,
+      "median": 5.741208333333333,
+      "p95": 8.789833333333334
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 0
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 7.411958333333333,
+      "median": 0.23225,
+      "p95": 1.480125
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 7.354041666666667,
+      "median": 0.12716666666666668,
+      "p95": 1.0367083333333333
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 5.511875,
+      "median": 1.872667,
+      "p95": 3.906958
+    },
+    "stage_probes": false,
+    "statuses": {
+      "superseded": 29,
+      "view-state": 131
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 1.4277916666666668,
+      "median": 0.095125,
+      "p95": 0.5635
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.538584,
+      "median": 0.039666,
+      "p95": 0.138084
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 9.043375,
+      "median": 0.7929583333333333,
+      "p95": 2.9995
+    },
+    "writing_tools_images": 2
+  },
+  "baseline-200000-r1/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "delivery": "task",
+    "elapsed_seconds": 7.892779,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.7528333333333334,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.09179166666666667,
+      "median": 0.05379166666666666,
+      "p95": 0.07566666666666667
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 29.980125,
+      "median": 2.4715,
+      "p95": 5.873375
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 23.301583333333333,
+      "median": 7.353791666666667,
+      "p95": 11.309291666666667
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 0
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 6.387541666666667,
+      "median": 0.239,
+      "p95": 1.55875
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 5.915375,
+      "median": 0.10608333333333334,
+      "p95": 1.0510833333333331
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 9.546084,
+      "median": 4.116958,
+      "p95": 7.045917
+    },
+    "stage_probes": false,
+    "statuses": {
+      "superseded": 36,
+      "view-state": 124
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 1.4865416666666667,
+      "median": 0.10833333333333332,
+      "p95": 0.4124583333333333
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.60525,
+      "median": 0.039375,
+      "p95": 0.1145
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 5.954958333333333,
+      "median": 0.056125,
+      "p95": 2.2265416666666664
+    },
+    "writing_tools_images": 2
+  },
+  "baseline-200000-r2/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "delivery": "task",
+    "elapsed_seconds": 7.846479542,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.6256666666666666,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.116,
+      "median": 0.05608333333333334,
+      "p95": 0.08620833333333333
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 24.944625,
+      "median": 1.8211666666666668,
+      "p95": 5.78175
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 19.480958333333334,
+      "median": 6.357458333333333,
+      "p95": 9.82975
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 0
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 2.9804166666666667,
+      "median": 0.18470833333333334,
+      "p95": 0.7061666666666666
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 2.8506666666666667,
+      "median": 0.08533333333333333,
+      "p95": 0.27166666666666667
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 8.547833,
+      "median": 4.099834,
+      "p95": 6.888709
+    },
+    "stage_probes": false,
+    "statuses": {
+      "superseded": 34,
+      "view-state": 126
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 1.304375,
+      "median": 0.08695833333333333,
+      "p95": 0.377625
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.110167,
+      "median": 0.036125,
+      "p95": 0.073875
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 5.124625,
+      "median": 0.0495,
+      "p95": 1.504375
+    },
+    "writing_tools_images": 2
+  },
+  "dispatch-probes-20000-r1/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "delivery": "dispatch",
+    "elapsed_seconds": 6.025357625,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.6300416666666666,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.09920833333333333,
+      "median": 0.05404166666666666,
+      "p95": 0.072875
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 23.09766666666667,
+      "median": 2.1216666666666666,
+      "p95": 5.855458333333333
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 23.03395833333333,
+      "median": 4.765333333333333,
+      "p95": 9.156083333333333
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 120,
+      "max": 34.45995833333333,
+      "median": 3.57425,
+      "p95": 7.331791666666667
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 6.387166666666667,
+      "median": 0.20279166666666665,
+      "p95": 1.6637916666666668
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 5.411416666666667,
+      "median": 0.10745833333333332,
+      "p95": 1.5327916666666668
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 3.986083,
+      "median": 1.304625,
+      "p95": 3.107333
+    },
+    "stage_probes": true,
+    "statuses": {
+      "superseded": 31,
+      "view-state": 129
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 1.3385416666666667,
+      "median": 0.08429166666666667,
+      "p95": 0.3226666666666667
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.218584,
+      "median": 0.036375,
+      "p95": 0.1225
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 15.818666666666665,
+      "median": 0.6168333333333333,
+      "p95": 3.3855416666666667
+    },
+    "writing_tools_images": 2
+  },
+  "dispatch-probes-20000-r2/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "delivery": "dispatch",
+    "elapsed_seconds": 6.045038834,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.563875,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.18370833333333333,
+      "median": 0.052083333333333336,
+      "p95": 0.08166666666666667
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 24.51245833333333,
+      "median": 2.4323333333333337,
+      "p95": 6.04575
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 19.377625,
+      "median": 5.375041666666667,
+      "p95": 9.694291666666667
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 120,
+      "max": 37.24270833333333,
+      "median": 3.7178333333333335,
+      "p95": 7.165875
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 6.574041666666667,
+      "median": 0.2597083333333333,
+      "p95": 2.6127916666666664
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 6.142625,
+      "median": 0.13466666666666666,
+      "p95": 2.3860416666666664
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 4.401333,
+      "median": 1.739167,
+      "p95": 3.234125
+    },
+    "stage_probes": true,
+    "statuses": {
+      "superseded": 25,
+      "view-state": 135
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 2.741375,
+      "median": 0.09966666666666667,
+      "p95": 0.32204166666666667
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 8.479583,
+      "median": 0.042417,
+      "p95": 0.168584
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 6.620083333333333,
+      "median": 0.5077916666666666,
+      "p95": 2.8532083333333333
+    },
+    "writing_tools_images": 2
+  },
+  "dispatch-probes-200000-r1/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "delivery": "dispatch",
+    "elapsed_seconds": 7.877472375,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.9431666666666666,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.14391666666666666,
+      "median": 0.06816666666666667,
+      "p95": 0.09625
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 24.782125,
+      "median": 2.6016666666666666,
+      "p95": 6.042416666666667
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 19.363833333333332,
+      "median": 7.373833333333333,
+      "p95": 10.868916666666665
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 120,
+      "max": 37.127125,
+      "median": 4.48625,
+      "p95": 7.324
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 1.88425,
+      "median": 0.22166666666666665,
+      "p95": 1.5113333333333332
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 1.5000416666666667,
+      "median": 0.10979166666666668,
+      "p95": 0.9805
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 9.166875,
+      "median": 4.20775,
+      "p95": 6.945791
+    },
+    "stage_probes": true,
+    "statuses": {
+      "superseded": 34,
+      "view-state": 126
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 1.34175,
+      "median": 0.091625,
+      "p95": 0.33158333333333334
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.269375,
+      "median": 0.039416,
+      "p95": 0.165916
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 4.436791666666667,
+      "median": 0.0445,
+      "p95": 2.783625
+    },
+    "writing_tools_images": 2
+  },
+  "dispatch-probes-200000-r2/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "delivery": "dispatch",
+    "elapsed_seconds": 7.868089292,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.7452083333333334,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.115125,
+      "median": 0.05354166666666666,
+      "p95": 0.07433333333333333
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 25.918166666666668,
+      "median": 1.9238333333333333,
+      "p95": 6.126916666666667
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 20.840375,
+      "median": 6.53025,
+      "p95": 10.596791666666666
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 120,
+      "max": 38.079125,
+      "median": 3.5689583333333337,
+      "p95": 7.683625
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 4.22275,
+      "median": 0.17854166666666665,
+      "p95": 0.8386666666666667
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 4.079583333333334,
+      "median": 0.09316666666666668,
+      "p95": 0.6308333333333334
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 7.971459,
+      "median": 3.785625,
+      "p95": 6.811958
+    },
+    "stage_probes": true,
+    "statuses": {
+      "superseded": 34,
+      "view-state": 126
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 1.5185833333333332,
+      "median": 0.084,
+      "p95": 0.23058333333333333
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.165834,
+      "median": 0.036625,
+      "p95": 0.091459
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 6.083958333333333,
+      "median": 0.043875,
+      "p95": 2.9406666666666665
+    },
+    "writing_tools_images": 2
+  },
+  "full-20000-r1/full.json": {
+    "after_load_bytes": 43303824,
+    "after_preferences_bytes": 54526888,
+    "after_rebuild_bytes": 59212760,
+    "after_typing_bytes": 52249512,
+    "app_count": 96,
+    "catalog_watch_healthy": true,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "elapsed_seconds": 147.669681833,
+    "errors": 0,
+    "fake_actions": 0,
+    "fake_registrations": 1,
+    "file_count": 20000,
+    "file_watch_healthy": true,
+    "focus_guards_checked": true,
+    "idle": [
+      {
+        "activity_held": false,
+        "catalog_events": 2,
+        "catalog_relevant_events": 2,
+        "catalog_scans": 2,
+        "cpu_percent_one_core": 0.1477341692615303,
+        "cpu_seconds": 0.09948100000000015,
+        "file_updates": 0,
+        "interrupt_wakeups": 9,
+        "package_idle_wakeups": 0,
+        "quiet": false,
+        "seconds": 67.337841
+      },
+      {
+        "activity_held": false,
+        "catalog_events": 0,
+        "catalog_relevant_events": 0,
+        "catalog_scans": 0,
+        "cpu_percent_one_core": 0.0010169435578098488,
+        "cpu_seconds": 0.0006700000000003925,
+        "file_updates": 0,
+        "interrupt_wakeups": 2,
+        "package_idle_wakeups": 0,
+        "quiet": true,
+        "seconds": 65.88369579166665
+      }
+    ],
+    "loaded_from_disk": true,
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_status_items": 0,
+    "on_screen_budgets": "Untested",
+    "profile": "full",
+    "protected_folder_probes": 0,
+    "rebuild_ms": 479.2739166666667,
+    "rebuild_sample_failures": 0,
+    "rebuild_sample_gap_ms": {
+      "count": 19,
+      "max": 27.70854166666667,
+      "median": 24.999166666666667,
+      "p95": 27.70854166666667
+    },
+    "rebuild_sampled_peak_bytes": 60490712,
+    "rebuild_samples": 20,
+    "rebuild_sampling": "25 ms requested, sampled lower bound; no shipping helper process; sampler stopped before idle",
+    "result": "Passed",
+    "schema": 1,
+    "scope": "Full retained production graph, isolated persisted SQLite, real filesystem/catalog/config watchers, real app and settings sources; hidden preferences layout, fake global effects. Fixture generator external and absent from app. No presented windows or screen capture.",
+    "settings_count": 730,
+    "stderr_bytes": 0,
+    "stdout_bytes": 54,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "visible_profile": "none"
+  },
+  "full-20000-r2/full.json": {
+    "after_load_bytes": 42599288,
+    "after_preferences_bytes": 53724072,
+    "after_rebuild_bytes": 58786776,
+    "after_typing_bytes": 51413928,
+    "app_count": 96,
+    "catalog_watch_healthy": true,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "elapsed_seconds": 79.614770667,
+    "errors": 0,
+    "fake_actions": 0,
+    "fake_registrations": 1,
+    "file_count": 20000,
+    "file_watch_healthy": true,
+    "focus_guards_checked": true,
+    "idle": [
+      {
+        "activity_held": false,
+        "catalog_events": 0,
+        "catalog_relevant_events": 0,
+        "catalog_scans": 0,
+        "cpu_percent_one_core": 0.005903690129050578,
+        "cpu_seconds": 0.0040199999999996905,
+        "file_updates": 0,
+        "interrupt_wakeups": 6,
+        "package_idle_wakeups": 0,
+        "quiet": true,
+        "seconds": 68.09300474999999
+      }
+    ],
+    "loaded_from_disk": true,
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_status_items": 0,
+    "on_screen_budgets": "Untested",
+    "profile": "full",
+    "protected_folder_probes": 0,
+    "rebuild_ms": 455.7520416666667,
+    "rebuild_sample_failures": 0,
+    "rebuild_sample_gap_ms": {
+      "count": 18,
+      "max": 30.62516666666667,
+      "median": 28.629541666666668,
+      "p95": 30.62516666666667
+    },
+    "rebuild_sampled_peak_bytes": 59802584,
+    "rebuild_samples": 19,
+    "rebuild_sampling": "25 ms requested, sampled lower bound; no shipping helper process; sampler stopped before idle",
+    "result": "Passed",
+    "schema": 1,
+    "scope": "Full retained production graph, isolated persisted SQLite, real filesystem/catalog/config watchers, real app and settings sources; hidden preferences layout, fake global effects. Fixture generator external and absent from app. No presented windows or screen capture.",
+    "settings_count": 730,
+    "stderr_bytes": 0,
+    "stdout_bytes": 27,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "visible_profile": "none"
+  },
+  "full-200000-r1/full.json": {
+    "after_load_bytes": 95650704,
+    "after_preferences_bytes": 107037704,
+    "after_rebuild_bytes": 155829280,
+    "after_typing_bytes": 104694744,
+    "app_count": 96,
+    "catalog_watch_healthy": true,
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "elapsed_seconds": 84.76374695800001,
+    "errors": 0,
+    "fake_actions": 0,
+    "fake_registrations": 1,
+    "file_count": 200000,
+    "file_watch_healthy": true,
+    "focus_guards_checked": true,
+    "idle": [
+      {
+        "activity_held": false,
+        "catalog_events": 0,
+        "catalog_relevant_events": 0,
+        "catalog_scans": 0,
+        "cpu_percent_one_core": 0.005438264658080954,
+        "cpu_seconds": 0.003697999999999979,
+        "file_updates": 0,
+        "interrupt_wakeups": 6,
+        "package_idle_wakeups": 0,
+        "quiet": true,
+        "seconds": 67.99963283333334
+      }
+    ],
+    "loaded_from_disk": true,
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_status_items": 0,
+    "on_screen_budgets": "Untested",
+    "profile": "full",
+    "protected_folder_probes": 0,
+    "rebuild_ms": 4427.733166666667,
+    "rebuild_sample_failures": 0,
+    "rebuild_sample_gap_ms": {
+      "count": 177,
+      "max": 32.768208333333334,
+      "median": 24.99216666666667,
+      "p95": 30.20191666666667
+    },
+    "rebuild_sampled_peak_bytes": 164643872,
+    "rebuild_samples": 178,
+    "rebuild_sampling": "25 ms requested, sampled lower bound; no shipping helper process; sampler stopped before idle",
+    "result": "Passed",
+    "schema": 1,
+    "scope": "Full retained production graph, isolated persisted SQLite, real filesystem/catalog/config watchers, real app and settings sources; hidden preferences layout, fake global effects. Fixture generator external and absent from app. No presented windows or screen capture.",
+    "settings_count": 730,
+    "stderr_bytes": 0,
+    "stdout_bytes": 27,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "visible_profile": "none"
+  },
+  "full-200000-r2/full.json": {
+    "after_load_bytes": 95716240,
+    "after_preferences_bytes": 107119624,
+    "after_rebuild_bytes": 155960352,
+    "after_typing_bytes": 104809432,
+    "app_count": 96,
+    "catalog_watch_healthy": true,
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "elapsed_seconds": 82.53556983300001,
+    "errors": 0,
+    "fake_actions": 0,
+    "fake_registrations": 1,
+    "file_count": 200000,
+    "file_watch_healthy": true,
+    "focus_guards_checked": true,
+    "idle": [
+      {
+        "activity_held": false,
+        "catalog_events": 0,
+        "catalog_relevant_events": 0,
+        "catalog_scans": 0,
+        "cpu_percent_one_core": 0.10977536177662439,
+        "cpu_seconds": 0.07245299999999943,
+        "file_updates": 0,
+        "interrupt_wakeups": 7,
+        "package_idle_wakeups": 0,
+        "quiet": true,
+        "seconds": 66.00114891666666
+      }
+    ],
+    "loaded_from_disk": true,
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_status_items": 0,
+    "on_screen_budgets": "Untested",
+    "profile": "full",
+    "protected_folder_probes": 0,
+    "rebuild_ms": 4329.808791666667,
+    "rebuild_sample_failures": 0,
+    "rebuild_sample_gap_ms": {
+      "count": 172,
+      "max": 33.13725,
+      "median": 25.00570833333333,
+      "p95": 29.793333333333333
+    },
+    "rebuild_sampled_peak_bytes": 164774944,
+    "rebuild_samples": 173,
+    "rebuild_sampling": "25 ms requested, sampled lower bound; no shipping helper process; sampler stopped before idle",
+    "result": "Passed",
+    "schema": 1,
+    "scope": "Full retained production graph, isolated persisted SQLite, real filesystem/catalog/config watchers, real app and settings sources; hidden preferences layout, fake global effects. Fixture generator external and absent from app. No presented windows or screen capture.",
+    "settings_count": 730,
+    "stderr_bytes": 0,
+    "stdout_bytes": 27,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "visible_profile": "none"
+  },
+  "pipeline-20000/pipeline.json": {
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "elapsed_seconds": 0.843291667,
+    "errors": 0,
+    "file": {
+      "count": 240,
+      "max": 1.4332083333333332,
+      "median": 0.4660833333333333,
+      "p95": 1.0124166666666665
+    },
+    "focus_guards_checked": true,
+    "matched_hashes": 240,
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_status_items": 0,
+    "on_screen_budgets": "Untested",
+    "pipeline": {
+      "count": 240,
+      "max": 1.4385416666666668,
+      "median": 0.510125,
+      "p95": 1.0614583333333332
+    },
+    "profile": "pipeline",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "schema": 1,
+    "scope": "Same snapshot, parsed query, empty usage, top-50 limit; file-only vs production pipeline; independent reference hash outside timers; stage-probe third invocation separate. Opposite orders, not an end-to-end latency verdict.",
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "visible_profile": "none"
+  },
+  "pipeline-200000/pipeline.json": {
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "elapsed_seconds": 3.629158791,
+    "errors": 0,
+    "file": {
+      "count": 240,
+      "max": 3.1569166666666666,
+      "median": 1.612,
+      "p95": 2.5997916666666665
+    },
+    "focus_guards_checked": true,
+    "matched_hashes": 240,
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_status_items": 0,
+    "on_screen_budgets": "Untested",
+    "pipeline": {
+      "count": 240,
+      "max": 3.076125,
+      "median": 1.6335833333333332,
+      "p95": 2.6264166666666666
+    },
+    "profile": "pipeline",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "schema": 1,
+    "scope": "Same snapshot, parsed query, empty usage, top-50 limit; file-only vs production pipeline; independent reference hash outside timers; stage-probe third invocation separate. Opposite orders, not an end-to-end latency verdict.",
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "visible_profile": "none"
+  },
+  "post-fix/baseline-20000-r1/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "delivery": "task",
+    "elapsed_seconds": 6.081381958000001,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.607625,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 1.5381666666666667,
+      "median": 0.05325,
+      "p95": 0.072875
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 40.60775,
+      "median": 4.203875,
+      "p95": 9.522666666666666
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 34.713875,
+      "median": 9.629625,
+      "p95": 15.366958333333335
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 0
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 15.372791666666666,
+      "median": 0.2675,
+      "p95": 4.490583333333333
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 15.32075,
+      "median": 0.11604166666666667,
+      "p95": 4.285625
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 8.394458,
+      "median": 2.69425,
+      "p95": 5.995167
+    },
+    "stage_probes": false,
+    "statuses": {
+      "superseded": 36,
+      "view-state": 124
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 2.2188333333333334,
+      "median": 0.12258333333333332,
+      "p95": 0.9381666666666666
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 2.114791,
+      "median": 0.0455,
+      "p95": 0.141709
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 8.955083333333334,
+      "median": 1.9219166666666667,
+      "p95": 4.449583333333333
+    },
+    "writing_tools_images": 2
+  },
+  "post-fix/baseline-20000-r2/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "delivery": "task",
+    "elapsed_seconds": 6.1053616250000005,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.5867083333333334,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.119375,
+      "median": 0.056,
+      "p95": 0.08254166666666667
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 50.01025,
+      "median": 2.3723333333333336,
+      "p95": 9.034416666666665
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 42.299708333333335,
+      "median": 7.953916666666667,
+      "p95": 15.355083333333335
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 0
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 27.110666666666667,
+      "median": 0.21945833333333334,
+      "p95": 3.2075833333333335
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 27.046541666666666,
+      "median": 0.112375,
+      "p95": 2.03075
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 10.366541,
+      "median": 2.065833,
+      "p95": 5.344584
+    },
+    "stage_probes": false,
+    "statuses": {
+      "superseded": 37,
+      "view-state": 123
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 2.089541666666667,
+      "median": 0.10091666666666667,
+      "p95": 1.4354166666666668
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.128167,
+      "median": 0.043958,
+      "p95": 0.078916
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 9.8835,
+      "median": 1.1290416666666667,
+      "p95": 6.346541666666667
+    },
+    "writing_tools_images": 2
+  },
+  "post-fix/baseline-200000-r1/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "delivery": "task",
+    "elapsed_seconds": 7.956931458000001,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.6345833333333334,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.09654166666666668,
+      "median": 0.05433333333333334,
+      "p95": 0.071375
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 32.415375,
+      "median": 2.53,
+      "p95": 10.76675
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 27.0175,
+      "median": 11.186875,
+      "p95": 18.95945833333333
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 0
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 12.724,
+      "median": 0.21529166666666666,
+      "p95": 3.997375
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 12.433666666666666,
+      "median": 0.10041666666666667,
+      "p95": 0.7617916666666666
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 17.5875,
+      "median": 7.227209,
+      "p95": 13.188583
+    },
+    "stage_probes": false,
+    "statuses": {
+      "superseded": 36,
+      "view-state": 124
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 4.90925,
+      "median": 0.10920833333333332,
+      "p95": 1.2255833333333332
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.265583,
+      "median": 0.046416,
+      "p95": 0.106167
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 5.785208333333333,
+      "median": 0.08725,
+      "p95": 3.7207916666666665
+    },
+    "writing_tools_images": 2
+  },
+  "post-fix/baseline-200000-r2/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "delivery": "task",
+    "elapsed_seconds": 7.942612250000001,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.70375,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.18966666666666665,
+      "median": 0.05445833333333334,
+      "p95": 0.07545833333333332
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 35.43879166666667,
+      "median": 3.7967916666666666,
+      "p95": 11.020416666666666
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 29.338083333333334,
+      "median": 12.024875,
+      "p95": 18.963583333333332
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 0
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 8.678458333333333,
+      "median": 0.19875,
+      "p95": 1.5580833333333333
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 8.625083333333334,
+      "median": 0.09758333333333333,
+      "p95": 0.652625
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 17.091584,
+      "median": 7.586292,
+      "p95": 14.0825
+    },
+    "stage_probes": false,
+    "statuses": {
+      "superseded": 37,
+      "view-state": 123
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 3.80875,
+      "median": 0.091125,
+      "p95": 1.148125
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.105542,
+      "median": 0.043,
+      "p95": 0.0815
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 11.000125,
+      "median": 0.09895833333333333,
+      "p95": 3.8299583333333334
+    },
+    "writing_tools_images": 2
+  },
+  "post-fix/full-20000-r1/full.json": {
+    "after_idle_bytes": 45351896,
+    "after_load_bytes": 40502160,
+    "after_preferences_bytes": 49595352,
+    "after_rebuild_bytes": 49628120,
+    "after_typing_bytes": 47252392,
+    "app_count": 96,
+    "catalog_watch_healthy": true,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "elapsed_seconds": 78.250356042,
+    "errors": 0,
+    "fake_actions": 0,
+    "fake_registrations": 1,
+    "file_count": 20000,
+    "file_watch_healthy": true,
+    "focus_guards_checked": true,
+    "idle": [
+      {
+        "activity_held": false,
+        "catalog_events": 0,
+        "catalog_relevant_events": 0,
+        "catalog_scans": 0,
+        "cpu_percent_one_core": 0.005751040038310627,
+        "cpu_seconds": 0.0038559999999998595,
+        "file_scans": 0,
+        "file_updates": 0,
+        "interrupt_wakeups": 6,
+        "package_idle_wakeups": 0,
+        "quiet": true,
+        "seconds": 67.04874204166666
+      }
+    ],
+    "loaded_from_disk": true,
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_status_items": 0,
+    "on_screen_budgets": "Untested",
+    "profile": "full",
+    "protected_folder_probes": 0,
+    "rebuild_ms": 418.60241666666667,
+    "rebuild_prepared_chunks": 0,
+    "rebuild_sample_failures": 0,
+    "rebuild_sample_gap_ms": {
+      "count": 16,
+      "max": 28.12091666666667,
+      "median": 25.00241666666667,
+      "p95": 28.12091666666667
+    },
+    "rebuild_sampled_peak_bytes": 50414552,
+    "rebuild_samples": 17,
+    "rebuild_sampling": "25 ms requested, sampled lower bound; no shipping helper process; sampler stopped before idle",
+    "result": "Passed",
+    "schema": 1,
+    "scope": "Full retained production graph, isolated persisted SQLite, real filesystem/catalog/config watchers, real app and settings sources; hidden preferences layout, fake global effects. Fixture generator external and absent from app. No presented windows or screen capture.",
+    "settings_count": 730,
+    "stderr_bytes": 0,
+    "stdout_bytes": 27,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "visible_profile": "none"
+  },
+  "post-fix/full-20000-r2/full.json": {
+    "after_idle_bytes": 49267696,
+    "after_load_bytes": 40600464,
+    "after_preferences_bytes": 49431536,
+    "after_rebuild_bytes": 49480688,
+    "after_typing_bytes": 47006656,
+    "app_count": 96,
+    "catalog_watch_healthy": true,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "elapsed_seconds": 79.488072,
+    "errors": 0,
+    "fake_actions": 0,
+    "fake_registrations": 1,
+    "file_count": 20000,
+    "file_watch_healthy": true,
+    "focus_guards_checked": true,
+    "idle": [
+      {
+        "activity_held": false,
+        "catalog_events": 0,
+        "catalog_relevant_events": 0,
+        "catalog_scans": 0,
+        "cpu_percent_one_core": 0.005555478409727844,
+        "cpu_seconds": 0.0037840000000004537,
+        "file_scans": 0,
+        "file_updates": 0,
+        "interrupt_wakeups": 5,
+        "package_idle_wakeups": 0,
+        "quiet": true,
+        "seconds": 68.11294583333333
+      }
+    ],
+    "loaded_from_disk": true,
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_status_items": 0,
+    "on_screen_budgets": "Untested",
+    "profile": "full",
+    "protected_folder_probes": 0,
+    "rebuild_ms": 434.2128333333333,
+    "rebuild_prepared_chunks": 0,
+    "rebuild_sample_failures": 0,
+    "rebuild_sample_gap_ms": {
+      "count": 17,
+      "max": 28.5275,
+      "median": 24.974,
+      "p95": 28.5275
+    },
+    "rebuild_sampled_peak_bytes": 56411120,
+    "rebuild_samples": 18,
+    "rebuild_sampling": "25 ms requested, sampled lower bound; no shipping helper process; sampler stopped before idle",
+    "result": "Passed",
+    "schema": 1,
+    "scope": "Full retained production graph, isolated persisted SQLite, real filesystem/catalog/config watchers, real app and settings sources; hidden preferences layout, fake global effects. Fixture generator external and absent from app. No presented windows or screen capture.",
+    "settings_count": 730,
+    "stderr_bytes": 0,
+    "stdout_bytes": 27,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "visible_profile": "none"
+  },
+  "post-fix/full-200000-r1/full.json": {
+    "after_idle_bytes": 102794224,
+    "after_load_bytes": 93782952,
+    "after_preferences_bytes": 102925320,
+    "after_rebuild_bytes": 102892552,
+    "after_typing_bytes": 100549616,
+    "app_count": 96,
+    "catalog_watch_healthy": true,
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "elapsed_seconds": 83.203890083,
+    "errors": 0,
+    "fake_actions": 0,
+    "fake_registrations": 1,
+    "file_count": 200000,
+    "file_watch_healthy": true,
+    "focus_guards_checked": true,
+    "idle": [
+      {
+        "activity_held": false,
+        "catalog_events": 0,
+        "catalog_relevant_events": 0,
+        "catalog_scans": 0,
+        "cpu_percent_one_core": 0.007430692914626052,
+        "cpu_seconds": 0.004959000000001268,
+        "file_scans": 0,
+        "file_updates": 0,
+        "interrupt_wakeups": 7,
+        "package_idle_wakeups": 0,
+        "quiet": true,
+        "seconds": 66.73671025
+      }
+    ],
+    "loaded_from_disk": true,
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_status_items": 0,
+    "on_screen_budgets": "Untested",
+    "profile": "full",
+    "protected_folder_probes": 0,
+    "rebuild_ms": 3882.1522083333334,
+    "rebuild_prepared_chunks": 0,
+    "rebuild_sample_failures": 0,
+    "rebuild_sample_gap_ms": {
+      "count": 154,
+      "max": 34.76383333333334,
+      "median": 24.995541666666668,
+      "p95": 32.934333333333335
+    },
+    "rebuild_sampled_peak_bytes": 111707144,
+    "rebuild_samples": 155,
+    "rebuild_sampling": "25 ms requested, sampled lower bound; no shipping helper process; sampler stopped before idle",
+    "result": "Passed",
+    "schema": 1,
+    "scope": "Full retained production graph, isolated persisted SQLite, real filesystem/catalog/config watchers, real app and settings sources; hidden preferences layout, fake global effects. Fixture generator external and absent from app. No presented windows or screen capture.",
+    "settings_count": 730,
+    "stderr_bytes": 0,
+    "stdout_bytes": 27,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "visible_profile": "none"
+  },
+  "post-fix/full-200000-r2/full.json": {
+    "after_idle_bytes": 97698800,
+    "after_load_bytes": 93799336,
+    "after_preferences_bytes": 102892504,
+    "after_rebuild_bytes": 103023600,
+    "after_typing_bytes": 100467672,
+    "app_count": 96,
+    "catalog_watch_healthy": true,
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "elapsed_seconds": 84.175268209,
+    "errors": 0,
+    "fake_actions": 0,
+    "fake_registrations": 1,
+    "file_count": 200000,
+    "file_watch_healthy": true,
+    "focus_guards_checked": true,
+    "idle": [
+      {
+        "activity_held": false,
+        "catalog_events": 0,
+        "catalog_relevant_events": 0,
+        "catalog_scans": 0,
+        "cpu_percent_one_core": 0.05121668765127025,
+        "cpu_seconds": 0.034725999999999146,
+        "file_scans": 0,
+        "file_updates": 0,
+        "interrupt_wakeups": 8,
+        "package_idle_wakeups": 0,
+        "quiet": true,
+        "seconds": 67.80211995833334
+      }
+    ],
+    "loaded_from_disk": true,
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_status_items": 0,
+    "on_screen_budgets": "Untested",
+    "profile": "full",
+    "protected_folder_probes": 0,
+    "rebuild_ms": 3949.8355,
+    "rebuild_prepared_chunks": 0,
+    "rebuild_sample_failures": 0,
+    "rebuild_sample_gap_ms": {
+      "count": 157,
+      "max": 33.589125,
+      "median": 23.114416666666667,
+      "p95": 32.05608333333333
+    },
+    "rebuild_sampled_peak_bytes": 106497008,
+    "rebuild_samples": 158,
+    "rebuild_sampling": "25 ms requested, sampled lower bound; no shipping helper process; sampler stopped before idle",
+    "result": "Passed",
+    "schema": 1,
+    "scope": "Full retained production graph, isolated persisted SQLite, real filesystem/catalog/config watchers, real app and settings sources; hidden preferences layout, fake global effects. Fixture generator external and absent from app. No presented windows or screen capture.",
+    "settings_count": 730,
+    "stderr_bytes": 0,
+    "stdout_bytes": 27,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "visible_profile": "none"
+  },
+  "post-fix/pipeline-20000/pipeline.json": {
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "elapsed_seconds": 0.792469375,
+    "errors": 0,
+    "file": {
+      "count": 240,
+      "max": 1.2802083333333332,
+      "median": 0.4483333333333333,
+      "p95": 0.94075
+    },
+    "focus_guards_checked": true,
+    "matched_hashes": 240,
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_status_items": 0,
+    "on_screen_budgets": "Untested",
+    "pipeline": {
+      "count": 240,
+      "max": 1.2818333333333332,
+      "median": 0.474875,
+      "p95": 0.972625
+    },
+    "profile": "pipeline",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "schema": 1,
+    "scope": "Same snapshot, parsed query, empty usage, top-50 limit; file-only vs production pipeline; independent reference hash outside timers; stage-probe third invocation separate. Opposite orders, not an end-to-end latency verdict.",
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "visible_profile": "none"
+  },
+  "post-fix/pipeline-200000/pipeline.json": {
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "elapsed_seconds": 3.66399775,
+    "errors": 0,
+    "file": {
+      "count": 240,
+      "max": 3.07025,
+      "median": 1.618375,
+      "p95": 2.4810833333333333
+    },
+    "focus_guards_checked": true,
+    "matched_hashes": 240,
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_status_items": 0,
+    "on_screen_budgets": "Untested",
+    "pipeline": {
+      "count": 240,
+      "max": 2.9989166666666667,
+      "median": 1.6405833333333333,
+      "p95": 2.6922916666666663
+    },
+    "profile": "pipeline",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "schema": 1,
+    "scope": "Same snapshot, parsed query, empty usage, top-50 limit; file-only vs production pipeline; independent reference hash outside timers; stage-probe third invocation separate. Opposite orders, not an end-to-end latency verdict.",
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "visible_profile": "none"
+  },
+  "post-fix/projects/full.json": {
+    "after_idle_bytes": 44942296,
+    "after_load_bytes": 37421944,
+    "after_preferences_bytes": 45204440,
+    "after_rebuild_bytes": 45138904,
+    "after_typing_bytes": 42697640,
+    "app_count": 96,
+    "catalog_watch_healthy": true,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "elapsed_seconds": 77.55344425,
+    "errors": 0,
+    "fake_actions": 0,
+    "fake_registrations": 1,
+    "file_count": 12543,
+    "file_watch_healthy": true,
+    "focus_guards_checked": true,
+    "idle": [
+      {
+        "activity_held": false,
+        "catalog_events": 0,
+        "catalog_relevant_events": 0,
+        "catalog_scans": 0,
+        "cpu_percent_one_core": 0.0037495312849090043,
+        "cpu_seconds": 0.0024740000000003093,
+        "file_scans": 0,
+        "file_updates": 0,
+        "interrupt_wakeups": 4,
+        "package_idle_wakeups": 0,
+        "quiet": true,
+        "seconds": 65.98158041666666
+      }
+    ],
+    "loaded_from_disk": true,
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_status_items": 0,
+    "on_screen_budgets": "Untested",
+    "profile": "full",
+    "protected_folder_probes": 0,
+    "rebuild_ms": 534.3294166666667,
+    "rebuild_prepared_chunks": 0,
+    "rebuild_sample_failures": 0,
+    "rebuild_sample_gap_ms": {
+      "count": 21,
+      "max": 29.09425,
+      "median": 25.000208333333333,
+      "p95": 28.142791666666668
+    },
+    "rebuild_sampled_peak_bytes": 46236632,
+    "rebuild_samples": 22,
+    "rebuild_sampling": "25 ms requested, sampled lower bound; no shipping helper process; sampler stopped before idle",
+    "result": "Passed",
+    "schema": 1,
+    "scope": "Full retained production graph, isolated persisted SQLite, real filesystem/catalog/config watchers, real app and settings sources; hidden preferences layout, fake global effects. Fixture generator external and absent from app. No presented windows or screen capture.",
+    "settings_count": 730,
+    "stderr_bytes": 0,
+    "stdout_bytes": 27,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "visible_profile": "none"
+  },
+  "search-probes-20000-r1/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "delivery": "task",
+    "elapsed_seconds": 6.0275495,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.6082083333333334,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.120625,
+      "median": 0.05175,
+      "p95": 0.07158333333333333
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 26.51308333333333,
+      "median": 2.361625,
+      "p95": 6.678916666666667
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 21.07633333333333,
+      "median": 5.646125,
+      "p95": 8.895875
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 120,
+      "max": 39.36204166666666,
+      "median": 3.9690833333333333,
+      "p95": 7.61775
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 5.453708333333333,
+      "median": 0.24108333333333334,
+      "p95": 1.8868333333333334
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 3.0865833333333335,
+      "median": 0.134,
+      "p95": 0.867375
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 4.354833,
+      "median": 1.832875,
+      "p95": 4.0545
+    },
+    "stage_probes": true,
+    "statuses": {
+      "superseded": 29,
+      "view-state": 131
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 4.785291666666667,
+      "median": 0.102375,
+      "p95": 0.424125
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.9175,
+      "median": 0.035708,
+      "p95": 0.108417
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 6.134,
+      "median": 0.676125,
+      "p95": 2.187375
+    },
+    "writing_tools_images": 2
+  },
+  "search-probes-20000-r2/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "delivery": "task",
+    "elapsed_seconds": 6.026175541,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.6112083333333334,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.241625,
+      "median": 0.0595,
+      "p95": 0.088625
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 30.6535,
+      "median": 2.26725,
+      "p95": 5.298958333333333
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 23.871958333333332,
+      "median": 5.146416666666667,
+      "p95": 8.260333333333334
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 120,
+      "max": 43.980875,
+      "median": 3.6255416666666664,
+      "p95": 6.675958333333333
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 10.716416666666666,
+      "median": 0.23154166666666665,
+      "p95": 2.3855416666666667
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 10.644916666666665,
+      "median": 0.11129166666666668,
+      "p95": 1.560125
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 4.575542,
+      "median": 1.645625,
+      "p95": 3.057083
+    },
+    "stage_probes": true,
+    "statuses": {
+      "superseded": 31,
+      "view-state": 129
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 1.928875,
+      "median": 0.09383333333333332,
+      "p95": 0.462875
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.366542,
+      "median": 0.0395,
+      "p95": 0.114417
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 7.87175,
+      "median": 0.5430416666666666,
+      "p95": 3.0035
+    },
+    "writing_tools_images": 2
+  },
+  "search-probes-200000-r1/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "delivery": "task",
+    "elapsed_seconds": 7.870108167,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.66,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.0765,
+      "median": 0.051125,
+      "p95": 0.06316666666666666
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 27.810166666666667,
+      "median": 2.2371666666666665,
+      "p95": 5.83675
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 22.359041666666666,
+      "median": 6.058916666666667,
+      "p95": 10.542166666666667
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 120,
+      "max": 40.837,
+      "median": 3.6528333333333336,
+      "p95": 7.6647083333333335
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 2.5352083333333333,
+      "median": 0.190625,
+      "p95": 0.7959166666666666
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 2.4164583333333334,
+      "median": 0.08891666666666667,
+      "p95": 0.6295833333333334
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 9.305584,
+      "median": 3.648542,
+      "p95": 7.905125
+    },
+    "stage_probes": true,
+    "statuses": {
+      "superseded": 34,
+      "view-state": 126
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 0.619375,
+      "median": 0.08929166666666667,
+      "p95": 0.266
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.995792,
+      "median": 0.033166,
+      "p95": 0.159708
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 3.6106666666666665,
+      "median": 0.05279166666666667,
+      "p95": 2.1090833333333334
+    },
+    "writing_tools_images": 2
+  },
+  "search-probes-200000-r2/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 200000,
+    "delivery": "task",
+    "elapsed_seconds": 7.895467375,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.865125,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.126375,
+      "median": 0.06245833333333334,
+      "p95": 0.10820833333333332
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 23.364708333333333,
+      "median": 1.9287083333333332,
+      "p95": 5.712041666666667
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 18.128666666666668,
+      "median": 7.072583333333333,
+      "p95": 10.001333333333333
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 120,
+      "max": 36.84591666666667,
+      "median": 3.6179166666666664,
+      "p95": 8.144541666666667
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 1.8037916666666667,
+      "median": 0.17758333333333334,
+      "p95": 0.6937083333333334
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 1.7326666666666668,
+      "median": 0.082375,
+      "p95": 0.3550416666666667
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 9.204834,
+      "median": 4.399417,
+      "p95": 6.926708
+    },
+    "stage_probes": true,
+    "statuses": {
+      "superseded": 34,
+      "view-state": 126
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 0.6767083333333334,
+      "median": 0.07775,
+      "p95": 0.3757083333333333
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.139292,
+      "median": 0.032417,
+      "p95": 0.081291
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 4.786125,
+      "median": 0.049291666666666664,
+      "p95": 2.481625
+    },
+    "writing_tools_images": 2
+  },
+  "strict-native-check-3/latency.json": {
+    "bare_field": false,
+    "clock": "mach_absolute_time",
+    "count": 20000,
+    "delivery": "task",
+    "elapsed_seconds": 6.328132792,
+    "errors": 0,
+    "fixed_statuses": {
+      "view-state": 120
+    },
+    "focus_guards_checked": true,
+    "hidden_cold_show_ms": 0.623,
+    "hidden_warm_show_ms": {
+      "count": 100,
+      "max": 0.11179166666666668,
+      "median": 0.053375,
+      "p95": 0.07395833333333333
+    },
+    "input_handler_ms": {
+      "count": 120,
+      "max": 29.079083333333333,
+      "median": 1.2844583333333333,
+      "p95": 4.737875
+    },
+    "input_to_view_ms": {
+      "count": 120,
+      "max": 23.00916666666667,
+      "median": 3.0922916666666667,
+      "p95": 7.226708333333333
+    },
+    "native_actions": 0,
+    "native_hotkey_registrations": 0,
+    "native_login_changes": 0,
+    "native_marker_round_trips": 5,
+    "native_status_items": 0,
+    "noop_main_queue_ms": {
+      "count": 120,
+      "max": 41.94025,
+      "median": 1.8552916666666668,
+      "p95": 5.64425
+    },
+    "on_screen_budgets": "Untested",
+    "profile": "latency",
+    "protected_folder_probes": 0,
+    "result": "Passed",
+    "result_mismatches": 0,
+    "scheduled_to_input_ms": {
+      "count": 120,
+      "max": 3.8375833333333333,
+      "median": 0.13220833333333334,
+      "p95": 1.5543333333333333
+    },
+    "scheduler_to_main_ms": {
+      "count": 120,
+      "max": 3.6725416666666666,
+      "median": 0.05975,
+      "p95": 1.4120416666666666
+    },
+    "schema": 1,
+    "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+    "search_ms": {
+      "count": 114,
+      "max": 4.796375,
+      "median": 1.012292,
+      "p95": 3.038333
+    },
+    "stage_probes": true,
+    "statuses": {
+      "superseded": 26,
+      "view-state": 134
+    },
+    "stderr_bytes": 0,
+    "stdout_bytes": 0,
+    "symbolichotkeys_writes": 0,
+    "thermal_end": 0,
+    "thermal_start": 0,
+    "timebase_denom": 3,
+    "timebase_numer": 125,
+    "timer_lateness_ms": {
+      "count": 120,
+      "max": 0.3544166666666667,
+      "median": 0.068,
+      "p95": 0.16075
+    },
+    "visible_profile": "none",
+    "worker_queue_ms": {
+      "count": 114,
+      "max": 0.278791,
+      "median": 0.030416,
+      "p95": 0.094833
+    },
+    "worker_to_main_ms": {
+      "count": 114,
+      "max": 6.291333333333333,
+      "median": 0.13179166666666667,
+      "p95": 2.5195416666666666
+    },
+    "writing_tools_images": 2
+  }
+}

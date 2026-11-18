@@ -1,0 +1,45 @@
+{
+  "purpose": "Normalize machine path prefixes only; preserve numerical values, failures and original hashes",
+  "files": [
+    {
+      "file": "build-2.log",
+      "original_sha256": "1d1947b82b6b53f53628350dab9a2d07560e5f8cff67131d6080bb4cee45d4b2",
+      "retained_sha256": "61007dde7e63a81450c4681d7520b1268d6810c0f4647dfe3cb45a9288b0bf41"
+    },
+    {
+      "file": "observer-build.log",
+      "original_sha256": "a1131b1b52e65d1b04f96e7a865d3c78a1fb7ad2c7601ebebf397d1ef869b93f",
+      "retained_sha256": "c6081056ef65c0f9e4a2e8e5e5dec12ff0efd0a11a8befdef7b4ee92b41aebaf"
+    },
+    {
+      "file": "tests-release-build.log",
+      "original_sha256": "b840c2d82f5e3afabc955705f93fd8fcca07fd22e3f4e34f095e4192cefd4355",
+      "retained_sha256": "e6bb24de9e009ab787ae093356821649d8afae13bffcfcb35c5cfb24b03dac98"
+    },
+    {
+      "file": "build.log",
+      "original_sha256": "78eda3cfc5cfe7b1fd9cfa3a9cd09d264181a6e7a30f2e1ba78722b5aad1c903",
+      "retained_sha256": "86d5c3d07b0b5b93efa27628ebe754c5c6fe232c7d8e97c93fc7c3f524bcd535"
+    },
+    {
+      "file": "post-fix/tests-debug-2.log",
+      "original_sha256": "32e169a87bd7417470c4c441c555b01d2786969b6c5a18f621e9201e336ba17a",
+      "retained_sha256": "691cb58faebdb8786e4c4330c2f88d53bc422c8554e261937aab97e04d7f04e4"
+    },
+    {
+      "file": "post-fix/tests-debug.log",
+      "original_sha256": "0c39a5edce94d630c5af041b37e079ed145766c28573aba66574918339608537",
+      "retained_sha256": "c2a897e27925f3b74c8a8769e2b10583c0a97cb309aaac64d2b52e63c0dab8b3"
+    },
+    {
+      "file": "post-fix/tests-release-build.log",
+      "original_sha256": "8f51bf085ebec2e51190e8e608dc80c13120d1e2fb243e0f5af321af64689cb4",
+      "retained_sha256": "3bef387c8b609e39ffcd0fc736e41c4f23f2585fbe11453261a770e414f8f68a"
+    },
+    {
+      "file": "post-fix/build.log",
+      "original_sha256": "8f7212cd8296608adba94c3f70d6c4ac77874bf7d058af94cb4826217edf86d5",
+      "retained_sha256": "d8cbb516ae544a6351ff4a15984ec8ec758c92e345fee4a2ba90be135b1b10b0"
+    }
+  ]
+}

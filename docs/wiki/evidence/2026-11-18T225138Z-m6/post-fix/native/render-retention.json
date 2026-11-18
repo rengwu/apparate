@@ -1,0 +1,105 @@
+{
+  "reason": "Functional raster assertions passed; no UI drawing change. Native marker round trips are separately tested; redundant bitmap files discarded after hashing. M5/M4 representative renders remain historical evidence.",
+  "discarded": [
+    {
+      "file": "alternate-dark.png",
+      "sha256": "50d47194369bafad60e47f76efcc3d318c36ffe2a1ef3c9085a3b450a1109385",
+      "bytes": 44986
+    },
+    {
+      "file": "no-results-light.png",
+      "sha256": "0da32682d4556eade92a13a81b56e4279f473f6a21a4cc7c4a819e5e2b6fc9e3",
+      "bytes": 25200
+    },
+    {
+      "file": "restart-light.png",
+      "sha256": "953d51a7050e6580a325c7329c0ce9a28c96bd50424bef3d655bb98bcd99ba4c",
+      "bytes": 39099
+    },
+    {
+      "file": "no-results-dark.png",
+      "sha256": "ecf48e5c1e1e89a79eea9718228e89d16d7e76719247f5b552723245b551771c",
+      "bytes": 25736
+    },
+    {
+      "file": "layout-1-dark.png",
+      "sha256": "a4b6729fe35a427c013d02fdd5c656a9b0d866d1507cc29dadf99e130a891eb0",
+      "bytes": 50175
+    },
+    {
+      "file": "layout-1-light.png",
+      "sha256": "c4a12c1b68b88535035d2a429b4d3ff805b37258c236b40e67dc59b75cda23a1",
+      "bytes": 50037
+    },
+    {
+      "file": "empty-light.png",
+      "sha256": "6369f6426940a19ab1dd7b92148e4e7f365ec40eb85376ca879519aa90bbdb2a",
+      "bytes": 24540
+    },
+    {
+      "file": "loading-dark.png",
+      "sha256": "5bedf6cf5af7cd0d1e059097740d1dc67e9e06f974efc2c89680124079c1e11a",
+      "bytes": 28043
+    },
+    {
+      "file": "empty-dark.png",
+      "sha256": "65e7fe4da671327540c8e17c959b93bf4a2281fd5422a06f9364f10b9d2b0c3e",
+      "bytes": 24000
+    },
+    {
+      "file": "restart-dark.png",
+      "sha256": "b2657caa58a8559c5d56dadaacfcffe0e92300686ad86d828e6482ce75cf64c4",
+      "bytes": 39085
+    },
+    {
+      "file": "layout-2-light.png",
+      "sha256": "388e70696c3c206b39d92826c3e77bfdd4edf73f41bf10a690f89dbff34592ed",
+      "bytes": 41223
+    },
+    {
+      "file": "loading-light.png",
+      "sha256": "454eabe6b96937d30ddc8fbc6e99acf172715440b90bcbf932c9d74a31b68a27",
+      "bytes": 28023
+    },
+    {
+      "file": "web-light.png",
+      "sha256": "ac747d8817814f9a3b090fcb0b391111b216212a91816d217f20316e72c1676f",
+      "bytes": 33844
+    },
+    {
+      "file": "layout-3-dark.png",
+      "sha256": "6878678badcf9da920b37a98956e6b4d9c364cac75a9603ec389f69bb0bd97b9",
+      "bytes": 41532
+    },
+    {
+      "file": "layout-2-dark.png",
+      "sha256": "6878678badcf9da920b37a98956e6b4d9c364cac75a9603ec389f69bb0bd97b9",
+      "bytes": 41532
+    },
+    {
+      "file": "matches-light.png",
+      "sha256": "5556bb27d721be0bc77029cfd6b375eb3395b81f7a20c8736cf5124290b660c4",
+      "bytes": 54604
+    },
+    {
+      "file": "matches-dark.png",
+      "sha256": "f4aa03ad44826c177a81fe744d0576a1531fca1c0b0a09a304742d62141247ce",
+      "bytes": 55114
+    },
+    {
+      "file": "alternate-light.png",
+      "sha256": "e9584d444487dc492d8052a27592198f6f076b9a60c062b06a57aa8787e87259",
+      "bytes": 44791
+    },
+    {
+      "file": "web-dark.png",
+      "sha256": "fa32591b1f935fbada8172f99457a0ed8eea0f5ee58256e83d603bf5bab1ed59",
+      "bytes": 33848
+    },
+    {
+      "file": "layout-3-light.png",
+      "sha256": "388e70696c3c206b39d92826c3e77bfdd4edf73f41bf10a690f89dbff34592ed",
+      "bytes": 41223
+    }
+  ]
+}

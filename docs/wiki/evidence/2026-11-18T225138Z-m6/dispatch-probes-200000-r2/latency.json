@@ -1,0 +1,99 @@
+{
+  "bare_field": false,
+  "clock": "mach_absolute_time",
+  "count": 200000,
+  "delivery": "dispatch",
+  "elapsed_seconds": 7.868089292,
+  "errors": 0,
+  "fixed_statuses": {
+    "view-state": 120
+  },
+  "focus_guards_checked": true,
+  "hidden_cold_show_ms": 0.7452083333333334,
+  "hidden_warm_show_ms": {
+    "count": 100,
+    "max": 0.115125,
+    "median": 0.05354166666666666,
+    "p95": 0.07433333333333333
+  },
+  "input_handler_ms": {
+    "count": 120,
+    "max": 25.918166666666668,
+    "median": 1.9238333333333333,
+    "p95": 6.126916666666667
+  },
+  "input_to_view_ms": {
+    "count": 120,
+    "max": 20.840375,
+    "median": 6.53025,
+    "p95": 10.596791666666666
+  },
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "native_login_changes": 0,
+  "native_marker_round_trips": 5,
+  "native_status_items": 0,
+  "noop_main_queue_ms": {
+    "count": 120,
+    "max": 38.079125,
+    "median": 3.5689583333333337,
+    "p95": 7.683625
+  },
+  "on_screen_budgets": "Untested",
+  "profile": "latency",
+  "protected_folder_probes": 0,
+  "result": "Passed",
+  "result_mismatches": 0,
+  "scheduled_to_input_ms": {
+    "count": 120,
+    "max": 4.22275,
+    "median": 0.17854166666666665,
+    "p95": 0.8386666666666667
+  },
+  "scheduler_to_main_ms": {
+    "count": 120,
+    "max": 4.079583333333334,
+    "median": 0.09316666666666668,
+    "p95": 0.6308333333333334
+  },
+  "schema": 1,
+  "scope": "Hidden field-editor injection to view state; 120 fixed + 40 stress inputs, no drawing or screen capture in timed path; absolute scheduling, all events retained. 100 warm hidden calls are not frame timings. Shared mach absolute ticks throughout.",
+  "search_ms": {
+    "count": 114,
+    "max": 7.971459,
+    "median": 3.785625,
+    "p95": 6.811958
+  },
+  "stage_probes": true,
+  "statuses": {
+    "superseded": 34,
+    "view-state": 126
+  },
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "symbolichotkeys_writes": 0,
+  "thermal_end": 0,
+  "thermal_start": 0,
+  "timebase_denom": 3,
+  "timebase_numer": 125,
+  "timer_lateness_ms": {
+    "count": 120,
+    "max": 1.5185833333333332,
+    "median": 0.084,
+    "p95": 0.23058333333333333
+  },
+  "visible_profile": "none",
+  "worker_queue_ms": {
+    "count": 114,
+    "max": 0.165834,
+    "median": 0.036625,
+    "p95": 0.091459
+  },
+  "worker_to_main_ms": {
+    "count": 114,
+    "max": 6.083958333333333,
+    "median": 0.043875,
+    "p95": 2.9406666666666665
+  },
+  "writing_tools_images": 2
+}

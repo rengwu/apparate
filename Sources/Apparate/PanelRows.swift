@@ -46,6 +46,7 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
     private var artwork: [String: (PanelRowContent, CGFloat, PanelRowDrawing)] = [:]
     private var images: [String: NSImage] = [:]
     private var requestedIcons: [String: ItemIcon] = [:]
+    var observationMarker: FrameMarker? { didSet { needsDisplay = true } }
     private var wheelRemainder: CGFloat = 0
     private let icons: IconLoader
     private var iconGeneration = -1
@@ -120,6 +121,13 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
         for index in visibleIndices {
             let rect = NSRect(x: 0, y: CGFloat(index - firstVisible) * 28, width: bounds.width, height: 28)
             if dirtyRect.intersects(rect) { drawRow(index, rect: rect) }
+        }
+        if let marker = observationMarker {
+            // Same draw as the complete rows; four points in the unused left gutter.
+            for (i, bit) in marker.bits.enumerated() {
+                (bit ? NSColor.white : NSColor.black).setFill()
+                NSRect(x: i % FrameMarker.columns, y: i / FrameMarker.columns, width: 1, height: 1).fill()
+            }
         }
     }
     func geometryIsValid() -> Bool { bounds.size == NSSize(width: 628, height: 252) }
