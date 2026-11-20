@@ -1,0 +1,8 @@
+{
+  "after_load_bytes": 36.3759,
+  "after_typing_bytes": 42.6415,
+  "after_preferences_bytes": 46.0947,
+  "rebuild_sampled_peak_bytes": 49.5166,
+  "after_idle_bytes": 45.3916,
+  "delta_vs_47_mib": -0.9053
+}

@@ -1,0 +1,33 @@
+{
+  "source_inputs_verified": 83,
+  "changed_shared_inputs": [
+    "Sources/Apparate/PanelController.swift",
+    "Sources/Apparate/PanelVerification.swift"
+  ],
+  "review_signature_verified": true,
+  "review_sha256": "43e59ddf458145de27e5e686e6b19a79b7ec7d347187cdc4ab8c64bd74667bb2",
+  "render_scenarios_verified": 206,
+  "prior_render_references": 198,
+  "local_images": 8,
+  "section8_signature_binary_and_images_verified": true,
+  "profiles": {
+    "panel": {
+      "result": "Passed",
+      "stderr_bytes": 0,
+      "native_actions": 0,
+      "native_hotkey_registrations": 0,
+      "protected_folder_probes": 0,
+      "visible_profile": "none",
+      "cleanup": "Owned process exited; test-created APPARATE_HOME removed"
+    },
+    "settings": {
+      "result": "Passed",
+      "stderr_bytes": 0,
+      "native_actions": 0,
+      "native_hotkey_registrations": 0,
+      "protected_folder_probes": 0,
+      "visible_profile": "none",
+      "cleanup": "Owned process exited; test-created APPARATE_HOME removed"
+    }
+  }
+}

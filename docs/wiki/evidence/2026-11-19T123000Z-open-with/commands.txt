@@ -1,0 +1,13 @@
+All unattended app commands use an explicit isolated executable and disposable home.
+
+swift build --scratch-path /private/tmp/apparate-ui-build-20261119
+/private/tmp/apparate-ui-build-20261119/debug/ApparateCoreTests
+python3 Tests/smoke-app.py --binary /private/tmp/apparate-ui-build-20261119/debug/Apparate --panel-check functional --output /private/tmp/apparate-open-panel-debug
+python3 Tests/smoke-app.py --binary /private/tmp/apparate-ui-build-20261119/debug/Apparate --settings-check --output /private/tmp/apparate-open-settings-debug
+swift build --scratch-path /private/tmp/apparate-ui-build-20261119 -c release
+/private/tmp/apparate-ui-build-20261119/release/ApparateCoreTests
+python3 docs/wiki/evidence/2026-11-19T123000Z-open-with/assembly.txt
+python3 Tests/smoke-app.py --binary build/review/2026-11-19-open-with/Apparate.app/Contents/MacOS/Apparate --panel-check functional --output docs/wiki/evidence/2026-11-19T123000Z-open-with/panel
+python3 Tests/smoke-app.py --binary build/review/2026-11-19-open-with/Apparate.app/Contents/MacOS/Apparate --settings-check --output docs/wiki/evidence/2026-11-19T123000Z-open-with/settings
+
+The first new-test compile needed package visibility on the prepared index test entry points. An intermediate stale executable invocation and one incorrect A-Z-after-filter expectation remain recorded. The final debug/release suites use the complete updated harness. Two queued build requests were serialized by SwiftPM's scratch-path lock; no app/test profile ran concurrently with a compilation. No performance measurement was run.

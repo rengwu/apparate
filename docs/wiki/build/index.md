@@ -1,7 +1,7 @@
 ---
 title: Build
 section: Build
-updated: 2026-11-19
+updated: 2026-11-20
 ---
 # Build
 
@@ -14,7 +14,8 @@ Build guides, one per milestone of the [implementation plan](../plan.md). Claude
 | M3 File index | [M3 guide](m3-file-index.md) | Reviewed: passed after a speed fix; committed `ef9f683` |
 | M4 Launcher panel | [M4 guide](m4-launcher-panel.md) | Reviewed: passed, latency carried to M6; committed `e1543de`; supervised checks pending |
 | M5 Settings, menu bar, first run | [M5 guide](m5-settings-menu-first-run.md) | Reviewed: passed after one fix; committed `a784dad`; supervised checks pending |
-| M6 Performance qualification | [M6 guide](m6-performance.md) | Ready for Codex |
+| M6 Performance qualification | [M6 guide](m6-performance.md) | Hidden stage reviewed and committed `87d171c`; on-screen stage waits for the user (DEC-049) |
+| UI follow-up (from the supervised session) | [UI follow-up guide](ui-follow-up.md) | Sections 1–14 reviewed and passed 2026-11-20; commit requested |
 
 ## How a guide is used
 

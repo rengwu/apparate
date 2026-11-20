@@ -4,6 +4,11 @@ public enum SearchScope: String, Codable, CaseIterable, Sendable {
     case apps, commands, settings, files, web
 }
 
+public enum ResultLocation: String, Codable, CaseIterable, Sendable {
+    case inline, right, below
+    package var rowHeight: Double { self == .below ? 40 : 28 }
+}
+
 public struct AppConfig: Codable, Equatable, Sendable {
     public struct HotKey: Codable, Equatable, Sendable {
         public var keyCode: UInt32 = 49
@@ -32,29 +37,36 @@ public struct AppConfig: Codable, Equatable, Sendable {
     }
     public var version = 1
     public var hotKey = HotKey()
+    public var openWithKey = HotKey.openWithDefault
     public var showMenuBarIcon = true
     public var prefixes = ["files": "'", "settings": ".", "web": "?"]
     public var searchURL = "https://duckduckgo.com/?q={query}"
-    public var folders = ["Projects", "Desktop", "Documents", "Downloads"].map { Folder(path: "~/" + $0) }
+    public var folders = ["Projects", "Desktop", "Documents", "Downloads"].map { Folder(path: "~/" + $0) } + [Folder(path: "~", depth: 1), Folder(path: "/", depth: 1)]
     public var respectGitignore = true
+    public var skipHiddenFiles = true
+    public var resultLocation = ResultLocation.inline
     public init() {}
     private enum CodingKeys: String, CodingKey {
-        case version, hotKey, showMenuBarIcon, prefixes, searchURL, folders, respectGitignore
+        case version, hotKey, openWithKey, showMenuBarIcon, prefixes, searchURL, folders, respectGitignore, skipHiddenFiles, resultLocation
     }
     public init(from decoder: Decoder) throws {
         self.init()
         let c = try decoder.container(keyedBy: CodingKeys.self)
         version = c.contains(.version) ? try c.decode(Int.self, forKey: .version) : version
         hotKey = c.contains(.hotKey) ? try c.decode(HotKey.self, forKey: .hotKey) : hotKey
+        openWithKey = c.contains(.openWithKey) ? try c.decode(HotKey.self, forKey: .openWithKey) : openWithKey
         showMenuBarIcon = c.contains(.showMenuBarIcon) ? try c.decode(Bool.self, forKey: .showMenuBarIcon) : showMenuBarIcon
         prefixes = c.contains(.prefixes) ? try c.decode([String: String].self, forKey: .prefixes) : prefixes
         searchURL = c.contains(.searchURL) ? try c.decode(String.self, forKey: .searchURL) : searchURL
         folders = c.contains(.folders) ? try c.decode([Folder].self, forKey: .folders) : folders
+        resultLocation = c.contains(.resultLocation) ? try c.decode(ResultLocation.self, forKey: .resultLocation) : resultLocation
         respectGitignore = c.contains(.respectGitignore) ? try c.decode(Bool.self, forKey: .respectGitignore) : respectGitignore
+        skipHiddenFiles = c.contains(.skipHiddenFiles) ? try c.decode(Bool.self, forKey: .skipHiddenFiles) : skipHiddenFiles
     }
 
     public func validationErrors(home: String = FileManager.default.homeDirectoryForCurrentUser.path) -> [String] {
         var errors: [String] = []
+        if let error = OpenWithShortcut.validation(openWithKey, launcher: hotKey) { errors.append(error) }
         if version != 1 { errors.append("Config version \(version) is not supported. This app supports version 1.") }
         var used = Set<String>()
         for scope in prefixes.keys.sorted() {

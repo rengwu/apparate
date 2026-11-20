@@ -1,0 +1,154 @@
+{
+  "capture_method": "hidden owned preferences content; native toolbar chrome/menu appearance remain supervised",
+  "errors": 0,
+  "fake_access_probes": 3,
+  "fake_actions": 0,
+  "fake_keyboard_links": 1,
+  "fake_login_changes": 2,
+  "fake_picker_calls": 2,
+  "fake_registrations": 3,
+  "fake_reveals": 1,
+  "focus_guards_checked": true,
+  "many_folders_scroll_checked": true,
+  "menu_graph": [
+    {
+      "key_equivalent": "k",
+      "title": "Open Apparate"
+    },
+    {
+      "key_equivalent": ",",
+      "title": "Settings\u2026"
+    },
+    {
+      "key_equivalent": "",
+      "title": ""
+    },
+    {
+      "key_equivalent": "q",
+      "title": "Quit Apparate"
+    }
+  ],
+  "mode": "fixtures",
+  "native_actions": 0,
+  "native_control_labels": {
+    "allow": "Allow folder access",
+    "depth-stepper:/Fixture/Desktop": "Depth for /Fixture/Desktop",
+    "depth-stepper:/Fixture/Documents": "Depth for /Fixture/Documents",
+    "depth-stepper:/Fixture/Downloads": "Depth for /Fixture/Downloads",
+    "depth-stepper:/Fixture/Extra": "Depth for /Fixture/Extra",
+    "depth:/Fixture/Desktop": "Depth for /Fixture/Desktop",
+    "depth:/Fixture/Documents": "Depth for /Fixture/Documents",
+    "depth:/Fixture/Downloads": "Depth for /Fixture/Downloads",
+    "depth:/Fixture/Extra": "Depth for /Fixture/Extra",
+    "folder-add": "Add Folders",
+    "folder-remove:/Fixture/Desktop": "Remove /Fixture/Desktop",
+    "folder-remove:/Fixture/Documents": "Remove /Fixture/Documents",
+    "folder-remove:/Fixture/Downloads": "Remove /Fixture/Downloads",
+    "folder-remove:/Fixture/Extra": "Remove /Fixture/Extra",
+    "login": "Launch at login",
+    "menu-icon": "Show menu bar icon",
+    "prefix-add": "Add Prefix",
+    "prefix-remove:files": "Remove Files and folders prefix",
+    "prefix-remove:settings": "Remove Settings prefix",
+    "prefix-remove:web": "Remove Web prefix",
+    "prefix:files": "Files and folders prefix",
+    "prefix:settings": "Settings prefix",
+    "prefix:web": "Web prefix",
+    "preset": "Search engine",
+    "rebuild": "Rebuild index",
+    "respect": "Skip files listed in .gitignore",
+    "reveal": "Show config.json in Finder",
+    "shortcut": "Open Apparate shortcut, \u2325\u2318K",
+    "url": "Search URL"
+  },
+  "native_hotkey_registrations": 0,
+  "native_login_changes": 0,
+  "native_status_items": 0,
+  "native_stepper_increment_decrement": true,
+  "prefix_field_geometry": {
+    "alignment_width": 40,
+    "centered": true,
+    "painted_width": 44
+  },
+  "protected_folder_probes": 0,
+  "ready": true,
+  "result": "Passed",
+  "routes": [
+    "open",
+    "settings:Folders",
+    "quit",
+    "settings:Folders",
+    "settings:Folders",
+    "quit",
+    "settings:Folders"
+  ],
+  "row_alignment_folders": [
+    {
+      "center_delta_pt": 0,
+      "title": "~/Projects",
+      "title_height": 16
+    },
+    {
+      "center_delta_pt": 0,
+      "title": "Skip files listed in .gitignore",
+      "title_height": 16
+    }
+  ],
+  "row_alignment_general": [
+    {
+      "center_delta_pt": 0,
+      "title": "Open Apparate",
+      "title_height": 16
+    },
+    {
+      "center_delta_pt": 0,
+      "title": "Spotlight also uses \u2318Space.",
+      "title_height": 16
+    },
+    {
+      "center_delta_pt": 0,
+      "title": "Launch at login",
+      "title_height": 16
+    },
+    {
+      "center_delta_pt": 0,
+      "title": "Show menu bar icon",
+      "title_height": 16
+    }
+  ],
+  "row_alignment_search": [
+    {
+      "center_delta_pt": 0,
+      "title": "Settings",
+      "title_height": 16
+    },
+    {
+      "center_delta_pt": 0,
+      "title": "Files and folders",
+      "title_height": 16
+    },
+    {
+      "center_delta_pt": 0,
+      "title": "Web",
+      "title_height": 16
+    },
+    {
+      "center_delta_pt": 0,
+      "title": "Search engine",
+      "title_height": 16
+    }
+  ],
+  "settings_check": true,
+  "spoken_voiceover": "Untested (DEC-050)",
+  "stepper_cell_action_returns": {
+    "decrement": false,
+    "increment": false
+  },
+  "symbolichotkeys_writes": 0,
+  "toolbar_tabs": [
+    "General",
+    "Search",
+    "Folders"
+  ],
+  "visible_profile": "none"
+}

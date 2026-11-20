@@ -1,0 +1,50 @@
+{
+  "source_inputs_verified": 83,
+  "changed_shared_inputs": [
+    "Sources/Apparate/FullPerformance.swift",
+    "Sources/Apparate/IconLoader.swift",
+    "Sources/Apparate/PanelRowDrawing.swift",
+    "Sources/Apparate/PanelRows.swift",
+    "Sources/Apparate/PanelVerification.swift",
+    "Tests/performance.py"
+  ],
+  "bundles": [
+    {
+      "bundle": "build/review/2026-11-20-below-icons/Apparate.app",
+      "identifier": "local.apparate.review",
+      "version": "0.1.0",
+      "app_sha256": "f47335321d554595ce3e9182d90cbc0586410f5f877d31a1f30d4aeff3c85c95",
+      "icon_sha256": "02018571f3cd027994fb3ca57c4a97b1ad8da3730973e32a5d81055188d8419e",
+      "CFBundleIconFile": "AppIcon",
+      "strict_deep_signature_verified": true
+    },
+    {
+      "bundle": "build/Apparate.app",
+      "identifier": "local.apparate",
+      "version": "0.1.0",
+      "app_sha256": "f54b474b85612d778132bfdce9300655efd4a03713cfcfcc192133b316556392",
+      "icon_sha256": "02018571f3cd027994fb3ca57c4a97b1ad8da3730973e32a5d81055188d8419e",
+      "CFBundleIconFile": "AppIcon",
+      "strict_deep_signature_verified": true
+    }
+  ],
+  "render_scenarios_verified": 222,
+  "reused_prior_images": 198,
+  "local_images": 24,
+  "memory_profile": "At original handoff: not run; subsequently completed after read-only catalog clarification",
+  "profiles": {
+    "panel": {
+      "result": "Passed",
+      "stderr_bytes": 0,
+      "native_effects": 0,
+      "cleanup": "Owned process exited; test-created APPARATE_HOME removed"
+    },
+    "settings": {
+      "result": "Passed",
+      "stderr_bytes": 0,
+      "native_effects": 0,
+      "cleanup": "Owned process exited; test-created APPARATE_HOME removed"
+    }
+  },
+  "memory_followup": "memory-comparison.json"
+}

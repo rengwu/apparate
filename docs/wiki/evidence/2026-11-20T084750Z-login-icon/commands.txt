@@ -1,0 +1,21 @@
+Builds and test/profile processes run sequentially. Every app execution uses an explicit isolated executable, disposable APPARATE_HOME and fixture effects.
+
+swift build --scratch-path /private/tmp/apparate-ui-build-20261119
+python3 Tests/smoke-app.py --binary /private/tmp/apparate-ui-build-20261119/debug/Apparate --settings-check --output /private/tmp/apparate-login-settings-debug
+/private/tmp/apparate-ui-build-20261119/debug/ApparateCoreTests
+swift build --scratch-path /private/tmp/apparate-ui-build-20261119 -c release
+/private/tmp/apparate-ui-build-20261119/release/ApparateCoreTests
+python3 docs/wiki/evidence/2026-11-20T084750Z-login-icon/assembly.txt
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-login-icon/Apparate.app/Contents/MacOS/Apparate --settings-check --output docs/wiki/evidence/2026-11-20T084750Z-login-icon/settings
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-login-icon/Apparate.app/Contents/MacOS/Apparate --panel-check functional --output docs/wiki/evidence/2026-11-20T084750Z-login-icon/panel
+python3 /private/tmp/apparate-section10-retain.py
+
+After the checks above pass, section 10 explicitly authorizes building the local output; the running app is a separate /Applications copy, which must not be accessed.
+./build.sh
+
+Verify both signed bundles: icon file/source hash, CFBundleIconFile = AppIcon, executable SHA-256 and codesign --verify --deep --strict. Do not launch build/Apparate.app.
+
+node docs/wiki/_build.mjs
+node docs/wiki/_build.mjs --check
+node /Users/rengwu/Projects/jstack/skills/verify-change/scripts/check-reports.mjs docs/wiki
+git diff --check

@@ -1,0 +1,48 @@
+{
+  "base_revision": "87d171c72d2f635b4d3f719e1194d2311d25b509",
+  "source_inputs_verified": 83,
+  "bundles": [
+    {
+      "bundle": "build/review/2026-11-20-login-icon/Apparate.app",
+      "identifier": "local.apparate.review",
+      "version": "0.1.0",
+      "minimum_macos": "27.0",
+      "CFBundleIconFile": "AppIcon",
+      "icon_bytes": 1054512,
+      "icon_sha256": "02018571f3cd027994fb3ca57c4a97b1ad8da3730973e32a5d81055188d8419e",
+      "app_sha256": "909ca2158ba430856fd713346c8796ddaa8ccd8c260400f8cd049e652f74f6f5",
+      "strict_deep_signature_verified": true
+    },
+    {
+      "bundle": "build/Apparate.app",
+      "identifier": "local.apparate",
+      "version": "0.1.0",
+      "minimum_macos": "27.0",
+      "CFBundleIconFile": "AppIcon",
+      "icon_bytes": 1054512,
+      "icon_sha256": "02018571f3cd027994fb3ca57c4a97b1ad8da3730973e32a5d81055188d8419e",
+      "app_sha256": "202a2faddeba71b79ff9bb6912a75d42dce7030098a5e71fa45207742124b1a8",
+      "strict_deep_signature_verified": true
+    }
+  ],
+  "render_scenarios_verified": 214,
+  "reused_prior_images": 206,
+  "local_images": 8,
+  "profiles": {
+    "panel": {
+      "result": "Passed",
+      "stderr_bytes": 0,
+      "visible_profile": "none",
+      "native_effects": 0,
+      "cleanup": "Owned process exited; test-created APPARATE_HOME removed"
+    },
+    "settings": {
+      "result": "Passed",
+      "stderr_bytes": 0,
+      "visible_profile": "none",
+      "native_effects": 0,
+      "cleanup": "Owned process exited; test-created APPARATE_HOME removed"
+    }
+  },
+  "normal_output": "Built by explicitly authorized ./build.sh after checks passed. Not launched. No access to /Applications or the running app/data."
+}

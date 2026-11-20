@@ -1,0 +1,17 @@
+{
+  "created_utc": "2026-11-19T06:54:05.844463+00:00",
+  "base_revision": "87d171c72d2f635b4d3f719e1194d2311d25b509",
+  "selected": [
+    "debug full Core 88 groups",
+    "release full Core 88 groups",
+    "observer self-test debug/release only; no capture",
+    "release hidden settings actions and all light/dark states",
+    "release hidden panel functional and 0/1/3/9 marker decode",
+    "release hidden full graph 20000 (one diagnostic repeat; unchanged M6 driver)"
+  ],
+  "excluded": [
+    "on-screen resize composition/latency until DEC-049 open",
+    "spoken VoiceOver per DEC-050",
+    "real global effects and session app/data"
+  ]
+}

@@ -1,0 +1,25 @@
+Sequential checks, all app executions use explicit isolated binaries and disposable fixture data.
+
+swift build --scratch-path /private/tmp/apparate-ui-build-20261119
+APPARATE_TEST_FILTER=hidden /private/tmp/apparate-ui-build-20261119/debug/ApparateCoreTests
+APPARATE_TEST_FILTER='hidden:' /private/tmp/apparate-ui-build-20261119/debug/ApparateCoreTests
+/private/tmp/apparate-ui-build-20261119/debug/ApparateCoreTests
+python3 Tests/smoke-app.py --binary /private/tmp/apparate-ui-build-20261119/debug/Apparate --settings-check --output /private/tmp/apparate-hidden-settings-debug
+swift build --scratch-path /private/tmp/apparate-ui-build-20261119 -c release
+/private/tmp/apparate-ui-build-20261119/release/ApparateCoreTests
+python3 docs/wiki/evidence/2026-11-20T113654Z-skip-hidden/assembly.txt
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-skip-hidden/Apparate.app/Contents/MacOS/Apparate --settings-check --output docs/wiki/evidence/2026-11-20T113654Z-skip-hidden/settings
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-skip-hidden/Apparate.app/Contents/MacOS/Apparate --panel-check functional --output docs/wiki/evidence/2026-11-20T113654Z-skip-hidden/panel
+python3 Tests/performance.py --binary build/review/2026-11-20-below-icons/Apparate.app/Contents/MacOS/Apparate pipeline --count 200000 --dot-entries --output docs/wiki/evidence/2026-11-20T113654Z-skip-hidden/pipeline-prior
+python3 Tests/performance.py --binary build/review/2026-11-20-skip-hidden/Apparate.app/Contents/MacOS/Apparate pipeline --count 200000 --dot-entries --output docs/wiki/evidence/2026-11-20T113654Z-skip-hidden/pipeline-candidate
+python3 /private/tmp/apparate-section12-retain.py
+./build.sh
+
+The initial debug compile and two targeted attempts needed fixture corrections; all failure logs are retained. Rebuilds used the same isolated scratch path. Final debug/release suites and signed profiles passed before build.sh. The build.sh exception is explicitly authorized by sections 10–12; the installed /Applications copy is untouched. No normal-output launch/install. No full memory profile or installed-app catalog scan in this section.
+
+Final record checks:
+python3 docs/wiki/evidence/2026-11-20T113654Z-skip-hidden/integrity.py
+node docs/wiki/_build.mjs
+node docs/wiki/_build.mjs --check
+node /Users/rengwu/Projects/jstack/skills/verify-change/scripts/check-reports.mjs docs/wiki
+git diff --check

@@ -1,0 +1,3279 @@
+{
+  "reason": "One final JPEG render set within the 2\u20133 MB budget; receipts, logs and measurements remain.",
+  "conversion": "Final hidden 2x renders resampled to one pixel per point, JPEG quality 70 using macOS sips. Original hashes and dimensions retained; no crop or content alteration.",
+  "original_final_images_archive": "/private/tmp/apparate-section7-originals",
+  "removed": [],
+  "retained": [
+    {
+      "original": {
+        "file": "panel/alternate-dark.jpg",
+        "sha256": "d9b452ce4fa8c17e51630180f57de6ad58f6c7fe7725f0fdc0cbb828b1157391",
+        "bytes": 39228,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/alternate-dark.jpg",
+      "sha256": "673218760890d40ccc793f51e5ca46937cc6465f08fa034163fb671328fa6e63",
+      "bytes": 16316,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/alternate-light.jpg",
+        "sha256": "205f5720f43dafb7339a4a44abf676a77f586c250344bc17e0e53a09e6b11f3b",
+        "bytes": 43395,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/alternate-light.jpg",
+      "sha256": "8ea64f39d870e45b7614098dea49c5182dc433089f1e7ea092eb68788a97fe1c",
+      "bytes": 18059,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-app-after-dark.jpg",
+        "sha256": "e9fdb41a7c611f81cd98428d0b4321f96db03c6889eafd467bfc9bf67d771b0d",
+        "bytes": 37224,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-app-after-dark.jpg",
+      "sha256": "00b12095a6b2b127ce4ef6036eeb20f158c069351e4e43a1fd9a4a9d64757362",
+      "bytes": 16072,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-app-after-light.jpg",
+        "sha256": "dd2390308b6ad70f2f129f68249165167404c61b1b4a0af2690741fbb32e655a",
+        "bytes": 41495,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-app-after-light.jpg",
+      "sha256": "39fd89a2953e7baf4c1ba15f70d7618cac0ec05926f4711dd04248b9f0045acd",
+      "bytes": 17873,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-app-before-dark.jpg",
+        "sha256": "e22502b2f8f546c8ee68ece7810d02ee8106888c85c1185ab08b8332f7ecab5e",
+        "bytes": 34854,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-app-before-dark.jpg",
+      "sha256": "a72860aa31e42dc5639cd61feeb3dd5f6e3b4a0708065e4f80d30ec689483a9f",
+      "bytes": 15194,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-app-before-light.jpg",
+        "sha256": "23f598b4036ffd75d2b72fa58817090117602dad0d9819660bc48f0ac04b73d1",
+        "bytes": 39055,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-app-before-light.jpg",
+      "sha256": "80271e0a272fa22b647860d824f1da337be3104303bd03736e8f2641bafb6553",
+      "bytes": 16967,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-command-after-dark.jpg",
+        "sha256": "425e628d99dca076fac7fbfc312eadb621f54246400387b25d033c5e2b9159a0",
+        "bytes": 30001,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-command-after-dark.jpg",
+      "sha256": "25c50034bc1b2cb447705449d5fbf3b724a201733207df12b2b868ab1416fd81",
+      "bytes": 13233,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-command-after-light.jpg",
+        "sha256": "6631dc7dd6344036b96abbe364d9ca78490eeb6523215f039bd3be78c07eb806",
+        "bytes": 34423,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-command-after-light.jpg",
+      "sha256": "31e36e3c96e82f94eab2ffac4c448f0eb8a1435d4e07f6ffb53e3cbc6f40aaeb",
+      "bytes": 15043,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-command-before-dark.jpg",
+        "sha256": "027562a554d1834553648f5575aeab5aa71aa37011b3c347ac8e169bbd4b5aa4",
+        "bytes": 27816,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-command-before-dark.jpg",
+      "sha256": "ca58b40bc72d90c5e1fa981850a155958d94169f9d7bce92259b7b23346731a8",
+      "bytes": 12330,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-command-before-light.jpg",
+        "sha256": "2822a359a255b9a9ee9b87dd63e1014af54fbcdab6b468f3008e89cb76b23f15",
+        "bytes": 32176,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-command-before-light.jpg",
+      "sha256": "583094fc6768ebc4eccd19becbf7353298f1319be252fc3bae03444df3bd6669",
+      "bytes": 14144,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-file-after-dark.jpg",
+        "sha256": "15c6db2b2e2bb0522b165ce7a64d76a17faf1286e05e51725cd1c417dec5e5b4",
+        "bytes": 39363,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-file-after-dark.jpg",
+      "sha256": "8869fb3b8356f56def624bc03ae4a0fe35b97f2d0c1346216961770fce2793bc",
+      "bytes": 16719,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-file-after-light.jpg",
+        "sha256": "187525d093bc7e981ac655ba148ee0fa8b9f0c47c3c787b01e76a0562b0c2f72",
+        "bytes": 43736,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-file-after-light.jpg",
+      "sha256": "afcf6ea05d69b2098616c096d288de8537b39f4965269f7ea4c2a9aa035f9ccc",
+      "bytes": 18516,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-file-before-dark.jpg",
+        "sha256": "03bb38dc24e21081fcb9a35a7d2c18226d8b1cba5d5beabc39d0ccb6e76cff75",
+        "bytes": 36418,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-file-before-dark.jpg",
+      "sha256": "6a80091918865b9882fa6c84eddaafae18f944321fc0b745fd3ba5505017fdc7",
+      "bytes": 15648,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-file-before-light.jpg",
+        "sha256": "5e609844e1aec45de518e9254c542ecc9d6a4211424f27317a160fef2e39d763",
+        "bytes": 40593,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-file-before-light.jpg",
+      "sha256": "347c2a42d251fa216f4665ef1ab47e774878d5bd632beed0a8544075de22ccc3",
+      "bytes": 17391,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-folder-after-dark.jpg",
+        "sha256": "cb510d9659ce9ec98db6043795c963ca461302f6c5fe19c97f450fa82e613332",
+        "bytes": 48758,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-folder-after-dark.jpg",
+      "sha256": "a13242834678d1b21ac985cf77a8a9f9324d4a274da8343027880903042d5629",
+      "bytes": 19689,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-folder-after-light.jpg",
+        "sha256": "6f40e05540c2ce527d8c72c1a6b5e226c63ba229db00d666d9332694adb09da4",
+        "bytes": 53057,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-folder-after-light.jpg",
+      "sha256": "c5fca0f4c29dc25f44d66f3e86e8981c9b7b0fa45e54e0240f859fb7a1eeba38",
+      "bytes": 21530,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-folder-before-dark.jpg",
+        "sha256": "7d85c4d7a4b58e02d7b3116a657893b37243a9fd6af28fd4c191c5c054d07aef",
+        "bytes": 47506,
+        "pixels": [
+          1280,
+          276
+        ]
+      },
+      "file": "panel/completion-folder-before-dark.jpg",
+      "sha256": "c3dbaa7b727baeff81ec52477ddace7cfaf6a09c928923d24083b161d85d69c0",
+      "bytes": 19055,
+      "pixels": [
+        640,
+        138
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-folder-before-light.jpg",
+        "sha256": "bd309bd84179dba42591ba5db5afff68ccba3a76bd520812233ab6832974ac20",
+        "bytes": 51559,
+        "pixels": [
+          1280,
+          276
+        ]
+      },
+      "file": "panel/completion-folder-before-light.jpg",
+      "sha256": "60d8e4b0febbba9567a865a8f0ffa9e888dc4085442ea4d5d9e009649bf416c1",
+      "bytes": 21146,
+      "pixels": [
+        640,
+        138
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-scoped-folder-after-dark.jpg",
+        "sha256": "cb510d9659ce9ec98db6043795c963ca461302f6c5fe19c97f450fa82e613332",
+        "bytes": 48758,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-folder-after-dark.jpg",
+      "sha256": "a13242834678d1b21ac985cf77a8a9f9324d4a274da8343027880903042d5629",
+      "bytes": 19689,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/completion-scoped-folder-after-dark.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/completion-scoped-folder-after-light.jpg",
+        "sha256": "6f40e05540c2ce527d8c72c1a6b5e226c63ba229db00d666d9332694adb09da4",
+        "bytes": 53057,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-folder-after-light.jpg",
+      "sha256": "c5fca0f4c29dc25f44d66f3e86e8981c9b7b0fa45e54e0240f859fb7a1eeba38",
+      "bytes": 21530,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/completion-scoped-folder-after-light.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/completion-scoped-folder-before-dark.jpg",
+        "sha256": "14d23498c570dbc3ee3d5d642a4e6a694b44d67c0cb7bd84e3d9859e0aae4d1a",
+        "bytes": 47589,
+        "pixels": [
+          1280,
+          276
+        ]
+      },
+      "file": "panel/completion-scoped-folder-before-dark.jpg",
+      "sha256": "db78cd2f4771a1a964ee93bed0786f582be147914b96ba9f197f32e30138263e",
+      "bytes": 19075,
+      "pixels": [
+        640,
+        138
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-scoped-folder-before-light.jpg",
+        "sha256": "77ef689d1fdf8d1a20475bfe3913bcbf3759c3a3ed681dcef4df5f962bd48b37",
+        "bytes": 51641,
+        "pixels": [
+          1280,
+          276
+        ]
+      },
+      "file": "panel/completion-scoped-folder-before-light.jpg",
+      "sha256": "7b1ebc149287aad95f59767ff20a4c027936f44d3bb75cae771fa2447a2b67a1",
+      "bytes": 21147,
+      "pixels": [
+        640,
+        138
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-setting-after-dark.jpg",
+        "sha256": "1d5e096565d08af6d96f458879531ed03f03525b6788a0d9cdae9acd51287975",
+        "bytes": 28330,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-setting-after-dark.jpg",
+      "sha256": "45222de5714c232f06768f375417999a8542cbe15ddcfb1cba176e479858d0ec",
+      "bytes": 12464,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-setting-after-light.jpg",
+        "sha256": "b55b4d76fa78a9a08468376509f0a7337635e941e383fae5e822bbc06035ad27",
+        "bytes": 32766,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-setting-after-light.jpg",
+      "sha256": "bfd65a7c62e4bc2937e566e78d26ff05a9661c216b1757917f350e389874d67b",
+      "bytes": 14274,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-setting-before-dark.jpg",
+        "sha256": "b0ef23bca6e87bd626e9a0383b19d20b56d423bc0995dd3328a668b49e483fe6",
+        "bytes": 27144,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-setting-before-dark.jpg",
+      "sha256": "c1404c831c21811488ea461ed21005bee224c71a204453f66338f8ea0bfb3a78",
+      "bytes": 12035,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/completion-setting-before-light.jpg",
+        "sha256": "c94746ec88d849dd1d21a6e26c93f3413337bb18b90ebf2823c239c78d77dbd2",
+        "bytes": 31542,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/completion-setting-before-light.jpg",
+      "sha256": "21a2f170b49557f9127a76995488602f9e479c2d72b5be29679dfea399e6f542",
+      "bytes": 13815,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/empty-dark.jpg",
+        "sha256": "d4d579dcedf4b1432dc803a3a7f931ccf4a29ea7516624e794a8c1f8514ab520",
+        "bytes": 8761,
+        "pixels": [
+          1280,
+          82
+        ]
+      },
+      "file": "panel/empty-dark.jpg",
+      "sha256": "db48f982fa8de14dc2b571e034080dc240e63c322d5d8e88a68cf347f8ae28a2",
+      "bytes": 6130,
+      "pixels": [
+        640,
+        41
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/empty-light.jpg",
+        "sha256": "93bd88b2b3295fd2f6239135a852b345a018e02a9acab81cb8460428c9406e16",
+        "bytes": 8761,
+        "pixels": [
+          1280,
+          82
+        ]
+      },
+      "file": "panel/empty-light.jpg",
+      "sha256": "3a67f0a433560e14a193591839b7890c1ad2f9bdb29009bfe0fdbc275dfddc12",
+      "bytes": 6132,
+      "pixels": [
+        640,
+        41
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/indexed-dot-config-dot-dark.jpg",
+        "sha256": "26208e9c6d5d339b6d3c70ce933f2311925a3c3228f797ac69d9d54bcf961312",
+        "bytes": 49107,
+        "pixels": [
+          1280,
+          332
+        ]
+      },
+      "file": "panel/indexed-dot-config-dot-dark.jpg",
+      "sha256": "b54c4d0ae4d0917340a08b4b78bb486998c95417a627c7af2b16ac0a38440bd2",
+      "bytes": 19834,
+      "pixels": [
+        640,
+        166
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/indexed-dot-config-dot-light.jpg",
+        "sha256": "75a43684dcffc5a2cdbe822f737a32329816632754ed4b47708d0a175a04e31a",
+        "bytes": 52926,
+        "pixels": [
+          1280,
+          332
+        ]
+      },
+      "file": "panel/indexed-dot-config-dot-light.jpg",
+      "sha256": "bc89e93ef256665e71d0bdf1f344e58ba39c6cc1711877091bc5ecad0403460b",
+      "bytes": 21475,
+      "pixels": [
+        640,
+        166
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/indexed-dot-config-ordinary-dark.jpg",
+        "sha256": "04440a85aacf11be32c741e272c7aad794fc8f4591c2006b9b224798c7184712",
+        "bytes": 43688,
+        "pixels": [
+          1280,
+          332
+        ]
+      },
+      "file": "panel/indexed-dot-config-ordinary-dark.jpg",
+      "sha256": "db959bb48b696885ea19442389633a3ddee266298ccd2c45846f0c66b22c1ca2",
+      "bytes": 17750,
+      "pixels": [
+        640,
+        166
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/indexed-dot-config-ordinary-light.jpg",
+        "sha256": "7d46a3d984dd7b2929079a5c242751c25bfa06a7126374fa53597e9e0826ecc1",
+        "bytes": 47748,
+        "pixels": [
+          1280,
+          332
+        ]
+      },
+      "file": "panel/indexed-dot-config-ordinary-light.jpg",
+      "sha256": "4f4f3537fb467754b2512a5486aa44d4ce19610e22b1b17ed7d8f4a4ab455863",
+      "bytes": 19430,
+      "pixels": [
+        640,
+        166
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/indexed-dot-direct-path-dark.jpg",
+        "sha256": "ff354f7adf66cb986e9565f9f8eadac889a0b8ae9bcba09016c6aa7d872a0e0e",
+        "bytes": 38986,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/indexed-dot-direct-path-dark.jpg",
+      "sha256": "96e5987b13f636efa0c494063d1ebc6ed5ecf5d90a086c246ba1d075f1e87d5d",
+      "bytes": 16361,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/indexed-dot-direct-path-light.jpg",
+        "sha256": "9090a77fb5373830c0cc9097b326f75574bcab70dcb46c56777f848e4a9c6627",
+        "bytes": 43126,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/indexed-dot-direct-path-light.jpg",
+      "sha256": "9468cb14abfde6277509ee79d8ba2f576a8a60f94f764a52bd9dfb44bf81c835",
+      "bytes": 18104,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/indexed-dot-env-dark.jpg",
+        "sha256": "1e8003f17292d004f228ad93e0fbfc3a747cfedc6e0bdb7d9f545c8950db4fa5",
+        "bytes": 33539,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/indexed-dot-env-dark.jpg",
+      "sha256": "260009c3153fb609912ed485bd4831624b88dbb2c619d81367b99612b4c61bc8",
+      "bytes": 14611,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/indexed-dot-env-light.jpg",
+        "sha256": "0bae7762989d58294207a7f0a52a8f8b3871784942686efb07e37dae7b18e0e7",
+        "bytes": 37726,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/indexed-dot-env-light.jpg",
+      "sha256": "182b8c3d5dcda7d2015bf77f5961e5cc2c2150811c21f0490e8791ace3f20238",
+      "bytes": 16337,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/indexed-dot-internal-path-dark.jpg",
+        "sha256": "bbb313303e41e786dbb23da8653ad762929b39a5dcd1ad6afe4a497f0d1c98fb",
+        "bytes": 40714,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/indexed-dot-internal-path-dark.jpg",
+      "sha256": "91b8288d41f1798183c859a864a486de47a1e0eed8ecda21b8763798802ae79b",
+      "bytes": 17010,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/indexed-dot-internal-path-light.jpg",
+        "sha256": "e2cc9fb0e6b87b4ad57738bc1cc4c1224886830ead69802c4947e98f9ced2db2",
+        "bytes": 44977,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/indexed-dot-internal-path-light.jpg",
+      "sha256": "ec5cccc5408bcf4bb74c2e33e230e8c768f9a238cdde6ae8b85805ec10b1087e",
+      "bytes": 18761,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/indexed-dot-settings-prefix-dark.jpg",
+        "sha256": "0c7cc7c983ffce3eea7d9a4c9073309a06df974cd6aaa3c55d7d50d4b9c0f6a7",
+        "bytes": 28923,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/indexed-dot-settings-prefix-dark.jpg",
+      "sha256": "fea48d410f44e9a94532ec6deef9b1a3690491e49da181dbde113eec800fe2d7",
+      "bytes": 12725,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/indexed-dot-settings-prefix-light.jpg",
+        "sha256": "8482f5750530982871e1881b6cf02fb7c68b29422745d0b47f86d63727670a23",
+        "bytes": 33346,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/indexed-dot-settings-prefix-light.jpg",
+      "sha256": "5af6563893213bfc5e34dd1385f5ece3cd6237e994364c326b5a50730925abe1",
+      "bytes": 14505,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/layout-1-dark.jpg",
+        "sha256": "08818751a79ec974b2b82be4555e7ff2414eccb3644af465e2e363e3401578d8",
+        "bytes": 50314,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/layout-1-dark.jpg",
+      "sha256": "216fbdad1e965e6f440f0ec7a36a6cfb57465b43b9cd4b4c33d2e47063205ed8",
+      "bytes": 19887,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/layout-1-light.jpg",
+        "sha256": "5fb68037343b551dbc56b41ca1b8a96a02f684aa99b87a332fd1a3b655267af4",
+        "bytes": 54421,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/layout-1-light.jpg",
+      "sha256": "14712a8443bd4f4442af4ad429b25b4a1b7ee318d99eade4dd2908837c0ec18b",
+      "bytes": 21582,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/layout-2-dark.jpg",
+        "sha256": "e4067ea123eadb5e0a4bbe5ceb1c91592d90b346822c63643f8f64b66c2365e0",
+        "bytes": 51846,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/layout-2-dark.jpg",
+      "sha256": "435be8bc421396083860f3d695366299ba743f693ee401f92e6778dfe1ff4d94",
+      "bytes": 20152,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/layout-2-light.jpg",
+        "sha256": "b169df3e2a6ba348d08257934ae6f73d3ed2cb55615e8713f5c69dde9464bd70",
+        "bytes": 55901,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/layout-2-light.jpg",
+      "sha256": "693415299eec14416dc25f4b78604761185dfb1a4721107822ca77b226eb11cb",
+      "bytes": 21862,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/layout-3-dark.jpg",
+        "sha256": "e4067ea123eadb5e0a4bbe5ceb1c91592d90b346822c63643f8f64b66c2365e0",
+        "bytes": 51846,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/layout-2-dark.jpg",
+      "sha256": "435be8bc421396083860f3d695366299ba743f693ee401f92e6778dfe1ff4d94",
+      "bytes": 20152,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/layout-3-dark.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/layout-3-light.jpg",
+        "sha256": "b169df3e2a6ba348d08257934ae6f73d3ed2cb55615e8713f5c69dde9464bd70",
+        "bytes": 55901,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/layout-2-light.jpg",
+      "sha256": "693415299eec14416dc25f4b78604761185dfb1a4721107822ca77b226eb11cb",
+      "bytes": 21862,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/layout-3-light.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/loading-dark.jpg",
+        "sha256": "df4f99d6db057b9e763cf7afa6bb4e3a0f71b63cf834fb7de6c21ec2e78e03c0",
+        "bytes": 15807,
+        "pixels": [
+          1280,
+          164
+        ]
+      },
+      "file": "panel/loading-dark.jpg",
+      "sha256": "c1578c3d7ff171f0b376d8dc3accb62594be6dba229c78a2954a850d13ea5880",
+      "bytes": 8523,
+      "pixels": [
+        640,
+        82
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/loading-light.jpg",
+        "sha256": "9b382deb566a2a63eb6584a04f3e118fff4638b27e646201ea6e454dbb5f463d",
+        "bytes": 16515,
+        "pixels": [
+          1280,
+          164
+        ]
+      },
+      "file": "panel/loading-light.jpg",
+      "sha256": "b0d9c1e54fcd69ce5db546de00fd003e10278a5aeaff745d78a9981380a04ff4",
+      "bytes": 8872,
+      "pixels": [
+        640,
+        82
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-0-dark.jpg",
+        "sha256": "d4d579dcedf4b1432dc803a3a7f931ccf4a29ea7516624e794a8c1f8514ab520",
+        "bytes": 8761,
+        "pixels": [
+          1280,
+          82
+        ]
+      },
+      "file": "panel/empty-dark.jpg",
+      "sha256": "db48f982fa8de14dc2b571e034080dc240e63c322d5d8e88a68cf347f8ae28a2",
+      "bytes": 6130,
+      "pixels": [
+        640,
+        41
+      ],
+      "duplicate_file_removed": "panel/location-below-0-dark.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/location-below-0-light.jpg",
+        "sha256": "93bd88b2b3295fd2f6239135a852b345a018e02a9acab81cb8460428c9406e16",
+        "bytes": 8761,
+        "pixels": [
+          1280,
+          82
+        ]
+      },
+      "file": "panel/empty-light.jpg",
+      "sha256": "3a67f0a433560e14a193591839b7890c1ad2f9bdb29009bfe0fdbc275dfddc12",
+      "bytes": 6132,
+      "pixels": [
+        640,
+        41
+      ],
+      "duplicate_file_removed": "panel/location-below-0-light.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/location-below-1-dark.jpg",
+        "sha256": "00114de0ade497ebe7ef55ebe38c9f212be8a62c2661c902457eba4677228305",
+        "bytes": 37212,
+        "pixels": [
+          1280,
+          244
+        ]
+      },
+      "file": "panel/location-below-1-dark.jpg",
+      "sha256": "05ce12a099976eed80b1e99d11c43abc9acf517d348e18d0286c7ea5b4fde951",
+      "bytes": 15105,
+      "pixels": [
+        640,
+        122
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-1-light.jpg",
+        "sha256": "e907ffb4dd28cda93f7529d9898a611c8fbdc97aca31e191cabcf664aa10c06c",
+        "bytes": 41225,
+        "pixels": [
+          1280,
+          244
+        ]
+      },
+      "file": "panel/location-below-1-light.jpg",
+      "sha256": "b06592ba432164ad031a83303bff32c1f8fab86a813c7db69a2ab7e7be77a4d9",
+      "bytes": 16906,
+      "pixels": [
+        640,
+        122
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-3-dark.jpg",
+        "sha256": "b4f998849897c646d915795d36dae0a461aac1faa3423707cbd541acd952df50",
+        "bytes": 51468,
+        "pixels": [
+          1280,
+          404
+        ]
+      },
+      "file": "panel/location-below-3-dark.jpg",
+      "sha256": "d1d3d48b4bee9e56d07468c66f33f813a77b7cfacbc2bed0039dc95ac5cafc58",
+      "bytes": 19717,
+      "pixels": [
+        640,
+        202
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-3-light.jpg",
+        "sha256": "8977df064a3f174a47934132384c1181a0853a9120ba3b6d983397f7c15bee37",
+        "bytes": 55245,
+        "pixels": [
+          1280,
+          404
+        ]
+      },
+      "file": "panel/location-below-3-light.jpg",
+      "sha256": "a75aa9ebf8c933948a92f9592e57bbceda415efa02d540760d84f83f19009fbf",
+      "bytes": 21240,
+      "pixels": [
+        640,
+        202
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-9-dark.jpg",
+        "sha256": "01191e2898d2ea5534e335b3d02a9f75edd631c7538e7c96e15c79362da64d1b",
+        "bytes": 94573,
+        "pixels": [
+          1280,
+          884
+        ]
+      },
+      "file": "panel/location-below-9-dark.jpg",
+      "sha256": "39a7192789d14320b4b1bc938de48322b12d62ab9da3679715b688d80e0d7dee",
+      "bytes": 31632,
+      "pixels": [
+        640,
+        442
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-9-light.jpg",
+        "sha256": "1ede3b55438c36d178765907af898175ef3a06dc1c4983a7476eced35ab428c6",
+        "bytes": 97720,
+        "pixels": [
+          1280,
+          884
+        ]
+      },
+      "file": "panel/location-below-9-light.jpg",
+      "sha256": "d31e3cf01f6288a098fd1068d67c616cb95f2e2d9a117847f38c300002f6d7a2",
+      "bytes": 32821,
+      "pixels": [
+        640,
+        442
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-both-long-dark.jpg",
+        "sha256": "abae90e55814df1ac68fe35387fd28cebd1656992c0575b08207b7e1ef40516f",
+        "bytes": 69404,
+        "pixels": [
+          1280,
+          244
+        ]
+      },
+      "file": "panel/location-below-both-long-dark.jpg",
+      "sha256": "334092baa4008571ba2ed947b5e81579c557befc9258aeac147e1a85cbd7877a",
+      "bytes": 24699,
+      "pixels": [
+        640,
+        122
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-both-long-light.jpg",
+        "sha256": "630c636a89d55d9b28aeaf2f9bfbb71877d38b58202e93454662a6359865961d",
+        "bytes": 73210,
+        "pixels": [
+          1280,
+          244
+        ]
+      },
+      "file": "panel/location-below-both-long-light.jpg",
+      "sha256": "ff9e1f9fc20d36ac5568e352f0f2a5523b514b88507f0953832bb4933958fb29",
+      "bytes": 26237,
+      "pixels": [
+        640,
+        122
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-keyboard-dark.jpg",
+        "sha256": "cd4409267abd20e97a86c555c16e4f7a7d4266abfa92637ecf7303ef472fdf58",
+        "bytes": 33352,
+        "pixels": [
+          1280,
+          244
+        ]
+      },
+      "file": "panel/location-below-keyboard-dark.jpg",
+      "sha256": "1fc84172ea703ce1a0410991ee3d0b04e3f3748918bdbcb13c8dc189bddbd85d",
+      "bytes": 13955,
+      "pixels": [
+        640,
+        122
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-keyboard-light.jpg",
+        "sha256": "bc4322252a18170879a35a0bb943edae557919ca8455afa4fa95e450609cbc3c",
+        "bytes": 37593,
+        "pixels": [
+          1280,
+          244
+        ]
+      },
+      "file": "panel/location-below-keyboard-light.jpg",
+      "sha256": "cb83d3de7550518486f6040ca56c78fd9cdca578bb3d142dd3c7d6eb39758c5e",
+      "bytes": 15908,
+      "pixels": [
+        640,
+        122
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-long-location-dark.jpg",
+        "sha256": "1f60be0c91b41eff70e4445d6060e3e527e0821f83c0ef0c8627944b0f0f838a",
+        "bytes": 51401,
+        "pixels": [
+          1280,
+          244
+        ]
+      },
+      "file": "panel/location-below-long-location-dark.jpg",
+      "sha256": "a448900d081af6a25d6af1c6e9bfdd8b020a3b2ca802e28dda5aa74c03cabaf3",
+      "bytes": 19205,
+      "pixels": [
+        640,
+        122
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-long-location-light.jpg",
+        "sha256": "04e461f314096fbf20a21809569f43f811b6b2b0341075ba25e2649bd577ec6b",
+        "bytes": 55329,
+        "pixels": [
+          1280,
+          244
+        ]
+      },
+      "file": "panel/location-below-long-location-light.jpg",
+      "sha256": "7067ec11ee900bbc1e21ada3239b7447dc005645ef91e5ec715e6c221460b4da",
+      "bytes": 20795,
+      "pixels": [
+        640,
+        122
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-long-title-dark.jpg",
+        "sha256": "5a77c51f0b12dc159164585997bb21f1268a70ac8af57a5ecd1877184f6aa86f",
+        "bytes": 54648,
+        "pixels": [
+          1280,
+          244
+        ]
+      },
+      "file": "panel/location-below-long-title-dark.jpg",
+      "sha256": "c3a4d46a2a34193428197e116956f141c4784e366f435453bbbe8b5fdb3c2c24",
+      "bytes": 21041,
+      "pixels": [
+        640,
+        122
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-long-title-light.jpg",
+        "sha256": "43eb7c18150ab57cc76662e5a8e32a73c61372b9ddcb68b23c0ae3a55f8cbfd8",
+        "bytes": 58600,
+        "pixels": [
+          1280,
+          244
+        ]
+      },
+      "file": "panel/location-below-long-title-light.jpg",
+      "sha256": "159519e617f0dd3355e40fdcf01a0cc274c26927535ba9276512419d68c5e083",
+      "bytes": 22777,
+      "pixels": [
+        640,
+        122
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-restart-dark.jpg",
+        "sha256": "217de451bf3ff7c54f8ac9d583e767878a17961eedd9bb5437d66c0fcd5f5b4e",
+        "bytes": 28266,
+        "pixels": [
+          1280,
+          244
+        ]
+      },
+      "file": "panel/location-below-restart-dark.jpg",
+      "sha256": "f14867988cc484135d936b4de22955949d6856a6e40888ab1870a2f807c88149",
+      "bytes": 12490,
+      "pixels": [
+        640,
+        122
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-below-restart-light.jpg",
+        "sha256": "345ca6937d6b189820ab5cf57335aa4eb2c51358f9c4242e1a040bd563605fee",
+        "bytes": 32510,
+        "pixels": [
+          1280,
+          244
+        ]
+      },
+      "file": "panel/location-below-restart-light.jpg",
+      "sha256": "ec849359659ea2c2b5947604ceb39a8933983b2a68e68ae316e8653fc3f959d2",
+      "bytes": 14480,
+      "pixels": [
+        640,
+        122
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-0-dark.jpg",
+        "sha256": "d4d579dcedf4b1432dc803a3a7f931ccf4a29ea7516624e794a8c1f8514ab520",
+        "bytes": 8761,
+        "pixels": [
+          1280,
+          82
+        ]
+      },
+      "file": "panel/empty-dark.jpg",
+      "sha256": "db48f982fa8de14dc2b571e034080dc240e63c322d5d8e88a68cf347f8ae28a2",
+      "bytes": 6130,
+      "pixels": [
+        640,
+        41
+      ],
+      "duplicate_file_removed": "panel/location-inline-0-dark.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-0-light.jpg",
+        "sha256": "93bd88b2b3295fd2f6239135a852b345a018e02a9acab81cb8460428c9406e16",
+        "bytes": 8761,
+        "pixels": [
+          1280,
+          82
+        ]
+      },
+      "file": "panel/empty-light.jpg",
+      "sha256": "3a67f0a433560e14a193591839b7890c1ad2f9bdb29009bfe0fdbc275dfddc12",
+      "bytes": 6132,
+      "pixels": [
+        640,
+        41
+      ],
+      "duplicate_file_removed": "panel/location-inline-0-light.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-1-dark.jpg",
+        "sha256": "e39d6584a61b2b5ecc40c9842046e895cbbb62b951bd66137e1f668b4baf0254",
+        "bytes": 37401,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-inline-1-dark.jpg",
+      "sha256": "ccd49376699b1ff71e26a342f902994a070ee179aba0a447f4af8f98a3982c45",
+      "bytes": 15915,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-1-light.jpg",
+        "sha256": "3c06b417159d918a1c99ca5e419072820f238a09db25530c26e98d92338df490",
+        "bytes": 41594,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-inline-1-light.jpg",
+      "sha256": "ede2ef758831a5c22f89a23bed703006437ed95d50e8a73829f19ee529e2dfad",
+      "bytes": 17666,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-3-dark.jpg",
+        "sha256": "ab315eea341861e55fe4b88cf0c9b9e41cbf9f41af7c800aada849eac5bbc466",
+        "bytes": 51410,
+        "pixels": [
+          1280,
+          332
+        ]
+      },
+      "file": "panel/location-inline-3-dark.jpg",
+      "sha256": "84b44ba47f3063a9abfd4927c2439fcfafc00127fbb2337f0e46f673081b136f",
+      "bytes": 20723,
+      "pixels": [
+        640,
+        166
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-3-light.jpg",
+        "sha256": "d2004be111b66a8dcd3e5abb07c5705c6d3e70a91b2bfa7844b479e1f00c8467",
+        "bytes": 55166,
+        "pixels": [
+          1280,
+          332
+        ]
+      },
+      "file": "panel/location-inline-3-light.jpg",
+      "sha256": "e7e024508e007a20543494165f92c06c04a5b06dc6b9e710a3b21e11c71d5b0e",
+      "bytes": 22374,
+      "pixels": [
+        640,
+        166
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-9-dark.jpg",
+        "sha256": "d3caa52d595f707faf59317c840a8396035d3a4d8282ad18298d6df9e7d66783",
+        "bytes": 93675,
+        "pixels": [
+          1280,
+          668
+        ]
+      },
+      "file": "panel/location-inline-9-dark.jpg",
+      "sha256": "648745c0447e1225340a7d846d073755f15e9f42b8cf69954a410f6b73e7e923",
+      "bytes": 35101,
+      "pixels": [
+        640,
+        334
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-9-light.jpg",
+        "sha256": "62fe060392fe66f6d749e2a4970ed8f4b83d77e7e670574b01ce3cc058253cb9",
+        "bytes": 96093,
+        "pixels": [
+          1280,
+          668
+        ]
+      },
+      "file": "panel/location-inline-9-light.jpg",
+      "sha256": "3532ba5e4fc8933253919b04570ac800a282ab536855d3f785bb98721cdd1c62",
+      "bytes": 36438,
+      "pixels": [
+        640,
+        334
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-both-long-dark.jpg",
+        "sha256": "e4067ea123eadb5e0a4bbe5ceb1c91592d90b346822c63643f8f64b66c2365e0",
+        "bytes": 51846,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/layout-2-dark.jpg",
+      "sha256": "435be8bc421396083860f3d695366299ba743f693ee401f92e6778dfe1ff4d94",
+      "bytes": 20152,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/location-inline-both-long-dark.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-both-long-light.jpg",
+        "sha256": "b169df3e2a6ba348d08257934ae6f73d3ed2cb55615e8713f5c69dde9464bd70",
+        "bytes": 55901,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/layout-2-light.jpg",
+      "sha256": "693415299eec14416dc25f4b78604761185dfb1a4721107822ca77b226eb11cb",
+      "bytes": 21862,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/location-inline-both-long-light.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-keyboard-dark.jpg",
+        "sha256": "a215f8d7ff4f8a4060570b5609eb434032382be59e65604e173d00a2fa6b9d98",
+        "bytes": 33167,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-inline-keyboard-dark.jpg",
+      "sha256": "619a80a9d2b0fcb32b76891af9533c714fc7c0092c9ad2ead7ea160925df450d",
+      "bytes": 13965,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-keyboard-light.jpg",
+        "sha256": "d60840d48c724bcfef7570910a395d9d0016596b83b34e9b7676497a1f452b6d",
+        "bytes": 37567,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-inline-keyboard-light.jpg",
+      "sha256": "e23b253c6e6c7b6558bfd39ec76d1d0cdb84ad6db9c9f12656cbc9d6a1fa66ac",
+      "bytes": 15776,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-long-location-dark.jpg",
+        "sha256": "542188d880be0cc04b24eb8c27d6c52d0d5a33f48528f227d85ef74a1165d9ff",
+        "bytes": 50235,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-inline-long-location-dark.jpg",
+      "sha256": "f0bd6cd930d5decff051a76e24d96ab9496aaee958e6265340d7f87b119dc612",
+      "bytes": 19878,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-long-location-light.jpg",
+        "sha256": "f5f55382777f38ef81412696c60dfc827ee3e6a632a9f5035e000946242dce63",
+        "bytes": 54364,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-inline-long-location-light.jpg",
+      "sha256": "e58fe0b4b0a1f5d35d3f7021240730a45082fea171fdb8a257c7ec7c5b0afaed",
+      "bytes": 21565,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-long-title-dark.jpg",
+        "sha256": "e4067ea123eadb5e0a4bbe5ceb1c91592d90b346822c63643f8f64b66c2365e0",
+        "bytes": 51846,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/layout-2-dark.jpg",
+      "sha256": "435be8bc421396083860f3d695366299ba743f693ee401f92e6778dfe1ff4d94",
+      "bytes": 20152,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/location-inline-long-title-dark.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-long-title-light.jpg",
+        "sha256": "b169df3e2a6ba348d08257934ae6f73d3ed2cb55615e8713f5c69dde9464bd70",
+        "bytes": 55901,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/layout-2-light.jpg",
+      "sha256": "693415299eec14416dc25f4b78604761185dfb1a4721107822ca77b226eb11cb",
+      "bytes": 21862,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/location-inline-long-title-light.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-restart-dark.jpg",
+        "sha256": "79db9a4dd448f541e36cc3d107152886314eac9bb576118ea728068ecee744e9",
+        "bytes": 27575,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-inline-restart-dark.jpg",
+      "sha256": "491d91849e32e2992946042bfa8ca3dc81493c829c6f616be2c57ab8c0c9d389",
+      "bytes": 12301,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-inline-restart-light.jpg",
+        "sha256": "4150e69f5ee5293d6a2ca3e78f0781c024c6fca6491e1b7a9503f561b1032f76",
+        "bytes": 31989,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-inline-restart-light.jpg",
+      "sha256": "3cc6a97e604bdd478cbcdcfcb84d5c4cce1e9dc26315bf4fa99879b8572995a2",
+      "bytes": 14118,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-right-0-dark.jpg",
+        "sha256": "d4d579dcedf4b1432dc803a3a7f931ccf4a29ea7516624e794a8c1f8514ab520",
+        "bytes": 8761,
+        "pixels": [
+          1280,
+          82
+        ]
+      },
+      "file": "panel/empty-dark.jpg",
+      "sha256": "db48f982fa8de14dc2b571e034080dc240e63c322d5d8e88a68cf347f8ae28a2",
+      "bytes": 6130,
+      "pixels": [
+        640,
+        41
+      ],
+      "duplicate_file_removed": "panel/location-right-0-dark.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/location-right-0-light.jpg",
+        "sha256": "93bd88b2b3295fd2f6239135a852b345a018e02a9acab81cb8460428c9406e16",
+        "bytes": 8761,
+        "pixels": [
+          1280,
+          82
+        ]
+      },
+      "file": "panel/empty-light.jpg",
+      "sha256": "3a67f0a433560e14a193591839b7890c1ad2f9bdb29009bfe0fdbc275dfddc12",
+      "bytes": 6132,
+      "pixels": [
+        640,
+        41
+      ],
+      "duplicate_file_removed": "panel/location-right-0-light.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/location-right-1-dark.jpg",
+        "sha256": "1c534ed01704f0b323c0c2d5a243aa971c8f555776e5e66d470131c760a50161",
+        "bytes": 37477,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-right-1-dark.jpg",
+      "sha256": "dfa737f904a65e7b59ba672a81329f5a344fb09ecbec5ee7514c9b068e3cdef2",
+      "bytes": 15949,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-right-1-light.jpg",
+        "sha256": "19ab4dcb2c047ff563751b7926a6549c4a5699e475575ceb7a49977da76cf5e5",
+        "bytes": 41655,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-right-1-light.jpg",
+      "sha256": "474ceea21fdd7b5536a839b5c60e0a174cad8e939ba4539847b1ea2856512b58",
+      "bytes": 17685,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-right-3-dark.jpg",
+        "sha256": "4b7b36d4de0c0c55e1a3c92a580bdbf8a833b0fa20b8774ebce53a3365729a18",
+        "bytes": 51572,
+        "pixels": [
+          1280,
+          332
+        ]
+      },
+      "file": "panel/location-right-3-dark.jpg",
+      "sha256": "c6250e8a066bb572292c3f5f240a956e429609518bb5492c0b87879dd7aee536",
+      "bytes": 20785,
+      "pixels": [
+        640,
+        166
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-right-3-light.jpg",
+        "sha256": "6aea343ff0071e329a202d89a016a81f582e3a37a6cfaae6dfca13b990bdcc42",
+        "bytes": 55265,
+        "pixels": [
+          1280,
+          332
+        ]
+      },
+      "file": "panel/location-right-3-light.jpg",
+      "sha256": "91669e486fd1bf83cc227b49f25e7143410bdbe8534a0c23f561872ce8f8ff1a",
+      "bytes": 22411,
+      "pixels": [
+        640,
+        166
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-right-9-dark.jpg",
+        "sha256": "53f137956965405eed5ac59a9587d7da6ab6667fa2bed66e9e989a959236ce40",
+        "bytes": 94090,
+        "pixels": [
+          1280,
+          668
+        ]
+      },
+      "file": "panel/location-right-9-dark.jpg",
+      "sha256": "1c4b233064b957da60f93422b447f520562d65c571beb17ddfe38a62048f9ef7",
+      "bytes": 35236,
+      "pixels": [
+        640,
+        334
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-right-9-light.jpg",
+        "sha256": "f25066cb81c0cf3983992df6069b619895f18895a84f6a157b057a1576f5294d",
+        "bytes": 96398,
+        "pixels": [
+          1280,
+          668
+        ]
+      },
+      "file": "panel/location-right-9-light.jpg",
+      "sha256": "f78e307755261456eabd557a115af2220ac4b8117b0192b5555febc7e8402b20",
+      "bytes": 36498,
+      "pixels": [
+        640,
+        334
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-right-both-long-dark.jpg",
+        "sha256": "e4067ea123eadb5e0a4bbe5ceb1c91592d90b346822c63643f8f64b66c2365e0",
+        "bytes": 51846,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/layout-2-dark.jpg",
+      "sha256": "435be8bc421396083860f3d695366299ba743f693ee401f92e6778dfe1ff4d94",
+      "bytes": 20152,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/location-right-both-long-dark.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/location-right-both-long-light.jpg",
+        "sha256": "b169df3e2a6ba348d08257934ae6f73d3ed2cb55615e8713f5c69dde9464bd70",
+        "bytes": 55901,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/layout-2-light.jpg",
+      "sha256": "693415299eec14416dc25f4b78604761185dfb1a4721107822ca77b226eb11cb",
+      "bytes": 21862,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/location-right-both-long-light.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/location-right-keyboard-dark.jpg",
+        "sha256": "9ba33524d721830b2f8dc8bf140486c016c2f32680ef23b87aea24f279a4c804",
+        "bytes": 33189,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-right-keyboard-dark.jpg",
+      "sha256": "97c8bc6859983c7dc7da2da4a362f44900869dca73c4b23132d6a16f936d4295",
+      "bytes": 13974,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-right-keyboard-light.jpg",
+        "sha256": "0832fb0fa1a50ce5334a98030e19e50642af9ccd34b869a4fee0300df95e394f",
+        "bytes": 37594,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-right-keyboard-light.jpg",
+      "sha256": "67b1b6b3e73dae0143d8bc034cd6cb4340800405012b508962b6d93df0cac57e",
+      "bytes": 15789,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-right-long-location-dark.jpg",
+        "sha256": "129b8a32f550e102c5131c8470c9fda6a1b91a1be4f90f13174df9317969ed82",
+        "bytes": 50248,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-right-long-location-dark.jpg",
+      "sha256": "e470cc61a444a9d37cd5aec6de49e039c7cdd3ce358749ae6961900c47a299ae",
+      "bytes": 19877,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-right-long-location-light.jpg",
+        "sha256": "bc2dbbf83dcef5fb2c889936c60ce215a4a46ffd1939240cdb3498d085064abb",
+        "bytes": 54341,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-right-long-location-light.jpg",
+      "sha256": "17c7a00d00707fdda17f3538192f31a426e5ba0412e4494cd803c19fdb10ceef",
+      "bytes": 21549,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/location-right-long-title-dark.jpg",
+        "sha256": "e4067ea123eadb5e0a4bbe5ceb1c91592d90b346822c63643f8f64b66c2365e0",
+        "bytes": 51846,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/layout-2-dark.jpg",
+      "sha256": "435be8bc421396083860f3d695366299ba743f693ee401f92e6778dfe1ff4d94",
+      "bytes": 20152,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/location-right-long-title-dark.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/location-right-long-title-light.jpg",
+        "sha256": "b169df3e2a6ba348d08257934ae6f73d3ed2cb55615e8713f5c69dde9464bd70",
+        "bytes": 55901,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/layout-2-light.jpg",
+      "sha256": "693415299eec14416dc25f4b78604761185dfb1a4721107822ca77b226eb11cb",
+      "bytes": 21862,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/location-right-long-title-light.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/location-right-restart-dark.jpg",
+        "sha256": "79db9a4dd448f541e36cc3d107152886314eac9bb576118ea728068ecee744e9",
+        "bytes": 27575,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-inline-restart-dark.jpg",
+      "sha256": "491d91849e32e2992946042bfa8ca3dc81493c829c6f616be2c57ab8c0c9d389",
+      "bytes": 12301,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/location-right-restart-dark.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/location-right-restart-light.jpg",
+        "sha256": "4150e69f5ee5293d6a2ca3e78f0781c024c6fca6491e1b7a9503f561b1032f76",
+        "bytes": 31989,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-inline-restart-light.jpg",
+      "sha256": "3cc6a97e604bdd478cbcdcfcb84d5c4cce1e9dc26315bf4fa99879b8572995a2",
+      "bytes": 14118,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/location-right-restart-light.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/matches-dark.jpg",
+        "sha256": "857786eedc091f51e1c28748f8a8c895ca4e4b7ca1bac14a6cbaaddbafdf48c7",
+        "bytes": 49655,
+        "pixels": [
+          1280,
+          332
+        ]
+      },
+      "file": "panel/matches-dark.jpg",
+      "sha256": "f0c4d9582815dd488349108d731a355c6e784f7e7afa3a60d5f3d390618c4075",
+      "bytes": 19790,
+      "pixels": [
+        640,
+        166
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/matches-light.jpg",
+        "sha256": "ffa6c673f6cbda1041f4bc6d62e7b292bbad61e8c25d7df07acfaed51b71d903",
+        "bytes": 53660,
+        "pixels": [
+          1280,
+          332
+        ]
+      },
+      "file": "panel/matches-light.jpg",
+      "sha256": "65c531113d349d442e82a4729ed3185ae292dedfec6e9493c5efa396964c6e5d",
+      "bytes": 21514,
+      "pixels": [
+        640,
+        166
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/no-results-dark.jpg",
+        "sha256": "3db519184c82b11695aa8daf70ee315bc85e93cc2529d744530a1a8c93f96d20",
+        "bytes": 14949,
+        "pixels": [
+          1280,
+          164
+        ]
+      },
+      "file": "panel/no-results-dark.jpg",
+      "sha256": "c0209701534d8e45a0d7af76afb1922ae782754a40f41d6b695c896b90ce18af",
+      "bytes": 8298,
+      "pixels": [
+        640,
+        82
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/no-results-light.jpg",
+        "sha256": "7dc7add78760548dac35b5fe04f54f747a6d67ec555b30b33dedf1158ef8962a",
+        "bytes": 15619,
+        "pixels": [
+          1280,
+          164
+        ]
+      },
+      "file": "panel/no-results-light.jpg",
+      "sha256": "db732cdc0ef2c0151c0810253cda12c6468453aa7e8c30fde90d27adfda97ecb",
+      "bytes": 8639,
+      "pixels": [
+        640,
+        82
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-completed-dark.jpg",
+        "sha256": "4da910a134495f78a50bb4bc5f4781de45541086c54a39fe4f312126d613b118",
+        "bytes": 48501,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/path-completed-dark.jpg",
+      "sha256": "27b94a62791860afe4595058848522f05562629a7f46d448a2f844b4e5bce4cc",
+      "bytes": 19566,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-completed-light.jpg",
+        "sha256": "b09b4c6a23b38ed9dd4492c07959a4cf14b1a9687eed3c4f2681e2428b2359cb",
+        "bytes": 52780,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/path-completed-light.jpg",
+      "sha256": "1f11873c3cd9b675c447934b8e64596d709cf944f9d573ffddce4df18e12f2c3",
+      "bytes": 21311,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-dot-dark.jpg",
+        "sha256": "c72da563d94845427c0ffd4b342d9d6af81bf0512101f866bb16c06508c10819",
+        "bytes": 33558,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/path-dot-dark.jpg",
+      "sha256": "52cd625d420e5a41913b2099ce7da99986889b8edbc62c0536f47bd03d782632",
+      "bytes": 14604,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-dot-light.jpg",
+        "sha256": "4df79a8d07c56e7a5ecf79db337a557d3976f5ccace326227d9cef4757c3e6be",
+        "bytes": 37709,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/path-dot-light.jpg",
+      "sha256": "a552fe24f2bef68d7cea0b3b9890e8d8ff2b7e970539c68c32c5bc8370a476c0",
+      "bytes": 16355,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-file-dark.jpg",
+        "sha256": "f1dfb1107f45a4024f04e9e1c00e9f97c444f7397bd6b382fd9b0fa88c2f7642",
+        "bytes": 35865,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/path-file-dark.jpg",
+      "sha256": "ff00314f7fd464d63ae058377d5bde6547d6bb1c2f5f29979be35ae11fc75ef1",
+      "bytes": 15521,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-file-light.jpg",
+        "sha256": "5f6ddb1919be6535a983234f3db3cf3be23e32308f6459a4510274f649f69bc9",
+        "bytes": 40048,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/path-file-light.jpg",
+      "sha256": "9b52821cc638c5a80e1fb094f0da234dbfd67e4d71cecd37c3700aa4ca01323d",
+      "bytes": 17295,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-folder-dark.jpg",
+        "sha256": "7aa6499b4de72ed06143203a7ce72f6eb45ae150e5ca00d803477f6d9c24f546",
+        "bytes": 41833,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/path-folder-dark.jpg",
+      "sha256": "9e0057b4b1004fec9eea017c5cb07cf0b88c1f92dcf3d69970c33b8d329e3cd2",
+      "bytes": 17258,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-folder-light.jpg",
+        "sha256": "0423577cde9b3a66c82c04a9ee1c806b4b7dda7731d64f212e5c690c89361cc0",
+        "bytes": 45983,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/path-folder-light.jpg",
+      "sha256": "ac20e10b108413013c3fd95327af829301d76d161d94d0c99a3132ea88afd93c",
+      "bytes": 18992,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-home-dark.jpg",
+        "sha256": "77d666083fdd4666cb412187ada4aebec5d300270bf463ddc8575497bd36e5bf",
+        "bytes": 52236,
+        "pixels": [
+          1280,
+          388
+        ]
+      },
+      "file": "panel/path-home-dark.jpg",
+      "sha256": "dff393f09d440a90d6496c9d4ac9d20d20563cc44b506626fb53ad4615314c01",
+      "bytes": 20413,
+      "pixels": [
+        640,
+        194
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-home-light.jpg",
+        "sha256": "d32ac87201c524d419303e7f9064ccc2747f24aad04ad695deca4342c6cff4e9",
+        "bytes": 56067,
+        "pixels": [
+          1280,
+          388
+        ]
+      },
+      "file": "panel/path-home-light.jpg",
+      "sha256": "87d3872b796b80ce3d92e3362eb1d2194da91b297a64c195324ab03812d39fb2",
+      "bytes": 21880,
+      "pixels": [
+        640,
+        194
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-missing-dark.jpg",
+        "sha256": "5cb97b6a09d4218962e3dfd40354eccac712ab96ef7b6a4166149592e83670c8",
+        "bytes": 17363,
+        "pixels": [
+          1280,
+          164
+        ]
+      },
+      "file": "panel/path-missing-dark.jpg",
+      "sha256": "bd36a922f19229cf6f9d2856b21ce29fc30faa2e85dfe81e1795ac3a83d1d12a",
+      "bytes": 9192,
+      "pixels": [
+        640,
+        82
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-missing-light.jpg",
+        "sha256": "49ebc5e30b8a7dd349be24746ca6e13c22c163b8e07e78cd0057a9ee9c76b658",
+        "bytes": 18072,
+        "pixels": [
+          1280,
+          164
+        ]
+      },
+      "file": "panel/path-missing-light.jpg",
+      "sha256": "978a89c2d533496b8636d5d26346ee89ba38594c6cefbc03c9afded9be3cb482",
+      "bytes": 9574,
+      "pixels": [
+        640,
+        82
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-no-match-dark.jpg",
+        "sha256": "14ef635ac5ad09f7a0a8e1fec23c68101f2425dc71fcf9d6a3297b4ec3142244",
+        "bytes": 16171,
+        "pixels": [
+          1280,
+          164
+        ]
+      },
+      "file": "panel/path-no-match-dark.jpg",
+      "sha256": "c08f55ea240ef639a6d7b7441fccc4bef3dacc5e786e5b5522a7f5069b539b70",
+      "bytes": 8669,
+      "pixels": [
+        640,
+        82
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-no-match-light.jpg",
+        "sha256": "7248e0a7850f2e6370506d90e839a33d0ce90efe6e0ad74875b4bc68b2754d19",
+        "bytes": 16881,
+        "pixels": [
+          1280,
+          164
+        ]
+      },
+      "file": "panel/path-no-match-light.jpg",
+      "sha256": "b449b625c28564ada6ea537f2e14a1c66e8d026e7f7878f0364d3c16df1e9719",
+      "bytes": 9043,
+      "pixels": [
+        640,
+        82
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-not-folder-dark.jpg",
+        "sha256": "1f2e569dfe24a24345a75a43ecb4e63ab158016ff3d7a539b95759ec6b92d739",
+        "bytes": 18410,
+        "pixels": [
+          1280,
+          164
+        ]
+      },
+      "file": "panel/path-not-folder-dark.jpg",
+      "sha256": "68c2d35f7178ea5a72c9320d506f17c34fc4cb97081e93e4d209aa35fbc8eace",
+      "bytes": 9624,
+      "pixels": [
+        640,
+        82
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-not-folder-light.jpg",
+        "sha256": "306ea29eb18dd5e40da89ebf32608dbec82143f0f6b06f0f3619efc2295c7a0d",
+        "bytes": 19161,
+        "pixels": [
+          1280,
+          164
+        ]
+      },
+      "file": "panel/path-not-folder-light.jpg",
+      "sha256": "c6df200c28348d0ae82a508e99f80c903334275be990b8d378c088fa395de36d",
+      "bytes": 10007,
+      "pixels": [
+        640,
+        82
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-protected-dark.jpg",
+        "sha256": "0fbe6967930231eea3ed39f3d8ed1757c76aa19d4abc328ac740c4d3d2296beb",
+        "bytes": 26808,
+        "pixels": [
+          1280,
+          164
+        ]
+      },
+      "file": "panel/path-protected-dark.jpg",
+      "sha256": "851311179ec32e2d3683adee509964a365122890c35a0b72c5005203e1ee1842",
+      "bytes": 12498,
+      "pixels": [
+        640,
+        82
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-protected-light.jpg",
+        "sha256": "5af29e348770b95359257ec8a10e563de5addd8eb8823fda420170ab9c0c6810",
+        "bytes": 27672,
+        "pixels": [
+          1280,
+          164
+        ]
+      },
+      "file": "panel/path-protected-light.jpg",
+      "sha256": "19af1c79bb2977ad0ef06d527151734d53e15fdbea7fda3c335d1262e22a28f2",
+      "bytes": 12935,
+      "pixels": [
+        640,
+        82
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-unicode-dark.jpg",
+        "sha256": "c93c975af8f4a1e11908e860a403ccc1491032557bb8604491de46a66d10e4f8",
+        "bytes": 49627,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/path-unicode-dark.jpg",
+      "sha256": "b3c40d6f674014d9d4ed57cd34b2d82e16768b58338020b8b6434b35b6796f82",
+      "bytes": 20051,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-unicode-light.jpg",
+        "sha256": "636f87175f677218cf1958673966365fd49dbddb031077a5d59a43c26f803a3f",
+        "bytes": 53915,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/path-unicode-light.jpg",
+      "sha256": "00ed32b613137408d19dc1f13a49467082c1201ccc7797e678bc6884d5eddc89",
+      "bytes": 21820,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-unreadable-dark.jpg",
+        "sha256": "a13af20e62122de010a2f1280a16634bea6f66d76e6542646524c9445e8614d8",
+        "bytes": 19561,
+        "pixels": [
+          1280,
+          164
+        ]
+      },
+      "file": "panel/path-unreadable-dark.jpg",
+      "sha256": "0e55ed41ef0ba5c978d1ca743e39f19ced70cd76a4de1b9f5e1b5801a0c1021f",
+      "bytes": 10064,
+      "pixels": [
+        640,
+        82
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/path-unreadable-light.jpg",
+        "sha256": "bcc2679d5f4a28fe3608744579dd28887688b51c94d59705ec0e7b9709a4ba83",
+        "bytes": 20394,
+        "pixels": [
+          1280,
+          164
+        ]
+      },
+      "file": "panel/path-unreadable-light.jpg",
+      "sha256": "7e76c4d5e2874df5f308eaadf82c6d7482d6a913e80746446c1a3556d9403782",
+      "bytes": 10464,
+      "pixels": [
+        640,
+        82
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/restart-dark.jpg",
+        "sha256": "9a14865b9ee3e124e97c62954dc097d1f30577c19e05916ab9919b55d03feec5",
+        "bytes": 34221,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/restart-dark.jpg",
+      "sha256": "621341ed84d6ee26371b66ad03706980e9901974f44b1b93a094270cbfc78e88",
+      "bytes": 14796,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/restart-light.jpg",
+        "sha256": "e01e5ad0b0861994c8367722cdae8cb4ae8b9cb90318635ce37a3100588f08d0",
+        "bytes": 38590,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/restart-light.jpg",
+      "sha256": "dcf5bf943f42844346dbb0b9a90f6d8e626380eb75916e441f687e290a268a6c",
+      "bytes": 16604,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/search-0-dark.png",
+        "sha256": "1684b624be418d0c4217cd246627d5bd273c97409d2cadeb6665f83a2d9d0ea4",
+        "bytes": 8914,
+        "pixels": [
+          1280,
+          82
+        ]
+      },
+      "file": "panel/search-0-dark.jpg",
+      "sha256": "83c7df68b5f05726e536ca3961c13d2cf0e8449c3a3f63b19f607552dc770a48",
+      "bytes": 2536,
+      "pixels": [
+        640,
+        41
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/search-0-light.png",
+        "sha256": "2d11e39e69661812ef721899dd9abeee781baca8ad6ab65a7341d28702c97395",
+        "bytes": 8874,
+        "pixels": [
+          1280,
+          82
+        ]
+      },
+      "file": "panel/search-0-light.jpg",
+      "sha256": "0f8ea23748d9cd0f570055fdb5fe37c65b5730267762f1baf0adca8a2dabfb0d",
+      "bytes": 2542,
+      "pixels": [
+        640,
+        41
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/search-1-dark.png",
+        "sha256": "769302fc9b182085fbcc8ce908a279a422d46420e6afa69780ae129d7c8d07bc",
+        "bytes": 29633,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/search-1-dark.jpg",
+      "sha256": "8bb0f5df2e7fa29b3fd90611c244ff7c3b32590c2727f5805b16c27d24d6b6d4",
+      "bytes": 11809,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/search-1-light.png",
+        "sha256": "8a40c3421a80e48bc9e03b5af6234a5ec99ddfa897685d413c0eb7053d450f62",
+        "bytes": 29319,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/search-1-light.jpg",
+      "sha256": "547b001ace620ee9a87e7f4c37c35ccc2c370b24777058d2961a8a7d1bbe9ed1",
+      "bytes": 13824,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/search-3-dark.png",
+        "sha256": "5473e5996e732db19fa7107db64de5c14f46263d74ac66fadff16fe4e72de41d",
+        "bytes": 48869,
+        "pixels": [
+          1280,
+          332
+        ]
+      },
+      "file": "panel/search-3-dark.jpg",
+      "sha256": "2ebf70ff2ee57750fd73df1e656452f9c077451ec3d015f9bcd09da2f4087be2",
+      "bytes": 16193,
+      "pixels": [
+        640,
+        166
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/search-3-light.png",
+        "sha256": "6f42886c0b5b2b22d7546d74c44daae7e7ebf33bc721a55fd0f2f1b23896ed57",
+        "bytes": 48051,
+        "pixels": [
+          1280,
+          332
+        ]
+      },
+      "file": "panel/search-3-light.jpg",
+      "sha256": "e7459e9861c4dc62c26370ee5e7710fd4139575eb40ef62437fa4b60a9f93de0",
+      "bytes": 18157,
+      "pixels": [
+        640,
+        166
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/search-9-dark.png",
+        "sha256": "83ff1f2c4be9255441e963149e1963c57c55d94c5f3f58a93a15c6c648a61301",
+        "bytes": 107084,
+        "pixels": [
+          1280,
+          668
+        ]
+      },
+      "file": "panel/search-9-dark.jpg",
+      "sha256": "08e0d3f861893f7b74e0cac9239d953b62d13e07516a664fda034dbb1a2b40c9",
+      "bytes": 29721,
+      "pixels": [
+        640,
+        334
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/search-9-light.png",
+        "sha256": "99d09628aa1163ef4184470b959f2f9ae3f70c4a567605f489feb24489b9352e",
+        "bytes": 105229,
+        "pixels": [
+          1280,
+          668
+        ]
+      },
+      "file": "panel/search-9-light.jpg",
+      "sha256": "bf6d957c136012bea89999f2f8e7282c3dcdd10e7dd80b19d882c88781d48bde",
+      "bytes": 31486,
+      "pixels": [
+        640,
+        334
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/search-marked-dark.png",
+        "sha256": "aae97806f0d8bbf813179d33867ed963e762ed53301e0ab21849b741dde98be9",
+        "bytes": 106320,
+        "pixels": [
+          1280,
+          668
+        ]
+      },
+      "file": "panel/search-marked-dark.jpg",
+      "sha256": "21330b31ee43469fe12d3965836e7116da4be5a5cde48ca6a384a41a00870df0",
+      "bytes": 29535,
+      "pixels": [
+        640,
+        334
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/search-marked-light.png",
+        "sha256": "465ae0e502389089f39d1acf9a3c8b176e630433c4c5df83dc67fe4af5fe3873",
+        "bytes": 104429,
+        "pixels": [
+          1280,
+          668
+        ]
+      },
+      "file": "panel/search-marked-light.jpg",
+      "sha256": "cc8ca439602cb3c1a3a28a2df2c7f75c1491d9905f7df10304e1ddd441e9cefd",
+      "bytes": 31294,
+      "pixels": [
+        640,
+        334
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/search-marked-strip-dark.png",
+        "sha256": "15dc7e0c872a060066f060d45c03ec24dae3d3b7dbc098591767dfc2fa5b1bf3",
+        "bytes": 7445,
+        "pixels": [
+          1280,
+          82
+        ]
+      },
+      "file": "panel/search-marked-strip-dark.jpg",
+      "sha256": "cf4909f76bd3e4387314e5b2926fb426ac702fa96ed962f976a8e3f83b0d8255",
+      "bytes": 2333,
+      "pixels": [
+        640,
+        41
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/search-marked-strip-light.png",
+        "sha256": "1d1c7d82f42ae43ac32e89de852884c5fc709c63cfca0f62f1307120290ba670",
+        "bytes": 7444,
+        "pixels": [
+          1280,
+          82
+        ]
+      },
+      "file": "panel/search-marked-strip-light.jpg",
+      "sha256": "a1b36bd8c19311fdef55d1dc43761b409b50a3cfa92eb18a27f053eaafe30007",
+      "bytes": 2348,
+      "pixels": [
+        640,
+        41
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/size-0-dark.jpg",
+        "sha256": "d4d579dcedf4b1432dc803a3a7f931ccf4a29ea7516624e794a8c1f8514ab520",
+        "bytes": 8761,
+        "pixels": [
+          1280,
+          82
+        ]
+      },
+      "file": "panel/empty-dark.jpg",
+      "sha256": "db48f982fa8de14dc2b571e034080dc240e63c322d5d8e88a68cf347f8ae28a2",
+      "bytes": 6130,
+      "pixels": [
+        640,
+        41
+      ],
+      "duplicate_file_removed": "panel/size-0-dark.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/size-0-light.jpg",
+        "sha256": "93bd88b2b3295fd2f6239135a852b345a018e02a9acab81cb8460428c9406e16",
+        "bytes": 8761,
+        "pixels": [
+          1280,
+          82
+        ]
+      },
+      "file": "panel/empty-light.jpg",
+      "sha256": "3a67f0a433560e14a193591839b7890c1ad2f9bdb29009bfe0fdbc275dfddc12",
+      "bytes": 6132,
+      "pixels": [
+        640,
+        41
+      ],
+      "duplicate_file_removed": "panel/size-0-light.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/size-1-dark.jpg",
+        "sha256": "e39d6584a61b2b5ecc40c9842046e895cbbb62b951bd66137e1f668b4baf0254",
+        "bytes": 37401,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-inline-1-dark.jpg",
+      "sha256": "ccd49376699b1ff71e26a342f902994a070ee179aba0a447f4af8f98a3982c45",
+      "bytes": 15915,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/size-1-dark.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/size-1-light.jpg",
+        "sha256": "3c06b417159d918a1c99ca5e419072820f238a09db25530c26e98d92338df490",
+        "bytes": 41594,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/location-inline-1-light.jpg",
+      "sha256": "ede2ef758831a5c22f89a23bed703006437ed95d50e8a73829f19ee529e2dfad",
+      "bytes": 17666,
+      "pixels": [
+        640,
+        110
+      ],
+      "duplicate_file_removed": "panel/size-1-light.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/size-3-dark.jpg",
+        "sha256": "ab315eea341861e55fe4b88cf0c9b9e41cbf9f41af7c800aada849eac5bbc466",
+        "bytes": 51410,
+        "pixels": [
+          1280,
+          332
+        ]
+      },
+      "file": "panel/location-inline-3-dark.jpg",
+      "sha256": "84b44ba47f3063a9abfd4927c2439fcfafc00127fbb2337f0e46f673081b136f",
+      "bytes": 20723,
+      "pixels": [
+        640,
+        166
+      ],
+      "duplicate_file_removed": "panel/size-3-dark.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/size-3-light.jpg",
+        "sha256": "d2004be111b66a8dcd3e5abb07c5705c6d3e70a91b2bfa7844b479e1f00c8467",
+        "bytes": 55166,
+        "pixels": [
+          1280,
+          332
+        ]
+      },
+      "file": "panel/location-inline-3-light.jpg",
+      "sha256": "e7e024508e007a20543494165f92c06c04a5b06dc6b9e710a3b21e11c71d5b0e",
+      "bytes": 22374,
+      "pixels": [
+        640,
+        166
+      ],
+      "duplicate_file_removed": "panel/size-3-light.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/size-9-dark.jpg",
+        "sha256": "d3caa52d595f707faf59317c840a8396035d3a4d8282ad18298d6df9e7d66783",
+        "bytes": 93675,
+        "pixels": [
+          1280,
+          668
+        ]
+      },
+      "file": "panel/location-inline-9-dark.jpg",
+      "sha256": "648745c0447e1225340a7d846d073755f15e9f42b8cf69954a410f6b73e7e923",
+      "bytes": 35101,
+      "pixels": [
+        640,
+        334
+      ],
+      "duplicate_file_removed": "panel/size-9-dark.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/size-9-light.jpg",
+        "sha256": "62fe060392fe66f6d749e2a4970ed8f4b83d77e7e670574b01ce3cc058253cb9",
+        "bytes": 96093,
+        "pixels": [
+          1280,
+          668
+        ]
+      },
+      "file": "panel/location-inline-9-light.jpg",
+      "sha256": "3532ba5e4fc8933253919b04570ac800a282ab536855d3f785bb98721cdd1c62",
+      "bytes": 36438,
+      "pixels": [
+        640,
+        334
+      ],
+      "duplicate_file_removed": "panel/size-9-light.jpg"
+    },
+    {
+      "original": {
+        "file": "panel/web-dark.jpg",
+        "sha256": "a5604a3c33d07c88ea425e54544d75021f2dbccd1ed26ede0ae2e1332fc372bf",
+        "bytes": 29955,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/web-dark.jpg",
+      "sha256": "e4fcfd8a700ee3fa0286a367e1d72bebd2614be552075057bcd44ec99e36bf16",
+      "bytes": 12935,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "panel/web-light.jpg",
+        "sha256": "4a92aae97ec2c19b092dfb70551785f68ab1a60d3531a72ff7f549bdbd617e5d",
+        "bytes": 34325,
+        "pixels": [
+          1280,
+          220
+        ]
+      },
+      "file": "panel/web-light.jpg",
+      "sha256": "0ec4618fef726a807a4b000976e23d2b9e18951fb50cc47de6adff778c8929bb",
+      "bytes": 14713,
+      "pixels": [
+        640,
+        110
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-broken-config-dark.jpg",
+        "sha256": "c9ccd6ef024304fb1143a0cce61d92d357218232b3593e5157411e2ff6723730",
+        "bytes": 66598,
+        "pixels": [
+          1240,
+          698
+        ]
+      },
+      "file": "settings/settings-broken-config-dark.jpg",
+      "sha256": "a636b4b1af21626c9e5e26b4810075435a7fa8a7283d20d8e81a266015fc8a0d",
+      "bytes": 26416,
+      "pixels": [
+        620,
+        349
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-broken-config-light.jpg",
+        "sha256": "e94c4139a457608c1ed937b9b9b682d9b1a66f74cc8389b7dfeebd6085ffc2f5",
+        "bytes": 69068,
+        "pixels": [
+          1240,
+          698
+        ]
+      },
+      "file": "settings/settings-broken-config-light.jpg",
+      "sha256": "c103419a990525533fe3b171d75959096f4f8a025c2c19e6b8db04c0eaf08280",
+      "bytes": 27230,
+      "pixels": [
+        620,
+        349
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-denied-dark.jpg",
+        "sha256": "c8b7aa6e7f7582d52c722043437b673243217f7e0cf678de6835921c99660599",
+        "bytes": 84329,
+        "pixels": [
+          1240,
+          806
+        ]
+      },
+      "file": "settings/settings-denied-dark.jpg",
+      "sha256": "baf0cbb95fe042ff190aa693515d1bb6e976562cfc6518cace2722702106180e",
+      "bytes": 32397,
+      "pixels": [
+        620,
+        403
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-denied-light.jpg",
+        "sha256": "8152cbad28c152ee390c26e55754f5fd68e3199aa12cc2fea5040a85bc68371d",
+        "bytes": 86030,
+        "pixels": [
+          1240,
+          806
+        ]
+      },
+      "file": "settings/settings-denied-light.jpg",
+      "sha256": "2c12b7c939fd4654b841476f6b38ab7408622a4a831f360aa538a817cfaa2386",
+      "bytes": 33470,
+      "pixels": [
+        620,
+        403
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-folders-dark.jpg",
+        "sha256": "afc95f1423bcbe23a555201ee99c5f50689f30610752364b565c7fea248cbfbe",
+        "bytes": 86622,
+        "pixels": [
+          1240,
+          806
+        ]
+      },
+      "file": "settings/settings-folders-dark.jpg",
+      "sha256": "532cbd95f9cdaf9935e50060c644ba010263b0c805a02e251bc1ed27a8abb2fe",
+      "bytes": 33182,
+      "pixels": [
+        620,
+        403
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-folders-light.jpg",
+        "sha256": "86a80aa524a3d370ced20f235564cccac25d31067dfa4ac9583eeae8ad3ea6af",
+        "bytes": 88416,
+        "pixels": [
+          1240,
+          806
+        ]
+      },
+      "file": "settings/settings-folders-light.jpg",
+      "sha256": "c7674447341018e2a82c5f3f5574feb9b84804bb6c305d86c8167af546bc9300",
+      "bytes": 34175,
+      "pixels": [
+        620,
+        403
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-general-dark.jpg",
+        "sha256": "68fc37cb438141dc796345a16c62d660056329f86effd6fb5ef9fb8c29a41b63",
+        "bytes": 60910,
+        "pixels": [
+          1240,
+          572
+        ]
+      },
+      "file": "settings/settings-general-dark.jpg",
+      "sha256": "dcf8e6e138c6a81f06010f590f6ead61935af7472fe62ab65c7b339b888f8476",
+      "bytes": 25698,
+      "pixels": [
+        620,
+        286
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-general-light.jpg",
+        "sha256": "6615c08bc66a1d96407fee05f0ec93ea6d4c0fc01a91c2d9dbc725b4d6f0b7d6",
+        "bytes": 63256,
+        "pixels": [
+          1240,
+          572
+        ]
+      },
+      "file": "settings/settings-general-light.jpg",
+      "sha256": "265f43344af7dc9b0215d44647d34421ba89f07cf5656e92dd7f0402e205e6ac",
+      "bytes": 26529,
+      "pixels": [
+        620,
+        286
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-location-below-dark.jpg",
+        "sha256": "2c45207d1e51ab7d6ab1d0b503500e5439a457320408ff8ac8d3c8108f3ef59d",
+        "bytes": 60875,
+        "pixels": [
+          1240,
+          572
+        ]
+      },
+      "file": "settings/settings-location-below-dark.jpg",
+      "sha256": "db225835151c0175ff49b5fc8e43cceb428a2987b7e32a23939a3a7344f88bdd",
+      "bytes": 25698,
+      "pixels": [
+        620,
+        286
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-location-below-light.jpg",
+        "sha256": "cb40672ae1b7df8d7f95b6b95e30e0987d915169d905fce5897c687714d9462a",
+        "bytes": 63222,
+        "pixels": [
+          1240,
+          572
+        ]
+      },
+      "file": "settings/settings-location-below-light.jpg",
+      "sha256": "6044b3f679df88fc6399c00c66761c955e9f1c3b038461e4b8e482bff1d9ac4c",
+      "bytes": 26542,
+      "pixels": [
+        620,
+        286
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-location-inline-dark.jpg",
+        "sha256": "68fc37cb438141dc796345a16c62d660056329f86effd6fb5ef9fb8c29a41b63",
+        "bytes": 60910,
+        "pixels": [
+          1240,
+          572
+        ]
+      },
+      "file": "settings/settings-general-dark.jpg",
+      "sha256": "dcf8e6e138c6a81f06010f590f6ead61935af7472fe62ab65c7b339b888f8476",
+      "bytes": 25698,
+      "pixels": [
+        620,
+        286
+      ],
+      "duplicate_file_removed": "settings/settings-location-inline-dark.jpg"
+    },
+    {
+      "original": {
+        "file": "settings/settings-location-inline-light.jpg",
+        "sha256": "6615c08bc66a1d96407fee05f0ec93ea6d4c0fc01a91c2d9dbc725b4d6f0b7d6",
+        "bytes": 63256,
+        "pixels": [
+          1240,
+          572
+        ]
+      },
+      "file": "settings/settings-general-light.jpg",
+      "sha256": "265f43344af7dc9b0215d44647d34421ba89f07cf5656e92dd7f0402e205e6ac",
+      "bytes": 26529,
+      "pixels": [
+        620,
+        286
+      ],
+      "duplicate_file_removed": "settings/settings-location-inline-light.jpg"
+    },
+    {
+      "original": {
+        "file": "settings/settings-location-right-dark.jpg",
+        "sha256": "853efb2d2029c8baec5b4cf15bf2e134d0c023a8d63d947af1af8486d313bf4a",
+        "bytes": 60787,
+        "pixels": [
+          1240,
+          572
+        ]
+      },
+      "file": "settings/settings-location-right-dark.jpg",
+      "sha256": "5bbdde73c1145c4b9efee8a3f37d2be39b71c1f47c1cba3a38c488f67e8e91e5",
+      "bytes": 25630,
+      "pixels": [
+        620,
+        286
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-location-right-light.jpg",
+        "sha256": "823f8ac835ddfabf50c8e1d2aa0340c4de8b952ab943726306e63095650e92c6",
+        "bytes": 63156,
+        "pixels": [
+          1240,
+          572
+        ]
+      },
+      "file": "settings/settings-location-right-light.jpg",
+      "sha256": "1e63e10d16930849a7994ac6dcb4e2e495457b1fad7972a17d39771d92ad2a7a",
+      "bytes": 26480,
+      "pixels": [
+        620,
+        286
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-login-approval-dark.jpg",
+        "sha256": "90d13b7a3079a520cdfa958fdacab1fc63d4d52e30f242c5964cd8de34c63fb1",
+        "bytes": 47370,
+        "pixels": [
+          1240,
+          500
+        ]
+      },
+      "file": "settings/settings-login-approval-dark.jpg",
+      "sha256": "3877c145977720652f64ae16517b6f5151cc527afc7d2d7d4f3bf1855b4b504c",
+      "bytes": 21296,
+      "pixels": [
+        620,
+        250
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-login-approval-light.jpg",
+        "sha256": "07498de252860ce30c552c16fe518b0799f6ade2fc0324367cb7f7b748ceee21",
+        "bytes": 47711,
+        "pixels": [
+          1240,
+          500
+        ]
+      },
+      "file": "settings/settings-login-approval-light.jpg",
+      "sha256": "69b0701b97815d77b3b787c482cc5c6eb109645b92098b6ecb8dec6fb74eeac4",
+      "bytes": 22054,
+      "pixels": [
+        620,
+        250
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-recording-dark.jpg",
+        "sha256": "47d0a483ddd5f6395408bad44c99b97b6674266951c33dd71b7ff4825130072b",
+        "bytes": 61670,
+        "pixels": [
+          1240,
+          572
+        ]
+      },
+      "file": "settings/settings-recording-dark.jpg",
+      "sha256": "257137bbf9a6befee713a970789cd5da07723d5cb79d2145e14e83b8e51ffe66",
+      "bytes": 25920,
+      "pixels": [
+        620,
+        286
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-recording-light.jpg",
+        "sha256": "b783d586dc1a17eb762015a50c835e3144fcfc28c0ce1cbb86a886ab9aeb1804",
+        "bytes": 63975,
+        "pixels": [
+          1240,
+          572
+        ]
+      },
+      "file": "settings/settings-recording-light.jpg",
+      "sha256": "2518df3ffa5d7078aa0910ae76ef2163613a966c856c1eb31934cb81c811dc60",
+      "bytes": 26761,
+      "pixels": [
+        620,
+        286
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-search-dark.jpg",
+        "sha256": "0925af62cd18ff4876a56d9102c2266cacbd773a5b8331ab13cbd74713e221cc",
+        "bytes": 60697,
+        "pixels": [
+          1240,
+          738
+        ]
+      },
+      "file": "settings/settings-search-dark.jpg",
+      "sha256": "4d90511fbff681bb67f0b29853a52b32154e65799243196081a294ac935d2f2b",
+      "bytes": 23181,
+      "pixels": [
+        620,
+        369
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-search-light.jpg",
+        "sha256": "459afcbbf9959ab049c7e149310e82e04bfa91decca86a43ea3d912bac235184",
+        "bytes": 63900,
+        "pixels": [
+          1240,
+          738
+        ]
+      },
+      "file": "settings/settings-search-light.jpg",
+      "sha256": "c805e1752a856241cd15300fd5e64990d2863f90dcf1723e94f10596dd68613a",
+      "bytes": 24434,
+      "pixels": [
+        620,
+        369
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-validation-dark.jpg",
+        "sha256": "5fbd64ab65ad93096b6da46577349813ce921305a15e197b5595aafe2d2ddf47",
+        "bytes": 76038,
+        "pixels": [
+          1240,
+          790
+        ]
+      },
+      "file": "settings/settings-validation-dark.jpg",
+      "sha256": "7c7d3a5b18b4eac437b404b0c2b293d619948dec6af41b71b3cc8b5ee4644185",
+      "bytes": 28680,
+      "pixels": [
+        620,
+        395
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/settings-validation-light.jpg",
+        "sha256": "7046809cba8a7f698b48628c7e41ebbd3ab0944baf715264e0f0f85d9e959365",
+        "bytes": 80203,
+        "pixels": [
+          1240,
+          790
+        ]
+      },
+      "file": "settings/settings-validation-light.jpg",
+      "sha256": "dc428742e8d677d249be28b8bff36e4bd7d472e7fdfdb6fe55e2b18d21bebcea",
+      "bytes": 30323,
+      "pixels": [
+        620,
+        395
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/setup-complete-dark.jpg",
+        "sha256": "b5e672b0da623d27559cb23c6afa49d321368003e05cb10864a779384101ccb4",
+        "bytes": 49782,
+        "pixels": [
+          1320,
+          456
+        ]
+      },
+      "file": "settings/setup-complete-dark.jpg",
+      "sha256": "9d6cc8937d318bb6943ca1843a30469de12b16dae8771d41959aa9d367c71e9b",
+      "bytes": 19882,
+      "pixels": [
+        660,
+        228
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/setup-complete-light.jpg",
+        "sha256": "488fa521945219371e3819419fe16eb77916f9282f706da80120af27136799d8",
+        "bytes": 49643,
+        "pixels": [
+          1320,
+          456
+        ]
+      },
+      "file": "settings/setup-complete-light.jpg",
+      "sha256": "fd0e2a88fa53c8874bad32574984896fb4e03e89c1e4ba5ec544b5ada09c98aa",
+      "bytes": 19976,
+      "pixels": [
+        660,
+        228
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/setup-incomplete-dark.jpg",
+        "sha256": "1debdd93ae66c854e5cc261447b473e8aa16d17e028dd719346a138d847d995e",
+        "bytes": 67918,
+        "pixels": [
+          1320,
+          556
+        ]
+      },
+      "file": "settings/setup-incomplete-dark.jpg",
+      "sha256": "a59d0cba3bf6e76a5be16cbd416b4b0adaf09bda38c244c3c877aaf5adc18ab6",
+      "bytes": 26689,
+      "pixels": [
+        660,
+        278
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/setup-incomplete-light.jpg",
+        "sha256": "ec20a116d569352146c4b151964762cba2e9e208ecb3b8157b151cbd1dd6e596",
+        "bytes": 66956,
+        "pixels": [
+          1320,
+          556
+        ]
+      },
+      "file": "settings/setup-incomplete-light.jpg",
+      "sha256": "fedeaa3dd77ef2cbe309a973ab1df974fc8563f8781e5c3bf17011fbe96661c8",
+      "bytes": 26292,
+      "pixels": [
+        660,
+        278
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/setup-partial-dark.jpg",
+        "sha256": "f1101a77235c1948063f528a1e177650f1cf04706ee244e5db8056fb98c57038",
+        "bytes": 57587,
+        "pixels": [
+          1320,
+          496
+        ]
+      },
+      "file": "settings/setup-partial-dark.jpg",
+      "sha256": "6a24712a57ce703c8654510ed44725c2fdb4ebf25d6e637c1ce1bdc5c676eddc",
+      "bytes": 22075,
+      "pixels": [
+        660,
+        248
+      ]
+    },
+    {
+      "original": {
+        "file": "settings/setup-partial-light.jpg",
+        "sha256": "ec8921c3adcdd400f40fd361d383ac9163af42c6400effb8b2f06276a1ca5ee6",
+        "bytes": 57406,
+        "pixels": [
+          1320,
+          496
+        ]
+      },
+      "file": "settings/setup-partial-light.jpg",
+      "sha256": "9f1a80c018175baaa33ad0035d2eac7549f5583a71694fc1e1961b1ccbdaf088",
+      "bytes": 21918,
+      "pixels": [
+        660,
+        248
+      ]
+    }
+  ],
+  "byte_identical_copies_removed": 30
+}

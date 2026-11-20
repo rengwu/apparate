@@ -17,7 +17,10 @@ public struct SearchItem: Sendable, Equatable {
     public let path: String?
     public init(id: String, kind: ItemKind, name: String, alternateNames: [String] = [], keywords: [String] = [], path: String? = nil) {
         self.id = id; self.kind = kind; self.name = name
-        self.alternateNames = alternateNames; self.keywords = keywords; self.path = path
+        if kind == .app, let basename = path?.split(separator: "/").last, basename.hasPrefix("."), !alternateNames.contains(String(basename)) {
+            self.alternateNames = alternateNames + [String(basename)]
+        } else { self.alternateNames = alternateNames }
+        self.keywords = keywords; self.path = path
     }
 }
 
@@ -55,6 +58,15 @@ public struct ParsedQuery: Sendable, Equatable {
     public let pathSegments: [String]
     public let hasTrailingSeparator: Bool
     public var isEmpty: Bool { text.isEmpty || (isPath && pathSegments.isEmpty) }
+    /// The empty name after a trailing slash does not opt in to dot entries.
+    package var includesDotNames: Bool {
+        (isPath ? (hasTrailingSeparator ? "" : pathSegments.last ?? "") : text).hasPrefix(".")
+    }
+    /// Application names in Open With are literal; launcher prefixes and paths do not apply.
+    public init(literalName: String) {
+        text = literalName.trimmingCharacters(in: .whitespacesAndNewlines)
+        scope = .apps; isPath = false; pathSegments = []; hasTrailingSeparator = false
+    }
     public init(_ raw: String, config: AppConfig = AppConfig()) {
         var text = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         var scope: SearchScope?

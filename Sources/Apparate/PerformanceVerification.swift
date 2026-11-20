@@ -5,6 +5,7 @@ import Synchronization
 
 enum PerformanceData {
     static let queries = ["", "r", "re", "rea", "read", "readme", "readme", "report", "config", "network", "project/", "project/read", "projects/report", "c", "ca", "café", "straße", "東京", ".zzzz", "?example"]
+    static let dotQueries = ["'.config", "'.env", "'.git", "'.github", "'.editorconfig", "'project/.env", "'project/.git", "'project/", "'config", ".config"]
     static func stats(_ values: [Double]) -> [String: Any] {
         guard !values.isEmpty else { return ["count": 0] }
         let sorted = values.sorted()
@@ -40,9 +41,11 @@ private final class PerformanceTraces: Sendable {
         defer { NSApp.terminate(nil) }
         do {
             let files = try await Task.detached(priority: .userInitiated) {
-                let fixture = SyntheticFiles(count: profile.panelCount)
+                let fixture = SyntheticFiles(count: profile.panelCount, includeDots: profile.dotEntries)
                 return try await FileCrawler(reader: fixture.reader).crawl(folders: [.init(path: fixture.root)], respectGitignore: true, access: FileAccessPolicy()).snapshot
             }.value
+            report["file_count"] = files.count; report["dot_count"] = files.dotEntryCount
+            report["dot_fixture"] = profile.dotEntries
             let catalog = try TestProfile.fixtureCatalog()
             if profile.performance == "pipeline" { try await pipeline(profile, files: files, catalog: catalog, report: &report) }
             else { try await latency(profile, files: files, catalog: catalog, report: &report) }
@@ -56,8 +59,9 @@ private final class PerformanceTraces: Sendable {
             let usage = UsageSnapshot(), pipeline = SearchPipeline()
             var rows: [[String: String]] = []
             for repeatIndex in 0..<2 {
-                for i in 0..<120 {
-                    let text = PerformanceData.queries[i % PerformanceData.queries.count], query = ParsedQuery(text)
+                let queries = PerformanceData.queries + (profile.dotEntries ? PerformanceData.dotQueries : [])
+                for i in 0..<(queries.count * 6) {
+                    let text = queries[i % queries.count], query = ParsedQuery(text)
                     let request = SearchRequest(generation: UInt64(i), index: catalog.index, query: query, files: files, usage: usage)
                     // Independent reference, parsed query and hashes all outside timing.
                     let local = catalog.index.search(query, usage: usage, includeWebFallback: false)
@@ -79,6 +83,10 @@ private final class PerformanceTraces: Sendable {
         try PerformanceData.csv(rows, to: profile.directory.appendingPathComponent("pipeline.csv"))
         report["file"] = PerformanceData.stats(rows.compactMap { Double($0["file_ms"]!) })
         report["pipeline"] = PerformanceData.stats(rows.compactMap { Double($0["pipeline_ms"]!) })
+        for (label, subset) in [("ordinary", rows.filter { !PerformanceData.dotQueries.contains($0["query"]!) }),
+                                ("dot_queries", rows.filter { PerformanceData.dotQueries.contains($0["query"]!) })] {
+            report[label + "_pipeline"] = PerformanceData.stats(subset.compactMap { Double($0["pipeline_ms"]!) })
+        }
         report["matched_hashes"] = rows.count
         report["scope"] = "Same snapshot, parsed query, empty usage, top-50 limit; file-only vs production pipeline; independent reference hash outside timers; stage-probe third invocation separate. Opposite orders, not an end-to-end latency verdict."
     }

@@ -10,6 +10,41 @@ import Synchronization
     }
 }
 @MainActor func settingsTests(_ h: Harness) async {
+    await h.test("settings: Open With preserves external fields, rejects stale keys and launcher clashes") {
+        let dir = try temporaryDirectory(); defer { try? FileManager.default.removeItem(at: dir) }
+        let store = try ConfigStore(directory: dir); defer { store.stopWatching() }
+        let registrar = RegistrarFake(), keys = HotKeyRegistration(registrar: registrar)
+        let model = SettingsModel(store: store, hotkey: keys, access: FolderAccessController(directory: dir, probe: { _ in .allowed }), login: LoginFake(), readSpotlight: { .disabled })
+        model.retryHotkey(); let registrations = registrar.operations
+        var chosen = AppConfig.HotKey.openWithDefault; chosen.keyCode = 40; chosen.modifiers = 2304; chosen.display = "⌥⌘K"
+        var external = model.config; external.showMenuBarIcon = false
+        try JSONEncoder().encode(external).write(to: store.file, options: .atomic)
+        try expect(model.set(\.openWithKey, from: .openWithDefault, to: chosen) && !model.config.showMenuBarIcon && registrar.operations == registrations)
+        external = model.config; external.openWithKey = .openWithDefault
+        try JSONEncoder().encode(external).write(to: store.file, options: .atomic)
+        try expect(!model.set(\.openWithKey, from: chosen, to: chosen) && model.config.openWithKey == .openWithDefault)
+        try expect(!model.setHotkey(.openWithDefault, expected: model.config.hotKey) && keys.active == model.config.hotKey && registrar.operations == registrations)
+        let good = model.config; external.openWithKey.keyCode = 0
+        try JSONEncoder().encode(external).write(to: store.file, options: .atomic); store.reload()
+        try expect(!model.editable && model.config == good)
+    }
+    await h.test("settings: result location writes preserve other fields, reject conflicts and roll back disk failure") {
+        let dir = try temporaryDirectory(); defer { try? FileManager.default.removeItem(at: dir) }
+        var failWrite = false
+        let store = try ConfigStore(directory: dir, writeData: { data, url in
+            if failWrite { throw SourceError("Fixture disk full") }; try data.write(to: url, options: .atomic)
+        }); defer { store.stopWatching() }
+        let model = SettingsModel(store: store, hotkey: HotKeyRegistration(registrar: RegistrarFake()), access: FolderAccessController(directory: dir, probe: { _ in .allowed }), login: LoginFake(), readSpotlight: { .unknown })
+        var external = model.config; external.showMenuBarIcon = false
+        try JSONEncoder().encode(external).write(to: store.file, options: .atomic)
+        try expect(model.set(\.resultLocation, from: .inline, to: .below) && !model.config.showMenuBarIcon)
+        external = model.config; external.resultLocation = .inline
+        try JSONEncoder().encode(external).write(to: store.file, options: .atomic)
+        try expect(!model.set(\.resultLocation, from: .below, to: .right) && model.config.resultLocation == .inline)
+        let saved = try Data(contentsOf: store.file); failWrite = true
+        try expect(!model.set(\.resultLocation, from: .inline, to: .right) && model.config.resultLocation == .inline)
+        try expect(try Data(contentsOf: store.file) == saved)
+    }
     await h.test("settings: fresh field updates preserve unrelated external edits and reject conflicts") {
         let dir = try temporaryDirectory(); defer { try? FileManager.default.removeItem(at: dir) }
         let store = try ConfigStore(directory: dir); defer { store.stopWatching() }
@@ -124,6 +159,10 @@ import Synchronization
         let model = SettingsModel(store: store, hotkey: HotKeyRegistration(registrar: RegistrarFake()), access: access, login: LoginFake(), readSpotlight: { .disabled }, home: "/Fixture")
         for _ in 0..<3 { model.refresh() }
         try expect(calls.withLock { $0.isEmpty } && model.needsAccess && !model.accessReady)
+        let original = store.current
+        var outside = original; outside.folders = []; try store.save(outside)
+        try expect(model.needsAccess && calls.withLock { $0.isEmpty }, "Path access must be available without adding an index root")
+        try store.save(original)
         model.requestAccess(); model.cancelAccess()
         try await Task.sleep(for: .milliseconds(30))
         try expect(calls.withLock { $0.isEmpty }, "Closing before a scheduled check starts must cancel it")

@@ -14,12 +14,13 @@ final class IndexConnection: @unchecked Sendable {
         do {
             try exec("PRAGMA journal_mode=WAL")
             let version = try integer("PRAGMA user_version")
-            guard (0...2).contains(version) else { throw UsageError(description: "Unsupported index database version.") }
+            guard (0...3).contains(version) else { throw UsageError(description: "Unsupported index database version.") }
             try exec("BEGIN IMMEDIATE")
             try exec("CREATE TABLE IF NOT EXISTS usage (item_id TEXT PRIMARY KEY, decayed_count REAL NOT NULL, last_update REAL NOT NULL)")
             try exec("CREATE TABLE IF NOT EXISTS file_nodes (generation INTEGER NOT NULL, id INTEGER NOT NULL, parent INTEGER NOT NULL, name TEXT NOT NULL, kind INTEGER NOT NULL, details BLOB NOT NULL, PRIMARY KEY(generation,id)) WITHOUT ROWID")
             try exec("CREATE TABLE IF NOT EXISTS file_state (singleton INTEGER PRIMARY KEY CHECK(singleton=1), generation INTEGER NOT NULL, details BLOB NOT NULL)")
-            try exec("PRAGMA user_version=2; COMMIT")
+            try exec("CREATE TABLE IF NOT EXISTS open_with (content_type TEXT PRIMARY KEY, application TEXT NOT NULL, last_used REAL NOT NULL)")
+            try exec("PRAGMA user_version=3; COMMIT")
         } catch { try? exec("ROLLBACK"); throw error }
     }
     deinit { sqlite3_close(db) }
@@ -65,6 +66,7 @@ struct FileDiskState: Codable, Sendable {
     var count: Int
     var revision: UInt64
     var lastUpdate: Date?
+    var skipHiddenFiles: Bool?
     var signature: String
     var checkpoints: [FileCheckpoint]
     var dirty: Set<String>
@@ -116,6 +118,7 @@ public actor FileIndexStore {
         var snapshot = FileIndexSnapshot()
         snapshot.chunks = arrays.map(FileChunk.init); snapshot.roots = state.roots; snapshot.free = state.free
         snapshot.slots = state.slots; snapshot.count = state.count; snapshot.revision = state.revision; snapshot.lastUpdate = state.lastUpdate
+        snapshot.skipHiddenFiles = state.skipHiddenFiles ?? false
         // Validate graph links before the snapshot can reach search (including cycle bounds).
         for root in snapshot.roots { guard snapshot.node(root.node) != nil else { throw SourceError("The file index root is invalid.") } }
         for id in 0..<snapshot.slots {
@@ -135,7 +138,7 @@ public actor FileIndexStore {
         try Task.checkCancellation(); saving = true; defer { saving = false }
         let db = connection, snapshot = result.snapshot
         let state = FileDiskState(roots: snapshot.roots, free: snapshot.free, slots: snapshot.slots, count: snapshot.count,
-                                  revision: snapshot.revision, lastUpdate: snapshot.lastUpdate, signature: signature, checkpoints: checkpoints, dirty: result.dirtyPaths)
+                                  revision: snapshot.revision, lastUpdate: snapshot.lastUpdate, skipHiddenFiles: snapshot.skipHiddenFiles, signature: signature, checkpoints: checkpoints, dirty: result.dirtyPaths)
         let stateData = try JSONEncoder().encode(state)
         let replace = replacing || generation == nil
         let target = replace ? try db.integer("SELECT COALESCE(MAX(generation),0)+1 FROM file_nodes") : generation!

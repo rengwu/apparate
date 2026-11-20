@@ -32,6 +32,9 @@ extension FileIndexSnapshot {
                 isCancelled: @Sendable () -> Bool) -> [SearchResult] {
         guard !query.isEmpty, limit > 0, query.scope == nil || query.scope == .files else { return [] }
         let nameQuery = MatchQuery(query.isPath ? (query.hasTrailingSeparator ? "" : query.pathSegments.last!) : query.text)
+        let includeDots = query.includesDotNames
+        let explicitDotRoots = skipHiddenFiles && includeDots
+            ? Set(roots.indices.filter { allowedRoots?.contains(Int32($0)) != false }.map { roots[$0].node }) : Set<Int32>()
         let parentQueries = (query.isPath ? (query.hasTrailingSeparator ? query.pathSegments : Array(query.pathSegments.dropLast())) : []).map(MatchQuery.init)
         var matcher = FuzzyMatcher(), heap: [FileCandidate] = [], parentScores: [Int32: Double] = [:]
         heap.reserveCapacity(limit)
@@ -42,10 +45,19 @@ extension FileIndexSnapshot {
                 return x.count < y.count
             } }
         }
+        var depths: [Int32: Int] = [:]
+        func depth(_ id: Int32) -> Int {
+            if let cached = depths[id] { return cached }
+            guard let node = node(id) else { return 0 }
+            let value = node.anchor.map { $0.split(separator: "/").count } ?? (1 + depth(node.parent))
+            depths[id] = value; return value
+        }
         func better(_ a: FileCandidate, _ b: FileCandidate) -> Bool {
             if a.match.tier != b.match.tier { return a.match.tier < b.match.tier }
             if a.kind.rank != b.kind.rank { return a.kind.rank < b.kind.rank }
             if a.score != b.score { return a.score > b.score }
+            let ad = depth(a.id), bd = depth(b.id)
+            if ad != bd { return ad < bd }
             if nameLess(a.id, b.id) { return true }
             if nameLess(b.id, a.id) { return false }
             return pathLess(a.id, b.id)
@@ -65,10 +77,10 @@ extension FileIndexSnapshot {
         }
         for (chunkID, chunk) in chunks.enumerated() {
             if isCancelled() { return [] }
-            let kinds = restrictedKinds?[chunkID] ?? chunk.kinds
+            let kinds = includeDots && !skipHiddenFiles ? (restrictedKinds?[chunkID] ?? chunk.kinds) : (restrictedOrdinaryKinds?[chunkID] ?? chunk.ordinaryKinds)
             for offset in kinds.indices {
-                guard let kind = kinds[offset] else { continue }
                 let id = Int32(chunkID * FileChunk.size + offset), textID = Int32(offset)
+                guard let kind = kinds[offset] ?? (explicitDotRoots.contains(id) ? (restrictedKinds?[chunkID] ?? chunk.kinds)[offset] : nil) else { continue }
                 var maximumTier: MatchTier = .keyword
                 if heap.count == limit {
                     maximumTier = heap[0].match.tier
@@ -123,7 +135,10 @@ extension FileIndexSnapshot {
                 let id = chain[j], chunk = chunks[Int(id) / FileChunk.size], textID = id % Int32(FileChunk.size), span = chunk.text.spans[Int(textID)]
                 if span.mask & query.mask == query.mask {
                     let score: Double? = chunk.text.withText(textID) { buffer in matcher.hasSubsequence(query.scalars, buffer) ? matcher.score(query.scalars, buffer).score : nil }
-                    if let score { if i == 0 { row[j] = score } else if j > 0 { row[j] = score + max(earlier, previous[j - 1] + 0.2) } }
+                    if let score {
+                        if i == 0 { row[j] = score - pathGapPenalty(chainCount: chain.count, firstMatch: j, queryCount: queries.count) }
+                        else if j > 0 { row[j] = score + max(earlier, previous[j - 1] + 0.2) }
+                    }
                 }
                 earlier = max(earlier, previous[j])
             }
@@ -193,6 +208,9 @@ extension SearchResult {
         if a.item.kind.rank != b.item.kind.rank { return a.item.kind.rank < b.item.kind.rank }
         let x = a.textScore + a.usageBoost, y = b.textScore + b.usageBoost
         if x != y { return x > y }
+        let ad = a.item.kind.isPath ? a.item.path?.split(separator: "/").count ?? 0 : 0
+        let bd = b.item.kind.isPath ? b.item.path?.split(separator: "/").count ?? 0 : 0
+        if ad != bd { return ad < bd }
         let an = FoldedText(a.item.name).scalars, bn = FoldedText(b.item.name).scalars
         if an != bn { return an.lexicographicallyPrecedes(bn) }
         return a.item.id < b.item.id

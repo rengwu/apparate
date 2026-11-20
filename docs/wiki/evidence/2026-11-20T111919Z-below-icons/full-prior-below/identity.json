@@ -1,0 +1,13 @@
+{
+  "app_sha256": "909ca2158ba430856fd713346c8796ddaa8ccd8c260400f8cd049e652f74f6f5",
+  "mode": "full",
+  "count": 20000,
+  "projects": false,
+  "bare": false,
+  "probes": false,
+  "delivery": "task",
+  "start_utc": "2026-11-20T11:51:04Z",
+  "dot_entries": true,
+  "result_location": "below",
+  "skip_hidden_files": false
+}

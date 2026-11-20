@@ -55,6 +55,10 @@ private final class RebuildSampler: Sendable {
             report["app_count"] = catalog.metrics.appCount; report["settings_count"] = catalog.metrics.settingsCount
             report["file_watch_healthy"] = files.watchHealthy; report["catalog_watch_healthy"] = catalog.watchHealthy
             report["after_load_bytes"] = try ProcessMetrics.footprint()
+            report["dot_count"] = files.snapshot?.dotEntryCount ?? 0
+            report["result_location"] = session.resultLocation.rawValue
+            report["icon_points"] = session.resultLocation.iconSize.rawValue
+            report["icon_raster_pixels"] = session.resultLocation.iconSize.pixels
             guard files.watchHealthy, catalog.watchHealthy, (files.snapshot?.count ?? 0) > 0 else { throw SourceError("Full graph is not ready with healthy watchers") }
             if profile.performance == "full" {
                 guard files.metrics.loadedFromDisk else { throw SourceError("Measured full run did not load the persisted index") }

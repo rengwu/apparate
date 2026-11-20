@@ -16,9 +16,9 @@ public struct FileCrawlResult: Sendable {
 public struct FileCrawler: Sendable {
     public var reader: FileReading
     public init(reader: FileReading = FileReading()) { self.reader = reader }
-    public func crawl(folders: [AppConfig.Folder], respectGitignore: Bool, access: FileAccessPolicy,
+    public func crawl(folders: [AppConfig.Folder], respectGitignore: Bool, skipHiddenFiles: Bool = false, access: FileAccessPolicy,
                       previous: FileIndexSnapshot = FileIndexSnapshot()) async throws -> FileCrawlResult {
-        var work = CrawlWork(reader: reader, access: access, respect: respectGitignore, previous: previous)
+        var work = CrawlWork(reader: reader, access: access, respect: respectGitignore, skipHidden: skipHiddenFiles, previous: previous)
         let roots = folders.map { FileRoot(path: $0.path, depth: $0.depth) }.sorted { $0.path < $1.path }
         if roots.map(\.path) == previous.roots.map(\.path) {
             work.builder = FileIndexBuilder(previous)
@@ -28,12 +28,17 @@ public struct FileCrawler: Sendable {
             work.makeRootNodes()
         }
         for r in work.builder.roots.indices { try await work.scanRoot(Int32(r)) }
+        work.removeHiddenMemberships()
         return work.finish()
     }
-    public func update(_ snapshot: FileIndexSnapshot, changes: [FileChange], respectGitignore: Bool,
+    public func update(_ snapshot: FileIndexSnapshot, changes: [FileChange], respectGitignore: Bool, skipHiddenFiles: Bool? = nil,
                        access: FileAccessPolicy, dirtyPaths: Set<String> = []) async throws -> FileCrawlResult {
+        let skipHidden = skipHiddenFiles ?? snapshot.skipHiddenFiles
+        if skipHidden != snapshot.skipHiddenFiles {
+            return try await crawl(folders: snapshot.roots.map { .init(path: $0.path, depth: $0.depth) }, respectGitignore: respectGitignore, skipHiddenFiles: skipHidden, access: access, previous: snapshot)
+        }
         let changes = changes.map { FileChange(path: AppConfig.normalizedFolder($0.path, home: ""), recursive: $0.recursive) }
-        var work = CrawlWork(reader: reader, access: access, respect: respectGitignore, previous: snapshot)
+        var work = CrawlWork(reader: reader, access: access, respect: respectGitignore, skipHidden: skipHidden, previous: snapshot)
         work.builder = FileIndexBuilder(snapshot); work.dirty = dirtyPaths
         for r in snapshot.roots.indices {
             let root = snapshot.roots[r]
@@ -44,7 +49,10 @@ public struct FileCrawler: Sendable {
             for change in relevant {
                 var path = pathIsWithin(root.path, change.path) ? root.path : change.path
                 let parts = path.dropFirst(root.path.count).split(separator: "/")
-                if parts.contains(where: { $0.hasPrefix(".") || $0 == "node_modules" }) { continue }
+                if parts.contains("node_modules") || parts.dropLast().contains(where: { $0.hasPrefix(".") }) { continue }
+                // Dot children are terminal for this root. Refresh their entry from the
+                // parent, including a recursive event; an explicit dot root has no suffix.
+                if parts.last?.hasPrefix(".") == true { path = parentPath(path) }
                 // Bundle metadata changes are reported below the package path. Refresh the
                 // terminal app from its parent; never enumerate package contents as files.
                 var ancestor = path, terminal = false
@@ -89,6 +97,7 @@ private struct CrawlWork {
     let reader: FileReading
     let access: FileAccessPolicy
     let respect: Bool
+    let skipHidden: Bool
     let previous: FileIndexSnapshot
     var builder = FileIndexBuilder()
     var dirty: Set<String> = []
@@ -184,7 +193,7 @@ private struct CrawlWork {
         // All reads succeed before deletions become evidence; a failed listing is not empty.
         let names = try reader.children(path); listed += 1
         var children: [(String, FileMetadata)] = []
-        for name in names where !name.hasPrefix(".") && name != "node_modules" {
+        for name in names where name != "node_modules" && (!skipHidden || !name.hasPrefix(".")) {
             let full = appendPath(path, name)
             if access.blocked(full) != nil { continue }
             do { children.append((name, try reader.metadata(full))) }
@@ -202,7 +211,7 @@ private struct CrawlWork {
         if let rules { scopes.append(IgnoreScope(directory: path, rules: GitIgnore(String(decoding: rules, as: UTF8.self), ignoreCase: builder.roots[Int(root)].ignoreCase))) }
         var existing = Dictionary(uniqueKeysWithValues: directory.children.compactMap { child in builder.node(child).map { ($0.name, child) } })
         var retained: [Int32] = [], descend: [(Int32, Bool)] = []
-        for (name, metadata) in children where !metadata.hidden {
+        for (name, metadata) in children {
             let full = appendPath(path, name)
             var excluded = false
             for scope in scopes { if let choice = scope.decision(full, directory: metadata.type == .directory || metadata.type == .package || metadata.type == .application) { excluded = choice } }
@@ -221,7 +230,7 @@ private struct CrawlWork {
                 var app = builder.node(child)!; app.application = FileApplication(reader.application(full)); builder.set(child, app)
             }
             builder.include(child, root: root); retained.append(child)
-            if metadata.type == .directory { descend.append((child, rescan || isNew)) }
+            if metadata.type == .directory && !name.hasPrefix(".") { descend.append((child, rescan || isNew)) }
         }
         for child in existing.values {
             if let blocked = access.blocked(builder.path(child)) {
@@ -238,7 +247,23 @@ private struct CrawlWork {
         }
         await Task.yield()
     }
+    mutating func removeHiddenMemberships() {
+        guard skipHidden else { return }
+        // A failed listing may retain old nodes from the previous policy. Remove
+        // only memberships below roots; explicit roots keep their own ownership.
+        for offset in 0..<builder.slots {
+            let id = Int32(offset)
+            guard let node = builder.node(id), node.visible, node.name.hasPrefix(".") else { continue }
+            for root in [node.owner] + node.otherOwners where root >= 0 && builder.roots[Int(root)].node != id {
+                builder.excludeTree(id, root: root)
+            }
+            if var parent = builder.node(node.parent) {
+                parent.children.removeAll { builder.node($0) == nil }; builder.set(node.parent, parent)
+            }
+        }
+    }
     mutating func finish() -> FileCrawlResult {
+        builder.base.skipHiddenFiles = skipHidden
         let changed = Set(builder.edits.keys)
         return FileCrawlResult(snapshot: builder.finish(), dirtyPaths: dirty, listedDirectories: listed,
                                preparedChunks: changed.count, changedChunks: changed)

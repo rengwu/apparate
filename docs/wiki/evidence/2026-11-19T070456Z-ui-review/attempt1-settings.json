@@ -1,0 +1,75 @@
+{
+  "capture_method": "hidden owned preferences content; native toolbar chrome/menu appearance remain supervised",
+  "errors": 1,
+  "failure": "Prefix field is not compact and centered",
+  "fake_actions": 0,
+  "fake_registrations": 3,
+  "focus_guards_checked": true,
+  "mode": "fixtures",
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "native_login_changes": 0,
+  "native_status_items": 0,
+  "protected_folder_probes": 0,
+  "ready": false,
+  "result": "Failed",
+  "row_alignment_folders": [
+    {
+      "center_delta_pt": 0,
+      "title": "~/Projects",
+      "title_height": 16
+    },
+    {
+      "center_delta_pt": 0,
+      "title": "Skip files listed in .gitignore",
+      "title_height": 16
+    }
+  ],
+  "row_alignment_general": [
+    {
+      "center_delta_pt": 0,
+      "title": "Open Apparate",
+      "title_height": 16
+    },
+    {
+      "center_delta_pt": 0,
+      "title": "Spotlight also uses \u2318Space.",
+      "title_height": 16
+    },
+    {
+      "center_delta_pt": 0,
+      "title": "Launch at login",
+      "title_height": 16
+    },
+    {
+      "center_delta_pt": 0,
+      "title": "Show menu bar icon",
+      "title_height": 16
+    }
+  ],
+  "row_alignment_search": [
+    {
+      "center_delta_pt": 0,
+      "title": "Settings",
+      "title_height": 16
+    },
+    {
+      "center_delta_pt": 0,
+      "title": "Files and folders",
+      "title_height": 16
+    },
+    {
+      "center_delta_pt": 0,
+      "title": "Web",
+      "title_height": 16
+    },
+    {
+      "center_delta_pt": 0,
+      "title": "Search engine",
+      "title_height": 16
+    }
+  ],
+  "settings_check": true,
+  "symbolichotkeys_writes": 0,
+  "visible_profile": "none"
+}

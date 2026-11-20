@@ -1,0 +1,148 @@
+{
+  "activity_begins": 3,
+  "activity_enabled": true,
+  "activity_ends": 3,
+  "activity_lifecycle_checked": true,
+  "ax_rows": 50,
+  "ax_stable_identity": true,
+  "ax_visible_rows": 9,
+  "capture_method": "app-owned hidden bitmap; no WindowServer composition",
+  "cleanup": "Owned process exited; test-created APPARATE_HOME removed",
+  "delivery": "task",
+  "driver_task_priority": 25,
+  "dynamic_geometry": [
+    {
+      "height": 41,
+      "marker_decoded": true,
+      "rows": 0,
+      "top": 41
+    },
+    {
+      "height": 110,
+      "marker_decoded": true,
+      "rows": 1,
+      "top": 41
+    },
+    {
+      "height": 166,
+      "marker_decoded": true,
+      "rows": 3,
+      "top": 41
+    },
+    {
+      "height": 334,
+      "marker_decoded": true,
+      "rows": 9,
+      "top": 41
+    }
+  ],
+  "errors": 0,
+  "explicit_web_before_catalog": true,
+  "fake_actions": 0,
+  "fake_model_actions": 4,
+  "fake_quit_callbacks": 1,
+  "fake_registrations": 1,
+  "focus_guards_checked": true,
+  "layout": [
+    {
+      "fixture": "layout:1",
+      "highlight_utf16_ranges": [
+        [
+          0,
+          1
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          10,
+          1
+        ]
+      ],
+      "location_truncated": true,
+      "title_truncated": false
+    },
+    {
+      "fixture": "layout:2",
+      "highlight_utf16_ranges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "location_truncated": false,
+      "title_truncated": true
+    },
+    {
+      "fixture": "layout:3",
+      "highlight_utf16_ranges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "location_truncated": false,
+      "title_truncated": true
+    }
+  ],
+  "mode": "fixtures",
+  "native_accessibility_notifications": 0,
+  "native_actions": 0,
+  "native_editor_arrows_and_marked_command_guard": true,
+  "native_hotkey_registrations": 0,
+  "opaque": false,
+  "panel_check": "functional",
+  "physical_footprint_bytes": 27903032,
+  "protected_folder_probes": 0,
+  "ready": true,
+  "renderer": "drawn",
+  "renders": [
+    "empty-light.png",
+    "matches-light.png",
+    "alternate-light.png",
+    "no-results-light.png",
+    "web-light.png",
+    "restart-light.png",
+    "empty-dark.png",
+    "matches-dark.png",
+    "alternate-dark.png",
+    "no-results-dark.png",
+    "web-dark.png",
+    "restart-dark.png"
+  ],
+  "result": "Passed",
+  "schema": 1,
+  "selection_notification_sink_count": 35,
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "thermal_state": 0,
+  "timing_scope": "injected field-editor text through production coordinator/session/layout and explicit off-screen raster; not a screen commit or presentation timestamp",
+  "visible_profile": "none",
+  "wait_ms": 0,
+  "warm_up": true
+}

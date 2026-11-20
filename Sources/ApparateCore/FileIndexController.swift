@@ -15,7 +15,11 @@ public struct FileIndexMetrics: Sendable {
         folders.map { folder in
             var root = snapshot?.roots.first { $0.path == folder.path } ?? FileRoot(path: folder.path, depth: folder.depth)
             if let blocked = access.blocked(folder.path) { root.status = blocked }
-            else if isIndexing { root.status = .indexing }
+            // Keep the last actionable status during a retry. Aggregate progress
+            // is separate, so starting work does not collapse error rows.
+            else if isIndexing {
+                if root.status == .indexed { root.status = .indexing }
+            }
             else if snapshot?.roots.contains(where: { $0.path == folder.path }) != true { root.status = .unavailable }
             return root
         }
@@ -29,6 +33,7 @@ public struct FileIndexMetrics: Sendable {
     private let crawler: FileCrawler
     private var folders: [AppConfig.Folder]
     private var respect: Bool
+    private var skipHidden: Bool
     private var access: FileAccessPolicy
     private var signature: String
     private var watchPaths: Set<String> = []
@@ -44,17 +49,17 @@ public struct FileIndexMetrics: Sendable {
     public init(config: AppConfig, store: FileIndexStore, access: FileAccessPolicy = FileAccessPolicy(),
                 watcher: any FileWatching = FileFolderWatcher(), crawler: FileCrawler = FileCrawler()) {
         self.store = store; self.access = access; self.watcher = watcher; self.crawler = crawler
-        folders = Self.normalized(config.folders); respect = config.respectGitignore
-        signature = Self.signature(folders, respect)
+        folders = Self.normalized(config.folders); respect = config.respectGitignore; skipHidden = config.skipHiddenFiles
+        signature = Self.signature(folders, respect, skipHidden)
     }
     isolated deinit { stop() }
     static func normalized(_ folders: [AppConfig.Folder]) -> [AppConfig.Folder] {
         let home = FileManager.default.homeDirectoryForCurrentUser.path
         return folders.map { AppConfig.Folder(path: AppConfig.normalizedFolder($0.path, home: home), depth: $0.depth) }.sorted { $0.path < $1.path }
     }
-    static func signature(_ folders: [AppConfig.Folder], _ respect: Bool) -> String {
+    static func signature(_ folders: [AppConfig.Folder], _ respect: Bool, _ skipHidden: Bool) -> String {
         let encoder = JSONEncoder(); encoder.outputFormatting = [.sortedKeys]
-        return "file-rules-3:\(respect):" + Locale.preferredLanguages.joined(separator: ",") + ":" + String(decoding: (try? encoder.encode(folders)) ?? Data(), as: UTF8.self)
+        return "file-rules-6:\(respect):\(skipHidden):" + Locale.preferredLanguages.joined(separator: ",") + ":" + String(decoding: (try? encoder.encode(folders)) ?? Data(), as: UTF8.self)
     }
     public func start() {
         guard stopped else { return }; stopped = false; loading = true; revision &+= 1
@@ -82,10 +87,10 @@ public struct FileIndexMetrics: Sendable {
         stopped = true; revision &+= 1; watcher.stop(); task?.cancel(); task = nil; debounce?.cancel(); debounce = nil
     }
     public func setConfig(_ config: AppConfig) {
-        let revised = Self.normalized(config.folders), signature = Self.signature(revised, config.respectGitignore)
+        let revised = Self.normalized(config.folders), signature = Self.signature(revised, config.respectGitignore, config.skipHiddenFiles)
         guard signature != self.signature else { return }
-        folders = revised; respect = config.respectGitignore; self.signature = signature
-        if let snapshot { publish(snapshot.restricting(to: Set(revised.map(\.path)))) }
+        folders = revised; respect = config.respectGitignore; skipHidden = config.skipHiddenFiles; self.signature = signature
+        if let snapshot { publish(snapshot.restricting(to: Set(revised.map(\.path)), skipHiddenFiles: skipHidden)) }
         rebuild()
     }
     public func setAccess(_ value: FileAccessPolicy) {
@@ -109,7 +114,10 @@ public struct FileIndexMetrics: Sendable {
         if let snapshot {
             for chunk in snapshot.chunks { for node in chunk.nodes.compactMap({ $0 }) where node.metadata.type == .directory && node.parent >= 0 {
                 if let parent = snapshot.node(node.parent), node.metadata.device != 0, node.metadata.device != parent.metadata.device {
-                    if let id = parent.children.first(where: { snapshot.node($0)?.name == node.name }) { paths.append(snapshot.path(id)) }
+                    if let id = parent.children.first(where: { snapshot.node($0)?.name == node.name }) {
+                        let path = snapshot.path(id)
+                        if folders.contains(where: { pathIsWithin(path, $0.path) && path.dropFirst($0.path.count).split(separator: "/").count < $0.depth }) { paths.append(path) }
+                    }
                 }
             } }
         }
@@ -117,7 +125,8 @@ public struct FileIndexMetrics: Sendable {
     }
     private func watch() {
         let paths = desiredWatchPaths(); watchPaths = Set(paths)
-        let result = watcher.start(paths: paths, checkpoints: checkpoints, access: access) { [weak self] in self?.receive($0) }
+        let result = watcher.start(paths: paths, checkpoints: checkpoints, access: access,
+            shallowPaths: Set(folders.filter { $0.depth == 1 }.map(\.path))) { [weak self] in self?.receive($0) }
         watchHealthy = result.healthy
         for path in result.rescanPaths { pending[path] = true }
         for checkpoint in result.checkpoints { pendingCheckpoints[checkpoint.path] = checkpoint }
@@ -155,13 +164,13 @@ public struct FileIndexMetrics: Sendable {
         var nextCheckpoints = checkpoints.filter { !captured.keys.contains($0.path) }
         nextCheckpoints.append(contentsOf: captured.values)
         pending = [:]; pendingCheckpoints = [:]; full = false
-        let version = revision, prior = snapshot ?? FileIndexSnapshot(), folders = folders, respect = respect, access = access,
+        let version = revision, prior = snapshot ?? FileIndexSnapshot(), folders = folders, respect = respect, skipHidden = skipHidden, access = access,
             crawler = crawler, signature = signature, store = store, dirty = dirty
         task = Task { [weak self] in
             let began = ContinuousClock.now
             let work = Task.detached(priority: .utility) {
-                if replace { return try await crawler.crawl(folders: folders, respectGitignore: respect, access: access, previous: prior) }
-                return try await crawler.update(prior, changes: changes, respectGitignore: respect, access: access, dirtyPaths: dirty)
+                if replace { return try await crawler.crawl(folders: folders, respectGitignore: respect, skipHiddenFiles: skipHidden, access: access, previous: prior) }
+                return try await crawler.update(prior, changes: changes, respectGitignore: respect, skipHiddenFiles: skipHidden, access: access, dirtyPaths: dirty)
             }
             do {
                 let result = try await withTaskCancellationHandler { try await work.value } onCancel: { work.cancel() }

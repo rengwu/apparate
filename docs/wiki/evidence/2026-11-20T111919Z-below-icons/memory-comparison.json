@@ -1,0 +1,171 @@
+{
+  "authorization": "2026-11-20 mailbox: section 11 memory read clarification; read-only installed-app catalogs allowed, no mutation/launch/quit",
+  "driver_sha256": "34176e3e9865161aaef44bb603d5346788e23ccc2611d7c636ff9bbe5e29c73d",
+  "driver_source_manifest": "../2026-11-20T113654Z-skip-hidden/source-manifest.json",
+  "corpus": "20,000 entries, 2,950 dots, skipHiddenFiles false; Below; each in independent disposable data folder",
+  "runs": {
+    "section6_inline": {
+      "identity": {
+        "app_sha256": "b089544af866c8a75dbb726c7fa778dbc37c744ac58e5ca05aa5857d3e5e5ced",
+        "mode": "full",
+        "count": 20000,
+        "projects": false,
+        "bare": false,
+        "probes": false,
+        "delivery": "task",
+        "start_utc": "2026-11-19T11:57:54Z",
+        "dot_entries": true
+      },
+      "measurements_mib": {
+        "after_idle_bytes": 45.141563415527344,
+        "after_load_bytes": 37.782142639160156,
+        "after_preferences_bytes": 45.51658630371094,
+        "after_rebuild_bytes": 45.36033630371094,
+        "after_typing_bytes": 41.750938415527344,
+        "rebuild_sampled_peak_bytes": 46.43846130371094
+      },
+      "catalog_counts": {
+        "apps": 98,
+        "settings": 730
+      },
+      "idle": [
+        {
+          "activity_held": false,
+          "catalog_events": 0,
+          "catalog_relevant_events": 0,
+          "catalog_scans": 0,
+          "cpu_percent_one_core": 0.009412050731998257,
+          "cpu_seconds": 0.006289999999999907,
+          "file_scans": 0,
+          "file_updates": 0,
+          "interrupt_wakeups": 7,
+          "package_idle_wakeups": 0,
+          "quiet": true,
+          "seconds": 66.82921904166668
+        }
+      ],
+      "thermal_start": 0,
+      "thermal_end": 0,
+      "result_location": "inline",
+      "icon_points": null,
+      "icon_raster_pixels": null
+    },
+    "section10_below": {
+      "identity": {
+        "app_sha256": "909ca2158ba430856fd713346c8796ddaa8ccd8c260400f8cd049e652f74f6f5",
+        "mode": "full",
+        "count": 20000,
+        "projects": false,
+        "bare": false,
+        "probes": false,
+        "delivery": "task",
+        "start_utc": "2026-11-20T11:51:04Z",
+        "dot_entries": true,
+        "result_location": "below",
+        "skip_hidden_files": false
+      },
+      "measurements_mib": {
+        "after_idle_bytes": 47.454063415527344,
+        "after_load_bytes": 38.172767639160156,
+        "after_preferences_bytes": 47.62591552734375,
+        "after_rebuild_bytes": 47.625938415527344,
+        "after_typing_bytes": 44.047767639160156,
+        "rebuild_sampled_peak_bytes": 51.047813415527344
+      },
+      "catalog_counts": {
+        "apps": 100,
+        "settings": 730
+      },
+      "idle": [
+        {
+          "activity_held": false,
+          "catalog_events": 0,
+          "catalog_relevant_events": 0,
+          "catalog_scans": 0,
+          "cpu_percent_one_core": 0.004349010976416156,
+          "cpu_seconds": 0.0029650000000001064,
+          "file_scans": 0,
+          "file_updates": 0,
+          "interrupt_wakeups": 5,
+          "package_idle_wakeups": 0,
+          "quiet": true,
+          "seconds": 68.17642024999999
+        }
+      ],
+      "thermal_start": 0,
+      "thermal_end": 0,
+      "result_location": "below",
+      "icon_points": null,
+      "icon_raster_pixels": null
+    },
+    "section11_below": {
+      "identity": {
+        "app_sha256": "f47335321d554595ce3e9182d90cbc0586410f5f877d31a1f30d4aeff3c85c95",
+        "mode": "full",
+        "count": 20000,
+        "projects": false,
+        "bare": false,
+        "probes": false,
+        "delivery": "task",
+        "start_utc": "2026-11-20T11:52:44Z",
+        "dot_entries": true,
+        "result_location": "below",
+        "skip_hidden_files": false
+      },
+      "measurements_mib": {
+        "after_idle_bytes": 47.39158630371094,
+        "after_load_bytes": 38.62591552734375,
+        "after_preferences_bytes": 49.141563415527344,
+        "after_rebuild_bytes": 49.21971130371094,
+        "after_typing_bytes": 45.95404052734375,
+        "rebuild_sampled_peak_bytes": 50.32908630371094
+      },
+      "catalog_counts": {
+        "apps": 100,
+        "settings": 730
+      },
+      "idle": [
+        {
+          "activity_held": false,
+          "catalog_events": 0,
+          "catalog_relevant_events": 0,
+          "catalog_scans": 0,
+          "cpu_percent_one_core": 0.004097816248631851,
+          "cpu_seconds": 0.0027820000000002842,
+          "file_scans": 0,
+          "file_updates": 0,
+          "interrupt_wakeups": 7,
+          "package_idle_wakeups": 0,
+          "quiet": true,
+          "seconds": 67.88981816666666
+        }
+      ],
+      "thermal_start": 0,
+      "thermal_end": 0,
+      "result_location": "below",
+      "icon_points": 32,
+      "icon_raster_pixels": 64
+    }
+  },
+  "candidate_minus_prior_mib": {
+    "after_idle_bytes": -0.06247711181640625,
+    "after_load_bytes": 0.45314788818359375,
+    "after_preferences_bytes": 1.5156478881835938,
+    "after_rebuild_bytes": 1.5937728881835938,
+    "after_typing_bytes": 1.9062728881835938,
+    "rebuild_sampled_peak_bytes": -0.7187271118164062
+  },
+  "candidate_minus_section6_mib": {
+    "after_idle_bytes": 2.2500228881835938,
+    "after_load_bytes": 0.8437728881835938,
+    "after_preferences_bytes": 3.6249771118164062,
+    "after_rebuild_bytes": 3.859375,
+    "after_typing_bytes": 4.203102111816406,
+    "rebuild_sampled_peak_bytes": 3.890625
+  },
+  "budgets": {
+    "40_mib_target": "Failed",
+    "60_mib_ceiling": "Passed",
+    "47_mib_preferences_comparison": "Failed"
+  }
+}

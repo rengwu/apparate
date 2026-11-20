@@ -1,0 +1,16 @@
+{
+  "core_debug_passed": 133,
+  "core_release_passed": 133,
+  "wiki_pages_checked": 59,
+  "verification_reports_checked": 22,
+  "diff_check": "Passed",
+  "source_inputs": 86,
+  "render_scenarios": 230,
+  "prior_render_matches": 226,
+  "local_images": 4,
+  "non_path_equal_digests_per_pair": 288,
+  "pipeline_pairs": 2,
+  "evidence_bytes": 650697,
+  "review_sha256": "f75e72e9045cdd1cdee92e88de164966afe3f26af2cf6994f184fb8fd88d5c1e",
+  "normal_sha256": "f6e0f8c34f26352a0b1e7fbe73aeafb21f51e072007d063e01bd56e2803700f1"
+}

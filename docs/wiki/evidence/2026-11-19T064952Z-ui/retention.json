@@ -1,0 +1,355 @@
+{
+  "reason": "Redundant exploratory images removed; all receipts and three representative visual defects retained. Final native JPEG matrix retained.",
+  "removed": [
+    {
+      "file": "attempt1-settings/settings-broken-config-dark.jpg",
+      "sha256": "9c93d56e912222a9c2547f738509ccd77964f57e8a2b03964bcc3ced5395e68e",
+      "bytes": 55970
+    },
+    {
+      "file": "attempt1-settings/settings-broken-config-light.jpg",
+      "sha256": "824b6c7bf643ccf745efbd64aa2ec1c731a71571cfa28a421770bb2637844560",
+      "bytes": 48880
+    },
+    {
+      "file": "attempt1-settings/settings-denied-dark.jpg",
+      "sha256": "d3fd2b43768e2bd5670a3f2a1a936c019aa2a819cbb4aa5a43ac7ac02a6fbc8b",
+      "bytes": 81833
+    },
+    {
+      "file": "attempt1-settings/settings-denied-light.jpg",
+      "sha256": "099939fe19b2c562720b3fada899ec5bf66698b169342f74eb1d8cc34594bd43",
+      "bytes": 76171
+    },
+    {
+      "file": "attempt1-settings/settings-folders-light.jpg",
+      "sha256": "01ec07f1071cf4bbb78c37100fd8d34a491805711620c53fefc32d29f7ca8ca9",
+      "bytes": 78089
+    },
+    {
+      "file": "attempt1-settings/settings-general-dark.jpg",
+      "sha256": "571ed4ae8c12a432db30624a813abe033f08d00bd59ec15c57bce1759074a1bd",
+      "bytes": 44111
+    },
+    {
+      "file": "attempt1-settings/settings-general-light.jpg",
+      "sha256": "f60e8a3ee52060acc12c36256286c15a20b6755cea3d383a5b6c1a9fb7db60da",
+      "bytes": 43147
+    },
+    {
+      "file": "attempt1-settings/settings-login-approval-dark.jpg",
+      "sha256": "c44dab3385372e8cdfb6968b4fbeb179ad3b5b4842e8b47b5b6fb55a96d72ffd",
+      "bytes": 34792
+    },
+    {
+      "file": "attempt1-settings/settings-login-approval-light.jpg",
+      "sha256": "aa7288e75af5b4f077911a36c9bd571082cb294a41c8dc53dfbe9dd72bb4d146",
+      "bytes": 33408
+    },
+    {
+      "file": "attempt1-settings/settings-recording-dark.jpg",
+      "sha256": "653b5a095d5fb78d6d7dbde2d691207569ec960219001216e21fcebd33ddc4d4",
+      "bytes": 45140
+    },
+    {
+      "file": "attempt1-settings/settings-recording-light.jpg",
+      "sha256": "d9370c99cb5d01d2428d1397f8a5db1c7f6fe4950b107c1caaf686e3cd28974a",
+      "bytes": 44145
+    },
+    {
+      "file": "attempt1-settings/settings-search-dark.jpg",
+      "sha256": "e5bcdaacdd04ffc9d5fb6c33599ec11cacbbe408f2fab82c987d1edc585585ba",
+      "bytes": 61803
+    },
+    {
+      "file": "attempt1-settings/settings-validation-dark.jpg",
+      "sha256": "f78bee1c59b1f19f5fef3873cd4b4fb6c905d1d29d5bb1ed0aa4181688d8ed6f",
+      "bytes": 77183
+    },
+    {
+      "file": "attempt1-settings/settings-validation-light.jpg",
+      "sha256": "c9ffaa474001a91007b135fb2c02361fa319d52b8e27f73346d16bee83aceec8",
+      "bytes": 71851
+    },
+    {
+      "file": "attempt1-settings/setup-complete-dark.jpg",
+      "sha256": "d852108cd7229a47fe1cab172b62c2fb4861e789e051e61c8f5f807cb74f8313",
+      "bytes": 49852
+    },
+    {
+      "file": "attempt1-settings/setup-complete-light.jpg",
+      "sha256": "a0d545dfac76dbf471a2dc736e458244e507f7a3e18e50e2a4ede8b3547b92bc",
+      "bytes": 50447
+    },
+    {
+      "file": "attempt1-settings/setup-incomplete-dark.jpg",
+      "sha256": "52efc5d0c04f70b35f5fea78d815b346de793cd8bb1e362fb95b4e5749d94fd9",
+      "bytes": 68005
+    },
+    {
+      "file": "attempt1-settings/setup-incomplete-light.jpg",
+      "sha256": "011987cdb801f2df6097a3dd50eb9a1fabe7ac0ce4ce2a4f56ec7381c23f100b",
+      "bytes": 68052
+    },
+    {
+      "file": "attempt1-settings/setup-partial-dark.jpg",
+      "sha256": "1019f1044892d4726034851f983729e39c7bfe5e4bb24d522fa5f07ee0d0e113",
+      "bytes": 57648
+    },
+    {
+      "file": "attempt1-settings/setup-partial-light.jpg",
+      "sha256": "6f3327da8f691a22fd944e47b77f8755b1558a6b8195881de62cdfe7563fc192",
+      "bytes": 58352
+    },
+    {
+      "file": "attempt2-settings/settings-broken-config-dark.jpg",
+      "sha256": "0affff434723166d8e443ce3df3ae36c2f00bd3982246ac7f409476910c0e3ce",
+      "bytes": 55417
+    },
+    {
+      "file": "attempt2-settings/settings-broken-config-light.jpg",
+      "sha256": "a138cee1c5f3580c89254e6df17bf120b7f58bab616217c28be99d560b31896b",
+      "bytes": 56833
+    },
+    {
+      "file": "attempt2-settings/settings-denied-dark.jpg",
+      "sha256": "cec84512d510015dd0d844ea03726195ff809a612e17b73320ff9a843845258a",
+      "bytes": 85703
+    },
+    {
+      "file": "attempt2-settings/settings-denied-light.jpg",
+      "sha256": "2d2586c0c837f808187c7158f4fc6958f714404738058edb4a9c27326a2c9d6d",
+      "bytes": 87553
+    },
+    {
+      "file": "attempt2-settings/settings-folders-light.jpg",
+      "sha256": "ba89998b808784af27254897cc1d498bcd488748b0019d9a89437bda835758d4",
+      "bytes": 89961
+    },
+    {
+      "file": "attempt2-settings/settings-general-dark.jpg",
+      "sha256": "5777ecdc7574501bc3cab9524290559f9ae2bca97defc8e7109ea2f909ef3cd1",
+      "bytes": 44307
+    },
+    {
+      "file": "attempt2-settings/settings-general-light.jpg",
+      "sha256": "54be03a9e6b51442dd6ac903b4f5bbceba206504e750f4fc2da76ff966e2d4cb",
+      "bytes": 44968
+    },
+    {
+      "file": "attempt2-settings/settings-login-approval-dark.jpg",
+      "sha256": "1b7c8dc5618ad83d8e655d834ddb9e38788b0f1d7c517766f96ff7fc4a2beb48",
+      "bytes": 34184
+    },
+    {
+      "file": "attempt2-settings/settings-login-approval-light.jpg",
+      "sha256": "32b05335687278c726b37f68a986787db903c365ab969c230a076f7c6a81daf8",
+      "bytes": 34052
+    },
+    {
+      "file": "attempt2-settings/settings-recording-dark.jpg",
+      "sha256": "66d839a98dea874dc27ff4a0447c8641801b88d320f41f1eaa8f7d739b60bbb9",
+      "bytes": 45090
+    },
+    {
+      "file": "attempt2-settings/settings-recording-light.jpg",
+      "sha256": "5cd809e729d2b752ad6fe8ea813bac8cff691bb255857f7a0f7e361ed2b15d06",
+      "bytes": 45855
+    },
+    {
+      "file": "attempt2-settings/settings-search-dark.jpg",
+      "sha256": "5ab2b66d28cf0fb7e4a89b0400add4568b50f1b809c59e6e443e3eda26522699",
+      "bytes": 60814
+    },
+    {
+      "file": "attempt2-settings/settings-search-light.jpg",
+      "sha256": "6a9380e71c71e826cea513b42b2a069c01cdd25a4ada78d1087e0e42f81b8f55",
+      "bytes": 64039
+    },
+    {
+      "file": "attempt2-settings/settings-validation-dark.jpg",
+      "sha256": "75342342ac93f0f347d3bb7cb80ce15b6fbccdb5dabb915a3c3258bd2be60296",
+      "bytes": 76155
+    },
+    {
+      "file": "attempt2-settings/settings-validation-light.jpg",
+      "sha256": "8cf90516e1b57bc58112e325fc8ef61068bb254195fb442bd906a998ab11f74c",
+      "bytes": 80342
+    },
+    {
+      "file": "attempt2-settings/setup-complete-dark.jpg",
+      "sha256": "b5e672b0da623d27559cb23c6afa49d321368003e05cb10864a779384101ccb4",
+      "bytes": 49782
+    },
+    {
+      "file": "attempt2-settings/setup-complete-light.jpg",
+      "sha256": "488fa521945219371e3819419fe16eb77916f9282f706da80120af27136799d8",
+      "bytes": 49643
+    },
+    {
+      "file": "attempt2-settings/setup-incomplete-dark.jpg",
+      "sha256": "1debdd93ae66c854e5cc261447b473e8aa16d17e028dd719346a138d847d995e",
+      "bytes": 67918
+    },
+    {
+      "file": "attempt2-settings/setup-incomplete-light.jpg",
+      "sha256": "ec20a116d569352146c4b151964762cba2e9e208ecb3b8157b151cbd1dd6e596",
+      "bytes": 66956
+    },
+    {
+      "file": "attempt2-settings/setup-partial-dark.jpg",
+      "sha256": "f1101a77235c1948063f528a1e177650f1cf04706ee244e5db8056fb98c57038",
+      "bytes": 57587
+    },
+    {
+      "file": "attempt2-settings/setup-partial-light.jpg",
+      "sha256": "ec8921c3adcdd400f40fd361d383ac9163af42c6400effb8b2f06276a1ca5ee6",
+      "bytes": 57406
+    },
+    {
+      "file": "attempt1-panel/alternate-dark.png",
+      "sha256": "855b0328aa9920bfa03e518c9b0a349fcff91bd2fe4a18aa41370e4ad70d177a",
+      "bytes": 32297
+    },
+    {
+      "file": "attempt1-panel/alternate-light.png",
+      "sha256": "ceee01fe7fd55e1fd66ef607a69f4a3598a99d9dd10d2335d7db24b3f1f489df",
+      "bytes": 32098
+    },
+    {
+      "file": "attempt1-panel/empty-dark.png",
+      "sha256": "b8cf615422b380d081f19f3472b476adc9e76e8e9f69d8e972410078a3d1d033",
+      "bytes": 8936
+    },
+    {
+      "file": "attempt1-panel/empty-light.png",
+      "sha256": "2ffc0e426948bbf2c556f0adb10f6eefa5f1188980d3956417551c45a0feffdf",
+      "bytes": 8881
+    },
+    {
+      "file": "attempt1-panel/layout-1-dark.png",
+      "sha256": "dee94a22a5ee2679a294c2753f4958bf13663012211bdef1a7c5b5efe1913cbd",
+      "bytes": 37556
+    },
+    {
+      "file": "attempt1-panel/layout-1-light.png",
+      "sha256": "0351da3d002f87f5e53973648bd02b7e44d147860722b3f4c8f8dea80dc2d2f4",
+      "bytes": 37380
+    },
+    {
+      "file": "attempt1-panel/layout-2-dark.png",
+      "sha256": "fa52c40221678e14098fdf846f61fd13072a05d7fffc9afc24d05ba9220c9946",
+      "bytes": 29156
+    },
+    {
+      "file": "attempt1-panel/layout-2-light.png",
+      "sha256": "9dd58120de27994734d83510ee68615ff150601f24489382bc505ffead272c85",
+      "bytes": 28766
+    },
+    {
+      "file": "attempt1-panel/layout-3-dark.png",
+      "sha256": "fa52c40221678e14098fdf846f61fd13072a05d7fffc9afc24d05ba9220c9946",
+      "bytes": 29156
+    },
+    {
+      "file": "attempt1-panel/layout-3-light.png",
+      "sha256": "9dd58120de27994734d83510ee68615ff150601f24489382bc505ffead272c85",
+      "bytes": 28766
+    },
+    {
+      "file": "attempt1-panel/loading-dark.png",
+      "sha256": "0ca949c5cd4915d743c86a3762f27cb5e1ef5af06b45b9208ee2d5d11f74842b",
+      "bytes": 14569
+    },
+    {
+      "file": "attempt1-panel/loading-light.png",
+      "sha256": "f7ef6f7593aaea72f006640367fe5d641ddf33c9ad00a236fb8debe788085f02",
+      "bytes": 14551
+    },
+    {
+      "file": "attempt1-panel/matches-dark.png",
+      "sha256": "9fd01679a950e351421f67008bd74f69145e60ede20dfaa61c5e5f25672da31e",
+      "bytes": 45662
+    },
+    {
+      "file": "attempt1-panel/matches-light.png",
+      "sha256": "bcea1f4acdc09dd1e813d1401289e9635fd58dd8e938f57fe7af154b1614af96",
+      "bytes": 45178
+    },
+    {
+      "file": "attempt1-panel/no-results-dark.png",
+      "sha256": "7b70b232979a12196b6774f7c6f77f9e308b4b091f06759f945fab0e9300487c",
+      "bytes": 12208
+    },
+    {
+      "file": "attempt1-panel/no-results-light.png",
+      "sha256": "d22ebd3f36b913d1dab8389b8a35068882a27e2e27948a015c9d950326c7fd15",
+      "bytes": 12125
+    },
+    {
+      "file": "attempt1-panel/restart-dark.png",
+      "sha256": "d5e1d77a94d206c2cce6ac07a21c15769834783217733f546fef1ee99c726e8a",
+      "bytes": 26710
+    },
+    {
+      "file": "attempt1-panel/restart-light.png",
+      "sha256": "419c022337c82ce31c6b243c44a069ecc66f536e89f1f28543b7fb5d0504b004",
+      "bytes": 26653
+    },
+    {
+      "file": "attempt1-panel/size-0-dark.png",
+      "sha256": "b8cf615422b380d081f19f3472b476adc9e76e8e9f69d8e972410078a3d1d033",
+      "bytes": 8936
+    },
+    {
+      "file": "attempt1-panel/size-0-light.png",
+      "sha256": "2ffc0e426948bbf2c556f0adb10f6eefa5f1188980d3956417551c45a0feffdf",
+      "bytes": 8881
+    },
+    {
+      "file": "attempt1-panel/size-1-dark.png",
+      "sha256": "d2e3aa7a0c381da013ccb0f317d5bab562817d188cbd90733581e01c5f77ed08",
+      "bytes": 30444
+    },
+    {
+      "file": "attempt1-panel/size-1-light.png",
+      "sha256": "0a6ed77296cc9c0a04cde09d92870e487118dd86601ea7043e6cee31d90873fa",
+      "bytes": 30084
+    },
+    {
+      "file": "attempt1-panel/size-3-dark.png",
+      "sha256": "e4022574734eb3ce2f616116e992c453ff01bb94f8939a119cad137151790982",
+      "bytes": 51009
+    },
+    {
+      "file": "attempt1-panel/size-3-light.png",
+      "sha256": "dc4a15c7c72b578a01eeb194188fc03eca15c1a84df3f4bd791889ea0a005fdd",
+      "bytes": 50153
+    },
+    {
+      "file": "attempt1-panel/size-9-dark.png",
+      "sha256": "6534745bf280367190495e04e16e218a744e2da586044146ff4f7f1d17b42d43",
+      "bytes": 113015
+    },
+    {
+      "file": "attempt1-panel/size-9-light.png",
+      "sha256": "0a2e634b31acad65ed106e57790bc791027149c7699894219ea3be53ed3c72c0",
+      "bytes": 111010
+    },
+    {
+      "file": "attempt1-panel/web-dark.png",
+      "sha256": "e1c1a4e5f03ddafeee1b4d755c0b42a40ed8280927254905305c2549cf65da40",
+      "bytes": 21713
+    },
+    {
+      "file": "attempt1-panel/web-light.png",
+      "sha256": "64399199fead7e4d70336b9b3a99780bb72bc5bcf3eb2f52f119d7036b0c031a",
+      "bytes": 21676
+    }
+  ],
+  "kept_earlier_images": [
+    "attempt1-settings/settings-folders-dark.jpg",
+    "attempt1-settings/settings-search-light.jpg",
+    "attempt2-settings/settings-folders-dark.jpg"
+  ]
+}

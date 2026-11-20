@@ -1,0 +1,11 @@
+FAIL shallow: home/root overlap, Finder-hidden children and bounded mount coverage: Expectation failed
+PASS hidden: default on, v1 round trips and invalid types
+PASS hidden: expected-value saves, external changes and write failure
+PASS hidden: pre-metadata exclusion, Finder flag, gitignore and explicit nested roots
+FAIL hidden: policy changes remove stale dots even on failed listings and cache reload: Expectation failed
+FAIL hidden: incremental renames, dot apps, ignored churn and rule-file edits: Expectation failed
+PASS hidden: rule-5 migration and toggles rebuild once; matching caches and unchanged settings do not
+PASS hidden: real explicit dot-root events still index ordinary children
+FAIL hidden: off preserves section-6 digests; typed paths retain their dot filter: ~/.config/.
+PASS files: depth, packages, hidden flags, links and duplicate names
+RESULT 6 passed; 4 failed

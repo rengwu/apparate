@@ -1,0 +1,38 @@
+Building for debugging...
+[Using on-disk description]
+[2 / 14] ApparateCore
+[13 / 25] ApparateCore
+[18 / 31] ApparateFixtures
+[20 / 33] ApparateFixtures
+[25 / 37] ApparateObserver-product
+[27 / 39] ApparateFixtures
+[28 / 39] ApparateCoreTests-product
+[34 / 50] ApparateCoreTests-product
+[37 / 61] Apparate-product
+[39 / 62] ApparateCoreTests-product
+[40 / 62] ApparateCoreTests-product
+[45 / 63] Apparate-product
+[46 / 63] ApparateCore
+<repo>/Package.swift: ApparateCore: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[49 / 63] ApparateCore
+[51 / 63] Apparate-product
+[52 / 63] Apparate-product
+[54 / 63] Apparate-product
+[55 / 63] Apparate-product
+[56 / 63] Apparate-product
+[56 / 63]
+<repo>/Package.swift: ApparateFixtures: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[59 / 64] Apparate-product
+<repo>/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+<repo>/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[59 / 64] ApparateObserver-product
+[61 / 65] Apparate-product
+[61 / 65] ApparateCoreTests-product
+[63 / 67] ApparateCoreTests-product
+<repo>/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+<repo>/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[65 / 68] Apparate-product
+<repo>/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+<repo>/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[67 / 68] Apparate-product
+Build complete! (7.34 sec)

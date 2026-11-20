@@ -1,0 +1,25 @@
+{
+  "compared_panel_images": 160,
+  "identical": 144,
+  "inline_right_identical": 36,
+  "changed_below": [
+    "panel/location-below-1-dark.jpg",
+    "panel/location-below-1-light.jpg",
+    "panel/location-below-3-dark.jpg",
+    "panel/location-below-3-light.jpg",
+    "panel/location-below-9-dark.jpg",
+    "panel/location-below-9-light.jpg",
+    "panel/location-below-both-long-dark.jpg",
+    "panel/location-below-both-long-light.jpg",
+    "panel/location-below-keyboard-dark.jpg",
+    "panel/location-below-keyboard-light.jpg",
+    "panel/location-below-long-location-dark.jpg",
+    "panel/location-below-long-location-light.jpg",
+    "panel/location-below-long-title-dark.jpg",
+    "panel/location-below-long-title-light.jpg",
+    "panel/location-below-restart-dark.jpg",
+    "panel/location-below-restart-light.jpg"
+  ],
+  "source_run": "2026-11-20T084750Z-login-icon",
+  "comparison": "New raw capture hashes against prior original hashes"
+}

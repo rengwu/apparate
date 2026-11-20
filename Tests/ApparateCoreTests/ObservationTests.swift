@@ -21,11 +21,11 @@ import ApparateCore
             let bits = marker.bits
             func pixel(_ x: Int, _ y: Int) -> (UInt8,UInt8,UInt8) {
                 let col = Int(Double(x - 6) / scale), row = Int(Double(y - 9) / scale)
-                let value: UInt8 = bits[row * 4 + col] ? 255 : 0; return (value,value,value)
+                let value: UInt8 = bits[row * FrameMarker.columns + col] ? 255 : 0; return (value,value,value)
             }
-            try expect(MarkerPixels.decode(width: 40, height: 260, originX: 6, originY: 9, scale: scale, pixel: pixel) == marker)
-            try expect(MarkerPixels.decode(width: 40, height: 20, originX: 6, originY: 9, scale: scale, pixel: pixel) == nil)
+            try expect(MarkerPixels.decode(width: 140, height: 40, originX: 6, originY: 9, scale: scale, pixel: pixel) == marker)
+            try expect(MarkerPixels.decode(width: 20, height: 10, originX: 6, originY: 9, scale: scale, pixel: pixel) == nil)
         }
-        try expect(MarkerPixels.decode(width: 40, height: 260, originX: 0, originY: 0, scale: 2, pixel: { _,_ in (128,128,128) }) == nil)
+        try expect(MarkerPixels.decode(width: 140, height: 40, originX: 0, originY: 0, scale: 2, pixel: { _,_ in (128,128,128) }) == nil)
     }
 }

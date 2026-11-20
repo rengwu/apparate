@@ -1,0 +1,11 @@
+{
+  "evidence_bytes": 584282,
+  "wiki_pages_checked": 58,
+  "verification_reports_checked": 21,
+  "diff_check": "Passed",
+  "source_inputs": 84,
+  "core_debug_passed": 128,
+  "core_release_passed": 128,
+  "review_sha256": "77fa1c2827972b67bf9d130cc1e60cf0e67fba29cdba1fa3eb33465a4ca94891",
+  "normal_sha256": "2acf75994bd09c7ae78fef9df42c309340424dc532d064c28250d25ecc0af696"
+}

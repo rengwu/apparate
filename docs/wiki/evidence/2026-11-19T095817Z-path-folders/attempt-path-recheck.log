@@ -1,0 +1,8 @@
+PASS path: parsing, normalization, scope precedence and relative paths remain indexed
+PASS path: alphabetical listing, dot names, node_modules, Unicode, cap and matcher
+PASS path: one-directory cache, leave/show/access invalidation and catalog independence
+PASS path: missing, unreadable, file, no matches and protected lexical/canonical gates
+PASS path: folder completion, package leaves, action targets and IME/pending guards
+PASS path: rapid directory changes cancel stale listing, queued actions and hiding
+PASS path: real fixture links, protected aliases and no index-style exclusions
+RESULT 7 passed; 0 failed

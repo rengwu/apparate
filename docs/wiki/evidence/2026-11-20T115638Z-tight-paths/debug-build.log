@@ -1,0 +1,39 @@
+Building for debugging...
+[Constructing description]
+[Planning deferred tasks]
+[1 / 14]
+[2 / 15] ApparateCore
+[13 / 26] ApparateCore
+[14 / 26] ApparateCore
+[18 / 32] ApparateFixtures
+[18 / 32] ApparateCore
+[18 / 32] ApparateFixtures
+[22 / 36] ApparateFixtures
+[27 / 39] ApparateObserver-product
+[29 / 40] ApparateCoreTests-product
+[36 / 51] ApparateCoreTests-product
+[37 / 62] Apparate-product
+[40 / 62] ApparateCoreTests-product
+[42 / 62] ApparateObserver-product
+[47 / 63] Apparate-product
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCore: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[49 / 63] Apparate-product
+[50 / 63] Apparate-product
+[54 / 63] Apparate-product
+[55 / 63] Apparate-product
+[58 / 63] ApparateFixtures
+/Users/rengwu/Projects/apparate/Package.swift: ApparateFixtures: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[59 / 64] Apparate-product
+/Users/rengwu/Projects/apparate/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[59 / 64] ApparateObserver-product
+[61 / 65] Apparate-product
+[61 / 65] ApparateCoreTests-product
+[63 / 67] ApparateCoreTests-product
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[65 / 67] Apparate-product
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[67 / 69] Apparate-product
+Build complete! (9.56 sec)

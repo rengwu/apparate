@@ -1,0 +1,13 @@
+{
+  "app_sha256": "77fa1c2827972b67bf9d130cc1e60cf0e67fba29cdba1fa3eb33465a4ca94891",
+  "mode": "pipeline",
+  "count": 200000,
+  "projects": false,
+  "bare": false,
+  "probes": false,
+  "delivery": "task",
+  "start_utc": "2026-11-20T12:01:09Z",
+  "dot_entries": true,
+  "result_location": "inline",
+  "skip_hidden_files": false
+}

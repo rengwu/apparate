@@ -1,0 +1,59 @@
+{
+  "source_inputs_verified": 86,
+  "changed_shared_inputs": [
+    "Sources/Apparate/PanelVerification.swift",
+    "Sources/ApparateCore/FileSearch.swift",
+    "Sources/ApparateCore/Search.swift",
+    "Tests/ApparateCoreTests/Runner.swift"
+  ],
+  "new_inputs": [
+    "Sources/ApparateCore/PathScoring.swift",
+    "Tests/ApparateCoreTests/PathRankingTests.swift"
+  ],
+  "bundles": [
+    {
+      "bundle": "build/review/2026-11-20-tight-paths/Apparate.app",
+      "identifier": "local.apparate.review",
+      "app_sha256": "f75e72e9045cdd1cdee92e88de164966afe3f26af2cf6994f184fb8fd88d5c1e",
+      "icon_sha256": "02018571f3cd027994fb3ca57c4a97b1ad8da3730973e32a5d81055188d8419e",
+      "CFBundleIconFile": "AppIcon",
+      "strict_deep_signature_verified": true
+    },
+    {
+      "bundle": "build/Apparate.app",
+      "identifier": "local.apparate",
+      "app_sha256": "f6e0f8c34f26352a0b1e7fbe73aeafb21f51e072007d063e01bd56e2803700f1",
+      "icon_sha256": "02018571f3cd027994fb3ca57c4a97b1ad8da3730973e32a5d81055188d8419e",
+      "CFBundleIconFile": "AppIcon",
+      "strict_deep_signature_verified": true
+    }
+  ],
+  "profiles": {
+    "debug-panel": {
+      "result": "Passed",
+      "stderr_bytes": 0,
+      "native_effects": 0,
+      "cleanup": "Owned process exited; test-created APPARATE_HOME removed"
+    },
+    "settings": {
+      "result": "Passed",
+      "stderr_bytes": 0,
+      "native_effects": 0,
+      "cleanup": "Owned process exited; test-created APPARATE_HOME removed"
+    },
+    "panel": {
+      "result": "Passed",
+      "stderr_bytes": 0,
+      "native_effects": 0,
+      "cleanup": "Owned process exited; test-created APPARATE_HOME removed"
+    }
+  },
+  "section_12_bundle_preserved": true,
+  "render_scenarios_verified": 230,
+  "reused_prior_images": 226,
+  "local_images": 4,
+  "section_11_bundle_preserved": true,
+  "pipeline_non_path_equal_digests_per_pair": 288,
+  "pipeline_pairs_verified": 2,
+  "memory_profile": "Section 11 comparison completed separately with immutable prior/candidate binaries; no full memory remeasurement of section 13"
+}

@@ -5,6 +5,12 @@ import ApparateCore
     await h.test("config: first launch, defaults, missing keys and deterministic save") {
         let dir = try temporaryDirectory(); defer { try? FileManager.default.removeItem(at: dir) }
         let store = try ConfigStore(directory: dir); defer { store.stopWatching() }
+        try expect(store.current.folders.map(\.path) == ["~/Projects", "~/Desktop", "~/Documents", "~/Downloads", "~", "/"])
+        try expect(store.current.folders.suffix(2).allSatisfy { $0.depth == 1 })
+        for json in ["{\"folders\":[]}", "{\"folders\":[{\"path\":\"/Fixture/Only\",\"depth\":3}]}"] {
+            let saved = try ConfigStore.decode(Data(json.utf8))
+            try expect(saved.folders.count <= 1 && !saved.folders.contains { $0.path == "~" || $0.path == "/" })
+        }
         try expect(store.current == AppConfig() && store.errors.isEmpty, "Initial defaults or errors: \(store.errors)")
         let bytes = try Data(contentsOf: store.file)
         try expect(try ConfigStore.decode(bytes) == AppConfig())
@@ -14,6 +20,17 @@ import ApparateCore
         try expect(try Data(contentsOf: store.file) == bytes, "Save bytes changed")
         try expect(AppConfig.dataDirectory(environment: ["APPARATE_HOME": dir.path]).path == dir.path, "Data directory override ignored")
         try expect(AppConfig.dataDirectory(environment: ["APPARATE_HOME": ""]).lastPathComponent == "Apparate")
+    }
+    await h.test("config: result location defaults, round trips and rejects unknown values") {
+        try expect(try ConfigStore.decode(Data("{}".utf8)).resultLocation == .inline)
+        for location in ResultLocation.allCases {
+            var config = AppConfig(); config.resultLocation = location
+            try expect(try ConfigStore.decode(JSONEncoder().encode(config)) == config)
+        }
+        for value in ["\"unknown\"", "null", "7"] {
+            do { _ = try ConfigStore.decode(Data("{\"resultLocation\":\(value)}".utf8)); throw TestFailure(description: "Accepted invalid resultLocation") }
+            catch is ConfigError { }
+        }
     }
     await h.test("config: semantic validation collects all errors; wrong types reject") {
         let examples = [

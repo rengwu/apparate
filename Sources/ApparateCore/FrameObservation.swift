@@ -16,7 +16,7 @@ package enum ObservationClock {
 package struct FrameMarker: Hashable, Codable, Sendable {
     package let run: UInt64, show: UInt64, revision: UInt64, digest: UInt64
     package init(run: UInt64, show: UInt64, revision: UInt64, digest: UInt64) { self.run = run; self.show = show; self.revision = revision; self.digest = digest }
-    package static let columns = 4, rows = 80
+    package static let columns = 40, rows = 8
     private static func checksum(_ bytes: [UInt8]) -> UInt32 { bytes.reduce(UInt32(2166136261)) { ($0 ^ UInt32($1)) &* 16777619 } }
     package var bytes: [UInt8] {
         var bytes: [UInt8] = [65, 80, 80, 54]
@@ -47,8 +47,8 @@ package enum MarkerPixels {
         guard scale >= 1, scale <= 4, originX.isFinite, originY.isFinite else { return nil }
         var bits: [Bool] = []; bits.reserveCapacity(320)
         for i in 0..<320 {
-            let x = Int(floor(originX + (Double(i % 4) + 0.5) * scale))
-            let y = Int(floor(originY + (Double(i / 4) + 0.5) * scale))
+            let x = Int(floor(originX + (Double(i % FrameMarker.columns) + 0.5) * scale))
+            let y = Int(floor(originY + (Double(i / FrameMarker.columns) + 0.5) * scale))
             guard x >= 0, y >= 0, x < width, y < height else { return nil }
             let (r,g,b) = pixel(x,y)
             if r >= 215 && g >= 215 && b >= 215 { bits.append(true) }

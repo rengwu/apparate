@@ -1,0 +1,82 @@
+{
+  "prior": {
+    "count": 200000,
+    "file_count": 200000,
+    "dot_count": 2950,
+    "matched_hashes": 360,
+    "result": "Passed",
+    "pipeline": {
+      "count": 360,
+      "max": 11.262416666666667,
+      "median": 7.083625,
+      "p95": 10.664208333333335
+    },
+    "ordinary_pipeline": {
+      "count": 240,
+      "max": 11.262416666666667,
+      "median": 7.940041666666667,
+      "p95": 10.888291666666666
+    },
+    "dot_queries_pipeline": {
+      "count": 120,
+      "max": 8.654333333333334,
+      "median": 2.4434166666666663,
+      "p95": 8.032458333333333
+    },
+    "scope": "Same snapshot, parsed query, empty usage, top-50 limit; file-only vs production pipeline; independent reference hash outside timers; stage-probe third invocation separate. Opposite orders, not an end-to-end latency verdict.",
+    "identity": {
+      "app_sha256": "f47335321d554595ce3e9182d90cbc0586410f5f877d31a1f30d4aeff3c85c95",
+      "mode": "pipeline",
+      "count": 200000,
+      "projects": false,
+      "bare": false,
+      "probes": false,
+      "delivery": "task",
+      "start_utc": "2026-11-20T11:41:36Z",
+      "dot_entries": true,
+      "result_location": "inline",
+      "skip_hidden_files": false
+    }
+  },
+  "candidate": {
+    "count": 200000,
+    "file_count": 200000,
+    "dot_count": 2950,
+    "matched_hashes": 360,
+    "result": "Passed",
+    "pipeline": {
+      "count": 360,
+      "max": 11.202333333333334,
+      "median": 7.084083333333333,
+      "p95": 10.444166666666666
+    },
+    "ordinary_pipeline": {
+      "count": 240,
+      "max": 11.202333333333334,
+      "median": 7.922291666666667,
+      "p95": 10.651875
+    },
+    "dot_queries_pipeline": {
+      "count": 120,
+      "max": 8.873291666666667,
+      "median": 2.2584583333333335,
+      "p95": 7.694708333333333
+    },
+    "scope": "Same snapshot, parsed query, empty usage, top-50 limit; file-only vs production pipeline; independent reference hash outside timers; stage-probe third invocation separate. Opposite orders, not an end-to-end latency verdict.",
+    "identity": {
+      "app_sha256": "77fa1c2827972b67bf9d130cc1e60cf0e67fba29cdba1fa3eb33465a4ca94891",
+      "mode": "pipeline",
+      "count": 200000,
+      "projects": false,
+      "bare": false,
+      "probes": false,
+      "delivery": "task",
+      "start_utc": "2026-11-20T11:41:57Z",
+      "dot_entries": true,
+      "result_location": "inline",
+      "skip_hidden_files": false
+    }
+  },
+  "compared_rows": 360,
+  "mismatches": []
+}

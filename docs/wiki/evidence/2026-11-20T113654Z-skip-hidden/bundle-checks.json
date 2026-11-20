@@ -1,0 +1,64 @@
+{
+  "source_inputs_verified": 84,
+  "changed_shared_inputs": [
+    "Sources/Apparate/PanelVerification.swift",
+    "Sources/Apparate/SettingsVerification.swift",
+    "Sources/Apparate/SettingsWindow.swift",
+    "Sources/ApparateCore/Config.swift",
+    "Sources/ApparateCore/FileCrawler.swift",
+    "Sources/ApparateCore/FileIndex.swift",
+    "Sources/ApparateCore/FileIndexController.swift",
+    "Sources/ApparateCore/FileIndexStore.swift",
+    "Sources/ApparateCore/FileSearch.swift",
+    "Tests/ApparateCoreTests/Runner.swift",
+    "Tests/ApparateCoreTests/ShallowTests.swift",
+    "Tests/performance.py"
+  ],
+  "new_inputs": [
+    "Tests/ApparateCoreTests/HiddenTests.swift"
+  ],
+  "bundles": [
+    {
+      "bundle": "build/review/2026-11-20-skip-hidden/Apparate.app",
+      "identifier": "local.apparate.review",
+      "app_sha256": "77fa1c2827972b67bf9d130cc1e60cf0e67fba29cdba1fa3eb33465a4ca94891",
+      "icon_sha256": "02018571f3cd027994fb3ca57c4a97b1ad8da3730973e32a5d81055188d8419e",
+      "CFBundleIconFile": "AppIcon",
+      "strict_deep_signature_verified": true
+    },
+    {
+      "bundle": "build/Apparate.app",
+      "identifier": "local.apparate",
+      "app_sha256": "2acf75994bd09c7ae78fef9df42c309340424dc532d064c28250d25ecc0af696",
+      "icon_sha256": "02018571f3cd027994fb3ca57c4a97b1ad8da3730973e32a5d81055188d8419e",
+      "CFBundleIconFile": "AppIcon",
+      "strict_deep_signature_verified": true
+    }
+  ],
+  "profiles": {
+    "debug-settings": {
+      "result": "Passed",
+      "stderr_bytes": 0,
+      "native_effects": 0,
+      "cleanup": "Owned process exited; test-created APPARATE_HOME removed"
+    },
+    "settings": {
+      "result": "Passed",
+      "stderr_bytes": 0,
+      "native_effects": 0,
+      "cleanup": "Owned process exited; test-created APPARATE_HOME removed"
+    },
+    "panel": {
+      "result": "Passed",
+      "stderr_bytes": 0,
+      "native_effects": 0,
+      "cleanup": "Owned process exited; test-created APPARATE_HOME removed"
+    }
+  },
+  "render_scenarios_verified": 226,
+  "reused_prior_images": 218,
+  "local_images": 6,
+  "section_11_bundle_preserved": true,
+  "pipeline_off_equal_digests": 360,
+  "memory_profile": "Not repeated; section 11 installed-app read clarification remains pending"
+}

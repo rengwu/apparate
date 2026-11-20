@@ -1,0 +1,11 @@
+{
+  "base_revision": "87d171c72d2f635b4d3f719e1194d2311d25b509",
+  "dirty": true,
+  "bundle": "build/review/2026-11-19-inline-default/Apparate.app",
+  "bundle_identifier": "local.apparate.review",
+  "app_sha256": "d5b224f6427f19dd8fdd6160018d2827d97a4ccd34dab6afd04affb387b9b073",
+  "swift": "Apple Swift version 6.4.2 (swiftlang-6.4.2.1.9 clang-2100.4.1.1)\nTarget: arm64-apple-macosx27.0.0",
+  "os": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A5368g",
+  "arch": "arm64",
+  "safety": "New review bundle from isolated SwiftPM output and repo resources. No access to build/Apparate.app or supervised data."
+}

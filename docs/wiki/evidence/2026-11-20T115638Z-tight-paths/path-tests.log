@@ -1,0 +1,6 @@
+PASS tight paths: two skipped folders beat one or two opens; five opens still win
+PASS tight paths: interior and trailing gaps, free ancestors and shared cap
+PASS tight paths: adjusted alignment beats the raw winner and shares one cap across gaps
+PASS tight paths: exhaustive independent alignment oracle for repeated fuzzy segments
+PASS tight paths: penalized candidates compete before the top-50 cutoff
+RESULT 5 passed; 0 failed

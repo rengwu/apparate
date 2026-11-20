@@ -1,0 +1,16 @@
+Building for debugging...
+[Using on-disk description]
+[3 / 8] ApparateCoreTests-product
+[8 / 13] ApparateCoreTests-product
+[8 / 13] Apparate-product
+[9 / 13] Apparate-product
+[12 / 16] Apparate-product
+[12 / 16] ApparateCoreTests-product
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[14 / 18] ApparateCoreTests-product
+[16 / 18] Apparate-product
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[18 / 20] Apparate-product
+Build complete! (3.70 sec)

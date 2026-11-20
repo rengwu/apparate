@@ -1,0 +1,16 @@
+{
+  "core_debug_passed": 134,
+  "core_release_passed": 134,
+  "wiki_pages_checked": 60,
+  "verification_reports_checked": 23,
+  "diff_check": "Passed",
+  "source_inputs": 86,
+  "render_scenarios": 238,
+  "prior_render_matches": 222,
+  "panel_render_matches": 184,
+  "local_images": 14,
+  "native_frame_equality": "Passed: indexed/all-indexing, mixed errors, waiting and four Skip switch actions",
+  "review_sha256": "ed436bbe06a3f516ef09c3e0a79d17fc5bda08f5457eae8a5c5145d1005ba5f1",
+  "normal_sha256": "2571d459f653a684f8494903c17ab2c6c2fa3cffd139c699ed014afdf8feaaa4",
+  "evidence_bytes": 733591
+}

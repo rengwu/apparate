@@ -1,0 +1,14 @@
+Building for debugging...
+[Using on-disk description]
+[2 / 4] ApparateCore
+[3 / 5] ApparateCore
+[6 / 8] ApparateObserver-product
+[7 / 9] ApparateObserver-product
+[9 / 11] Apparate-product
+[10 / 12] Apparate-product
+[12 / 15] Apparate-product
+[13 / 16] Apparate-product
+<repo>/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+<repo>/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[15 / 16] Apparate-product
+Build complete! (6.21 sec)

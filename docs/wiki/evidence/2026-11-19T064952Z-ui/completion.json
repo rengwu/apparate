@@ -1,0 +1,10 @@
+{
+  "source_manifest_matches": true,
+  "native_settings_passed": true,
+  "native_panel_passed": true,
+  "memory_driver_passed": true,
+  "evidence_bytes_before_this_receipt": 2806440,
+  "final_render_inspection": "Tabs, error/approval/recording/denied states, setup incomplete/partial/complete, strip/1/3/9, loading and no-results inspected in light/dark content renders. Initial alignment and light-card defects corrected.",
+  "session_bundle_and_data": "Not accessed",
+  "commit": "None; awaiting review"
+}

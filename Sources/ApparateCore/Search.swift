@@ -20,6 +20,7 @@ extension SearchIndex {
         let nameQuery = MatchQuery(query.isPath ? (query.hasTrailingSeparator ? "" : query.pathSegments.last!) : query.text)
         let parentQueries = (query.isPath ? (query.hasTrailingSeparator ? query.pathSegments : Array(query.pathSegments.dropLast())) : []).map(MatchQuery.init)
         var matcher = FuzzyMatcher(), heap: [Candidate] = []
+        let includeDots = query.includesDotNames
         // Baseline measurement showed repeated ancestor scoring dominating trailing-slash queries.
         // Parent chains are interned, so one score (including failures) per chain suffices per query.
         var parentScores = Array(repeating: Double.nan, count: parentQueries.isEmpty ? 0 : folders.count)
@@ -30,6 +31,7 @@ extension SearchIndex {
             let ak = items[a.item].kind.rank, bk = items[b.item].kind.rank
             if ak != bk { return ak < bk }
             if a.score != b.score { return a.score > b.score }
+            if sources[a.item].pathDepth != sources[b.item].pathDepth { return sources[a.item].pathDepth < sources[b.item].pathDepth }
             if text.less(Int32(a.item), Int32(b.item)) { return true }
             if text.less(Int32(b.item), Int32(a.item)) { return false }
             return items[a.item].id < items[b.item].id
@@ -58,6 +60,7 @@ extension SearchIndex {
 
         for i in items.indices {
             if i & 255 == 0 && isCancelled() { return [] }
+            if !includeDots && dotNames[i] { continue }
             let item = items[i]
             guard query.includes(item.kind) else { continue }
             var maximumTier: MatchTier = .keyword
@@ -151,7 +154,7 @@ extension SearchIndex {
                         matcher.hasSubsequence(query.scalars, buffer) ? matcher.score(query.scalars, buffer).score : nil
                     }
                     if let score {
-                        if i == 0 { row[j] = score }
+                        if i == 0 { row[j] = score - pathGapPenalty(chainCount: chain.count, firstMatch: j, queryCount: queries.count) }
                         else if j > 0 { row[j] = score + max(earlier, previous[j - 1] + 0.2) }
                     }
                 }

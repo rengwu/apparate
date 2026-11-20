@@ -14,6 +14,7 @@ import Darwin
     let performance: String?
     let bareField: Bool
     let stageProbes: Bool
+    let dotEntries: Bool
     let panelCount: Int
     let opaque: Bool, warmUp: Bool
     let waitMS: Int
@@ -57,7 +58,7 @@ import Darwin
             throw SourceError("Invalid isolated panel-check configuration.")
         }
         return TestProfile(mode: mode, directory: directory, seconds: min(90, max(1, Double(env["APPARATE_TEST_SECONDS"] ?? "3") ?? 3)),
-                           query: env["APPARATE_TEST_QUERY"] ?? "term", show: show, performAction: env["APPARATE_TEST_ACTION"] == "open", panelCheck: panelCheck, settingsCheck: settingsCheck, performance: performance, bareField: env["APPARATE_BARE_FIELD"] == "1", stageProbes: env["APPARATE_STAGE_PROBES"] == "1", panelCount: count,
+                           query: env["APPARATE_TEST_QUERY"] ?? "term", show: show, performAction: env["APPARATE_TEST_ACTION"] == "open", panelCheck: panelCheck, settingsCheck: settingsCheck, performance: performance, bareField: env["APPARATE_BARE_FIELD"] == "1", stageProbes: env["APPARATE_STAGE_PROBES"] == "1", dotEntries: env["APPARATE_DOT_ENTRIES"] == "1", panelCount: count,
                            opaque: env["APPARATE_PANEL_OPAQUE"] == "1", warmUp: env["APPARATE_PANEL_NO_WARMUP"] != "1", waitMS: wait, activityEnabled: env["APPARATE_PANEL_NO_ACTIVITY"] != "1", delivery: delivery!)
     }
     nonisolated static func fixtureCatalog() throws -> CatalogSnapshot {

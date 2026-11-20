@@ -1,0 +1,27 @@
+All builds, tests and measurements are sequential. App profiles use explicit isolated binaries and disposable fixture data.
+
+Before section-13 edits, the authorized section-11 memory commands were completed with immutable section-10/11 binaries; see ../2026-11-20T111919Z-below-icons/commands.txt and memory-comparison.json. No installed app was changed, launched or quit.
+
+swift build --scratch-path /private/tmp/apparate-ui-build-20261119
+APPARATE_TEST_FILTER='tight paths:' /private/tmp/apparate-ui-build-20261119/debug/ApparateCoreTests
+/private/tmp/apparate-ui-build-20261119/debug/ApparateCoreTests
+python3 Tests/smoke-app.py --binary /private/tmp/apparate-ui-build-20261119/debug/Apparate --panel-check functional --output /private/tmp/apparate-tight-panel-debug
+swift build --scratch-path /private/tmp/apparate-ui-build-20261119 -c release
+/private/tmp/apparate-ui-build-20261119/release/ApparateCoreTests
+python3 docs/wiki/evidence/2026-11-20T115638Z-tight-paths/assembly.txt
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-tight-paths/Apparate.app/Contents/MacOS/Apparate --panel-check functional --output docs/wiki/evidence/2026-11-20T115638Z-tight-paths/panel
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-tight-paths/Apparate.app/Contents/MacOS/Apparate --settings-check --output docs/wiki/evidence/2026-11-20T115638Z-tight-paths/settings
+python3 Tests/performance.py --binary build/review/2026-11-20-skip-hidden/Apparate.app/Contents/MacOS/Apparate pipeline --count 200000 --dot-entries --output docs/wiki/evidence/2026-11-20T115638Z-tight-paths/pipeline-prior
+python3 Tests/performance.py --binary build/review/2026-11-20-tight-paths/Apparate.app/Contents/MacOS/Apparate pipeline --count 200000 --dot-entries --output docs/wiki/evidence/2026-11-20T115638Z-tight-paths/pipeline-candidate
+python3 /private/tmp/apparate-section13-retain.py
+python3 Tests/performance.py --binary build/review/2026-11-20-tight-paths/Apparate.app/Contents/MacOS/Apparate pipeline --count 200000 --dot-entries --output docs/wiki/evidence/2026-11-20T115638Z-tight-paths/pipeline-candidate-repeat
+python3 Tests/performance.py --binary build/review/2026-11-20-skip-hidden/Apparate.app/Contents/MacOS/Apparate pipeline --count 200000 --dot-entries --output docs/wiki/evidence/2026-11-20T115638Z-tight-paths/pipeline-prior-repeat
+./build.sh
+
+The reversed pair investigates the higher first candidate project/read p95 with nearly unchanged median. All attempts retained; no other jobs concurrent with measurements. Normal output was rebuilt only after functional checks, render inspection and comparisons, under the section-10 onward authorization. It was not launched or installed.
+
+python3 docs/wiki/evidence/2026-11-20T115638Z-tight-paths/integrity.py
+node docs/wiki/_build.mjs
+node docs/wiki/_build.mjs --check
+node /Users/rengwu/Projects/jstack/skills/verify-change/scripts/check-reports.mjs docs/wiki
+git diff --check

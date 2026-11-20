@@ -1,0 +1,25 @@
+All build/test/profile processes ran sequentially. App executions explicitly select an isolated executable and use disposable homes and fake effects.
+
+swift build --scratch-path /private/tmp/apparate-ui-build-20261119
+python3 Tests/smoke-app.py --binary /private/tmp/apparate-ui-build-20261119/debug/Apparate --panel-check functional --output /private/tmp/apparate-below-panel-debug
+/private/tmp/apparate-ui-build-20261119/debug/ApparateCoreTests
+swift build --scratch-path /private/tmp/apparate-ui-build-20261119 -c release
+/private/tmp/apparate-ui-build-20261119/release/ApparateCoreTests
+python3 docs/wiki/evidence/2026-11-20T111919Z-below-icons/assembly.txt
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-below-icons/Apparate.app/Contents/MacOS/Apparate --panel-check functional --output docs/wiki/evidence/2026-11-20T111919Z-below-icons/panel
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-below-icons/Apparate.app/Contents/MacOS/Apparate --settings-check --output docs/wiki/evidence/2026-11-20T111919Z-below-icons/settings
+python3 /private/tmp/apparate-section11-retain.py
+./build.sh
+
+The normal build uses the explicit section-10/11 mailbox authorization after functional checks and render review pass. Do not launch or install the normal output; the running /Applications copy stays untouched.
+
+Pending memory comparison, not executed while the scope of read-only /Applications catalog access is awaiting clarification:
+python3 Tests/performance.py --binary build/review/2026-11-20-login-icon/Apparate.app/Contents/MacOS/Apparate full --count 20000 --dot-entries --result-location below --output docs/wiki/evidence/2026-11-20T111919Z-below-icons/full-prior-below
+python3 Tests/performance.py --binary build/review/2026-11-20-below-icons/Apparate.app/Contents/MacOS/Apparate full --count 20000 --dot-entries --result-location below --output docs/wiki/evidence/2026-11-20T111919Z-below-icons/full-below
+
+node docs/wiki/_build.mjs
+node docs/wiki/_build.mjs --check
+node /Users/rengwu/Projects/jstack/skills/verify-change/scripts/check-reports.mjs docs/wiki
+git diff --check
+
+2026-11-20 completion: the two previously pending full commands above executed after the mailbox read-only catalog clarification. Both passed their harness checks; see memory-comparison.json for budget outcomes. Driver SHA and manifest are recorded there.

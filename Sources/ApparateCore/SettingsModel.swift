@@ -81,7 +81,9 @@ public struct SettingsIndexState: Sendable {
     }
     public var accessReady: Bool { AccessFolder.allCases.allSatisfy { folder in access.observations.contains { $0.folder == folder && $0.status == .allowed } } }
     public var needsAccess: Bool {
-        config.folders.contains { folder in
+        // Typed paths can reach these folders even when they are outside the index.
+        if !accessReady { return true }
+        return config.folders.contains { folder in
             let path = normalized(folder.path)
             return AccessFolder.allCases.contains { protected in
                 let root = home + "/" + protected.rawValue
@@ -93,12 +95,11 @@ public struct SettingsIndexState: Sendable {
     }
     public var accessText: String {
         if let checking = access.checking { return "Checking \(checking.rawValue)…" }
-        if accessReady { return "Last check: all three folders allowed." }
         return AccessFolder.allCases.compactMap { folder -> String? in
             let status = access.observations.first { $0.folder == folder }?.status
             if status == .allowed { return nil }
             let label: String
-            switch status { case .denied: label = "Denied"; case .notFound: label = "Not found"; case .error: label = "Could not check"; default: label = "Not checked" }
+            switch status { case .denied: label = "Denied"; case .notFound: label = "Not found"; case .error: label = "Could not check"; default: return nil }
             return folder.rawValue + ": " + label
         }.joined(separator: " · ")
     }

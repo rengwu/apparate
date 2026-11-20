@@ -1,0 +1,34 @@
+Building for debugging...
+[Using on-disk description]
+[3 / 28]
+[4 / 29] ApparateCore
+[15 / 40] ApparateCore
+[16 / 40] ApparateCore
+[20 / 42] ApparateCore
+[20 / 43] ApparateFixtures
+[22 / 44] ApparateFixtures
+[27 / 39] ApparateObserver-product
+[30 / 41] ApparateCore
+[36 / 52] ApparateCoreTests-product
+[40 / 63] Apparate-product
+[40 / 63] ApparateObserver-product
+[46 / 65] ApparateCoreTests-product
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCore: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[53 / 65] Apparate-product
+[55 / 65] Apparate-product
+[57 / 65] Apparate-product
+[58 / 65] Apparate-product
+/Users/rengwu/Projects/apparate/Package.swift: ApparateFixtures: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[61 / 65] ApparateCore-product
+[61 / 66] Apparate-product
+/Users/rengwu/Projects/apparate/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[63 / 66] ApparateObserver-product
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[65 / 69] ApparateCoreTests-product
+[67 / 69] Apparate-product
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[69 / 71] Apparate-product
+Build complete! (9.84 sec)

@@ -1,0 +1,34 @@
+Building for debugging...
+[Using on-disk description]
+[5 / 16] ApparateCoreTests-product
+[16 / 44] ApparateObserver-product
+[16 / 44] ApparateCoreTests-product
+[19 / 44] ApparateObserver-product
+[22 / 45] ApparateCore
+[23 / 45] ApparateCore
+[25 / 45] Apparate-product
+[26 / 45] Apparate-product
+[31 / 45] Apparate-product
+[33 / 45] Apparate-product
+[35 / 47] ApparateCore
+[37 / 47] Apparate-product
+[39 / 57] ApparateCore
+[41 / 57] ApparateCoreTests-product
+[46 / 57] ApparateCore
+[48 / 57] ApparateCore
+[49 / 57] ApparateCore
+[49 / 57] Apparate-product
+[49 / 57] ApparateCore
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCore: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+/Users/rengwu/Projects/apparate/Package.swift: ApparateFixtures: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[55 / 58] Apparate-product
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[55 / 58] ApparateObserver-product
+/Users/rengwu/Projects/apparate/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[59 / 61] Apparate-product
+[61 / 63] Apparate-product
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+Build complete! (8.26 sec)

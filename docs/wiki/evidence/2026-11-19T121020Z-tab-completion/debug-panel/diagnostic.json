@@ -1,0 +1,863 @@
+{
+  "activity_begins": 3,
+  "activity_enabled": true,
+  "activity_ends": 3,
+  "activity_lifecycle_checked": true,
+  "ax_rows": 50,
+  "ax_stable_identity": true,
+  "ax_visible_rows": 9,
+  "capture_method": "app-owned hidden bitmap; no WindowServer composition",
+  "delivery": "task",
+  "driver_task_priority": 25,
+  "dynamic_geometry": [
+    {
+      "height": 41,
+      "marker_decoded": true,
+      "rows": 0,
+      "top": 41
+    },
+    {
+      "height": 110,
+      "marker_decoded": true,
+      "rows": 1,
+      "top": 41
+    },
+    {
+      "height": 166,
+      "marker_decoded": true,
+      "rows": 3,
+      "top": 41
+    },
+    {
+      "height": 334,
+      "marker_decoded": true,
+      "rows": 9,
+      "top": 41
+    }
+  ],
+  "empty_label_geometry": [
+    {
+      "cap_center_from_bottom": 20.579833984375,
+      "cap_center_from_top": 61.420166015625,
+      "font_cap_height": 9.15966796875,
+      "height": 82,
+      "target_from_bottom": 20.5,
+      "text": "No results"
+    }
+  ],
+  "errors": 0,
+  "explicit_web_before_catalog": true,
+  "fake_actions": 0,
+  "fake_model_actions": 4,
+  "fake_quit_callbacks": 1,
+  "fake_registrations": 1,
+  "focus_guards_checked": true,
+  "footer_label_geometry": [
+    {
+      "cap_center_from_bottom": 13.875244140625,
+      "cap_center_from_top": 320.124755859375,
+      "font_cap_height": 7.75048828125,
+      "height": 334,
+      "target_from_bottom": 14,
+      "text": "\u21a9 Open   \u2318\u21a9 Reveal in Finder   \u2318C Copy path"
+    }
+  ],
+  "indexed_dot_names": {
+    "cases": [
+      {
+        "highlights": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        ],
+        "names": [
+          ".config",
+          ".config",
+          "vite.config.js"
+        ],
+        "query": "'.config",
+        "renders": [
+          "indexed-dot-config-dot-light.jpg",
+          "indexed-dot-config-dot-dark.jpg"
+        ]
+      },
+      {
+        "highlights": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        ],
+        "names": [
+          "Configuration",
+          "config.json",
+          "vite.config.js"
+        ],
+        "query": "config",
+        "renders": [
+          "indexed-dot-config-ordinary-light.jpg",
+          "indexed-dot-config-ordinary-dark.jpg"
+        ]
+      },
+      {
+        "highlights": [
+          [
+            0,
+            1,
+            2,
+            3
+          ]
+        ],
+        "names": [
+          ".env"
+        ],
+        "query": "'.env",
+        "renders": [
+          "indexed-dot-env-light.jpg",
+          "indexed-dot-env-dark.jpg"
+        ]
+      },
+      {
+        "highlights": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        ],
+        "names": [
+          ".config"
+        ],
+        "query": "'Projects/.config",
+        "renders": [
+          "indexed-dot-internal-path-light.jpg",
+          "indexed-dot-internal-path-dark.jpg"
+        ]
+      },
+      {
+        "highlights": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        ],
+        "names": [
+          "Configuration"
+        ],
+        "query": ".config",
+        "renders": [
+          "indexed-dot-settings-prefix-light.jpg",
+          "indexed-dot-settings-prefix-dark.jpg"
+        ]
+      },
+      {
+        "highlights": [
+          []
+        ],
+        "names": [
+          "settings.json"
+        ],
+        "query": "~/.config/",
+        "renders": [
+          "indexed-dot-direct-path-light.jpg",
+          "indexed-dot-direct-path-dark.jpg"
+        ]
+      }
+    ],
+    "dot_count": 4,
+    "dot_directory_descent": false,
+    "indexed_count": 9,
+    "real_filesystem_reads": 0
+  },
+  "layout": [
+    {
+      "fixture": "layout:1",
+      "highlight_utf16_ranges": [
+        [
+          0,
+          1
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          10,
+          1
+        ]
+      ],
+      "location_truncated": true,
+      "title_truncated": false
+    },
+    {
+      "fixture": "layout:2",
+      "highlight_utf16_ranges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "location_truncated": false,
+      "title_truncated": true
+    },
+    {
+      "fixture": "layout:3",
+      "highlight_utf16_ranges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "location_truncated": false,
+      "title_truncated": true
+    }
+  ],
+  "loading_label_geometry": [
+    {
+      "cap_center_from_bottom": 20.579833984375,
+      "cap_center_from_top": 61.420166015625,
+      "font_cap_height": 9.15966796875,
+      "height": 82,
+      "target_from_bottom": 20.5,
+      "text": "Searching\u2026"
+    }
+  ],
+  "location_layouts": [
+    {
+      "heights": [
+        41,
+        110,
+        166,
+        334
+      ],
+      "live_change_pending_selection_ax_click_number": true,
+      "marker_decoded": true,
+      "mode": "inline"
+    },
+    {
+      "heights": [
+        41,
+        110,
+        166,
+        334
+      ],
+      "live_change_pending_selection_ax_click_number": true,
+      "marker_decoded": true,
+      "mode": "right"
+    },
+    {
+      "heights": [
+        41,
+        122,
+        202,
+        442
+      ],
+      "live_change_pending_selection_ax_click_number": true,
+      "marker_decoded": true,
+      "mode": "below"
+    }
+  ],
+  "mode": "fixtures",
+  "native_accessibility_notifications": 0,
+  "native_actions": 0,
+  "native_editor_arrows_and_marked_command_guard": true,
+  "native_hotkey_registrations": 0,
+  "opaque": false,
+  "panel_check": "functional",
+  "path_navigation": {
+    "catalog_independent": true,
+    "marked_tab_guard": true,
+    "native_filesystem_action_routes": 3,
+    "native_tab_and_undo": true,
+    "native_undo_restored_empty": true,
+    "real_actions": 0,
+    "real_filesystem_reads": 0,
+    "renders": [
+      "path-home-light.jpg",
+      "path-home-dark.jpg",
+      "path-dot-light.jpg",
+      "path-dot-dark.jpg",
+      "path-folder-light.jpg",
+      "path-folder-dark.jpg",
+      "path-completed-light.jpg",
+      "path-completed-dark.jpg",
+      "path-file-light.jpg",
+      "path-file-dark.jpg",
+      "path-unicode-light.jpg",
+      "path-unicode-dark.jpg",
+      "path-missing-light.jpg",
+      "path-missing-dark.jpg",
+      "path-unreadable-light.jpg",
+      "path-unreadable-dark.jpg",
+      "path-not-folder-light.jpg",
+      "path-not-folder-dark.jpg",
+      "path-no-match-light.jpg",
+      "path-no-match-dark.jpg",
+      "path-protected-light.jpg",
+      "path-protected-dark.jpg"
+    ],
+    "return_current_event_type": 13,
+    "rows": [
+      {
+        "fixture_symbol": "folder",
+        "font_runs": [
+          {
+            "utf16_range": [
+              0,
+              7
+            ],
+            "weight": 0
+          }
+        ],
+        "highlight_offsets": [],
+        "highlight_utf16_ranges": [],
+        "kind": "Folder",
+        "state": "home",
+        "title": "Library"
+      },
+      {
+        "fixture_symbol": "folder",
+        "font_runs": [
+          {
+            "utf16_range": [
+              0,
+              12
+            ],
+            "weight": 0
+          }
+        ],
+        "highlight_offsets": [],
+        "highlight_utf16_ranges": [],
+        "kind": "Folder",
+        "state": "home",
+        "title": "node_modules"
+      },
+      {
+        "fixture_symbol": "doc",
+        "font_runs": [
+          {
+            "utf16_range": [
+              0,
+              8
+            ],
+            "weight": 0
+          }
+        ],
+        "highlight_offsets": [],
+        "highlight_utf16_ranges": [],
+        "kind": "File",
+        "state": "home",
+        "title": "note.txt"
+      },
+      {
+        "fixture_symbol": "folder",
+        "font_runs": [
+          {
+            "utf16_range": [
+              0,
+              10
+            ],
+            "weight": 0
+          }
+        ],
+        "highlight_offsets": [],
+        "highlight_utf16_ranges": [],
+        "kind": "Folder",
+        "state": "home",
+        "title": "Unreadable"
+      },
+      {
+        "fixture_symbol": "folder",
+        "font_runs": [
+          {
+            "utf16_range": [
+              0,
+              3
+            ],
+            "weight": 0.30000001192092896
+          },
+          {
+            "utf16_range": [
+              3,
+              1
+            ],
+            "weight": 0
+          }
+        ],
+        "highlight_offsets": [
+          0,
+          1,
+          2
+        ],
+        "highlight_utf16_ranges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "kind": "Folder",
+        "state": "dot",
+        "title": ".ssh"
+      },
+      {
+        "fixture_symbol": "folder",
+        "font_runs": [
+          {
+            "utf16_range": [
+              0,
+              3
+            ],
+            "weight": 0.30000001192092896
+          },
+          {
+            "utf16_range": [
+              3,
+              16
+            ],
+            "weight": 0
+          }
+        ],
+        "highlight_offsets": [
+          0,
+          1,
+          2
+        ],
+        "highlight_utf16_ranges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "kind": "Folder",
+        "state": "folder",
+        "title": "Application Support"
+      },
+      {
+        "fixture_symbol": "doc",
+        "font_runs": [
+          {
+            "utf16_range": [
+              0,
+              1
+            ],
+            "weight": 0
+          },
+          {
+            "utf16_range": [
+              1,
+              7
+            ],
+            "weight": 0
+          },
+          {
+            "utf16_range": [
+              8,
+              2
+            ],
+            "weight": 0
+          },
+          {
+            "utf16_range": [
+              10,
+              2
+            ],
+            "weight": 0
+          },
+          {
+            "utf16_range": [
+              12,
+              3
+            ],
+            "weight": 0
+          }
+        ],
+        "highlight_offsets": [],
+        "highlight_utf16_ranges": [],
+        "kind": "File",
+        "state": "completed",
+        "title": "A\ud83d\udc69\ud83c\udffd\u200d\ud83d\udcbbe\u0301\u6771\u4eac.md"
+      },
+      {
+        "fixture_symbol": "doc",
+        "font_runs": [
+          {
+            "utf16_range": [
+              0,
+              8
+            ],
+            "weight": 0.30000001192092896
+          }
+        ],
+        "highlight_offsets": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "highlight_utf16_ranges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            7,
+            1
+          ]
+        ],
+        "kind": "File",
+        "state": "file",
+        "title": "note.txt"
+      },
+      {
+        "fixture_symbol": "doc",
+        "font_runs": [
+          {
+            "utf16_range": [
+              0,
+              1
+            ],
+            "weight": 0
+          },
+          {
+            "utf16_range": [
+              1,
+              7
+            ],
+            "weight": 0
+          },
+          {
+            "utf16_range": [
+              8,
+              2
+            ],
+            "weight": 0
+          },
+          {
+            "utf16_range": [
+              10,
+              2
+            ],
+            "weight": 0.30000001192092896
+          },
+          {
+            "utf16_range": [
+              12,
+              3
+            ],
+            "weight": 0
+          }
+        ],
+        "highlight_offsets": [
+          3,
+          4
+        ],
+        "highlight_utf16_ranges": [
+          [
+            10,
+            1
+          ],
+          [
+            11,
+            1
+          ]
+        ],
+        "kind": "File",
+        "state": "unicode",
+        "title": "A\ud83d\udc69\ud83c\udffd\u200d\ud83d\udcbbe\u0301\u6771\u4eac.md"
+      }
+    ]
+  },
+  "physical_footprint_bytes": 37848144,
+  "protected_folder_probes": 0,
+  "ready": true,
+  "renderer": "drawn",
+  "renders": [
+    "empty-light.jpg",
+    "matches-light.jpg",
+    "alternate-light.jpg",
+    "no-results-light.jpg",
+    "web-light.jpg",
+    "restart-light.jpg",
+    "empty-dark.jpg",
+    "matches-dark.jpg",
+    "alternate-dark.jpg",
+    "no-results-dark.jpg",
+    "web-dark.jpg",
+    "restart-dark.jpg"
+  ],
+  "result": "Passed",
+  "result_completion": {
+    "actions": 0,
+    "cases": [
+      {
+        "completion": "~/Projects/quinecms-demo-site/",
+        "kind": "folder",
+        "query": "quinecm",
+        "redo_restored": "~/Projects/quinecms-demo-site/",
+        "renders": [
+          "completion-folder-before-light.jpg",
+          "completion-folder-before-dark.jpg",
+          "completion-folder-after-light.jpg",
+          "completion-folder-after-dark.jpg"
+        ],
+        "undo_restored": "quinecm"
+      },
+      {
+        "completion": "~/Projects/quinecms-demo-site/",
+        "kind": "scoped-folder",
+        "query": "'quinecm",
+        "redo_restored": "~/Projects/quinecms-demo-site/",
+        "renders": [
+          "completion-scoped-folder-before-light.jpg",
+          "completion-scoped-folder-before-dark.jpg",
+          "completion-scoped-folder-after-light.jpg",
+          "completion-scoped-folder-after-dark.jpg"
+        ],
+        "undo_restored": "'quinecm"
+      },
+      {
+        "completion": "~/A\ud83d\udc69\ud83c\udffd\u200d\ud83d\udcbbe\u0301\u6771\u4eac.md",
+        "kind": "file",
+        "query": "'\u6771\u4eac",
+        "redo_restored": "~/A\ud83d\udc69\ud83c\udffd\u200d\ud83d\udcbbe\u0301\u6771\u4eac.md",
+        "renders": [
+          "completion-file-before-light.jpg",
+          "completion-file-before-dark.jpg",
+          "completion-file-after-light.jpg",
+          "completion-file-after-dark.jpg"
+        ],
+        "undo_restored": "'\u6771\u4eac"
+      },
+      {
+        "completion": "@Fixture Editor",
+        "kind": "app",
+        "query": "@fixt",
+        "redo_restored": "@Fixture Editor",
+        "renders": [
+          "completion-app-before-light.jpg",
+          "completion-app-before-dark.jpg",
+          "completion-app-after-light.jpg",
+          "completion-app-after-dark.jpg"
+        ],
+        "undo_restored": "@fixt"
+      },
+      {
+        "completion": ".Displays",
+        "kind": "setting",
+        "query": ".disp",
+        "redo_restored": ".Displays",
+        "renders": [
+          "completion-setting-before-light.jpg",
+          "completion-setting-before-dark.jpg",
+          "completion-setting-after-light.jpg",
+          "completion-setting-after-dark.jpg"
+        ],
+        "undo_restored": ".disp"
+      },
+      {
+        "completion": "!Lock Screen",
+        "kind": "command",
+        "query": "!loc",
+        "redo_restored": "!Lock Screen",
+        "renders": [
+          "completion-command-before-light.jpg",
+          "completion-command-before-dark.jpg",
+          "completion-command-after-light.jpg",
+          "completion-command-after-dark.jpg"
+        ],
+        "undo_restored": "!loc"
+      }
+    ],
+    "consumed_no_ops": [
+      "identical",
+      "shift-tab",
+      "no-selection",
+      "web",
+      "pending",
+      "unreconciled-editor",
+      "marked-tab",
+      "marked-backtab"
+    ],
+    "history_scope": "Completion action isolated after clearing fixture input history; physical event grouping untested",
+    "native_undo_redo": true,
+    "real_filesystem_reads": 0
+  },
+  "same_height_window_frame_calls": 0,
+  "schema": 1,
+  "search_centers": [
+    {
+      "cap_center_error": 0.36328125,
+      "cap_center_from_top": 20.36328125,
+      "font_cap_height": 11.2734375,
+      "height": 41,
+      "marked": false,
+      "state": "placeholder"
+    },
+    {
+      "cap_center_error": 0.13675998164295322,
+      "cap_center_from_top": 20.136759981642953,
+      "font_cap_height": 11.72648003671409,
+      "height": 41,
+      "marked": true,
+      "state": "marked-strip"
+    },
+    {
+      "cap_center_error": 0.36328125,
+      "cap_center_from_top": 20.36328125,
+      "font_cap_height": 11.2734375,
+      "height": 110,
+      "marked": false,
+      "state": "typed-1-rows"
+    },
+    {
+      "cap_center_error": 0.36328125,
+      "cap_center_from_top": 20.36328125,
+      "font_cap_height": 11.2734375,
+      "height": 166,
+      "marked": false,
+      "state": "typed-3-rows"
+    },
+    {
+      "cap_center_error": 0.36328125,
+      "cap_center_from_top": 20.36328125,
+      "font_cap_height": 11.2734375,
+      "height": 334,
+      "marked": false,
+      "state": "typed-9-rows"
+    },
+    {
+      "cap_center_error": 0.13675998164296743,
+      "cap_center_from_top": 20.136759981642967,
+      "font_cap_height": 11.72648003671409,
+      "height": 334,
+      "marked": true,
+      "state": "marked"
+    }
+  ],
+  "selection_notification_sink_count": 35,
+  "thermal_state": 0,
+  "timing_scope": "injected field-editor text through production coordinator/session/layout and explicit off-screen raster; not a screen commit or presentation timestamp",
+  "visible_profile": "none",
+  "wait_ms": 0,
+  "warm_up": true
+}

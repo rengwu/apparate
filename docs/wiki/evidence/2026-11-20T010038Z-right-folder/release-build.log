@@ -1,0 +1,13 @@
+Building for production...
+[Using on-disk description]
+[3 / 12] ApparateCore
+[5 / 13] ApparateCore
+[9 / 16] ApparateFixtures
+[11 / 17] ApparateFixtures
+[14 / 15] Apparate-product
+[15 / 16] Apparate-product
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[18 / 20] Apparate-product
+[19 / 20] Apparate-product
+Build complete! (44.14 sec)

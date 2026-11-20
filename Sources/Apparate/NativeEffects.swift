@@ -7,6 +7,9 @@ import ApparateCore
     func openApplication(_ url: URL) async throws {
         _ = try await NSWorkspace.shared.openApplication(at: url, configuration: NSWorkspace.OpenConfiguration())
     }
+    func openFile(_ url: URL, with application: URL) async throws {
+        _ = try await NSWorkspace.shared.open([url], withApplicationAt: application, configuration: NSWorkspace.OpenConfiguration())
+    }
     func openURL(_ url: URL) async throws {
         guard NSWorkspace.shared.open(url) else { throw SourceError("macOS did not accept the open request.") }
     }
@@ -93,6 +96,7 @@ import ApparateCore
 @MainActor final class TestEffects: ActionExecuting, HotKeyRegistering {
     private(set) var actionCount = 0, registrationCount = 0, applicationOpens = 0, urlOpens = 0
     func openApplication(_ url: URL) async throws { actionCount += 1; applicationOpens += 1 }
+    func openFile(_ url: URL, with application: URL) async throws { actionCount += 1; urlOpens += 1 }
     func openURL(_ url: URL) async throws { actionCount += 1; urlOpens += 1 }
     func reveal(_ url: URL) async throws { actionCount += 1 }
     func copyPath(_ path: String) async throws { actionCount += 1 }

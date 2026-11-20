@@ -10,6 +10,7 @@ import subprocess
 import tempfile
 
 parser = argparse.ArgumentParser()
+parser.add_argument("--binary", type=Path, help="Explicit isolated review executable")
 parser.add_argument('--fixture-app', action='store_true')
 parser.add_argument('--file-source', choices=['fixture', 'projects'])
 parser.add_argument('--mode', choices=['fixtures', 'live-readonly'], default='fixtures')
@@ -37,8 +38,8 @@ assert not args.action_open or args.show == 'panel'
 assert not args.settings_check or (args.mode == 'fixtures' and not args.show and not args.file_source and not args.panel_check and not args.action_open and args.runs == 1)
 assert not args.panel_check or (args.mode == 'fixtures' and not args.show and not args.file_source and not args.action_open and args.runs == 1)
 root = Path(__file__).resolve().parent.parent
-binary = root / 'build/Apparate.app/Contents/MacOS/Apparate'
-assert binary.is_file(), 'Run ./build.sh first'
+binary = args.binary.resolve() if args.binary else root / 'build/Apparate.app/Contents/MacOS/Apparate'
+assert binary.is_file(), 'Missing executable; supply --binary or assemble the default app'
 with tempfile.TemporaryDirectory(prefix='apparate-m2-app-') as directory:
     home = Path(directory)
     folders = []
@@ -77,6 +78,7 @@ with tempfile.TemporaryDirectory(prefix='apparate-m2-app-') as directory:
     results = []
     for run in range(args.runs):
         process = subprocess.Popen([str(binary)], env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = b'', b''
         try:
             stdout, stderr = process.communicate(timeout=max(args.seconds + 65, 180 if args.panel_check else 0))
             assert process.returncode == 0, 'App did not exit normally'
@@ -132,6 +134,10 @@ with tempfile.TemporaryDirectory(prefix='apparate-m2-app-') as directory:
         except BaseException as error:
             if args.output:
                 args.output.mkdir(parents=True, exist_ok=True)
+                diagnostic = getattr(error, 'stderr', None) or stderr
+                if diagnostic:
+                    text = diagnostic.decode(errors='replace').replace(str(home), '<fixture-home>').replace(str(root), '<repo>').replace(str(Path.home()), '<user-home>')
+                    (args.output / 'process-failure.log').write_text(text[:24000])
                 (args.output / 'failure.json').write_text(json.dumps({'result': 'Failed', 'exception': type(error).__name__, 'phase': 'owned process / receipt validation'}, indent=2) + '\n')
                 for picture in list(home.glob('*.png')) + list(home.glob('*.jpg')):
                     shutil.copyfile(picture, args.output / picture.name)

@@ -1,0 +1,10 @@
+Building for debugging...
+[Computing dependencies]
+[1 / 1]
+[2 / 6] Apparate-product
+[4 / 8] Apparate-product
+[5 / 8] Apparate-product
+<repo>/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+<repo>/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[7 / 8] Apparate-product
+Build complete! (4.26 sec)

@@ -67,6 +67,7 @@ final class FileChunk: Sendable {
     // The scan reads only these value buffers and prepared text. It never copies a
     // FileNode (and its reference-bearing metadata) for an ordinary candidate.
     let kinds: [ItemKind?]
+    let ordinaryKinds: [ItemKind?]
     let parents: [Int32]
     init(_ nodes: [FileNode?]) {
         self.nodes = nodes
@@ -75,6 +76,8 @@ final class FileChunk: Sendable {
             guard let node, node.visible, node.kind != .app else { return nil }
             return node.kind
         }
+        ordinaryKinds = nodes.contains(where: { $0?.name.hasPrefix(".") == true })
+            ? kinds.enumerated().map { nodes[$0.offset]?.name.hasPrefix(".") == true ? nil : $0.element } : kinds
         parents = nodes.map { $0?.parent ?? -1 }
         var text = TextStore()
         for node in nodes { _ = text.append(node?.name ?? "") }
@@ -91,8 +94,10 @@ public struct FileIndexSnapshot: Sendable {
     public internal(set) var count = 0
     public internal(set) var revision: UInt64 = 0
     public internal(set) var lastUpdate: Date?
+    public internal(set) var skipHiddenFiles = false
     var allowedRoots: Set<Int32>?
     var restrictedKinds: [[ItemKind?]]?
+    var restrictedOrdinaryKinds: [[ItemKind?]]?
     public init() {}
     func node(_ id: Int32) -> FileNode? {
         guard id >= 0, Int(id) < slots else { return nil }
@@ -100,6 +105,12 @@ public struct FileIndexSnapshot: Sendable {
     }
     func searchable(_ node: FileNode) -> Bool {
         guard node.visible else { return false }
+        if skipHiddenFiles && node.name.hasPrefix(".") {
+            guard roots.indices.contains(where: { r in
+                guard allowedRoots?.contains(Int32(r)) != false, node.belongs(to: Int32(r)), let root = self.node(roots[r].node) else { return false }
+                return root.parent == node.parent && root.name == node.name && root.anchor == node.anchor
+            }) else { return false }
+        }
         guard let allowedRoots else { return true }
         return allowedRoots.contains(node.owner) || node.otherOwners.contains(where: allowedRoots.contains)
     }
@@ -136,8 +147,11 @@ public struct FileIndexSnapshot: Sendable {
         applications = try? CatalogSnapshot(entries: entries.values.sorted { $0.item.id < $1.item.id })
     }
     public var applicationCount: Int { applications?.entries.count ?? 0 }
-    public func restricting(to paths: Set<String>) -> FileIndexSnapshot {
+    package var dotEntryCount: Int { chunks.reduce(0) { $0 + $1.nodes.compactMap { $0 }.filter { searchable($0) && $0.name.hasPrefix(".") }.count } }
+    public func restricting(to paths: Set<String>, skipHiddenFiles: Bool? = nil) -> FileIndexSnapshot {
         var result = self
+        result.identity = UUID()
+        if let skipHiddenFiles { result.skipHiddenFiles = skipHiddenFiles }
         result.allowedRoots = Set(roots.indices.filter { paths.contains(roots[$0].path) }.map(Int32.init))
         result.count = chunks.reduce(0) { total, chunk in total + chunk.nodes.compactMap { $0 }.filter { result.searchable($0) }.count }
         result.restrictedKinds = chunks.map { chunk in
@@ -145,6 +159,9 @@ public struct FileIndexSnapshot: Sendable {
                 guard let node = chunk.nodes[offset], result.searchable(node) else { return nil }
                 return chunk.kinds[offset]
             }
+        }
+        result.restrictedOrdinaryKinds = chunks.enumerated().map { index, chunk in
+            chunk.ordinaryKinds.indices.map { offset in result.restrictedKinds![index][offset] == nil ? nil : chunk.ordinaryKinds[offset] }
         }
         result.prepareApplications()
         return result
@@ -178,6 +195,11 @@ struct FileIndexBuilder {
     var count: Int
     init(_ base: FileIndexSnapshot = FileIndexSnapshot()) {
         self.base = base; roots = base.roots; free = base.free; slots = base.slots; count = base.count
+        // A pending config view counts only allowed candidates, while its shared
+        // graph still contains the old memberships that the rebuild will remove.
+        if base.allowedRoots != nil {
+            count = base.chunks.reduce(0) { $0 + $1.nodes.compactMap { $0 }.filter(\.visible).count }
+        }
     }
     func node(_ id: Int32) -> FileNode? {
         guard id >= 0, Int(id) < slots else { return nil }
@@ -248,7 +270,7 @@ struct FileIndexBuilder {
             else { snapshot.chunks[chunk] = replacement }
         }
         snapshot.roots = roots; snapshot.free = free; snapshot.slots = slots; snapshot.count = count
-        snapshot.allowedRoots = nil; snapshot.restrictedKinds = nil
+        snapshot.allowedRoots = nil; snapshot.restrictedKinds = nil; snapshot.restrictedOrdinaryKinds = nil
         snapshot.prepareApplications()
         snapshot.identity = UUID(); snapshot.revision &+= 1; snapshot.lastUpdate = Date()
         return snapshot

@@ -1,0 +1,20 @@
+All app commands select an explicit isolated binary and disposable home. Builds and test/profile processes ran sequentially.
+
+swift build --scratch-path /private/tmp/apparate-ui-build-20261119
+python3 Tests/smoke-app.py --binary /private/tmp/apparate-ui-build-20261119/debug/Apparate --panel-check functional --output /private/tmp/apparate-right-panel-debug
+/private/tmp/apparate-ui-build-20261119/debug/ApparateCoreTests
+swift build --scratch-path /private/tmp/apparate-ui-build-20261119 -c release
+/private/tmp/apparate-ui-build-20261119/release/ApparateCoreTests
+python3 docs/wiki/evidence/2026-11-20T010038Z-right-folder/assembly.txt
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-right-folder/Apparate.app/Contents/MacOS/Apparate --panel-check functional --output docs/wiki/evidence/2026-11-20T010038Z-right-folder/panel
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-right-folder/Apparate.app/Contents/MacOS/Apparate --settings-check --output docs/wiki/evidence/2026-11-20T010038Z-right-folder/settings
+
+The initial compile failed on a reserved Swift keyword used as a local fixture variable. It was renamed before any test launch; the initial build log remains recorded.
+
+python3 /private/tmp/apparate-section9-retain.py
+node docs/wiki/_build.mjs
+node docs/wiki/_build.mjs --check
+node /Users/rengwu/Projects/jstack/skills/verify-change/scripts/check-reports.mjs docs/wiki
+git diff --check
+
+Retention script copied to retention-script.txt. New original renders archived at /private/tmp/apparate-section9-originals; 198 exact raw-image hash matches reference existing section 8 JPEGs and eight new Right Arrow renders remain local. All 83 source inputs, original/output image mappings and signed executable hashes verified; section 8 signature, binary and retained image hashes rechecked without mutation. See integrity-check.json.

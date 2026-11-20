@@ -9,7 +9,7 @@ A minimal, very fast launcher for macOS. Planning notes, research, decisions, an
 ## Planning
 
 - [Requirements](requirements.md) — what the user asked for.
-- [Decisions](decisions.md) — accepted choices through round 11, the performance budgets, and what is still open.
+- [Decisions](decisions.md) — accepted choices, the performance budgets, and what is still open.
 - [Implementation plan](plan.md) — approved milestones from foundation to release 0.1.0, how the build runs, and progress.
 
 ## Build
@@ -41,6 +41,18 @@ A minimal, very fast launcher for macOS. Planning notes, research, decisions, an
 - [M4 verification](verification/runs/2026-11-18T200340Z-m4.md) — approved and committed; hidden proxy latency remains failed and carried to M6.
 - [M5 verification](verification/runs/2026-11-18T212428Z-m5.md) — Settings, menu and setup; automated checks and review fix passed; included in the M5 milestone commit; native checks pending before M7.
 
+- [UI follow-up verification](verification/runs/2026-11-19T064952Z-ui.md) — Settings cards, setup text and dynamic panel sizing; hidden checks passed, review and on-screen resize proof pending.
+
+- [UI six-fix recheck](verification/runs/2026-11-19T070456Z-ui-review.md) — revised controls and panel alignment; new hidden renders ready for review.
+
+- [Panel centering follow-up](verification/runs/2026-11-19T083754Z-panel-centering.md) — search, magnifier and footer alignment, with hidden renders and measured centers.
+
+- [Result-location setting](verification/runs/2026-11-19T085025Z-row-location.md) — Inline, Right and Below, live reflow, render matrix and 20k preferences footprint.
+
+- [Inline-default follow-up](verification/runs/2026-11-19T090422Z-inline-default.md) — round 15 default and retained saved choices.
+
+- [Direct paths and shallow folders](verification/runs/2026-11-19T095817Z-path-folders.md) — DEC-054 navigation, shallow watches, access gates, defaults and ranking.
+
 ## Research
 
 Claude and Codex researched the whole topic independently, at the user's request, and then compared conclusions.
@@ -58,3 +70,21 @@ Claude and Codex researched the whole topic independently, at the user's request
 **2026-11-19 gate update:** Claude moved the pending native checks to the M7 release gate in the [M5 guide](build/m5-settings-menu-first-run.md). Their recorded outcomes remain unchanged.
 
 - [M6 hidden-stage results](verification/runs/2026-11-18T225138Z-m6.md): functional checks passed; 20k target and 200k rebuild limit missed; on-screen qualification pending.
+
+- [Indexed dot names](verification/runs/2026-11-19T115135Z-dot-names.md) — section 6 behavior and hidden renders pass; 20k target and 200k steady/rebuild memory limits remain missed.
+
+- [Tab completes the selection](verification/runs/2026-11-19T121020Z-tab-completion.md) — section 7 completes all accepted local kinds, with scoped names, home-abbreviated paths and native undo/redo.
+
+- [Open With](verification/runs/2026-11-19T123000Z-open-with.md) — configurable local shortcut, remembered/default/claimed apps, Back and bounded success-only history; hidden checks pass, native behavior remains untested.
+
+- [Right Arrow completes folders](verification/runs/2026-11-20T010038Z-right-folder.md) — section 9 shares Tab completion at the caret end, preserves native editing elsewhere, and passes hidden completion/history/caret checks.
+
+- [Login availability and app icon](verification/runs/2026-11-20T084750Z-login-icon.md) — section 10 enables registration from not found, verifies fixture success/refusal, and bundles the final app icon.
+
+- [Larger Below-layout icons](verification/runs/2026-11-20T111919Z-below-icons.md) — 32-point icons, matching 64-pixel rasters, safe size switching and unchanged Inline/Right hashes; completed memory comparison misses the 40/47 MiB targets but stays under 60 MiB.
+
+- [Skip hidden files](verification/runs/2026-11-20T113654Z-skip-hidden.md) — default-on Folders switch, explicit-root/path exemptions, one rebuild per toggle and off-state equality.
+
+- [Tight relative-path ranking](verification/runs/2026-11-20T115638Z-tight-paths.md) — capped ancestor-gap penalty, usage crossover, unchanged non-path digests and 200k path timings.
+
+- [Single indexing indicator](verification/runs/2026-11-20T121149Z-indexing-indicator.md) — one Folders progress indicator, retained error statuses and exact idle/indexing frame equality.

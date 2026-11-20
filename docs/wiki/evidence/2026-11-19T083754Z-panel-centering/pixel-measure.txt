@@ -1,0 +1,45 @@
+import AppKit
+// Read app-owned bitmaps only. Coordinates are points from the top-left.
+// A 0.15 RGB contrast threshold excludes antialiasing fringes and JPEG noise.
+let root = CommandLine.arguments[1]
+var measurements: [[String: Any]] = []
+func measure(_ file: String, _ label: String, _ left: Double, _ right: Double,
+             _ top: Double, _ bottom: Double, backgroundX: Double = 0, target: Double) throws {
+    let image = NSBitmapImageRep(data: try Data(contentsOf: URL(fileURLWithPath: root + "/" + file)))!
+    let scale = Double(image.pixelsWide) / 640
+    var ys: [Int] = []
+    for y in Int(top * scale)..<Int(bottom * scale) {
+        let bg = image.colorAt(x: Int(backgroundX * scale), y: y)!.usingColorSpace(.deviceRGB)!
+        for x in Int(left * scale)..<Int(right * scale) {
+            let color = image.colorAt(x: x, y: y)!.usingColorSpace(.deviceRGB)!
+            let delta = max(abs(color.redComponent - bg.redComponent), abs(color.greenComponent - bg.greenComponent), abs(color.blueComponent - bg.blueComponent))
+            if delta > 0.15 { ys.append(y) }
+        }
+    }
+    guard let first = ys.min(), let last = ys.max() else { fatalError("No foreground pixels: \(file), \(label)") }
+    let center = Double(first + last + 1) / (2 * scale)
+    measurements.append(["file": file, "glyph": label, "scale": scale, "ink_top": Double(first) / scale,
+                         "ink_bottom": Double(last + 1) / scale, "center": center, "target": target, "error": center - target])
+}
+for appearance in ["light", "dark"] {
+    for (rows, height) in [(0, 41), (1, 110), (3, 166), (9, 334)] {
+        let file = "search-\(rows)-\(appearance).png"
+        try measure(file, "magnifier", 16, 34, 0, 40, target: 20)
+        try measure(file, rows == 0 ? "placeholder Search" : "typed result", 44, 110, 0, 40, target: 20)
+        if rows > 0 {
+            // O in Open supplies a cap-height reference; descenders in the
+            // remaining footer words are intentionally excluded.
+            try measure(file, "footer O", 30.5, 38, Double(height - 28), Double(height), target: Double(height - 14))
+        }
+    }
+    try measure("loading-\(appearance).jpg", "status S", 17, 24, 42, 82, target: 61.5)
+    try measure("no-results-\(appearance).jpg", "status N", 17, 26, 42, 82, target: 61.5)
+    for row in 0..<9 {
+        let top = Double(47 + row * 28), center = top + 14
+        // R in Result and the entire hint compare the existing row typography.
+        try measure("search-9-\(appearance).png", "row \(row + 1) title R", 44, 52, top, top + 28, backgroundX: 580, target: center)
+        try measure("search-9-\(appearance).png", "row \(row + 1) hint", 596, 624, top, top + 28, backgroundX: 580, target: center)
+    }
+}
+let data = try JSONSerialization.data(withJSONObject: measurements, options: [.prettyPrinted, .sortedKeys])
+print(String(decoding: data, as: UTF8.self))

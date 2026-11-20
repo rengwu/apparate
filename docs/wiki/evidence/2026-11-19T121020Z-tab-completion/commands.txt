@@ -1,0 +1,12 @@
+All app commands pass an explicit isolated executable. Builds/tests were sequential.
+
+swift build --scratch-path /private/tmp/apparate-ui-build-20261119
+/private/tmp/apparate-ui-build-20261119/debug/ApparateCoreTests
+python3 Tests/smoke-app.py --binary /private/tmp/apparate-ui-build-20261119/debug/Apparate --panel-check functional --output /private/tmp/apparate-tab-panel-debug
+swift build --scratch-path /private/tmp/apparate-ui-build-20261119 -c release
+/private/tmp/apparate-ui-build-20261119/release/ApparateCoreTests
+python3 docs/wiki/evidence/2026-11-19T121020Z-tab-completion/assembly.txt
+python3 Tests/smoke-app.py --binary build/review/2026-11-19-tab-completion/Apparate.app/Contents/MacOS/Apparate --panel-check functional --output docs/wiki/evidence/2026-11-19T121020Z-tab-completion/panel
+python3 Tests/smoke-app.py --binary build/review/2026-11-19-tab-completion/Apparate.app/Contents/MacOS/Apparate --settings-check --output docs/wiki/evidence/2026-11-19T121020Z-tab-completion/settings
+
+The first debug test attempt failed one ambiguous fixture expectation; the retained attempt log and report explain the correction. Final debug/release are 110/110.

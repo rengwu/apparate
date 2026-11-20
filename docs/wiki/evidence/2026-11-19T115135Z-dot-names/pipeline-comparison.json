@@ -1,0 +1,7 @@
+{
+  "result": "Passed",
+  "matched_old_new_digests": 240,
+  "prior_identity": "pipeline-prior/identity.json",
+  "candidate_identity": "pipeline-plain/identity.json",
+  "scope": "Same plain 200k corpus and original query sequence. Dot corpus is separate."
+}

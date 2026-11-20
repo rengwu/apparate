@@ -1,0 +1,40 @@
+Building for debugging...
+[Constructing description]
+[Planning deferred tasks]
+[3 / 28]
+[4 / 29] ApparateCore
+[15 / 40] ApparateCore
+[21 / 43] ApparateFixtures
+[21 / 43] ApparateCore
+[21 / 43] ApparateObserver-product
+[25 / 47] ApparateFixtures
+[30 / 42] ApparateCore
+[32 / 43] ApparateCoreTests-product
+[38 / 54] ApparateCoreTests-product
+[38 / 65] ApparateCoreTests-product
+[42 / 65] ApparateCoreTests-product
+[46 / 66] ApparateCoreTests-product
+[48 / 66] Apparate-product
+<repo>/Package.swift: ApparateCore: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[53 / 66] ApparateCore
+[54 / 66] Apparate-product
+[56 / 66] Apparate-product
+[57 / 66] Apparate-product
+[58 / 66] Apparate-product
+[59 / 66]
+<repo>/Package.swift: ApparateFixtures: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[62 / 66] ApparateCore-product
+[62 / 67] Apparate-product
+<repo>/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+<repo>/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[63 / 67] ApparateObserver-product
+[64 / 69] Apparate-product
+[64 / 69] ApparateCoreTests-product
+[66 / 69] ApparateCoreTests-product
+<repo>/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+<repo>/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[68 / 71] Apparate-product
+<repo>/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+<repo>/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[70 / 71] Apparate-product
+Build complete! (9.20 sec)

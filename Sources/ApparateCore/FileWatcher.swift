@@ -19,9 +19,15 @@ public struct FileWatchStart: Sendable {
     }
 }
 @MainActor public protocol FileWatching: AnyObject {
-    func start(paths: [String], checkpoints: [FileCheckpoint], access: FileAccessPolicy,
+    func start(paths: [String], checkpoints: [FileCheckpoint], access: FileAccessPolicy, shallowPaths: Set<String>,
                receive: @escaping @MainActor @Sendable (FileWatchBatch) -> Void) -> FileWatchStart
     func stop()
+}
+extension FileWatching {
+    public func start(paths: [String], checkpoints: [FileCheckpoint], access: FileAccessPolicy,
+                      receive: @escaping @MainActor @Sendable (FileWatchBatch) -> Void) -> FileWatchStart {
+        start(paths: paths, checkpoints: checkpoints, access: access, shallowPaths: [], receive: receive)
+    }
 }
 private final class FileEventContext: Sendable {
     let root: String, relative: String
@@ -37,15 +43,16 @@ private final class FileEventContext: Sendable {
     private var vnodes: [any DispatchSourceFileSystemObject] = []
     private var generation: UInt64 = 0
     public private(set) var recursivePaths: [String] = []
+    public private(set) var shallowPaths: [String] = []
     public private(set) var creationWatchPaths: [String] = []
     public init() {}
     isolated deinit { stop() }
     public func stop() {
         generation &+= 1
         for stream in streams { FSEventStreamStop(stream); FSEventStreamInvalidate(stream); FSEventStreamRelease(stream) }
-        streams = []; vnodes.forEach { $0.cancel() }; vnodes = []; recursivePaths = []; creationWatchPaths = []
+        streams = []; vnodes.forEach { $0.cancel() }; vnodes = []; recursivePaths = []; shallowPaths = []; creationWatchPaths = []
     }
-    public func start(paths: [String], checkpoints: [FileCheckpoint], access: FileAccessPolicy,
+    public func start(paths: [String], checkpoints: [FileCheckpoint], access: FileAccessPolicy, shallowPaths: Set<String> = [],
                       receive: @escaping @MainActor @Sendable (FileWatchBatch) -> Void) -> FileWatchStart {
         stop()
         let generation = generation
@@ -60,7 +67,16 @@ private final class FileEventContext: Sendable {
                 result.rescanPaths.append(path); continue
             }
             let device = info.st_dev
-            if watched.contains(where: { $0.1 == device && pathIsWithin(path, $0.0) }) { continue }
+            if shallowPaths.contains(path) {
+                if watchShallow(path, receive: deliver) { self.shallowPaths.append(path) } else { result.healthy = false }
+                // Vnodes have no replay cursor: verify this single directory on startup/rearm.
+                result.rescanPaths.append(path)
+                continue
+            }
+            if watched.contains(where: {
+                $0.1 == device && pathIsWithin(path, $0.0) &&
+                    !path.dropFirst($0.0.count).split(separator: "/").contains(where: { $0.hasPrefix(".") || $0 == "node_modules" })
+            }) { continue }
             var fs = statfs()
             guard statfs(path, &fs) == 0 else { result.healthy = false; result.rescanPaths.append(path); continue }
             let mount = withUnsafePointer(to: &fs.f_mntonname) { p in p.withMemoryRebound(to: CChar.self, capacity: Int(MAXPATHLEN)) { String(cString: $0) } }
@@ -116,10 +132,30 @@ private final class FileEventContext: Sendable {
             else { continue }
             let normalizedPath = AppConfig.normalizedFolder(path, home: "")
             let suffix = normalizedPath.dropFirst(root.count).split(separator: "/")
-            if suffix.contains(where: { $0.hasPrefix(".") || $0 == "node_modules" }) { continue }
+            if suffix.contains("node_modules") || suffix.dropLast().contains(where: { $0.hasPrefix(".") }) { continue }
             changes.append(FileChange(path: normalizedPath, recursive: flags[i] & UInt32(kFSEventStreamEventFlagMustScanSubDirs) != 0))
         }
         return changes.isEmpty ? nil : FileWatchBatch(checkpoint: checkpoint, changes: changes, rearm: rearm)
+    }
+    private func watchShallow(_ path: String, receive: @escaping @MainActor @Sendable (FileWatchBatch) -> Void) -> Bool {
+        let fd = open(path, O_EVTONLY | O_NOFOLLOW | O_CLOEXEC)
+        guard fd >= 0 else { return false }
+        var original = stat()
+        guard fstat(fd, &original) == 0, original.st_mode & S_IFMT == S_IFDIR else { close(fd); return false }
+        let inode = original.st_ino, device = original.st_dev
+        let source = DispatchSource.makeFileSystemObjectSource(fileDescriptor: fd, eventMask: [.write, .attrib, .delete, .rename, .revoke], queue: .main)
+        source.setEventHandler { [weak source] in
+            guard let source else { return }
+            MainActor.assumeIsolated {
+                var current = stat()
+                let replaced = lstat(path, &current) != 0 || current.st_ino != inode || current.st_dev != device
+                let rearm = replaced || !source.data.intersection([.delete, .rename, .revoke]).isEmpty
+                receive(FileWatchBatch(checkpoint: FileCheckpoint(path: path, device: device, uuid: nil, eventID: 0),
+                    changes: [FileChange(path: path)], rearm: rearm))
+            }
+        }
+        source.setCancelHandler { close(fd) }; source.resume(); vnodes.append(source)
+        return true
     }
     private func watchCreation(_ path: String, receive: @escaping @MainActor @Sendable (FileWatchBatch) -> Void) -> Bool {
         let root = URL(fileURLWithPath: path), parent = AppSource.watchableParent(of: root)

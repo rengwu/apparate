@@ -1,0 +1,10 @@
+{
+  "app_sha256": "d5b224f6427f19dd8fdd6160018d2827d97a4ccd34dab6afd04affb387b9b073",
+  "mode": "full",
+  "count": 20000,
+  "projects": false,
+  "bare": false,
+  "probes": false,
+  "delivery": "task",
+  "start_utc": "2026-11-19T10:32:20Z"
+}

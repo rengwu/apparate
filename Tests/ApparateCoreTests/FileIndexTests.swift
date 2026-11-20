@@ -19,7 +19,7 @@ func crawlFixture(_ directory: URL, depth: Int = 10, respect: Bool = true, reade
     var receive: (@MainActor @Sendable (FileWatchBatch) -> Void)?
     var starts = 0, stopped = false, healthy = true
     var uuid: String? = "fixture-device", device: Int32 = 10
-    func start(paths: [String], checkpoints: [FileCheckpoint], access: FileAccessPolicy,
+    func start(paths: [String], checkpoints: [FileCheckpoint], access: FileAccessPolicy, shallowPaths: Set<String> = [],
                receive: @escaping @MainActor @Sendable (FileWatchBatch) -> Void) -> FileWatchStart {
         starts += 1; stopped = false; self.receive = receive
         let cp = paths.map { path in FileCheckpoint(path: path, device: device, uuid: uuid, eventID: checkpoints.first { $0.path == path }?.eventID ?? 10) }
@@ -36,8 +36,9 @@ func crawlFixture(_ directory: URL, depth: Int = 10, respect: Bool = true, reade
     var batches: [FileWatchBatch] = []
     var recursivePaths: [String] { base.recursivePaths }
     var creationWatchPaths: [String] { base.creationWatchPaths }
-    func start(paths: [String], checkpoints: [FileCheckpoint], access: FileAccessPolicy, receive: @escaping @MainActor @Sendable (FileWatchBatch) -> Void) -> FileWatchStart {
-        base.start(paths: paths, checkpoints: checkpoints, access: access) { [weak self] batch in self?.batches.append(batch); receive(batch) }
+    var shallowPaths: [String] { base.shallowPaths }
+    func start(paths: [String], checkpoints: [FileCheckpoint], access: FileAccessPolicy, shallowPaths: Set<String> = [], receive: @escaping @MainActor @Sendable (FileWatchBatch) -> Void) -> FileWatchStart {
+        base.start(paths: paths, checkpoints: checkpoints, access: access, shallowPaths: shallowPaths) { [weak self] batch in self?.batches.append(batch); receive(batch) }
     }
     func stop() { base.stop() }
 }
@@ -66,8 +67,8 @@ func crawlFixture(_ directory: URL, depth: Int = 10, respect: Bool = true, reade
         try FileManager.default.createSymbolicLink(atPath: dir.appendingPathComponent("linked").path, withDestinationPath: dir.appendingPathComponent("a").path)
         try FileManager.default.createSymbolicLink(atPath: dir.appendingPathComponent("dangling").path, withDestinationPath: dir.appendingPathComponent("absent").path)
         let scan = try await crawlFixture(dir, depth: 2)
-        for name in ["a", "a/b", "a/same.txt", "other/same.txt", "Example.app", "linked", "dangling"] { try expect(scan.snapshot.contains(path: dir.appendingPathComponent(name).path), name) }
-        for name in ["a/b/deep.txt", ".hidden", "node_modules", "flagged.txt", "Example.app/Contents", "linked/same.txt"] { try expect(!scan.snapshot.contains(path: dir.appendingPathComponent(name).path), name) }
+        for name in ["a", "a/b", "a/same.txt", "other/same.txt", ".hidden", "Example.app", "linked", "dangling", "flagged.txt"] { try expect(scan.snapshot.contains(path: dir.appendingPathComponent(name).path), name) }
+        for name in ["a/b/deep.txt", ".hidden/no.txt", "node_modules", "Example.app/Contents", "linked/same.txt"] { try expect(!scan.snapshot.contains(path: dir.appendingPathComponent(name).path), name) }
         let rows = scan.snapshot.search(ParsedQuery("same")); try expect(rows.count == 2 && Set(rows.map(\.item.id)).count == 2)
         try expect(scan.snapshot.search(ParsedQuery("users/")).isEmpty)
         try expect(!scan.snapshot.search(ParsedQuery(dir.lastPathComponent + "/same")).isEmpty)
@@ -79,7 +80,7 @@ func crawlFixture(_ directory: URL, depth: Int = 10, respect: Bool = true, reade
         try makeFile(dir, "repo/src/keep.txt"); try makeFile(dir, "repo/omit.txt")
         let inner = dir.appendingPathComponent("repo")
         let both = try await FileCrawler().crawl(folders: [.init(path: dir.path, depth: 1), .init(path: inner.path, depth: 5)], respectGitignore: true, access: fixtureAccess)
-        try expect(both.snapshot.count == 4)
+        try expect(both.snapshot.count == 6) // Each root's .gitignore is now an entry.
         let path = inner.appendingPathComponent("src/keep.txt").path
         try expect(both.snapshot.contains(path: path) && !both.snapshot.contains(path: inner.appendingPathComponent("omit.txt").path))
         let before = both.snapshot.search(ParsedQuery("keep")).first!.item.id
@@ -87,7 +88,7 @@ func crawlFixture(_ directory: URL, depth: Int = 10, respect: Bool = true, reade
         let only = try await FileCrawler().crawl(folders: [.init(path: inner.path, depth: 5)], respectGitignore: true, access: fixtureAccess, previous: both.snapshot)
         try expect(only.snapshot.search(ParsedQuery("keep")).first?.item.id == before)
         try expect(only.snapshot.search(ParsedQuery(dir.lastPathComponent + "/keep")).isEmpty)
-        try expect(both.snapshot.restricting(to: [dir.path]).count == 1)
+        try expect(both.snapshot.restricting(to: [dir.path]).count == 2)
     }
     await h.test("files: discovered apps use bundle names, app ranking and targets, deduplicate and persist") {
         let dir = try temporaryDirectory(); defer { try? FileManager.default.removeItem(at: dir) }
@@ -222,7 +223,7 @@ func crawlFixture(_ directory: URL, depth: Int = 10, respect: Bool = true, reade
         try near(counts["fixture:old"]!, 3.5)
         try expect(sqlite3_open(dir.appendingPathComponent("index.sqlite").path, &pointer) == SQLITE_OK)
         var statement: OpaquePointer?; sqlite3_prepare_v2(pointer, "PRAGMA user_version", -1, &statement, nil)
-        try expect(sqlite3_step(statement) == SQLITE_ROW && sqlite3_column_int(statement, 0) == 2)
+        try expect(sqlite3_step(statement) == SQLITE_ROW && sqlite3_column_int(statement, 0) == 3)
         sqlite3_finalize(statement)
         try expect(sqlite3_exec(pointer, "PRAGMA user_version=99", nil, nil, nil) == SQLITE_OK); sqlite3_close(pointer)
         do { _ = try UsageStore(directory: dir); throw TestFailure(description: "Expected unknown-version rejection") }
@@ -371,6 +372,31 @@ func crawlFixture(_ directory: URL, depth: Int = 10, respect: Bool = true, reade
         try await eventually({ third.metrics.completedScans > 0 && !third.isIndexing }, timeout: 8)
         try expect(third.metrics.listedDirectories > 0 && third.metrics.completedUpdates == 0)
         try expect(third.snapshot?.contains(path: root.appendingPathComponent("unreported.txt").path) == true)
+    }
+    await h.test("files: rebuild progress retains actionable root statuses until new results arrive") {
+        let dir = try temporaryDirectory(); defer { try? FileManager.default.removeItem(at: dir) }
+        let failing = Mutex(true)
+        let codes = ["/Fixture/Denied": EACCES, "/Fixture/Missing": ENOENT, "/Fixture/Offline": EIO]
+        let reader = FileReading(metadata: { path in
+            if let code = codes[path], failing.withLock({ $0 }) { throw NSError(domain: NSPOSIXErrorDomain, code: Int(code)) }
+            return FileMetadata(type: .directory)
+        }, children: { _ in [] }, ignoreContents: { _ in nil }, ignoresCase: { _ in false })
+        var config = AppConfig(); config.folders = (Array(codes.keys) + ["/Fixture/Ready", "/Fixture/Waiting"]).sorted().map { .init(path: $0) }
+        let controller = FileIndexController(config: config, store: try FileIndexStore(directory: dir),
+            access: FileAccessPolicy(protectedPaths: ["/Fixture/Waiting": nil]), watcher: FixtureFileWatcher(), crawler: FileCrawler(reader: reader))
+        controller.start(); defer { controller.stop() }
+        try await eventually { controller.snapshot != nil && !controller.isIndexing }
+        let stable = Dictionary(uniqueKeysWithValues: controller.rootStatuses.map { ($0.path, $0.status) })
+        try expect(stable == ["/Fixture/Denied": .denied, "/Fixture/Missing": .notFound, "/Fixture/Offline": .unavailable, "/Fixture/Ready": .indexed, "/Fixture/Waiting": .waitingForAccess])
+        controller.rebuild()
+        try expect(controller.isIndexing)
+        for root in controller.rootStatuses { try expect(root.status == (root.path == "/Fixture/Ready" ? .indexing : stable[root.path]), root.path) }
+        try await eventually { !controller.isIndexing }
+        try expect(Dictionary(uniqueKeysWithValues: controller.rootStatuses.map { ($0.path, $0.status) }) == stable)
+        failing.withLock { $0 = false }; controller.setAccess(fixtureAccess)
+        try expect(controller.isIndexing && controller.rootStatuses.first { $0.path == "/Fixture/Denied" }?.status == .denied)
+        try await eventually { !controller.isIndexing }
+        try expect(controller.rootStatuses.allSatisfy { $0.status == .indexed })
     }
     await h.test("files: settings status observes start finish config changes and restored time") {
         let dir = try temporaryDirectory(); defer { try? FileManager.default.removeItem(at: dir) }

@@ -37,6 +37,13 @@ func search(_ items: [SearchItem], _ text: String, config: AppConfig = AppConfig
 
 @main struct Runner {
     @MainActor static func main() async {
+        if CommandLine.arguments.contains("--shallow-idle") || CommandLine.arguments.contains("--shallow-writer") {
+            do {
+                if CommandLine.arguments.contains("--shallow-writer") { try runShallowWriter() }
+                else { try await runShallowIdle() }
+            } catch { print("Shallow measurement failed: \(error)"); exit(1) }
+            return
+        }
         if CommandLine.arguments.contains("--file-comparison") {
             do { try await runFileComparisonBenchmark() } catch { print("File comparison failed: \(error)"); exit(1) }
             return
@@ -64,6 +71,12 @@ func search(_ items: [SearchItem], _ text: String, config: AppConfig = AppConfig
         await sourceTests(h)
         await actionTests(h)
         await panelTests(h)
+        await pathTests(h)
+        await pathRankingTests(h)
+        await openWithTests(h)
+        await shallowTests(h)
+        await dotTests(h)
+        await hiddenTests(h)
         await accessTests(h)
         await ignoreTests(h)
         await fileIndexTests(h)

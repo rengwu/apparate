@@ -9,7 +9,7 @@ updated: 2026-11-19
 
 ## Entry points and prerequisites
 
-The Set up Apparate window appears when config is first created, or with `APPARATE_SHOW=setup`. Its **Allow Access…** button starts `FolderAccessController.check`. Only that explicit request performs protected-folder reads in production. The signed bundle includes the three plain folder usage descriptions. `APPARATE_HOME` redirects app persistence; it does not isolate macOS privacy grants.
+The Set up Apparate window appears when config is first created, or with `APPARATE_SHOW=setup`. Its **Allow Access…** button starts `FolderAccessController.check`. Only that explicit request starts the access-check sequence; later indexing and typed path navigation require a saved Allowed observation before protected-folder reads. The signed bundle includes the three plain folder usage descriptions. `APPARATE_HOME` redirects app persistence; it does not isolate macOS privacy grants.
 
 ## Expected outcomes
 
@@ -41,4 +41,6 @@ M3 consumes Allowed observations as a gate for automatic protected-folder reads,
 
 ## M5 integration
 
-Focus refresh never probes. Closing setup or Settings cancels the remaining sequential checks, while any in-flight probe may finish and persist its observation. The conditional Folders retry appears for configured protected roots with no Allowed hint or a denied/waiting current status. [M5 verification](../verification/runs/2026-11-18T212428Z-m5.md).
+Focus refresh never probes. Closing setup or Settings cancels the remaining sequential checks, while any in-flight probe may finish and persist its observation. The Folders retry appears whenever one of the three Allowed observations is missing, including an empty index list, or an indexed protected root reports denied/waiting. [M5 verification](../verification/runs/2026-11-18T212428Z-m5.md).
+
+Direct path navigation applies the same gate before metadata/listing calls and checks canonical aliases, with a separate access-needed message. It never starts the access probe. Typing other folders may cause a macOS prompt, as explicitly accepted in DEC-054. Automated cases use synthetic readers or owned temporary directories; no real grant or denial is inferred. [Section 5 verification](../verification/runs/2026-11-19T095817Z-path-folders.md).

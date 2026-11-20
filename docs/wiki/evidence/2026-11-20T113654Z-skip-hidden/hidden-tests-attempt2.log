@@ -1,0 +1,9 @@
+PASS hidden: default on, v1 round trips and invalid types
+PASS hidden: expected-value saves, external changes and write failure
+PASS hidden: pre-metadata exclusion, Finder flag, gitignore and explicit nested roots
+FAIL hidden: policy changes remove stale dots even on failed listings and cache reload: Changed roots: 1, 0, 0
+FAIL hidden: incremental renames, dot apps, ignored churn and rule-file edits: Hidden churn: 3, 0, 1
+PASS hidden: rule-5 migration and toggles rebuild once; matching caches and unchanged settings do not
+PASS hidden: real explicit dot-root events still index ordinary children
+PASS hidden: off preserves section-6 digests; typed paths retain their dot filter
+RESULT 6 passed; 2 failed

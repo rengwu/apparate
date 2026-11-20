@@ -1,0 +1,20 @@
+Building for debugging...
+[1 / 8]
+[2 / 9] ApparateCore
+[13 / 20] ApparateCore
+[17 / 24] ApparateCore
+[19 / 26] ApparateCore
+[23 / 30] ApparateFixtures
+[24 / 30] Apparate-product
+[32 / 41] Apparate-product
+[33 / 41] Apparate-product
+[34 / 41] Apparate-product
+[35 / 41] Apparate-product
+[37 / 41] ApparateCore
+<repo>/Package.swift: ApparateCore: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+<repo>/Package.swift: ApparateFixtures: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[39 / 42] Apparate-product
+<repo>/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+<repo>/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[41 / 42] Apparate-product
+Build complete! (5.73 sec)

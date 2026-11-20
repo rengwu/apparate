@@ -280,7 +280,7 @@ These are judged against DEC-008, kept as goals by [DEC-028](decisions.md#round-
 
 ### M7. Release 0.1.0
 
-- The [app icon](design/icon.md) is final ([DEC-047](decisions.md#round-11-2026-11-19)): add `Resources/AppIcon.icns` to the bundle. M5 uses `MenuBarIconTemplate.png` for the menu bar item ([DEC-048](decisions.md#round-11-2026-11-19)).
+- ~~Add the final [app icon](design/icon.md) to the bundle.~~ Pulled forward and completed in [UI follow-up section 10](build/ui-follow-up.md#10-launch-at-login-and-the-app-icon): `Resources/AppIcon.icns` is bundled with `CFBundleIconFile = AppIcon`. M5 already uses `MenuBarIconTemplate.png` for the menu bar item ([DEC-048](decisions.md#round-11-2026-11-19)).
 - README with install and update steps, and the MIT licence ([DEC-034](decisions.md#round-4-2026-11-18)).
 - The release notes list what was not checked on a real Mac: the input method, VoiceOver, Lock Screen, Sleep and a real Restart ([DEC-050](decisions.md#round-12-2026-11-19)).
 - Release builds leave out the test profiles, diagnostics and synthetic fixtures ([M4 review](build/m4-launcher-panel.md#review)).

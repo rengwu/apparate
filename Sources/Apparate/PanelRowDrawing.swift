@@ -4,12 +4,13 @@ import ApparateCore
 
 struct PanelRowContent: Equatable {
     let id: String, title: String, location: String, kind: String
+    let itemKind: ItemKind
     let highlights: [Int], icon: ItemIcon
     let selected: Bool, number: Int?
     init(_ row: PanelRow, model: PanelModel, index: Int) {
-        id = row.entry.item.id; title = row.entry.item.name
+        id = row.entry.item.id; title = row.entry.item.name; itemKind = row.entry.item.kind
         selected = id == model.selectedID
-        location = selected && model.restartArmed ? "Press Return again" : PanelText.location(row.entry)
+        location = selected && model.restartArmed ? "Press Return again" : row.locationOverride ?? PanelText.location(row.entry)
         highlights = row.result.highlights; icon = row.entry.icon
         switch row.entry.item.kind {
         case .app: kind = "Application"
@@ -23,16 +24,19 @@ struct PanelRowContent: Equatable {
     }
 }
 
-/// Cached Core Text layout, shared by every row in the fixed viewport.
+/// Cached Core Text layout, shared by every row in the current viewport.
 @MainActor struct PanelRowDrawing {
-    static let height: CGFloat = 28
+    let height: CGFloat
     let iconFrame: NSRect, titleFrame: NSRect, locationFrame: NSRect, hintFrame: NSRect
     let title: CTLine, location: CTLine?, hint: CTLine?
     let titleTruncated: Bool, locationTruncated: Bool
     let highlightedRanges: [NSRange]
+    private let locationRightAligned: Bool
     private static func line(_ text: NSAttributedString) -> CTLine { CTLineCreateWithAttributedString(text) }
     private static func width(_ line: CTLine) -> CGFloat { CGFloat(CTLineGetTypographicBounds(line, nil, nil, nil)) }
-    init(content: PanelRowContent, width: CGFloat) {
+    init(content: PanelRowContent, width: CGFloat, layout: ResultLocation = .inline) {
+        height = layout.rowHeight
+        locationRightAligned = layout == .right
         let font = NSFont.systemFont(ofSize: 13)
         let foreground = content.selected ? NSColor.alternateSelectedControlTextColor : .labelColor
         let secondary = content.selected ? NSColor.alternateSelectedControlTextColor.withAlphaComponent(0.85) : .secondaryLabelColor
@@ -41,22 +45,26 @@ struct PanelRowContent: Equatable {
         highlightedRanges = PanelText.highlightRanges(content.title, offsets: content.highlights)
         for range in highlightedRanges { text.addAttribute(.font, value: NSFont.systemFont(ofSize: 13, weight: .semibold), range: range) }
         let fullTitle = Self.line(text)
-        iconFrame = NSRect(x: 9, y: 4, width: 20, height: 20)
-        hintFrame = NSRect(x: width - 39, y: 0, width: 30, height: 28)
-        let start: CGFloat = 38, available = max(0, hintFrame.minX - 9 - start)
+        let iconSize = layout.iconSize.points
+        iconFrame = NSRect(x: 9, y: (height - iconSize) / 2, width: iconSize, height: iconSize)
+        hintFrame = NSRect(x: width - 39, y: 0, width: 30, height: height)
+        let start = iconFrame.maxX + 9, end = hintFrame.minX - 9, available = max(0, end - start)
         let titleWidth = min(available, ceil(Self.width(fullTitle)))
         titleTruncated = Self.width(fullTitle) > available
-        titleFrame = NSRect(x: start, y: 0, width: titleWidth, height: 28)
+        let below = layout == .below && !content.location.isEmpty
+        titleFrame = NSRect(x: start, y: below ? 4 : 0, width: titleWidth, height: below ? 16 : height)
         let token = Self.line(NSAttributedString(string: "…", attributes: attrs))
         title = titleTruncated ? (CTLineCreateTruncatedLine(fullTitle, Double(available), .end, token) ?? token) : fullTitle
-        let remaining = available - titleWidth
-        if !content.location.isEmpty && remaining >= 42 {
-            let locationAttrs: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: secondary]
-            let fullLocation = Self.line(NSAttributedString(string: " — " + content.location, attributes: locationAttrs))
+        let gap: CGFloat = layout == .inline ? 10 : 16
+        let locationStart = below ? start : start + titleWidth + gap
+        let remaining = max(0, end - locationStart)
+        if !content.location.isEmpty && (below || remaining >= 32) {
+            let locationAttrs: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: below ? 11 : 12), .foregroundColor: secondary]
+            let fullLocation = Self.line(NSAttributedString(string: content.location, attributes: locationAttrs))
             let ellipsis = Self.line(NSAttributedString(string: "…", attributes: locationAttrs))
             locationTruncated = Self.width(fullLocation) > remaining
             location = locationTruncated ? CTLineCreateTruncatedLine(fullLocation, Double(remaining), .middle, ellipsis) : fullLocation
-            locationFrame = NSRect(x: start + titleWidth, y: 0, width: remaining, height: 28)
+            locationFrame = NSRect(x: locationStart, y: below ? 21 : 0, width: remaining, height: below ? 14 : height)
         } else { location = nil; locationFrame = .zero; locationTruncated = false }
         hint = content.number.map { Self.line(NSAttributedString(string: "⌘\($0)", attributes: [.font: NSFont.systemFont(ofSize: 11), .foregroundColor: secondary])) }
     }
@@ -74,11 +82,12 @@ struct PanelRowContent: Equatable {
         func drawLine(_ line: CTLine, frame: NSRect, right: Bool = false) {
             var ascent: CGFloat = 0, descent: CGFloat = 0
             let width = CGFloat(CTLineGetTypographicBounds(line, &ascent, &descent, nil))
-            context.textPosition = CGPoint(x: right ? frame.maxX - width : frame.minX, y: ((28 - ascent - descent) / 2).rounded(.down) + descent)
+            context.textPosition = CGPoint(x: right ? frame.maxX - width : frame.minX,
+                y: height - frame.maxY + ((frame.height - ascent - descent) / 2).rounded(.down) + descent)
             CTLineDraw(line, context)
         }
         drawLine(title, frame: titleFrame)
-        if let location { drawLine(location, frame: locationFrame) }
+        if let location { drawLine(location, frame: locationFrame, right: locationRightAligned) }
         if let hint { drawLine(hint, frame: hintFrame, right: true) }
     }
 }

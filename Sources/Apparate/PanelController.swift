@@ -5,9 +5,10 @@ import ApparateCore
 private final class LauncherPanel: NSPanel {
     let presentationAllowed: Bool
     var onKey: ((NSEvent) -> Bool)?
+    private(set) var dispatchedKey: NSEvent?
     init(presentationAllowed: Bool) {
         self.presentationAllowed = presentationAllowed
-        super.init(contentRect: NSRect(x: 0, y: 0, width: 640, height: 334),
+        super.init(contentRect: NSRect(x: 0, y: 0, width: 640, height: 41),
                    styleMask: [.titled, .fullSizeContentView, .nonactivatingPanel], backing: .buffered, defer: true)
     }
     override var canBecomeKey: Bool { presentationAllowed }
@@ -15,6 +16,13 @@ private final class LauncherPanel: NSPanel {
     override func orderFront(_ sender: Any?) { if presentationAllowed { super.orderFront(sender) } }
     override func order(_ place: NSWindow.OrderingMode, relativeTo otherWin: Int) {
         if presentationAllowed || place == .out { super.order(place, relativeTo: otherWin) }
+    }
+    override func sendEvent(_ event: NSEvent) {
+        let previous = dispatchedKey
+        if event.type == .keyDown { dispatchedKey = event }
+        defer { dispatchedKey = previous }
+        if event.type == .keyDown, onKey?(event) == true { return }
+        super.sendEvent(event)
     }
     override func performKeyEquivalent(with event: NSEvent) -> Bool { onKey?(event) == true || super.performKeyEquivalent(with: event) }
 }
@@ -50,7 +58,7 @@ private final class PanelActivity {
     private let panel: LauncherPanel
     private let search: NSTextField
     private let footer = NSTextField(labelWithString: ""), empty = NSTextField(labelWithString: "")
-    private let background = PanelBackground(frame: NSRect(x: 0, y: 0, width: 640, height: 334))
+    private let background = PanelBackground(frame: NSRect(x: 0, y: 0, width: 640, height: 41))
     private let opaque: Bool
     private let activityEnabled: Bool
     private var activity: PanelActivity?
@@ -58,7 +66,11 @@ private final class PanelActivity {
     var activityHeld: Bool { activity != nil }
     var observationRun: UInt64?
     private(set) var observationShow: UInt64 = 0
-    private var waitingForCatalog = false
+    private let magnifier = NSImageView(), topRule = NSBox(), bottomRule = NSBox()
+    private var hasCompletedPresentation = false
+    private var displayedOpenWith = false
+    var panelFrame: NSRect { panel.frame }
+    private(set) var layoutFrameChanges = 0
     var onHidden: (() -> Void)?, onQuit: (() -> Void)?, onSettings: (() -> Void)?
     var onTiming: ((Double, Double?) -> Void)?
     var onUpdate: ((UInt64, Bool, Double) -> Void)?
@@ -72,6 +84,7 @@ private final class PanelActivity {
     var footerText: String { footer.stringValue }
     var emptyText: String? { empty.isHidden ? nil : empty.stringValue }
     var text: String { search.stringValue }
+    var placeholderText: String { search.placeholderString ?? "" }
     var contentView: NSView { background }
     var appearanceName: String { panel.effectiveAppearance.name.rawValue }
     var usesVibrancy: Bool { background.usesVibrancy }
@@ -105,13 +118,17 @@ private final class PanelActivity {
             }
         }
         NotificationCenter.default.addObserver(self, selector: #selector(colorsChanged), name: NSColor.systemColorsDidChangeNotification, object: nil)
+        for name in [Notification.Name.NSUndoManagerDidUndoChange, .NSUndoManagerDidRedoChange] {
+            NotificationCenter.default.addObserver(self, selector: #selector(editorHistoryChanged), name: name, object: nil)
+        }
         NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(colorsChanged), name: NSWorkspace.accessibilityDisplayOptionsDidChangeNotification, object: nil)
         if warmUp { self.warmUp() }
     }
     private func build() {
         background.wantsLayer = true
         panel.contentView = background
-        let magnifier = NSImageView(frame: NSRect(x: 16, y: 304, width: 18, height: 18))
+        rows.rowTop = PanelLayout.rowTop
+        background.addSubview(rows)
         magnifier.image = NSImage(systemSymbolName: "magnifyingglass", accessibilityDescription: nil)
         magnifier.contentTintColor = .secondaryLabelColor; background.addSubview(magnifier)
         search.frame = NSRect(x: 43, y: 301, width: 580, height: 24)
@@ -126,15 +143,14 @@ private final class PanelActivity {
         search.isAutomaticTextCompletionEnabled = false
         search.focusRingType = .none; search.placeholderString = "Search"; search.delegate = self
         search.setAccessibilityLabel("Search apps, settings, files and folders"); background.addSubview(search)
-        for y in [293.0, 28.0] {
-            let rule = NSBox(frame: NSRect(x: 0, y: y, width: 640, height: 1)); rule.boxType = .separator; background.addSubview(rule)
-        }
-        background.addSubview(rows)
+        for rule in [topRule, bottomRule] { rule.boxType = .separator; background.addSubview(rule) }
         empty.frame = NSRect(x: 15, y: 259, width: 610, height: 22); empty.font = .systemFont(ofSize: 13)
         empty.textColor = .secondaryLabelColor; empty.isHidden = true; background.addSubview(empty)
-        footer.frame = NSRect(x: 15, y: 4, width: 610, height: 20); footer.font = .systemFont(ofSize: 11)
+        // Its native baseline puts the 11 pt cap-height midpoint at 14 pt,
+        // centered in the footer's 28 pt band below the divider.
+        footer.frame = NSRect(x: 15, y: 1, width: 610, height: 20); footer.font = .systemFont(ofSize: 11)
         footer.textColor = .secondaryLabelColor; background.addSubview(footer)
-        colorsChanged()
+        layout(rows: 0, message: false); colorsChanged()
     }
     @objc private func colorsChanged() {
         let solid = opaque || NSWorkspace.shared.accessibilityDisplayShouldReduceTransparency
@@ -152,7 +168,7 @@ private final class PanelActivity {
         beginShowing()
         if let screen = NSScreen.main ?? NSScreen.screens.first {
             let area = screen.visibleFrame
-            panel.setFrameOrigin(NSPoint(x: area.midX - 320, y: area.midY - 167))
+            panel.setFrameOrigin(NSPoint(x: area.midX - 320, y: area.midY + 167 - panel.frame.height))
         }
         panel.makeKeyAndOrderFront(nil); panel.makeFirstResponder(search)
         let shown = durationMS(start.duration(to: .now)); onTiming?(shown, nil)
@@ -162,7 +178,7 @@ private final class PanelActivity {
         } }
     }
     private func beginShowing() {
-        observationShow &+= 1
+        observationShow &+= 1; hasCompletedPresentation = false
         if activityEnabled && activity == nil { activity = PanelActivity(); activityBegins += 1 }
         editor?.unmarkText(); search.stringValue = ""; editor?.string = ""
         editor?.setSelectedRange(NSRange(location: 0, length: 0))
@@ -171,6 +187,10 @@ private final class PanelActivity {
     func beginHiddenShowing() throws {
         guard !panel.presentationAllowed else { throw SourceError("Hidden checks require a non-presenting panel.") }
         beginShowing(); try verifyHidden()
+    }
+    func sendHiddenKey(_ event: NSEvent) throws {
+        guard !panel.presentationAllowed else { throw SourceError("Owned key checks require a hidden panel.") }
+        try verifyHidden(); panel.sendEvent(event); try verifyHidden()
     }
     func verifyHidden() throws {
         guard !panel.isVisible, !panel.isKeyWindow, !panel.isMainWindow, !NSApp.isActive,
@@ -190,19 +210,64 @@ private final class PanelActivity {
     }
     func controlTextDidChange(_ notification: Notification) {
         onTextBegin?()
-        session.edit(search.stringValue, composing: editor?.hasMarkedText() ?? false)
-        onText?(search.stringValue, session.model.revision)
+        let value = editor?.string ?? search.stringValue
+        session.edit(value, composing: editor?.hasMarkedText() ?? false)
+        onText?(value, session.model.revision)
+    }
+    @objc private func editorHistoryChanged(_ notification: Notification) {
+        // Inspect the undo manager only for a history event, not on each keystroke.
+        guard session.model.visible, let manager = notification.object as? UndoManager,
+              manager === editor?.undoManager else { return }
+        // Native history can restore NSSearchField without a control-change callback.
+        // Reconcile after AppKit finishes its transaction, without polling.
+        Task { @MainActor [weak self] in
+            guard let self, self.session.model.visible, let editor = self.editor, editor.string != self.session.model.query else { return }
+            self.controlTextDidChange(Notification(name: NSControl.textDidChangeNotification))
+        }
     }
     func control(_ control: NSControl, textView: NSTextView, doCommandBy selector: Selector) -> Bool {
+        // The input method handles the key first. Any Tab command reaching this
+        // delegate stays in the editor, including while composition is active.
+        if selector == #selector(NSResponder.insertTab(_:)) || selector == #selector(NSResponder.insertBacktab(_:)) {
+            session.setComposing(textView.hasMarkedText())
+            if selector == #selector(NSResponder.insertTab(_:)), !textView.hasMarkedText() { _ = completeSelection(in: textView) }
+            return true
+        }
         guard !textView.hasMarkedText() else { session.setComposing(true); return false }
         session.setComposing(false)
         switch selector {
+        case #selector(NSResponder.moveRight(_:)):
+            guard session.model.selected?.entry.item.kind == .folder,
+                  textView.selectedRanges.count == 1,
+                  textView.selectedRange() == NSRange(location: textView.string.utf16.count, length: 0),
+                  plainRightCommand else { return false }
+            return completeSelection(in: textView)
         case #selector(NSResponder.moveUp(_:)): session.move(-1); return true
         case #selector(NSResponder.moveDown(_:)): session.move(1); return true
-        case #selector(NSResponder.insertNewline(_:)): session.act(.open, isRepeat: NSApp.currentEvent?.isARepeat ?? false); return true
+        case #selector(NSResponder.insertNewline(_:)):
+            // isARepeat is only valid on key events; editor/AX commands may have none.
+            let event = NSApp.currentEvent
+            session.act(.open, isRepeat: event?.type == .keyDown && event?.isARepeat == true); return true
         case #selector(NSResponder.cancelOperation(_:)): return escape()
         default: return false
         }
+    }
+    private var plainRightCommand: Bool {
+        // Owned dispatch supplies context even for directly delivered hidden events.
+        // An eventless native command remains valid; an unrelated/non-key event does not
+        // supply key-only properties. Arrow function/numeric-pad bits are incidental.
+        let current = NSApp.currentEvent
+        let event = panel.dispatchedKey ?? (current?.type == .keyDown && current?.window === panel ? current : nil)
+        guard let event else { return true }
+        return event.keyCode == 124 && event.modifierFlags.intersection([.shift, .option, .command, .control]).isEmpty
+    }
+    @discardableResult private func completeSelection(in textView: NSTextView) -> Bool {
+        guard textView.string == session.model.query,
+              let completion = session.completion, completion != textView.string else { return false }
+        textView.breakUndoCoalescing()
+        textView.insertText(completion, replacementRange: NSRange(location: 0, length: textView.string.utf16.count))
+        textView.breakUndoCoalescing()
+        return true
     }
     @discardableResult func escape() -> Bool {
         let handled = session.escape()
@@ -217,6 +282,12 @@ private final class PanelActivity {
         let flags = event.modifierFlags.intersection([.command, .control, .option, .shift])
         if flags == .command, event.charactersIgnoringModifiers?.lowercased() == "q" { onQuit?(); return true }
         if flags == .command, event.charactersIgnoringModifiers == "," { hide(); onSettings?(); return true }
+        let openKey = session.openWithKey
+        if event.keyCode == openKey.keyCode && flags == ShortcutEvent.modifiers(openKey) {
+            session.setComposing(editor?.hasMarkedText() ?? false)
+            if (editor?.string ?? search.stringValue) == session.model.query { _ = session.beginOpenWith(isRepeat: event.isARepeat) }
+            return true
+        }
         guard !(editor?.hasMarkedText() ?? false) else { session.setComposing(true); return false }
         session.setComposing(false)
         if flags == .command {
@@ -234,29 +305,73 @@ private final class PanelActivity {
         if !session.model.visible && activity != nil { activity = nil; activityEnds += 1 }
         let start = ContinuousClock.now
         defer { onUpdate?(session.model.revision, session.model.pending, durationMS(start.duration(to: .now))) }
-        if session.model.pending && session.isCatalogReady {
+        CATransaction.begin(); CATransaction.setDisableActions(true)
+        defer { CATransaction.commit() }
+        if displayedOpenWith != session.isOpenWith {
+            displayedOpenWith = session.isOpenWith; hasCompletedPresentation = false
+            search.stringValue = session.model.query; editor?.string = session.model.query
+            editor?.setSelectedRange(NSRange(location: session.model.query.utf16.count, length: 0))
+            editor?.undoManager?.removeAllActions()
+        }
+        search.placeholderString = session.placeholder
+        search.setAccessibilityLabel(session.isOpenWith ? session.placeholder : "Search apps, settings, files and folders")
+        let layoutChanged = rows.resultLocation != session.resultLocation
+        rows.resultLocation = session.resultLocation
+        // A pending generation keeps the last complete rows, footer and height. Clearing
+        // always wins. With no accepted presentation yet, show one progress row.
+        if session.model.pending && (!session.model.query.isEmpty || session.isOpenWith) && hasCompletedPresentation {
             if rows.firstVisible != session.model.firstVisibleRow { rows.apply(session.model) }
-            if waitingForCatalog { waitingForCatalog = false; empty.isHidden = true; footer.stringValue = "" }
+            if layoutChanged {
+                layout(rows: rows.contents.count, message: !empty.isHidden)
+                background.layoutSubtreeIfNeeded()
+            }
             return
         }
         rows.apply(session.model)
-        if let run = observationRun {
+        let blank = session.model.query.isEmpty && !session.isOpenWith
+        if blank { hasCompletedPresentation = false }
+        else if !session.model.pending { hasCompletedPresentation = true }
+        empty.isHidden = blank || !session.model.rows.isEmpty
+        empty.stringValue = session.model.pending ? "Searching…" : session.pathMessage ?? (session.isOpenWith ? "No applications" : "No results")
+        if blank || session.model.pending || session.model.rows.isEmpty { footer.stringValue = "" }
+        else if session.isOpenWith { footer.stringValue = "↩ Open with " + (session.model.selected?.entry.item.name ?? "") + "   esc Back" }
+        else if session.model.restartArmed { footer.stringValue = "↩ Confirm Restart   esc Cancel" }
+        else if session.model.selected?.entry.target.fileURL != nil { footer.stringValue = "↩ Open   ⌘↩ Reveal in Finder   ⌘C Copy path" + ((session.model.selected?.entry.item.kind == .file || session.model.selected?.entry.item.kind == .folder) ? "   " + session.openWithKey.display + " Open With…" : "") }
+        else { footer.stringValue = "↩ Open" }
+        layout(rows: rows.contents.count, message: !empty.isHidden)
+        if let run = observationRun, !session.model.pending {
             rows.observationMarker = FrameMarker(run: run, show: observationShow, revision: session.model.revision,
                 digest: ObservationClock.digest(session.model.rows.map(\.result)))
+        } else { rows.observationMarker = nil }
+        rows.needsDisplay = true; background.layoutSubtreeIfNeeded()
+    }
+    private func layout(rows count: Int, message: Bool) {
+        let height = PanelLayout.height(rows: count, message: message, location: rows.resultLocation)
+        let top = panel.frame.maxY
+        // Lay out the complete accepted state before changing window geometry. The
+        // live observer, not this transaction, will establish atomic screen delivery.
+        background.setFrameSize(NSSize(width: 640, height: height))
+        rows.frame = NSRect(x: 6, y: 0, width: 628, height: height)
+        // Center the 16 pt text's cap height in the 40 pt search row. AppKit draws
+        // it high within this borderless 24 pt cell; move the whole native field
+        // down 2 pt so its editor, placeholder and marked text move together.
+        magnifier.frame = NSRect(x: 16, y: height - 29, width: 18, height: 18)
+        search.frame = NSRect(x: 43, y: height - 35, width: observationRun == nil ? 580 : 536, height: 24)
+        topRule.frame = NSRect(x: 0, y: height - 41, width: 640, height: 1)
+        topRule.isHidden = count == 0 && !message
+        bottomRule.frame = NSRect(x: 0, y: 28, width: 640, height: 1); bottomRule.isHidden = count == 0
+        footer.isHidden = count == 0
+        empty.frame = NSRect(x: 15, y: height - 75, width: 610, height: 22)
+        let frame = NSRect(x: panel.frame.minX, y: top - height, width: 640, height: height)
+        if panel.frame != frame {
+            layoutFrameChanges += 1
+            panel.setFrame(frame, display: false, animate: false)
         }
-        let blank = session.model.query.isEmpty
-        waitingForCatalog = !blank && session.model.pending && !session.isCatalogReady
-        empty.isHidden = blank || !session.model.rows.isEmpty
-        empty.stringValue = waitingForCatalog ? "Searching…" : "No results"
-        if blank { footer.stringValue = "" }
-        else if waitingForCatalog { footer.stringValue = "" }
-        else if session.model.restartArmed { footer.stringValue = "↩ Confirm Restart   esc Cancel" }
-        else if session.model.selected?.entry.target.fileURL != nil { footer.stringValue = "↩ Open   ⌘↩ Reveal in Finder   ⌘C Copy path" }
-        else { footer.stringValue = session.model.rows.isEmpty ? "" : "↩ Open" }
     }
     /// Existing smoke checks enter via the text-field delegate, with no presentation.
     func enterTestQuery(_ value: String) {
-        search.stringValue = value; controlTextDidChange(Notification(name: NSControl.textDidChangeNotification, object: search))
+        search.stringValue = value; editor?.string = value
+        controlTextDidChange(Notification(name: NSControl.textDidChangeNotification, object: search))
     }
     /// Native field-editor input, delivered directly to this hidden window (never global events).
     func injectText(_ value: String) throws {
@@ -277,11 +392,11 @@ private final class PanelActivity {
     }
     func verifyPendingPresentation() throws {
         guard !session.model.pending, session.isCatalogReady else { throw SourceError("Fixture results are not ready.") }
-        let query = search.stringValue, previous = rows.contents, oldFooter = footer.stringValue, oldEmpty = emptyText
+        let query = search.stringValue, previous = rows.contents, oldFooter = footer.stringValue, oldEmpty = emptyText, oldFrame = panel.frame
         defer { enterTestQuery(query) }
         for text in ["t", "te", ".pending fixture"] {
             enterTestQuery(text)
-            guard session.model.pending, rows.contents == previous, footer.stringValue == oldFooter, emptyText == oldEmpty else {
+            guard session.model.pending, rows.contents == previous, footer.stringValue == oldFooter, emptyText == oldEmpty, panel.frame == oldFrame else {
                 throw SourceError("Pending query changed the presentation.")
             }
         }
@@ -296,7 +411,7 @@ private final class PanelActivity {
         return rep
     }
     func capture(to url: URL) throws {
-        guard let data = try render().representation(using: .png, properties: [:]) else { throw SourceError("The panel render could not be encoded.") }
+        guard let data = try render().representation(using: url.pathExtension == "jpg" ? .jpeg : .png, properties: [.compressionFactor: 0.82]) else { throw SourceError("The panel render could not be encoded.") }
         try data.write(to: url, options: .atomic)
     }
 }

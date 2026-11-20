@@ -12,23 +12,30 @@ import tempfile
 import time
 
 parser = argparse.ArgumentParser()
+parser.add_argument("--binary", type=Path, help="Explicit isolated review executable")
 parser.add_argument('mode', choices=['pipeline', 'latency', 'full'])
 parser.add_argument('--count', type=int, choices=[20000, 200000], default=20000)
 parser.add_argument('--projects', action='store_true')
+parser.add_argument('--dot-entries', action='store_true', help='Include terminal dot entries and ignored/sentinel fixtures')
+parser.add_argument('--result-location', choices=['inline', 'right', 'below'], default='inline')
 parser.add_argument('--bare', action='store_true')
 parser.add_argument('--probes', action='store_true')
 parser.add_argument('--delivery', choices=['task', 'dispatch'], default='task')
 parser.add_argument('--output', type=Path, required=True)
 args = parser.parse_args()
 assert not args.projects or args.mode == 'full'
+assert not (args.projects and args.dot_entries)
 assert not (args.bare or args.probes) or args.mode == 'latency'
 assert not args.output.exists(), 'Keep each attempt in a fresh evidence directory'
 args.output.mkdir(parents=True)
 root = Path(__file__).resolve().parent.parent
-binary = root / 'build/Apparate.app/Contents/MacOS/Apparate'
+binary = args.binary.resolve() if args.binary else root / 'build/Apparate.app/Contents/MacOS/Apparate'
 identity = {'app_sha256': hashlib.sha256(binary.read_bytes()).hexdigest(), 'mode': args.mode,
             'count': args.count, 'projects': args.projects, 'bare': args.bare, 'probes': args.probes,
             'delivery': args.delivery, 'start_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}
+identity['dot_entries'] = args.dot_entries
+identity['result_location'] = args.result_location
+identity['skip_hidden_files'] = False
 (args.output / 'identity.json').write_text(json.dumps(identity, indent=2) + '\n')
 def cleanup_receipt():
     owned_home = globals().get('home')
@@ -47,14 +54,25 @@ with tempfile.TemporaryDirectory(prefix='apparate-m6-') as temporary:
             source.mkdir()
             for group in range(500):
                 (source / f'Project-{group:04d}').mkdir()
+                if args.dot_entries:
+                    folder = source / f'Project-{group:04d}'
+                    for name in ['.git', '.github', '.config']:
+                        (folder / name).mkdir()
+                        (folder / name / 'excluded-sentinel.txt').touch()
+                    for name in ['.env', '.editorconfig']:
+                        (folder / name).touch()
+                    (folder / '.gitignore').write_text('.env\n' if group % 10 == 0 else '')
             names = ['README', 'Report', 'Config', 'Network', 'Calendar', 'Terminal', 'Archive', 'Notes', 'Search', 'Index', 'Café', 'Straße', '東京資料']
-            for i in range(args.count - 501):
+            dot_count = 2950 if args.dot_entries else 0
+            for i in range(args.count - 501 - dot_count):
                 (source / f'Project-{i % 500:04d}' / f'{names[(i * 17 + 31) % len(names)]}-{i:06d}.md').touch()
         folders = [{'path': str(source), 'depth': 10}]
     (home / 'config.json').write_text(json.dumps({'version': 1,
-        'hotKey': {'keyCode': 111, 'modifiers': 6400, 'display': '⌃⌥⌘F12'}, 'folders': folders}))
+        'hotKey': {'keyCode': 111, 'modifiers': 6400, 'display': '⌃⌥⌘F12'}, 'folders': folders, 'resultLocation': args.result_location,
+        'skipHiddenFiles': False}))  # Preserve the established dot-inclusive comparison corpus.
     env = {k: v for k, v in os.environ.items() if not k.startswith('APPARATE_')}
     env.update(APPARATE_HOME=str(home), APPARATE_TEST_MODE='live-readonly' if args.mode == 'full' else 'fixtures',
+               APPARATE_DOT_ENTRIES='1' if args.dot_entries else '0',
                APPARATE_PANEL_COUNT=str(args.count), APPARATE_BARE_FIELD='1' if args.bare else '0',
                APPARATE_STAGE_PROBES='1' if args.probes else '0', APPARATE_PANEL_DELIVERY=args.delivery)
     for mode in (['prepare', 'full'] if args.mode == 'full' else [args.mode]):
@@ -81,6 +99,12 @@ with tempfile.TemporaryDirectory(prefix='apparate-m6-') as temporary:
             if mode == 'full':
                 assert result['loaded_from_disk'] and result['file_watch_healthy'] and result['catalog_watch_healthy']
                 assert args.projects or result['file_count'] == args.count
+            if args.dot_entries:
+                assert result['file_count'] == args.count and result['dot_count'] == 2950
+                result['fixture_manifest'] = {'projects': 500, 'dot_entries_created': 3000, 'dot_entries_indexed': 2950,
+                    'ignored_dot_entries': 50, 'dot_directory_sentinels': 1500, 'listed_directories_expected': 501,
+                    'ordinary_entries_indexed': args.count - 2950, 'retained_total': args.count}
+                (args.output / f'{mode}.json').write_text(json.dumps(result, indent=2, sort_keys=True) + '\n')
             print(json.dumps({'mode': mode, 'result': result['result'], 'elapsed_seconds': result['elapsed_seconds']}), flush=True)
         except BaseException as error:
             (args.output / 'failure.json').write_text(json.dumps({'result': 'Failed', 'exception': type(error).__name__, 'phase': mode}) + '\n')

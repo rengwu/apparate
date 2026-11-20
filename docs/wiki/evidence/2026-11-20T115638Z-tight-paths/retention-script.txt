@@ -1,0 +1,54 @@
+from pathlib import Path
+import hashlib, json, os, re, shutil, subprocess
+
+base = Path('/Users/rengwu/Projects/apparate/docs/wiki/evidence/2026-11-20T115638Z-tight-paths')
+prior = base.parent / '2026-11-20T113654Z-skip-hidden'
+archive = Path('/private/tmp/apparate-section13-originals')
+assert not archive.exists()
+archive.mkdir()
+def digest(p):
+    return hashlib.sha256(p.read_bytes()).hexdigest()
+def dimensions(p):
+    s = subprocess.check_output(['sips', '-g', 'pixelWidth', '-g', 'pixelHeight', str(p)], text=True)
+    return [int(re.search(k + r':\s+(\d+)', s)[1]) for k in ('pixelWidth', 'pixelHeight')]
+old = {x['original']['sha256']: x for x in json.loads((prior / 'retention.json').read_text())['retained']}
+retention = {
+    'reason': 'Retain new path-ranking renders locally; reuse section 12 images only when the new raw image hash matches exactly. Prior evidence is unchanged.',
+    'conversion': 'New path-ranking images use one pixel per point, JPEG quality 60. Original hashes and dimensions retained; no crop or content alteration.',
+    'original_final_images_archive': str(archive),
+    'retained': [], 'reused_prior_images': 0, 'byte_identical_local_copies_removed': 0
+}
+seen = {}
+for p in sorted(x for x in base.rglob('*') if x.suffix in ('.png', '.jpg')):
+    rel = p.relative_to(base)
+    before = {'file': str(rel), 'sha256': digest(p), 'bytes': p.stat().st_size, 'pixels': dimensions(p)}
+    source = archive / rel
+    source.parent.mkdir(parents=True, exist_ok=True)
+    shutil.move(p, source)
+    previous = old.get(before['sha256'])
+    if previous:
+        assert digest(prior / previous['file']) == previous['sha256']
+        item = {k: previous[k] for k in ('sha256', 'bytes', 'pixels')}
+        item['file'] = os.path.relpath(prior / previous['file'], base)
+        item['reused_prior'] = True
+        retention['reused_prior_images'] += 1
+    elif False:
+        shutil.copyfile(source, p)
+        item = {'file': str(rel), 'sha256': before['sha256'], 'bytes': before['bytes'], 'pixels': before['pixels'], 'native_2x': True}
+    else:
+        destination = p.with_suffix('.jpg')
+        width, height = before['pixels']
+        assert width % 2 == 0 and height % 2 == 0
+        subprocess.run(['sips', '-s', 'format', 'jpeg', '-s', 'formatOptions', '60', '--resampleHeightWidth', str(height // 2), str(width // 2), str(source), '--out', str(destination)], check=True, stdout=subprocess.DEVNULL)
+        h = digest(destination)
+        item = {'file': str(destination.relative_to(base)), 'sha256': h, 'bytes': destination.stat().st_size, 'pixels': dimensions(destination)}
+        if h in seen:
+            item['file'] = seen[h]
+            destination.unlink()
+            retention['byte_identical_local_copies_removed'] += 1
+        else:
+            seen[h] = item['file']
+    item['original'] = before
+    retention['retained'].append(item)
+    (base / 'retention.json').write_text(json.dumps(retention, indent=2) + '\n')
+print(json.dumps({'scenarios': len(retention['retained']), 'reused_prior_images': retention['reused_prior_images'], 'local_images': len(list(base.rglob('*.jpg'))), 'total_evidence_bytes': sum(p.stat().st_size for p in base.rglob('*') if p.is_file())}, indent=2))

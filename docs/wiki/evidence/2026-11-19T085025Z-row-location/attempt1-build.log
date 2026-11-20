@@ -1,0 +1,47 @@
+Building for debugging...
+[Constructing description]
+[Planning deferred tasks]
+[4 / 29] ApparateCore
+[15 / 40] ApparateCore
+[21 / 43] ApparateFixtures
+[21 / 43] ApparateCore
+[21 / 43] ApparateFixtures
+[23 / 45] ApparateCore
+[30 / 42] ApparateFixtures
+[31 / 42] ApparateCore
+[40 / 54] ApparateCoreTests-product
+[41 / 65] Apparate-product
+[42 / 65] ApparateCoreTests-product
+[46 / 66] ApparateCore
+<repo>/Package.swift: ApparateCore: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[51 / 67] ApparateCore-product
+[51 / 66] ApparateCore
+[54 / 66] Apparate-product
+[58 / 66] Apparate-product
+[59 / 66] Apparate-product
+[59 / 66]
+<repo>/Package.swift: ApparateFixtures: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[61 / 66] ApparateFixtures
+[62 / 67] Apparate-product
+error: SwiftCompile normal arm64 <repo>/Sources/Apparate/SettingsVerification.swift failed with a nonzero exit code. Command line:     cd <projects>
+    builtin-SwiftPerFileCompile SettingsVerification.swift
+<repo>/Sources/Apparate/SettingsVerification.swift:81:31: error: call can throw, but it is executed in a non-throwing autoclosure
+ 79 |                 try check(model.config.resultLocation == value && session.resultLocation == value && panel.rows.resultLocation == value, "Native location change did not reach open panel")
+ 80 |                 try check(session.model.revision == beforeLayoutRevision && session.model.selectedID == beforeLayoutSelection, "Location change restarted search or lost selection")
+ 81 |                 try check(try ConfigStore.decode(Data(contentsOf: store.file)).resultLocation == value, "Location change was not persisted")
+    |                               `- error: call can throw, but it is executed in a non-throwing autoclosure
+ 82 |                 try captureSettings(settings, "location-" + value.rawValue, profile)
+ 83 |             }
+
+<repo>/Sources/Apparate/SettingsVerification.swift:81:50: error: call can throw, but it is executed in a non-throwing autoclosure
+ 79 |                 try check(model.config.resultLocation == value && session.resultLocation == value && panel.rows.resultLocation == value, "Native location change did not reach open panel")
+ 80 |                 try check(session.model.revision == beforeLayoutRevision && session.model.selectedID == beforeLayoutSelection, "Location change restarted search or lost selection")
+ 81 |                 try check(try ConfigStore.decode(Data(contentsOf: store.file)).resultLocation == value, "Location change was not persisted")
+    |                                                  `- error: call can throw, but it is executed in a non-throwing autoclosure
+ 82 |                 try captureSettings(settings, "location-" + value.rawValue, profile)
+ 83 |             }
+Failed frontend command:
+/Library/Developer/CommandLineTools/usr/bin/swift-frontend -frontend -c <repo>/Sources/Apparate/AppTestDiagnostics.swift <repo>/Sources/Apparate/FullPerformance.swift <repo>/Sources/Apparate/IconLoader.swift <repo>/Sources/Apparate/MenuController.swift <repo>/Sources/Apparate/NativeEffects.swift <repo>/Sources/Apparate/PanelController.swift <repo>/Sources/Apparate/PanelRowDrawing.swift <repo>/Sources/Apparate/PanelRows.swift <repo>/Sources/Apparate/PanelVerification.swift <repo>/Sources/Apparate/PerformanceVerification.swift -primary-file <repo>/Sources/Apparate/PreferencesSupport.swift -primary-file <repo>/Sources/Apparate/SettingsVerification.swift <repo>/Sources/Apparate/SettingsWindow.swift <repo>/Sources/Apparate/SetupWindow.swift <repo>/Sources/Apparate/TestProfile.swift <repo>/Sources/Apparate/main.swift -emit-dependencies-path <isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/PreferencesSupport.d -emit-const-values-path <isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/PreferencesSupport.swiftconstvalues -emit-reference-dependencies-path <isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/PreferencesSupport.swiftdeps -serialize-diagnostics-path <isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/PreferencesSupport.dia -emit-dependencies-path <isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsVerification.d -emit-const-values-path <isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsVerification.swiftconstvalues -emit-reference-dependencies-path <isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsVerification.swiftdeps -serialize-diagnostics-path <isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsVerification.dia -target arm64-apple-macos27.0 -disable-cross-import-overlay-search -swift-module-cross-import Darwin /Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk/usr/include/Darwin.swiftcrossimport/xlocale.swiftoverlay -load-resolved-plugin /Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/libObservationMacros.dylib\#\#ObservationMacros -load-resolved-plugin /Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/libSwiftMacros.dylib\#\#SwiftMacros -disable-implicit-swift-modules -Xcc -fno-implicit-modules -Xcc -fno-implicit-module-maps -explicit-swift-module-map-file <isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/Apparate-dependencies-1.json -Xllvm -aarch64-use-tbi -enable-objc-interop -stack-check -sdk /Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk -I <isolated-build>/out/Products/Debug -Isystem /Library/Developer/CommandLineTools/Developer/usr/lib -F <isolated-build>/out/Products/Debug/PackageFrameworks -F <isolated-build>/out/Products/Debug -F /Library/Developer/CommandLineTools/Library/Developer/Frameworks -F /Library/Developer/CommandLineTools/Developer/Library/Frameworks -module-cache-path <isolated-build>/out/Intermediates.noindex/SwiftExplicitPrecompiledModules -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\=dwarf -dwarf-version\=5 -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D Xcode -serialize-debugging-options -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -validate-clang-modules-once -clang-build-session-file <isolated-build>/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc <projects> -enable-anonymous-context-mangled-names -file-compilation-dir <projects> -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -ivfsstatcache -Xcc <isolated-build>/out/SDKStatCaches.noindex/macosx27.2-26B118-a0facfad118c1a7a18f0aad9463f65495818d34bafcb1249783cb8b2c4efe0a2.sdkstatcache -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -Xcc -I<isolated-build>/out/Products/Debug/include -Xcc -I<isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/DerivedSources-normal/arm64 -Xcc -I<isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/DerivedSources/arm64 -Xcc -I<isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\=1 -no-auto-bridging-header-chaining -module-name Apparate -package-name apparate -const-gather-protocols-file <isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/Apparate_const_extract_protocols.json -disable-clang-spi -clang-target arm64-apple-macos27.2 -target-sdk-version 27.2 -target-sdk-name macosx27.2 -in-process-plugin-server-path /Library/Developer/CommandLineTools/usr/lib/swift/host/libSwiftInProcPluginServer.dylib -o <isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/PreferencesSupport.o -o <isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsVerification.o -debug-module-path <isolated-build>/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/Apparate.swiftmodule -index-unit-output-path /Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/PreferencesSupport.o -index-unit-output-path /Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsVerification.o -index-store-path <isolated-build>/out -index-system-modules
+<repo>/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+<repo>/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+error: Build failed

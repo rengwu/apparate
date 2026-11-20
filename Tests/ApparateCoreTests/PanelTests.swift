@@ -24,6 +24,75 @@ func waitUsage(_ gate: UsageGate, _ count: Int) async throws {
     throw TestFailure(description: "Usage read \(count) did not arrive")
 }
 @MainActor func panelTests(_ h: Harness) async {
+    await h.test("completion: accepted kinds, scope preservation, paths and identical no-op") {
+        let home = "/Fixture/Home"
+        let entries = [
+            CatalogEntry(item: SearchItem(id: "folder:repo", kind: .folder, name: "quinecms-demo-site", path: home + "/Projects/quinecms-demo-site"), target: .file(URL(fileURLWithPath: home + "/Projects/quinecms-demo-site"))),
+            CatalogEntry(item: SearchItem(id: "file:unicode", kind: .file, name: "A👩🏽‍💻e\u{301}東京.md", path: home + "/A👩🏽‍💻e\u{301}東京.md"), target: .file(URL(fileURLWithPath: home + "/A👩🏽‍💻e\u{301}東京.md"))),
+            CatalogEntry(item: SearchItem(id: "folder:root", kind: .folder, name: "Disk Root", path: "/"), target: .file(URL(fileURLWithPath: "/"))),
+            CatalogEntry(item: SearchItem(id: "file:outside", kind: .file, name: "outside.txt", path: "/Fixture/Other/outside.txt"), target: .file(URL(fileURLWithPath: "/Fixture/Other/outside.txt"))),
+            CatalogEntry(item: SearchItem(id: "app:fixture", kind: .app, name: "Fixture Editor"), target: .application(URL(fileURLWithPath: "/Fixture/Editor.app"))),
+            CatalogEntry(item: SearchItem(id: "setting:displays", kind: .setting, name: "Displays"), target: .settings(bundle: "fixture", anchor: nil))] + CatalogEntry.commands
+        var config = AppConfig(); config.prefixes["apps"] = "@"; config.prefixes["commands"] = "!"
+        let session = LauncherSession(config: config, pathHome: home, usage: { UsageSnapshot() })
+        session.setCatalog(try CatalogSnapshot(entries: entries)); session.show(); defer { session.hide() }
+        var actions = 0; session.onAction = { _ in actions += 1 }
+        for (query, expected) in [("quinecm", "~/Projects/quinecms-demo-site/"), ("'quinecm", "~/Projects/quinecms-demo-site/"),
+            ("'東京", "~/A👩🏽‍💻e\u{301}東京.md"), ("disk", "/"), ("'outside", "/Fixture/Other/outside.txt"),
+            ("@fixt", "@Fixture Editor"), ("fixt", "Fixture Editor"), (".disp", ".Displays"), ("!loc", "!Lock Screen")] {
+            session.edit(query); try await eventually { !session.model.pending }
+            try expect(session.completion == expected, "Completion differs for \(query): \(String(describing: session.completion))")
+        }
+        for query in [".Displays", "@Fixture Editor", "!Lock Screen", "?fixture", "zzzzqqq"] {
+            session.edit(query); try await eventually { !session.model.pending }; try expect(session.completion == nil, query)
+        }
+        try expect(actions == 0)
+    }
+    await h.test("completion: current selection, pending generations, composition and hiding") {
+        let session = LauncherSession(config: AppConfig(), usage: { UsageSnapshot() })
+        session.setCatalog(try CatalogSnapshot(entries: [entryFixture("Row One"), entryFixture("Row Two")]))
+        session.show(); defer { session.hide() }
+        try expect(session.completion == nil)
+        session.edit("row"); try expect(session.completion == nil); try await eventually { !session.model.pending }
+        session.move(1); try expect(session.completion == "Row Two")
+        session.setComposing(true); try expect(session.completion == nil); session.setComposing(false)
+        session.edit("row on"); try expect(session.completion == nil, "Previous accepted row completed a new pending query")
+        try await eventually { !session.model.pending }; try expect(session.completion == "Row One")
+        session.edit(""); try expect(session.completion == nil)
+        session.hide(); try expect(session.completion == nil)
+    }
+    await h.test("panel UI: strip, status and bounded result heights") {
+        try expect(PanelLayout.height(rows: 0) == 41)
+        try expect(PanelLayout.height(rows: 0, message: true) == 82)
+        try expect(PanelLayout.height(rows: 1) == 110 && PanelLayout.height(rows: 3) == 166)
+        try expect(PanelLayout.height(rows: 9) == 334 && PanelLayout.height(rows: 50) == 334)
+        try expect(PanelLayout.height(rows: 0, location: .below) == 41 && PanelLayout.height(rows: 0, message: true, location: .below) == 82)
+        try expect(PanelLayout.height(rows: 1, location: .below) == 122 && PanelLayout.height(rows: 3, location: .below) == 202)
+        try expect(PanelLayout.height(rows: 9, location: .below) == 442 && PanelLayout.height(rows: 50, location: .below) == 442)
+    }
+    await h.test("panel layout setting preserves pending actions, selection, viewport and composition") {
+        let gate = UsageGate()
+        var config = AppConfig()
+        let session = LauncherSession(config: config, usage: { await gate.read() })
+        defer { session.hide() }
+        session.setCatalog(try CatalogSnapshot(entries: (0..<50).map { entryFixture(String(format: "Row %02d", $0)) }))
+        var actions = 0, submissions = 0
+        session.onAction = { _ in actions += 1 }; session.onSubmitted = { _,_ in submissions += 1 }
+        session.show(); session.edit("row"); try await waitUsage(gate, 1)
+        let revision = session.model.revision
+        session.act(.open)
+        config.resultLocation = .below; session.setConfig(config)
+        try expect(session.model.pending && session.model.revision == revision && submissions == 0)
+        await gate.finish(1); try await eventually { !session.model.pending }
+        try expect(actions == 1)
+        session.move(30); session.setComposing(true)
+        let selected = session.model.selectedID, first = session.model.firstVisibleRow, submitted = submissions
+        config.resultLocation = .inline; session.setConfig(config)
+        try expect(session.model.selectedID == selected && session.model.firstVisibleRow == first && session.model.composing)
+        try expect(session.model.query == "row" && session.model.revision == revision && submissions == submitted)
+        config.searchURL = "https://example.test/?q={query}"; session.setConfig(config)
+        try expect(session.model.revision > revision, "Search config must retain its existing restart behavior")
+    }
     await h.test("panel M4: 50-row viewport, numbered actions, clamping and reset") {
         let rows = try rowsFixture((0..<50).map { entryFixture(String(format: "Row %02d", $0)) }, query: "row")
         var model = PanelModel(); model.show(); let revision = model.begin(query: "row"); _ = model.accept(rows, revision: revision)

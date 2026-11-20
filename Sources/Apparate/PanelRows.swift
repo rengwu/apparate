@@ -45,8 +45,25 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
     private(set) var accessibilityElements: [String: ResultAccessibilityRow] = [:]
     private var artwork: [String: (PanelRowContent, CGFloat, PanelRowDrawing)] = [:]
     private var images: [String: NSImage] = [:]
-    private var requestedIcons: [String: ItemIcon] = [:]
+    private struct IconRequest: Equatable { let icon: ItemIcon, kind: ItemKind; let size: PanelIconSize }
+    private var requestedIcons: [String: IconRequest] = [:]
     var observationMarker: FrameMarker? { didSet { needsDisplay = true } }
+    var resultLocation = ResultLocation.inline {
+        didSet {
+            if oldValue != resultLocation {
+                artwork.removeAll(); wheelRemainder = 0; needsDisplay = true
+                if oldValue.iconSize != resultLocation.iconSize {
+                    images.removeAll(); requestedIcons.removeAll(); loadVisibleIcons()
+                }
+                for (index, content) in contents.enumerated() {
+                    accessibilityElements[content.id]?.setAccessibilityFrameInParentSpace(NSRect(x: 0,
+                        y: rowTop + CGFloat(index - firstVisible) * rowHeight, width: bounds.width, height: rowHeight))
+                }
+            }
+        }
+    }
+    var rowHeight: CGFloat { resultLocation.rowHeight }
+    var rowTop: CGFloat = 0
     private var wheelRemainder: CGFloat = 0
     private let icons: IconLoader
     private var iconGeneration = -1
@@ -76,32 +93,37 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
             element.setAccessibilityLabel([content.title, content.location, content.kind, "\(index + 1) of \(contents.count)"].filter { !$0.isEmpty }.joined(separator: ", "))
             element.updateSelected(content.selected)
             element.setAccessibilityIndex(index)
-            element.setAccessibilityFrameInParentSpace(NSRect(x: 0, y: CGFloat(index - firstVisible) * 28, width: bounds.width, height: 28))
+            element.setAccessibilityFrameInParentSpace(NSRect(x: 0, y: rowTop + CGFloat(index - firstVisible) * rowHeight, width: bounds.width, height: rowHeight))
             accessibilityElements[content.id] = element
         }
+        loadVisibleIcons()
+        changed(from: old, first: oldFirst)
+        if oldSelected != selectedID { onAccessibilitySelection?() }
+    }
+    private func loadVisibleIcons() {
         for index in visibleIndices {
             let content = contents[index]
-            if requestedIcons[content.id] != content.icon {
-                requestedIcons[content.id] = content.icon; images.removeValue(forKey: content.id)
-                icons.load(content.icon) { [weak self] image in
-                    guard let self, self.requestedIcons[content.id] == content.icon else { return }
+            let request = IconRequest(icon: content.icon, kind: content.itemKind, size: resultLocation.iconSize)
+            if requestedIcons[content.id] != request {
+                requestedIcons[content.id] = request; images.removeValue(forKey: content.id)
+                icons.load(content.icon, kind: content.itemKind, size: request.size) { [weak self] image in
+                    guard let self, self.requestedIcons[content.id] == request, self.resultLocation.iconSize == request.size else { return }
                     self.images[content.id] = image; self.invalidate(id: content.id)
                 }
             }
         }
-        changed(from: old, first: oldFirst)
-        if oldSelected != selectedID { onAccessibilitySelection?() }
     }
+    func loadedIcon(at index: Int) -> NSImage? { images[contents[index].id] }
     func changed(from old: [PanelRowContent], first oldFirst: Int) {
         for slot in 0..<PanelModel.pageSize {
             let before = old.indices.contains(oldFirst + slot) ? old[oldFirst + slot] : nil
             let after = contents.indices.contains(firstVisible + slot) ? contents[firstVisible + slot] : nil
-            if before != after { setNeedsDisplay(NSRect(x: 0, y: CGFloat(slot) * 28, width: bounds.width, height: 28)) }
+            if before != after { setNeedsDisplay(NSRect(x: 0, y: rowTop + CGFloat(slot) * rowHeight, width: bounds.width, height: rowHeight)) }
         }
     }
     func invalidate(id: String) {
         guard let index = contents.firstIndex(where: { $0.id == id }), visibleIndices.contains(index) else { return }
-        setNeedsDisplay(NSRect(x: 0, y: CGFloat(index - firstVisible) * 28, width: bounds.width, height: 28))
+        setNeedsDisplay(NSRect(x: 0, y: rowTop + CGFloat(index - firstVisible) * rowHeight, width: bounds.width, height: rowHeight))
     }
     func invalidateAppearance() { artwork.removeAll(); needsDisplay = true }
     override func viewDidChangeEffectiveAppearance() { super.viewDidChangeEffectiveAppearance(); invalidateAppearance() }
@@ -109,39 +131,47 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
         let content = contents[index]
         if let cached = artwork[content.id], cached.0 == content, cached.1 == bounds.width { return cached.2 }
         var result: PanelRowDrawing!
-        effectiveAppearance.performAsCurrentDrawingAppearance { result = PanelRowDrawing(content: content, width: bounds.width) }
+        effectiveAppearance.performAsCurrentDrawingAppearance { result = PanelRowDrawing(content: content, width: bounds.width, layout: resultLocation) }
         artwork[content.id] = (content, bounds.width, result)
         return result
     }
     func drawRow(_ index: Int, rect: NSRect) {
         guard contents.indices.contains(index) else { return }
-        drawing(at: index).draw(content: contents[index], in: rect, icon: images[contents[index].id])
+        drawing(at: index).draw(content: contents[index], in: rect, icon: loadedIcon(at: index))
     }
     override func draw(_ dirtyRect: NSRect) {
         for index in visibleIndices {
-            let rect = NSRect(x: 0, y: CGFloat(index - firstVisible) * 28, width: bounds.width, height: 28)
+            let rect = NSRect(x: 0, y: rowTop + CGFloat(index - firstVisible) * rowHeight, width: bounds.width, height: rowHeight)
             if dirtyRect.intersects(rect) { drawRow(index, rect: rect) }
         }
         if let marker = observationMarker {
-            // Same draw as the complete rows; four points in the unused left gutter.
+            // Same draw as the complete rows; compact diagnostic code in the search strip. A full invalidation
+            // on each accepted revision draws every visible row and this marker together.
             for (i, bit) in marker.bits.enumerated() {
                 (bit ? NSColor.white : NSColor.black).setFill()
-                NSRect(x: i % FrameMarker.columns, y: i / FrameMarker.columns, width: 1, height: 1).fill()
+                NSRect(x: 582 + i % FrameMarker.columns, y: 16 + i / FrameMarker.columns, width: 1, height: 1).fill()
             }
         }
     }
-    func geometryIsValid() -> Bool { bounds.size == NSSize(width: 628, height: 252) }
+    func geometryIsValid() -> Bool {
+        bounds.width == 628 && (rowTop == 0 ? bounds.height == rowHeight * 9 : bounds.height >= PanelLayout.stripHeight && bounds.height <= PanelLayout.maximumHeight && (contents.isEmpty || rowTop + CGFloat(visibleIndices.count) * rowHeight <= bounds.height - 35))
+    }
+    override func hitTest(_ point: NSPoint) -> NSView? {
+        let local = convert(point, from: superview)
+        guard local.y >= rowTop, local.y < rowTop + CGFloat(visibleIndices.count) * rowHeight else { return nil }
+        return super.hitTest(point)
+    }
     func activate(point: NSPoint) {
-        let index = firstVisible + Int(floor(point.y / 28))
+        let index = firstVisible + Int(floor((point.y - rowTop) / rowHeight))
         guard bounds.contains(point), visibleIndices.contains(index) else { return }
         onActivate?(contents[index].id)
     }
     override func mouseDown(with event: NSEvent) { activate(point: convert(event.locationInWindow, from: nil)) }
     override func scrollWheel(with event: NSEvent) {
-        let delta = event.hasPreciseScrollingDeltas ? -event.scrollingDeltaY : -event.scrollingDeltaY * 28
+        let delta = event.hasPreciseScrollingDeltas ? -event.scrollingDeltaY : -event.scrollingDeltaY * rowHeight
         wheelRemainder += delta
-        let rows = Int(wheelRemainder / 28)
-        if rows != 0 { wheelRemainder -= CGFloat(rows) * 28; onScroll?(rows) }
+        let rows = Int(wheelRemainder / rowHeight)
+        if rows != 0 { wheelRemainder -= CGFloat(rows) * rowHeight; onScroll?(rows) }
     }
     override func accessibilityChildren() -> [Any]? { contents.compactMap { accessibilityElements[$0.id] } }
     override func accessibilityRows() -> [Any]? { accessibilityChildren() }

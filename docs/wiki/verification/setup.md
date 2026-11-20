@@ -7,6 +7,10 @@ updated: 2026-11-19
 
 Run from the Apparate project root on macOS 27 arm64 with Swift 6.4.2 Command Line Tools, Python 3 and Node.js 22+. There are no downloaded packages or runtime services. The executable Core harness is used because XCTest and Swift Testing are unavailable in this Command Line Tools installation.
 
+## During the supervised session
+
+Do not run `build.sh`, replace or launch `build/Apparate.app`, or touch Claude's session home while that app is in use. The UI follow-up uses `swift build --scratch-path /private/tmp/apparate-ui-build-20261119` (debug/release), with an independently assembled bundle under `build/review/2026-11-19-ui/Apparate.app`. The smoke and performance drivers accept `--binary <explicit executable>`; always pass that review executable in this session. Its resources come from the repository, never from the running bundle. Bundle assembly, identities, final commands and receipts are recorded in the [UI run](runs/2026-11-19T064952Z-ui.md). All profiles remain hidden with isolated temporary homes and fake global effects.
+
 ## Build and identity
 
 ```sh
@@ -209,3 +213,75 @@ python3 Tests/observe-performance.py --self-test
 The external observer's explicit capture mode targets only an exact PID/window ID whose bundle is Apparate, uses a desktop-independent window filter, preflights its actual launch identity without prompting, bounds duration and saves metadata/markers only. Its separate offline correlator checks run/show/revision/digest and input deadlines; stale, duplicate, out-of-order or absent frames cannot become a completed-only pass. Live scale/content-rectangle calibration and vibrancy composition remain unverified. A desktop-independent window may not prove the live backdrop; bring the alternative to Claude before changing capture scope.
 
 **DEC-049:** do not run capture or present the panel until Claude sends an explicit “on-screen window open” after the user says they are away. The visible callback driver and its own key-window watchdog must be connected and validated in that stage; another application's frontmost status does not prove a nonactivating panel lost the key window. Then pair capture-on/off timings, inspect actual refresh/frame gaps, use fresh processes for cold shows and run the agreed opaque/vibrancy pair. Physical-key delivery remains a separate supervised observation. Hidden results cannot close these gates.
+
+## Direct paths and shallow-root verification
+
+Section 5’s Core checks use injected readers or temporary fixture homes/root trees; never use `/`, `~` or protected user folders for automated browsing. The native panel functional profile supplies a synthetic filesystem and drives Tab, undo, marked-text guards, error states and fake filesystem actions. Production test profiles restrict direct path reads to their own disposable APPARATE_HOME.
+
+Run the isolated release `ApparateCoreTests --shallow-idle` for a 64-second watcher observation while its own separate child process churns a deeper fixture subtree. The writer’s CPU is excluded. Expect zero watcher batches, scans, updates and publications, then an immediate-child change must become searchable. Process wakeups still include the harness’s two waits; they are reported separately from filesystem events. No build or other test may run concurrently with a measurement. Full-app hidden idle remains a separate regression check.
+
+
+## Dot-entry measurements
+
+For DEC-055, use `Tests/performance.py --binary <isolated-review-executable> full --count 20000 --dot-entries --output <new-evidence-directory>`, repeat at 200000, and run `pipeline --count 200000 --dot-entries` with the same explicit binary. The 500-project corpus creates six dot entries per project, 50 ignored `.env` files and 1,500 child sentinels inside terminal dot directories. Expected retained counts are the requested total, including 2,950 dot entries; only 501 directories are listed. A small Core fixture checks the ignore switch and refuses any sentinel-directory enumeration. These are deterministic synthetic corpora, not a measured sample of the user's files.
+
+The pipeline retains the original 20-query set and adds ten dot-name/path/control queries, six repetitions in each timing order. Receipts split the original and added query sets and check production/reference hashes. Use a separate plain-corpus run for comparison with a prior binary; document that its corpus differs from the dot-inclusive run. Full graph memory includes load, typing, preferences, rebuild endpoint and sampled rebuild peak. The sampled peak is a lower bound; a valid harness receipt does not imply the memory budgets passed. Keep every measurement sequential, with no concurrent builds/tests, and preserve original fingerprints.
+
+
+## Completing the selected result
+
+For DEC-056, run the full debug/release Core suites and `python3 Tests/smoke-app.py --binary <isolated-review-executable> --panel-check functional --output <new-evidence-directory>`. The `result_completion` receipt exercises ordinary/scoped folder selections, a Unicode file, app, setting and command; before/after light/dark renders show the resulting query and rows. Folder completion must list the selected folder's contents, files abbreviate home, and names preserve scope prefixes.
+
+The owned hidden native editor receives actual `insertTab:`, `insertBacktab:`, `undo:` and `redo:` commands. Tests assert the same editor, caret at the end, no activation, and exact text/results restoration. Fixture input history is cleared before each completion to isolate that native undo action; this does not prove physical key-event grouping. No-op cases cover identical text, no selection, web, pending results, unreconciled editor text and marked text. Physical keyboard, actual input-method handling and presentation remain supervised/Untested. Use synthetic readers only, and keep the running app and real data isolated as above.
+
+
+## Open With checks
+
+For DEC-057, run both complete Core suites, then `python3 Tests/smoke-app.py --binary <isolated-review-executable> --panel-check functional --output <new-panel-directory>` and the corresponding `--settings-check` profile in a separate new directory. Every app command must pass the explicit isolated binary during the supervised session. All lookup/open effects use injected fakes. Core covers the same worker orchestration with fake Workspace and app metadata readers, canonical/lexical access gates, ordering, missing remembered apps, stale generations, Back, config conflicts and schema-2 migration/reopen/eviction while preserving usage/file data.
+
+The native panel sends constructed key events only to its owned hidden NSPanel (`sendEvent`), which tests the local default/custom trigger route; it does not synthesize global input. It then drives native text/command routing, checks list order/labels, literal Unicode filtering, Back, mode no-ops, numbered/Return/click actions, folders, empty apps and marked triggers. Settings records the key through its real recorder handler and asserts no extra global registration. Inspect final light/dark list/filter/empty/General/error/recording JPEGs and retain identity/receipts before cleanup. Actual physical keys, input methods, macOS handler discovery and real file opening are Untested until a supervised slot; no such slot is authorized by this recipe.
+
+
+## Right Arrow folder completion
+
+For DEC-058, run both complete Core suites and the signed hidden `--panel-check functional` profile with an explicit isolated `--binary`. The `right_folder_completion` receipt checks ordinary/scoped/direct-path/Unicode folders, native undo/redo and the same field editor with a caret at the UTF-16 end. An owned Right key event carrying normal function/numeric-pad flags exercises the panel-to-editor route; other cases use native command selectors. No global input is injected.
+
+Fallthrough checks compare actual caret ranges for middle-of-text movement, selection collapse, Shift/Option/Command-Right, file/app/setting/command/web rows, pending/no-selection/editor-model mismatch and Open With. Marked text checks that the delegate returns control without changing composition; a real IME is not exercised. Completion history is isolated by clearing fixture input history before each action, so physical key-event grouping remains untested. Final light/dark before/after renders use synthetic readers only. Keep the running app/data isolated and retain the new binary/manifest/receipt independently of the section-8 run.
+
+## Login availability and app icon
+
+For UI section 10, run the full debug/release Core suites and hidden Settings profile with an explicit isolated binary. The fixture starts at ServiceManagement's `.notFound` status and shares the native adapter's pure mapping, without constructing a real login service. Toggle the native switch on/off and refuse a second registration from not found. Assert the observed state, switch enabled/on state and visible inline error; also retain approval-pending cancellation and unsupported-run coverage. No real registration or Login Items change is part of this recipe.
+
+Assemble a fresh signed review bundle with `Resources/AppIcon.icns` copied into `Contents/Resources` and `CFBundleIconFile` set to `AppIcon`. Verify the bundled icon hash matches the source and run `codesign --verify --deep --strict`. The section-10 mailbox explicitly authorizes `./build.sh` after checks pass because the running app is now a separate copy under `/Applications`; that copy and real data remain untouched. Record and verify the resulting build bundle without launching it. Finder/Dock appearance and actual login behavior remain supervised checks.
+
+## Below-layout icon checks
+
+Section 11 adds `larger_below_icons` to the hidden panel profile. An owned vector fixture passes through the production rasterizer to produce 40/64-pixel PNGs. A controlled asynchronous loader tests a loaded small icon switching to a cold large request, late small results after a switch to Below, late large results after a switch away, and warm switches through every layout. Check row images immediately and after callbacks, native point sizes, pixel dimensions, and size-separated cache reuse. No Workspace icon lookup occurs in this functional profile.
+
+Inspect Below mixed app/file/folder/setting/command rows at 1/3/9 results, plus a web row, in light/dark. Verify 32-point frames, x = 50 aligned text, unchanged vertical text/hints and 122/202/442 panel heights. Existing layout checks retain long-title/location truncation, selection, hit testing, numbered actions, pending reflow and accessibility geometry. Compare the new raw Inline/Right images against the preceding run's original hashes.
+
+The performance driver accepts `--result-location below` and records it in the identity; the app records the active layout and point/raster sizes. Use `full --count 20000 --dot-entries --result-location below` with an explicit isolated binary for comparison against section 6. This profile reads installed-app/settings metadata and uses native file icons, while actions/global effects remain fake and file/config/index data stay in its disposable home. Respect any active restriction on reading installed apps before using this profile. Keep measurements sequential, with no concurrent builds or tests, and distinguish prior historical values from a matched comparison.
+
+
+## Skip hidden files checks
+
+For DEC-059, run full debug/release Core suites with the isolated scratch executable. `hidden:` scenarios cover default-on/missing-key and bad-value config, expected-value conflicts/write refusal, skipped dot metadata/apps, Finder-hidden non-dot entries, overlapping explicit dot roots, failed-listing policy changes, persistence, create/rename/rule edits, rule-5 migration and exactly one rebuild per toggle. A real FSEvents fixture checks ordinary children and `.gitignore` changes inside an explicit dot root. Direct-path fixtures retain the original final-name-dot filter with either switch value.
+
+Use the hidden Settings profile with an explicit review executable. Its `skip_hidden_files` receipt checks the native on/off action, persisted value, stale displayed-value conflict, external refresh, same-card placement and accessibility label; broken config must disable the switch. Inspect light/dark on/off Folders images, including scroll and validation regressions. The existing panel profile retains section-6 dot-name behavior with the fixture config explicitly off.
+
+The performance driver now explicitly writes `skipHiddenFiles: false` and records it in the run identity, so established dot-inclusive corpus counts remain comparable. Run `pipeline --count 200000 --dot-entries` sequentially with prior and candidate isolated binaries and compare every query/repetition digest. This synthetic pipeline does not read installed-app catalogs; it does not qualify full-app memory. The section-11 read-only installed-app restriction has been clarified and its matched full-profile comparison completed; installed-app mutation/launch/quit remains prohibited.
+
+
+## Tight path alignment checks
+
+DEC-060 uses `tight paths:` Core groups for usage crossover (0/1/2/5/20 opens), interior/trailing gaps, free leading ancestors, shared cap across both gap kinds, repeated/fuzzy alignment alternatives and top-50 cutoff. The 160-case independent oracle enumerates all ancestor alignments and computes actual interior/trailing gaps, instead of using the production first-match formula. Compact and regular complete rows must agree.
+
+Run the signed hidden panel functional profile. `tight_path_ranking` records two `apparate/build` rows with one and five deeper-folder opens, text scores/usage/highlights and light/dark images. All readers/icons are fixtures. Existing direct-path, completion, layout and Settings checks remain.
+
+Run `pipeline --count 200000 --dot-entries` sequentially with explicit prior/candidate binaries. Compare every non-path digest byte-for-byte and report per-query path pipeline p95, including section 6's preserved same-corpus CSV. Path scores may intentionally differ, so do not require cross-version path digests to remain equal. Each production/reference comparison must still pass. Note the twelve samples per individual query, historical fingerprint/catalog differences where applicable, and the absence of an end-to-end presentation measurement.
+
+## Single indexing indicator checks
+
+For UI section 14, run both complete Core suites and the hidden Settings profile with an explicit isolated executable. The Core retry fixture covers retained denied/missing/unavailable/waiting states, aggregate progress, repeated failure and successful recovery. Native `indexing_indicator` checks the spinner style, size and accessibility label; no per-row indexing text; the 8-point gap and vertical centering; and exact content-coordinate frame equality for folder rows, action buttons, both following cards and the window content. Compare indexed/all-indexing, mixed-error idle/indexing and waiting idle/indexing pairs; progressing ready roots must retain their existing controls.
+
+Toggle each native Skip switch on and off, with the fixture config callback publishing indexing immediately. Check the same frames and Rebuild state after each action. Retain light/dark idle, all-indexing, mixed idle and mixed indexing images. The hidden spinner uses its stopped native glyph; the harness never presents a window or starts visible animation. Animation and spoken VoiceOver require the supervised session. Run the existing signed panel profile as a regression check, then assemble/verify the authorized local build without launching it.

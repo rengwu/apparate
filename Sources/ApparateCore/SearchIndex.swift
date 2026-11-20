@@ -6,6 +6,7 @@ struct ItemTexts: Sendable {
     var alternates: Range<Int32>
     var keywords: Range<Int32>
     var parent: Int32 = -1
+    var pathDepth = 0
 }
 struct FolderNode: Sendable { let text: Int32; let parent: Int32 }
 private struct FolderKey: Hashable { let parent: Int32; let name: String }
@@ -17,11 +18,16 @@ public struct SearchIndex: Sendable {
     var text = TextStore()
     var sources: [ItemTexts] = []
     var folders: [FolderNode] = []
+    var dotNames: [Bool] = []
 
     public init(items: [SearchItem]) throws {
         var ids = Set<String>()
         for item in items where !ids.insert(item.id).inserted { throw IndexError.duplicateID(item.id) }
         self.items = items
+        dotNames = items.map { item in
+            if item.kind == .app { return item.path?.split(separator: "/").last?.hasPrefix(".") == true }
+            return item.kind.isPath && item.name.hasPrefix(".")
+        }
         text.spans.reserveCapacity(items.count)
         text.ascii.reserveCapacity(items.count * 24)
         text.asciiBonuses.reserveCapacity(items.count * 24)
@@ -36,6 +42,7 @@ public struct SearchIndex: Sendable {
             for keyword in item.keywords { _ = text.append(keyword) }
             var source = ItemTexts(alternates: start..<middle, keywords: middle..<Int32(text.spans.count))
             if item.kind.isPath, let path = item.path {
+                source.pathDepth = path.split(separator: "/").count
                 var parent: Int32 = -1
                 for component in path.split(separator: "/").dropLast() {
                     let name = String(component), key = FolderKey(parent: parent, name: name)

@@ -13,6 +13,8 @@ Eligibility is captured before ConfigStore writes defaults: missing config shows
 
 The shortcut step completes only when Apparate holds the configured key and, for ⌘Space, Spotlight is known not to use it. A different registered shortcut completes the step too. Unknown Spotlight state asks the user to check, without claiming a conflict or success. Known first-run Spotlight conflict uses the inline explanation; other unexpected startup registration failure retains the one-time alert. Returning to either preferences window rereads shortcut/login/config state and retries registration.
 
+The [UI follow-up](../build/ui-follow-up.md) (DEC-051) keeps the checklist and removes redundant shortcut success text, per-folder “Not checked”, the all-allowed summary and the Projects permission claim. Checkmarks carry success. Plain, nonselectable status labels wrap and the window height follows the content. The shortcut conflict/unavailable guidance, checking progress and named denied/missing/error outcomes remain.
+
 The access step says “macOS may ask for access to each folder.” Only **Allow Access…** probes Desktop, Documents and Downloads, sequentially. Focus refresh never probes. Saved results are last-check hints; denied, missing and error states remain separate. Closing the checking window cancels future probes in that sequence; an already issued system prompt cannot be dismissed by the app. Done is always available. **Choose Folders…** routes to the same Settings window's Folders tab. Settings offers a conditional access retry after setup has closed.
 
 ## Verification recipe
@@ -30,3 +32,9 @@ No automated check launches System Settings, presents a window, changes login re
 ## Verification history
 
 - [M5 automated verification](../verification/runs/2026-11-18T212428Z-m5.md).
+
+- [UI follow-up verification](../verification/runs/2026-11-19T064952Z-ui.md) — hidden incomplete, partial and complete light/dark setup states.
+
+- [Result-location follow-up verification](../verification/runs/2026-11-19T085025Z-row-location.md) — unchanged setup eligibility, actions and incomplete/partial/complete light/dark states re-exercised with the new Settings control.
+
+New configs now include shallow home/root discovery as well as the original four folders (DEC-054); existing lists stay intact. Setup’s explicit access checks are unchanged. [Section 5 verification](../verification/runs/2026-11-19T095817Z-path-folders.md).

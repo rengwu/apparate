@@ -1,0 +1,57 @@
+{
+  "source_inputs_verified": 86,
+  "changed_shared_inputs": [
+    "Sources/Apparate/SettingsVerification.swift",
+    "Sources/Apparate/SettingsWindow.swift",
+    "Sources/ApparateCore/FileIndexController.swift",
+    "Tests/ApparateCoreTests/FileIndexTests.swift"
+  ],
+  "new_inputs": [],
+  "bundles": [
+    {
+      "bundle": "build/review/2026-11-20-indexing-indicator/Apparate.app",
+      "identifier": "local.apparate.review",
+      "app_sha256": "ed436bbe06a3f516ef09c3e0a79d17fc5bda08f5457eae8a5c5145d1005ba5f1",
+      "icon_sha256": "02018571f3cd027994fb3ca57c4a97b1ad8da3730973e32a5d81055188d8419e",
+      "CFBundleIconFile": "AppIcon",
+      "strict_deep_signature_verified": true
+    },
+    {
+      "bundle": "build/Apparate.app",
+      "identifier": "local.apparate",
+      "app_sha256": "2571d459f653a684f8494903c17ab2c6c2fa3cffd139c699ed014afdf8feaaa4",
+      "icon_sha256": "02018571f3cd027994fb3ca57c4a97b1ad8da3730973e32a5d81055188d8419e",
+      "CFBundleIconFile": "AppIcon",
+      "strict_deep_signature_verified": true
+    }
+  ],
+  "profiles": {
+    "debug-settings": {
+      "result": "Passed",
+      "stderr_bytes": 0,
+      "native_effects": 0,
+      "cleanup": "Owned process exited; test-created APPARATE_HOME removed"
+    },
+    "settings": {
+      "result": "Passed",
+      "stderr_bytes": 0,
+      "native_effects": 0,
+      "cleanup": "Owned process exited; test-created APPARATE_HOME removed"
+    },
+    "panel": {
+      "result": "Passed",
+      "stderr_bytes": 0,
+      "native_effects": 0,
+      "cleanup": "Owned process exited; test-created APPARATE_HOME removed"
+    }
+  },
+  "section_12_bundle_preserved": true,
+  "section_13_bundle_preserved": true,
+  "render_scenarios_verified": 238,
+  "reused_prior_images": 222,
+  "local_images": 14,
+  "section_11_bundle_preserved": true,
+  "indexing_frames_and_switch_transitions_verified": true,
+  "superseded_debug_image_hashes_verified": 54,
+  "memory_profile": "Not repeated for section 14; section 11 comparison remains recorded separately with its budget failures."
+}

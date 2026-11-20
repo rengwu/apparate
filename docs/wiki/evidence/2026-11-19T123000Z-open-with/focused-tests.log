@@ -1,0 +1,8 @@
+PASS Open With: config defaults, literal key policy and round trip
+PASS Open With: groups, deduplication, literal Unicode matcher and catalog tail
+PASS Open With: exact back state, filtered apps, actions and mode key guards
+PASS Open With: generation cancellation, hide and source changes on Back
+PASS Open With: folder, missing discovery, pending and marked triggers
+PASS Open With: success-only item history, chosen-app failure and unresolved type
+PASS Open With: additive v2 migration, bounded type history and existing file data
+RESULT 7 passed; 0 failed

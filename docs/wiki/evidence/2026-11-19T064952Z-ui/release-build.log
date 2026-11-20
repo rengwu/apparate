@@ -1,0 +1,64 @@
+Building for production...
+[Pre-planning 1 / 182]
+[Planning deferred tasks]
+[30 / 60] ApparateCore
+[42 / 120]
+[48 / 120]
+[52 / 120]
+[53 / 120]
+[57 / 120]
+[59 / 120]
+[62 / 120]
+[66 / 120]
+[68 / 120]
+[69 / 120]
+[70 / 120]
+[76 / 120]
+[77 / 120]
+[78 / 120]
+[82 / 120]
+[83 / 120]
+[84 / 120]
+[86 / 120]
+[88 / 120]
+[90 / 120]
+[91 / 120] ApparateCore
+<repo>/Package.swift: ApparateCore: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[100 / 122] ApparateFixtures
+[102 / 123] ApparateObserver-product
+[115 / 190]
+[123 / 190]
+[137 / 190]
+<repo>/Package.swift: ApparateFixtures: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[145 / 192] Apparate-product
+[146 / 192] ApparateFixtures
+[150 / 192]
+[156 / 192]
+[159 / 192]
+[162 / 193]
+[167 / 195]
+[168 / 195]
+[170 / 195]
+[171 / 195]
+[174 / 195]
+[177 / 195]
+[178 / 195]
+[179 / 195]
+[180 / 195]
+[182 / 195]
+[183 / 195] ApparateObserver-product
+[185 / 195] ApparateObserver-product
+<repo>/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+<repo>/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[186 / 195] ApparateObserver-product
+[187 / 195] ApparateCoreTests-product
+[189 / 195] ApparateCoreTests-product
+<repo>/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+<repo>/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[190 / 195] ApparateCoreTests-product
+[191 / 195] Apparate-product
+<repo>/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+<repo>/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[193 / 195] Apparate-product
+[194 / 195] Apparate-product
+Build complete! (55.70 sec)

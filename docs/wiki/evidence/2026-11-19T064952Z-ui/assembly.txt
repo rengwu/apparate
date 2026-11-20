@@ -1,0 +1,18 @@
+from pathlib import Path
+import hashlib, json, plistlib, shutil, subprocess
+bundle = Path('build/review/2026-11-19-ui/Apparate.app')
+assert not bundle.exists(), 'Review bundles are immutable; choose a fresh path'
+(bundle / 'Contents/MacOS').mkdir(parents=True)
+resources = bundle / 'Contents/Resources'
+resources.mkdir()
+shutil.copy2('/private/tmp/apparate-ui-build-20261119/release/Apparate', bundle / 'Contents/MacOS/Apparate')
+for source in ['THIRD_PARTY_NOTICES.txt', 'Resources/MenuBarIconTemplate.png', 'Resources/MenuBarIconTemplate@2x.png']:
+    shutil.copy2(source, resources / Path(source).name)
+info = dict(CFBundleName='Apparate Review', CFBundleIdentifier='local.apparate.review', CFBundleExecutable='Apparate', CFBundlePackageType='APPL', CFBundleShortVersionString=Path('VERSION').read_text().strip(), CFBundleVersion=Path('VERSION').read_text().strip(), LSMinimumSystemVersion='27.0', LSUIElement=True)
+for folder in ['Desktop', 'Documents', 'Downloads']:
+    info['NS' + folder + 'FolderUsageDescription'] = 'Apparate searches file and folder names in your ' + folder + ' folder.'
+(bundle / 'Contents/Info.plist').write_bytes(plistlib.dumps(info))
+subprocess.run(['codesign', '--force', '--deep', '--sign', '-', '--requirements', '=designated => identifier "local.apparate.review"', str(bundle)], check=True)
+subprocess.run(['codesign', '--verify', '--deep', '--strict', str(bundle)], check=True)
+identity = {'base_revision': subprocess.check_output(['git','rev-parse','HEAD'], text=True).strip(), 'dirty': True, 'bundle': str(bundle), 'bundle_identifier': info['CFBundleIdentifier'], 'app_sha256': hashlib.sha256((bundle / 'Contents/MacOS/Apparate').read_bytes()).hexdigest(), 'swift': subprocess.check_output(['swift','--version'], text=True).strip(), 'os': subprocess.check_output(['sw_vers'], text=True).strip(), 'arch': subprocess.check_output(['uname','-m'], text=True).strip(), 'safety': 'New review bundle from isolated SwiftPM output and repo resources. No access to build/Apparate.app or supervised data.'}
+Path('docs/wiki/evidence/2026-11-19T064952Z-ui/build-identity.json').write_text(json.dumps(identity, indent=2) + '\n')

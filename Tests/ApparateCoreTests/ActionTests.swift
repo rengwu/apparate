@@ -6,6 +6,7 @@ import Synchronization
     var calls: [String] = [], failure = false
     private func accept(_ value: String) throws { calls.append(value); if failure { throw SourceError("Fixture refused") } }
     func openApplication(_ url: URL) async throws { try accept("app:" + url.path) }
+    func openFile(_ url: URL, with application: URL) async throws { try accept("with:" + application.path + ":" + url.path) }
     func openURL(_ url: URL) async throws { try accept("url:" + url.absoluteString) }
     func reveal(_ url: URL) async throws { try accept("reveal:" + url.path) }
     func copyPath(_ path: String) async throws { try accept("copy:" + path) }

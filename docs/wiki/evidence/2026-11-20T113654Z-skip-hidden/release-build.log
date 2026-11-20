@@ -1,0 +1,26 @@
+Building for production...
+[Constructing description]
+[Planning deferred tasks]
+[6 / 17] ApparateCore
+[8 / 18] ApparateCore
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCore: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[16 / 28] ApparateFixtures
+[18 / 29] ApparateObserver-product
+[19 / 30] ApparateFixtures
+[23 / 29] ApparateCoreTests-product
+[25 / 31] ApparateObserver-product
+/Users/rengwu/Projects/apparate/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[27 / 31] ApparateObserver-product
+[28 / 31] ApparateObserver-product
+[31 / 36] ApparateCoreTests-product
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[33 / 36] ApparateCoreTests-product
+[34 / 36] ApparateCoreTests-product
+[36 / 37] Apparate-product
+[38 / 40] Apparate-product
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[39 / 40] Apparate-product
+Build complete! (51.53 sec)

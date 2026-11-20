@@ -1,0 +1,9 @@
+{
+  "source_manifest_matches": true,
+  "native_settings_and_panel": "Passed",
+  "debug_core": "88 passed; 0 failed",
+  "release_core": "88 passed; 0 failed",
+  "evidence_bytes": 2565328,
+  "on_screen": "Untested; no presentation or capture",
+  "commit": "None; recheck requested"
+}

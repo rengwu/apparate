@@ -43,7 +43,9 @@ import ApparateCore
             let firstRun = !FileManager.default.fileExists(atPath: directory.appendingPathComponent("config.json").path)
             let store = try ConfigStore(directory: directory); config = store
             let history = try UsageStore(directory: directory); usage = history
-            let session = LauncherSession(config: store.current, requiresFiles: true, usage: { try await history.snapshot() }); self.session = session
+            let session = LauncherSession(config: store.current, requiresFiles: true,
+                pathReader: profile == nil ? PathReading() : .restricted(to: directory.path),
+                openWith: profile == nil ? OpenWithWorkspace.service(history: history) : OpenWithService { _,_ in OpenWithDiscovery(contentType: nil, claimed: []) }, usage: { try await history.snapshot() }); self.session = session
             let panel = PanelController(session: session, icons: icons, presentationAllowed: profile == nil); self.panel = panel
             panel.onTiming = { [weak self] shown, commit in self?.diagnostics?.shownMS = shown; if let commit { self?.diagnostics?.commitProxyMS = commit } }
             let executor: any ActionExecuting
@@ -59,13 +61,20 @@ import ApparateCore
                 nativeRegistrar = native; registrar = native
                 access = FolderAccessController(directory: directory)
             }
+            session.setPathAccess(FileAccessPolicy(observations: access?.observations ?? []))
             access?.onError = { [weak self] message in self?.logError(message) }
             let presence: @Sendable (URL) -> FilePresence
             if profile == nil { presence = { url in filePresence(url) } }
             else { presence = { _ in FilePresence.present } }
-            let dispatcher = ActionDispatcher(executor: executor, presence: presence, record: { try await history.recordSuccessfulOpen(id: $0) })
+            let dispatcher = ActionDispatcher(executor: executor, presence: presence, recordOpenWith: { try await history.recordSuccessfulOpen(id: $0, contentType: $1, application: $2) }, record: { try await history.recordSuccessfulOpen(id: $0) })
             actions = dispatcher
             dispatcher.onHistoryError = { [weak self] _ in self?.logError("Usage history could not be saved.") }
+            session.onOpenWithFailure = { [weak self] failure in
+                guard let self else { return }
+                self.panel?.hide()
+                if let id = failure.missingID { self.catalog?.removeMissing(id); self.files?.removeMissing(id) }
+                self.alertError(failure.reason, title: "Couldn’t find applications for \(failure.title)")
+            }
             session.onError = { [weak self] message in self?.logError(message) }
             session.onAction = { [weak self] request in
                 guard let self else { return }
@@ -136,7 +145,10 @@ import ApparateCore
             fileController.onChange = { [weak self] snapshot in
                 self?.session?.setFiles(snapshot); self?.refreshIndexStatus(); self?.diagnostics?.ready()
             }
-            access?.onCompletion = { [weak self] observations in self?.files?.setAccess(FileAccessPolicy(observations: observations)) }
+            access?.onCompletion = { [weak self] observations in
+                let policy = FileAccessPolicy(observations: observations)
+                self?.session?.setPathAccess(policy); self?.files?.setAccess(policy)
+            }
             access?.onChange = { [weak self] in self?.refreshPreferences() }
             fileController.onStatusChange = { [weak self] in self?.refreshIndexStatus() }
             settings.onRebuild = { [weak fileController] in fileController?.rebuild() }

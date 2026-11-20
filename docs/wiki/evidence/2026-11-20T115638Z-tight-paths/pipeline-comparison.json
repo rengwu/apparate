@@ -1,0 +1,290 @@
+{
+  "compared_rows": 360,
+  "non_path_rows": 288,
+  "non_path_mismatches": [],
+  "changed_path_digest_rows": 48,
+  "runs": {
+    "prior": {
+      "identity": {
+        "app_sha256": "77fa1c2827972b67bf9d130cc1e60cf0e67fba29cdba1fa3eb33465a4ca94891",
+        "mode": "pipeline",
+        "count": 200000,
+        "projects": false,
+        "bare": false,
+        "probes": false,
+        "delivery": "task",
+        "start_utc": "2026-11-20T12:01:09Z",
+        "dot_entries": true,
+        "result_location": "inline",
+        "skip_hidden_files": false
+      },
+      "pipeline": {
+        "count": 360,
+        "max": 10.764333333333333,
+        "median": 7.070083333333333,
+        "p95": 10.299291666666665
+      },
+      "matched_hashes": 360
+    },
+    "candidate": {
+      "identity": {
+        "app_sha256": "f75e72e9045cdd1cdee92e88de164966afe3f26af2cf6994f184fb8fd88d5c1e",
+        "mode": "pipeline",
+        "count": 200000,
+        "projects": false,
+        "bare": false,
+        "probes": false,
+        "delivery": "task",
+        "start_utc": "2026-11-20T12:01:32Z",
+        "dot_entries": true,
+        "result_location": "inline",
+        "skip_hidden_files": false
+      },
+      "pipeline": {
+        "count": 360,
+        "max": 11.671291666666667,
+        "median": 7.139625,
+        "p95": 10.402208333333334
+      },
+      "matched_hashes": 360
+    },
+    "section6": {
+      "identity": {
+        "app_sha256": "b089544af866c8a75dbb726c7fa778dbc37c744ac58e5ca05aa5857d3e5e5ced",
+        "mode": "pipeline",
+        "count": 200000,
+        "projects": false,
+        "bare": false,
+        "probes": false,
+        "delivery": "task",
+        "start_utc": "2026-11-19T11:57:21Z",
+        "dot_entries": true
+      },
+      "pipeline": {
+        "count": 360,
+        "max": 10.054583333333333,
+        "median": 5.937541666666667,
+        "p95": 9.129
+      },
+      "matched_hashes": 360
+    },
+    "prior_repeat": {
+      "identity": {
+        "app_sha256": "77fa1c2827972b67bf9d130cc1e60cf0e67fba29cdba1fa3eb33465a4ca94891",
+        "mode": "pipeline",
+        "count": 200000,
+        "projects": false,
+        "bare": false,
+        "probes": false,
+        "delivery": "task",
+        "start_utc": "2026-11-20T12:02:49Z",
+        "dot_entries": true,
+        "result_location": "inline",
+        "skip_hidden_files": false
+      },
+      "pipeline": {
+        "count": 360,
+        "max": 11.169625,
+        "median": 7.224916666666667,
+        "p95": 10.581041666666666
+      },
+      "matched_hashes": 360
+    },
+    "candidate_repeat": {
+      "identity": {
+        "app_sha256": "f75e72e9045cdd1cdee92e88de164966afe3f26af2cf6994f184fb8fd88d5c1e",
+        "mode": "pipeline",
+        "count": 200000,
+        "projects": false,
+        "bare": false,
+        "probes": false,
+        "delivery": "task",
+        "start_utc": "2026-11-20T12:02:34Z",
+        "dot_entries": true,
+        "result_location": "inline",
+        "skip_hidden_files": false
+      },
+      "pipeline": {
+        "count": 360,
+        "max": 11.179583333333333,
+        "median": 7.286375,
+        "p95": 10.374166666666666
+      },
+      "matched_hashes": 360
+    }
+  },
+  "path_queries": {
+    "project/": {
+      "prior": {
+        "samples": 12,
+        "p95_ms": 1.31675,
+        "median_ms": 1.1593333333333333
+      },
+      "candidate": {
+        "samples": 12,
+        "p95_ms": 1.4007083333333332,
+        "median_ms": 1.1974166666666668
+      },
+      "section6": {
+        "samples": 12,
+        "p95_ms": 1.04925,
+        "median_ms": 1.0232083333333333
+      },
+      "prior_repeat": {
+        "samples": 12,
+        "p95_ms": 1.4906666666666668,
+        "median_ms": 1.163
+      },
+      "candidate_repeat": {
+        "samples": 12,
+        "p95_ms": 1.536875,
+        "median_ms": 1.20475
+      }
+    },
+    "project/read": {
+      "prior": {
+        "samples": 12,
+        "p95_ms": 10.350416666666666,
+        "median_ms": 9.834958333333335
+      },
+      "candidate": {
+        "samples": 12,
+        "p95_ms": 11.671291666666667,
+        "median_ms": 9.895583333333335
+      },
+      "section6": {
+        "samples": 12,
+        "p95_ms": 10.054583333333333,
+        "median_ms": 9.012416666666667
+      },
+      "prior_repeat": {
+        "samples": 12,
+        "p95_ms": 10.683791666666666,
+        "median_ms": 10.29425
+      },
+      "candidate_repeat": {
+        "samples": 12,
+        "p95_ms": 10.871375,
+        "median_ms": 9.91825
+      }
+    },
+    "projects/report": {
+      "prior": {
+        "samples": 12,
+        "p95_ms": 9.874375,
+        "median_ms": 9.072083333333333
+      },
+      "candidate": {
+        "samples": 12,
+        "p95_ms": 10.691958333333334,
+        "median_ms": 9.202
+      },
+      "section6": {
+        "samples": 12,
+        "p95_ms": 9.643291666666666,
+        "median_ms": 8.739083333333333
+      },
+      "prior_repeat": {
+        "samples": 12,
+        "p95_ms": 9.405458333333334,
+        "median_ms": 9.140666666666666
+      },
+      "candidate_repeat": {
+        "samples": 12,
+        "p95_ms": 10.1955,
+        "median_ms": 9.18175
+      }
+    },
+    "'project/.env": {
+      "prior": {
+        "samples": 12,
+        "p95_ms": 3.103875,
+        "median_ms": 2.9296666666666664
+      },
+      "candidate": {
+        "samples": 12,
+        "p95_ms": 3.6377916666666663,
+        "median_ms": 3.0201666666666664
+      },
+      "section6": {
+        "samples": 12,
+        "p95_ms": 2.7700833333333335,
+        "median_ms": 2.6361666666666665
+      },
+      "prior_repeat": {
+        "samples": 12,
+        "p95_ms": 3.6264583333333333,
+        "median_ms": 2.9811666666666663
+      },
+      "candidate_repeat": {
+        "samples": 12,
+        "p95_ms": 3.3317083333333333,
+        "median_ms": 3.026625
+      }
+    },
+    "'project/.git": {
+      "prior": {
+        "samples": 12,
+        "p95_ms": 3.786,
+        "median_ms": 3.1252083333333336
+      },
+      "candidate": {
+        "samples": 12,
+        "p95_ms": 3.237375,
+        "median_ms": 3.0754166666666665
+      },
+      "section6": {
+        "samples": 12,
+        "p95_ms": 3.5795833333333333,
+        "median_ms": 2.7215416666666665
+      },
+      "prior_repeat": {
+        "samples": 12,
+        "p95_ms": 3.7329166666666667,
+        "median_ms": 3.2030833333333333
+      },
+      "candidate_repeat": {
+        "samples": 12,
+        "p95_ms": 3.2350416666666666,
+        "median_ms": 3.1444583333333336
+      }
+    },
+    "'project/": {
+      "prior": {
+        "samples": 12,
+        "p95_ms": 1.22025,
+        "median_ms": 1.1561666666666668
+      },
+      "candidate": {
+        "samples": 12,
+        "p95_ms": 1.1999166666666667,
+        "median_ms": 1.188
+      },
+      "section6": {
+        "samples": 12,
+        "p95_ms": 1.2065,
+        "median_ms": 1.0175416666666666
+      },
+      "prior_repeat": {
+        "samples": 12,
+        "p95_ms": 1.20575,
+        "median_ms": 1.1621666666666668
+      },
+      "candidate_repeat": {
+        "samples": 12,
+        "p95_ms": 1.3389583333333333,
+        "median_ms": 1.1925416666666668
+      }
+    }
+  },
+  "scope": "Same 200k dot corpus, 12 samples/query. Prior/candidate sequential fresh runs; section 6 values historical. Non-path digests include IDs, tiers, score/boost bit patterns, sources and highlights. Path digest changes are intended. No displayed-frame latency or speedup claim.",
+  "reverse_pair": {
+    "reason": "First candidate project/read p95 was higher with nearly unchanged median; reversed-order pair checks repeatability, preserving all attempts",
+    "order": [
+      "candidate",
+      "prior"
+    ],
+    "non_path_equal_digests": 288,
+    "same_binary_repeat_equal_digests": 360
+  }
+}

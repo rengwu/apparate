@@ -1,0 +1,50 @@
+Building for debugging...
+[Using on-disk description]
+[3 / 15] ApparateCore
+[4 / 16] ApparateCore
+[10 / 23] ApparateFixtures
+[11 / 24] ApparateFixtures
+[15 / 23] ApparateCore
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCore: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[22 / 28] ApparateCoreTests-product
+/Users/rengwu/Projects/apparate/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: ApparateObserver-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[23 / 29] ApparateObserver-product
+[28 / 33] Apparate-product
+error: SwiftCompile normal arm64 /Users/rengwu/Projects/apparate/Sources/Apparate/SettingsVerification.swift failed with a nonzero exit code. Command line:     cd /Users/rengwu/Projects
+    builtin-SwiftPerFileCompile SettingsVerification.swift
+[29 / 33] Apparate-product
+/Users/rengwu/Projects/apparate/Sources/Apparate/SettingsVerification.swift:375:23: error: call can throw, but it is executed in a non-throwing autoclosure
+373 |         try captureSettings(settings, "indexing-all", profile)
+374 |         set(Array(repeating: .indexed, count: 4), indexing: false)
+375 |         try check(try frames() == idle, "Indexing finish shifted frames")
+    |                       `- error: call can throw, but it is executed in a non-throwing autoclosure
+376 |         set([.indexed, .denied, .notFound, .unavailable], indexing: false)
+377 |         let mixedIdle = try frames()
+
+/Users/rengwu/Projects/apparate/Sources/Apparate/SettingsVerification.swift:387:23: error: call can throw, but it is executed in a non-throwing autoclosure
+385 |         let waitingIdle = try frames()
+386 |         set([.indexing, .waitingForAccess, .indexed, .indexed], indexing: true)
+387 |         try check(try frames() == waitingIdle && folderRows()[1].detail.stringValue == "Waiting for access", "Waiting row shifted on indexing")
+    |                       `- error: call can throw, but it is executed in a non-throwing autoclosure
+388 |         var toggles = 0
+389 |         store.onChange = { value, errors in
+
+/Users/rengwu/Projects/apparate/Sources/Apparate/SettingsVerification.swift:399:31: error: call can throw, but it is executed in a non-throwing autoclosure
+397 |                 let before = try frames(); toggle(button)
+398 |                 try checkProgress(true)
+399 |                 try check(try frames() == before, "Switch-triggered indexing shifted frames: " + id)
+    |                               `- error: call can throw, but it is executed in a non-throwing autoclosure
+400 |             }
+401 |         }
+
+/Users/rengwu/Projects/apparate/Sources/Apparate/SettingsVerification.swift:361:32: error: call can throw, but it is executed in a non-throwing autoclosure
+359 |             let spinnerFrame = spinner.convert(spinner.bounds, to: content)
+360 |             try check(abs(progressFrame.minX - buttonFrame.maxX - 8) < 0.01 && abs(spinnerFrame.midY - buttonFrame.midY) < 0.01, "Progress spacing/centering")
+361 |             try check(abs((try view("folder-actions")).frame.height - add.frame.height) < 0.01, "Action row height is not fixed by Add Folders")
+    |                                `- error: call can throw, but it is executed in a non-throwing autoclosure
+362 |         }
+363 |         try check(model.config.folders.count == 4, "Indexing fixture requires four folders")
+Failed frontend command:
+/Library/Developer/CommandLineTools/usr/bin/swift-frontend -frontend -c /Users/rengwu/Projects/apparate/Sources/Apparate/AppTestDiagnostics.swift /Users/rengwu/Projects/apparate/Sources/Apparate/FullPerformance.swift /Users/rengwu/Projects/apparate/Sources/Apparate/IconLoader.swift /Users/rengwu/Projects/apparate/Sources/Apparate/MenuController.swift /Users/rengwu/Projects/apparate/Sources/Apparate/NativeEffects.swift /Users/rengwu/Projects/apparate/Sources/Apparate/OpenWithWorkspace.swift /Users/rengwu/Projects/apparate/Sources/Apparate/PanelController.swift /Users/rengwu/Projects/apparate/Sources/Apparate/PanelRowDrawing.swift /Users/rengwu/Projects/apparate/Sources/Apparate/PanelRows.swift /Users/rengwu/Projects/apparate/Sources/Apparate/PanelVerification.swift /Users/rengwu/Projects/apparate/Sources/Apparate/PerformanceVerification.swift /Users/rengwu/Projects/apparate/Sources/Apparate/PreferencesSupport.swift -primary-file /Users/rengwu/Projects/apparate/Sources/Apparate/SettingsVerification.swift /Users/rengwu/Projects/apparate/Sources/Apparate/SettingsWindow.swift /Users/rengwu/Projects/apparate/Sources/Apparate/SetupWindow.swift /Users/rengwu/Projects/apparate/Sources/Apparate/TestProfile.swift /Users/rengwu/Projects/apparate/Sources/Apparate/main.swift -emit-dependencies-path /private/tmp/apparate-ui-build-20261119/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsVerification.d -emit-const-values-path /private/tmp/apparate-ui-build-20261119/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsVerification.swiftconstvalues -emit-reference-dependencies-path /private/tmp/apparate-ui-build-20261119/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsVerification.swiftdeps -serialize-diagnostics-path /private/tmp/apparate-ui-build-20261119/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsVerification.dia -target arm64-apple-macos27.0 -disable-cross-import-overlay-search -swift-module-cross-import Darwin /Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk/usr/include/Darwin.swiftcrossimport/xlocale.swiftoverlay -load-resolved-plugin /Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/libObservationMacros.dylib\#\#ObservationMacros -load-resolved-plugin /Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/libSwiftMacros.dylib\#\#SwiftMacros -disable-implicit-swift-modules -Xcc -fno-implicit-modules -Xcc -fno-implicit-module-maps -explicit-swift-module-map-file /private/tmp/apparate-ui-build-20261119/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/Apparate-dependencies-1.json -Xllvm -aarch64-use-tbi -enable-objc-interop -stack-check -sdk /Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk -I /private/tmp/apparate-ui-build-20261119/out/Products/Debug -Isystem /Library/Developer/CommandLineTools/Developer/usr/lib -F /private/tmp/apparate-ui-build-20261119/out/Products/Debug/PackageFrameworks -F /private/tmp/apparate-ui-build-20261119/out/Products/Debug -F /Library/Developer/CommandLineTools/Library/Developer/Frameworks -F /Library/Developer/CommandLineTools/Developer/Library/Frameworks -module-cache-path /private/tmp/apparate-ui-build-20261119/out/Intermediates.noindex/SwiftExplicitPrecompiledModules -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\=dwarf -dwarf-version\=5 -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D Xcode -serialize-debugging-options -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -validate-clang-modules-once -clang-build-session-file /private/tmp/apparate-ui-build-20261119/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /Users/rengwu/Projects -enable-anonymous-context-mangled-names -file-compilation-dir /Users/rengwu/Projects -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -ivfsstatcache -Xcc /private/tmp/apparate-ui-build-20261119/out/SDKStatCaches.noindex/macosx27.2-26B118-a0facfad118c1a7a18f0aad9463f65495818d34bafcb1249783cb8b2c4efe0a2.sdkstatcache -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -Xcc -I/private/tmp/apparate-ui-build-20261119/out/Products/Debug/include -Xcc -I/private/tmp/apparate-ui-build-20261119/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/DerivedSources-normal/arm64 -Xcc -I/private/tmp/apparate-ui-build-20261119/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/DerivedSources/arm64 -Xcc -I/private/tmp/apparate-ui-build-20261119/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\=1 -no-auto-bridging-header-chaining -module-name Apparate -package-name apparate -const-gather-protocols-file /private/tmp/apparate-ui-build-20261119/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/Apparate_const_extract_protocols.json -disable-clang-spi -clang-target arm64-apple-macos27.2 -target-sdk-version 27.2 -target-sdk-name macosx27.2 -in-process-plugin-server-path /Library/Developer/CommandLineTools/usr/lib/swift/host/libSwiftInProcPluginServer.dylib -o /private/tmp/apparate-ui-build-20261119/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsVerification.o -debug-module-path /private/tmp/apparate-ui-build-20261119/out/Intermediates.noindex/Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/Apparate.swiftmodule -index-unit-output-path /Apparate.build/Debug/Apparate-p.build/Objects-normal/arm64/SettingsVerification.o -index-store-path /private/tmp/apparate-ui-build-20261119/out -index-system-modules
+error: Build failed

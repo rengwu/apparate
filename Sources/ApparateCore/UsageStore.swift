@@ -34,7 +34,7 @@ public actor UsageStore {
     public func snapshot() throws -> UsageSnapshot { UsageSnapshot(counts: try counts()) }
 
     /// Call only after an action succeeds. Merely viewing or selecting a row never records usage.
-    public func recordSuccessfulOpen(id: String) throws {
+    public func recordSuccessfulOpen(id: String, contentType: String? = nil, application: URL? = nil) throws {
         let now = clock()
         guard now.isFinite else { throw UsageError(description: "Usage clock is not finite.") }
         try exec("BEGIN IMMEDIATE")
@@ -52,8 +52,25 @@ public actor UsageStore {
                     for entry in remove { bind(entry.key, to: s, at: 1); try done(s); sqlite3_reset(s); sqlite3_clear_bindings(s) }
                 }
             }
+            if let contentType, !contentType.isEmpty, let application {
+                try statement("INSERT INTO open_with(content_type, application, last_used) VALUES(?,?,?) ON CONFLICT(content_type) DO UPDATE SET application=excluded.application,last_used=excluded.last_used") { s in
+                    bind(contentType, to: s, at: 1); bind(application.standardizedFileURL.path, to: s, at: 2)
+                    sqlite3_bind_double(s, 3, now); try done(s)
+                }
+                try exec("DELETE FROM open_with WHERE content_type IN (SELECT content_type FROM open_with ORDER BY last_used DESC,content_type ASC LIMIT -1 OFFSET 128)")
+            }
             try exec("COMMIT")
         } catch { try? exec("ROLLBACK"); throw error }
+    }
+
+    public func lastOpenWith(for contentType: String) throws -> URL? {
+        try statement("SELECT application FROM open_with WHERE content_type=?") { s in
+            bind(contentType, to: s, at: 1)
+            let status = sqlite3_step(s)
+            if status == SQLITE_DONE { return nil }
+            guard status == SQLITE_ROW, let value = sqlite3_column_text(s, 0) else { throw failure() }
+            return URL(fileURLWithPath: String(cString: value))
+        }
     }
 
     private func counts(at now: TimeInterval) throws -> [String: Double] {
