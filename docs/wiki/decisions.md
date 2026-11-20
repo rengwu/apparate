@@ -172,6 +172,15 @@ Source: the user's messages in the chat during the supervised session, with scre
 | DEC-060 | In a path query (one with `/`), each folder skipped between the matched parts, and between the last matched part and the result, lowers the result's score. `apparate/build` then ranks `~/Projects/apparate/build` above `~/Projects/apparate/docs/wiki/build`, even after one open of the deeper folder; a folder opened often can still rise. Searches without `/` are unchanged. | The user, after `docs/wiki/build` (opened once) outranked `apparate/build`: "it has less depth, and furthermore its an exact match". Claude proposed the skipped-folder penalty; the user: "cool solution, lets do it". Built in [UI follow-up section 13](build/ui-follow-up.md#13-path-queries-prefer-the-tightest-path). |
 | DEC-061 | Release 0.1.0 without the supervised on-screen checks (M2, M4, M5 and the UI follow-up) and without the M6 on-screen speed measurements. The release notes list them as not yet checked on a real Mac. This waives the rule Claude set in the M5 guide that M7 would not release until they passed. | The user: "waive the checks for now, proceed with the release". The checks stay open for a later session. |
 
+## Round 20 — 2026-11-21
+
+Source: the user's chat request, then two grill-forms: "Apparate icon — background tint" (round 20) and "Apparate icon — Dusk, content size" (round 21).
+
+| ID | Decision | Basis |
+| --- | --- | --- |
+| DEC-062 | The icon's background changes from near-black to Dusk: a dark blue at the top fading to plum at the bottom, with a soft violet lift behind the ball. It stays dark. The poof, its colours and the sparkle layout stay as in [DEC-046](#round-10-2026-11-19) and [DEC-047](#round-11-2026-11-19). | The user: "i like the current icon, but i think the background can be better than pure black. maybe add a slight tint or either purple, or blue. (still keep it dark though)". User choice in round 20 (D · Dusk) from Plum, Indigo, Midnight and Dusk, all equally dark. Claude had recommended B (Indigo). |
+| DEC-063 | The poof and sparkles are drawn 20% larger inside the same tile. The sparkles keep their size relative to the ball but move outward less than it grows, so they stay clear of the tile edge. | The user's note on round 20: "can we make the contents a little bigger? (lesser padding / empty space)". User choice in round 21 (120%) from 110%, 120% and 130%; matched the recommendation. |
+
 ## Observed from the reference apps
 
 Klip, Yacht and Portia (in `~/Projects`) are SwiftPM packages built by a `build.sh` script with Command Line Tools only. They are pure AppKit (no SwiftUI) menu bar apps. Each is released as a zip or DMG on GitHub Releases, ad-hoc signed and not notarized. Klip signs with a fixed designated requirement (`identifier "local.klip"`), which keeps privacy grants valid across rebuilds. These are observations, not decisions for Apparate; round 2 asks whether to follow them.

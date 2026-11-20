@@ -1,11 +1,11 @@
 ---
 title: App icon
 section: Design
-updated: 2026-11-19
+updated: 2026-11-21
 ---
 # App icon
 
-The app icon is a glowing ball of poof on black: the puff of smoke when something apparates. The menu bar shows the same puff as an outline. Decided over grill-form rounds 4–11 ([decisions](../decisions.md#round-11-2026-11-19)).
+The app icon is a glowing ball of poof on a dark dusk-blue tile: the puff of smoke when something apparates. The menu bar shows the same puff as an outline. Decided over grill-form rounds 4–11 ([decisions](../decisions.md#round-11-2026-11-19)); the background and the size of the contents changed in rounds 20–21 ([decisions](../decisions.md#round-20-2026-11-21)).
 
 ![The final icon](../attachments/2026-11-19-icon/final-512.png)
 
@@ -36,6 +36,8 @@ The icon brief changed as the user reacted to each round. Everything below was a
 | 9 | Curl, Burst, Trail, Smoke ring | Keep the round ball; vary it like random seeds ([DEC-045](../decisions.md#round-9-2026-11-19)). |
 | 10 | Eight seeded balls of poof | Seed 10, with balanced but not symmetrical sparkles ([DEC-046](../decisions.md#round-10-2026-11-19)). |
 | 11 | Two sparkle layouts; three menu bar glyphs | Layout B and the outlined puff ([DEC-047](../decisions.md#round-11-2026-11-19), [DEC-048](../decisions.md#round-11-2026-11-19)). |
+| 20 | Four dark background tints: Plum, Indigo, Midnight, Dusk | Dusk, with bigger contents ([DEC-062](../decisions.md#round-20-2026-11-21)). |
+| 21 | Dusk with the contents at 110%, 120% and 130% | 120% ([DEC-063](../decisions.md#round-20-2026-11-21)). |
 
 Round 6 and later, as offered:
 
@@ -51,6 +53,10 @@ Round 6 and later, as offered:
 
 ![Round 11: seed 10 as first drawn, then layouts A and B](../attachments/2026-11-19-icon/round-11.jpg)
 
+![Round 20: the icon before, then the four tints](../attachments/2026-11-21-icon-tint/round-20.jpg)
+
+![Round 21: Dusk at its first size, then the three sizes](../attachments/2026-11-21-icon-tint/round-21.jpg)
+
 ## The recipe
 
-The ball is a round core with a ring of lumps whose number, sizes and angles come from a seeded random generator; seed 10 was chosen. The colour is a white core, eroded from the shape and blurred, over an edge gradient running from lilac through violet and pink to amber, with a violet and pink glow behind, on a near-black radial background. The sparkles are four-pointed stars: the largest at the upper left, opposite the ball's amber weight, a medium one at the right and a small one at the lower left.
+The ball is a round core with a ring of lumps whose number, sizes and angles come from a seeded random generator; seed 10 was chosen. The colour is a white core, eroded from the shape and blurred, over an edge gradient running from lilac through violet and pink to amber, with a violet and pink glow behind. The background is Dusk: a vertical gradient from dark blue (`#1A2252`) through indigo to plum (`#1A0A24`), with a soft violet radial lift behind the ball. The sparkles are four-pointed stars: the largest at the upper left, opposite the ball's amber weight, a medium one at the right and a small one at the lower left. The ball is scaled to 120% around the tile's centre; the sparkles are scaled 120% too, but their distance from the centre grows only 12%, so they stay clear of the edge.
