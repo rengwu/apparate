@@ -16,7 +16,7 @@ Build guides, one per milestone of the [implementation plan](../plan.md). Claude
 | M5 Settings, menu bar, first run | [M5 guide](m5-settings-menu-first-run.md) | Reviewed: passed after one fix; committed `9658758`; supervised checks pending |
 | M6 Performance qualification | [M6 guide](m6-performance.md) | Hidden stage reviewed and committed `13038cb`; on-screen stage waits for the user (DEC-049) |
 | UI follow-up (from the supervised session) | [UI follow-up guide](ui-follow-up.md) | Sections 1–14 reviewed and passed; committed `9194cfd` |
-| M7 Release 0.1.0 | [M7 guide](m7-release.md) | [Built; automated checks passed](../verification/runs/2026-11-20T141252Z-m7.md); reviewed and approved for the M7 commit; privacy choices applied; native checks remain Untested, waived for 0.1.0 (DEC-061) |
+| M7 Release 0.1.0 | [M7 guide](m7-release.md) | [Built; automated checks passed](../verification/runs/2026-11-20T141252Z-m7.md); reviewed; committed and tagged `v0.1.0`; [published](https://github.com/rengwu/apparate/releases/tag/v0.1.0) 2026-11-21; privacy choices applied; native checks remain Untested, waived for 0.1.0 (DEC-061) |
 
 ## How a guide is used
 

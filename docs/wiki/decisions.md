@@ -178,4 +178,4 @@ Klip, Yacht and Portia (in `~/Projects`) are SwiftPM packages built by a `build.
 
 ## Not yet decided
 
-- Creating the GitHub repository and publishing a release need the user's go-ahead when M7 is reached.
+- ~~Creating the GitHub repository and publishing a release need the user's go-ahead when M7 is reached.~~ Done 2026-11-21 at the user's request: public `rengwu/apparate`, release `v0.1.0`.
