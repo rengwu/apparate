@@ -1,0 +1,8 @@
+{
+  "scenarios": 239,
+  "reused_prior_images": 238,
+  "matrix_local_images": 1,
+  "additional_app_smoke_images": 1,
+  "local_images": 2,
+  "note": "Corrected original JPG-only counter to include the native PNG demo. Shared-app fixture smoke is separate from the 239-scenario matrix."
+}

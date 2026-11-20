@@ -9,7 +9,7 @@ updated: 2026-11-19
 
 ## Entry points and expected outcomes
 
-Eligibility is captured before ConfigStore writes defaults: missing config shows setup, existing config does not, and `APPARATE_SHOW=setup` is an explicit override. Done closes even when steps are incomplete. It neither shows the launcher nor quits; the newly created config prevents repeated onboarding next launch.
+Eligibility is captured before ConfigStore writes defaults: missing config shows setup and existing config does not. In testing builds only, `APPARATE_SHOW=setup` is an explicit override; M7 excludes that switch from production. Done closes even when steps are incomplete. It neither shows the launcher nor quits; the newly created config prevents repeated onboarding next launch.
 
 The shortcut step completes only when Apparate holds the configured key and, for ⌘Space, Spotlight is known not to use it. A different registered shortcut completes the step too. Unknown Spotlight state asks the user to check, without claiming a conflict or success. Known first-run Spotlight conflict uses the inline explanation; other unexpected startup registration failure retains the one-time alert. Returning to either preferences window rereads shortcut/login/config state and retries registration.
 
@@ -23,7 +23,7 @@ Use [M5 setup](../verification/setup.md#m5-settings-menu-and-setup). Core fixtur
 
 ## Supervised recipes — Untested
 
-Use a fresh, agreed development config and explicitly agreed privacy actions. Confirm setup appears once, can be closed incomplete and does not return next launch. Check the real shortcut link, return-to-window refresh, one-time unexpected registration error and custom shortcut success. Check mixed folder decisions, close during a pending check, reopen and retry through Settings, then rebuild with the same signed identity and verify persistence. Restore agreed preferences afterward. See the existing [M2 supervised recipe](../verification/runs/2026-11-18T164001Z-m2-supervised.md); M7 cannot release until all native checks pass.
+Use a fresh, agreed development config and explicitly agreed privacy actions. Confirm setup appears once, can be closed incomplete and does not return next launch. Check the real shortcut link, return-to-window refresh, one-time unexpected registration error and custom shortcut success. Check mixed folder decisions, close during a pending check, reopen and retry through Settings, then rebuild with the same signed identity and verify persistence. Restore agreed preferences afterward. See the existing [M2 supervised recipe](../verification/runs/2026-11-18T164001Z-m2-supervised.md). These checks remain Untested; [DEC-061](../decisions.md#round-13-2026-11-19) waives them for release 0.1.0.
 
 ## Coverage and limitations
 

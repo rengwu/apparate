@@ -1,6 +1,6 @@
 ---
 title: Apparate
-updated: 2026-11-19
+updated: 2026-11-21
 ---
 # Apparate
 
@@ -21,6 +21,7 @@ A minimal, very fast launcher for macOS. Planning notes, research, decisions, an
 - [M4 guide](build/m4-launcher-panel.md) — the finished launcher panel.
 - [M5 guide](build/m5-settings-menu-first-run.md) — settings, menu bar and first run.
 - [M6 guide](build/m6-performance.md) — measuring the finished app against the budgets.
+- [M7 guide](build/m7-release.md) — release build, archive, documentation and privacy review.
 
 ## Design
 
@@ -30,16 +31,16 @@ A minimal, very fast launcher for macOS. Planning notes, research, decisions, an
 
 - [Feature map](features/index.md) — implemented behavior, entry points and repeatable recipes.
 - [Verification setup](verification/setup.md) — isolated builds, tests and measurements.
-- [Supervised session](verification/supervised-session.md) — the on-screen and real-action checks the user runs with Claude before release.
+- [Supervised session](verification/supervised-session.md) — the on-screen and real-action recipes; waived for 0.1.0, still open.
 - [M1 verification](verification/runs/2026-11-18T154000Z-m1.md) — outcomes and evidence for the foundation build.
 - [M2 automated verification](verification/runs/2026-11-18T164000Z-m2.md) — 43 passing groups after five review fixes; [review passed](build/m2-sources-actions-panel.md#review), committed separately.
-- [M2 supervised checks](verification/runs/2026-11-18T164001Z-m2-supervised.md) — native effects, permissions, global keys and IME; Untested, required before M7 release.
+- [M2 supervised checks](verification/runs/2026-11-18T164001Z-m2-supervised.md) — native effects, permissions, global keys and IME; Untested, waived for 0.1.0 by DEC-061.
 - [M3 automated verification](verification/runs/2026-11-18T181500Z-m3.md) — 63 passing groups and the verified search-speed fix; memory/end-to-end limits recorded; independent recheck passed.
 
 - [Catalog follow-up](verification/runs/2026-11-18T191222Z-catalog.md) — unchanged metadata reuse, event traces and publication checks.
 
 - [M4 verification](verification/runs/2026-11-18T200340Z-m4.md) — approved and committed; hidden proxy latency remains failed and carried to M6.
-- [M5 verification](verification/runs/2026-11-18T212428Z-m5.md) — Settings, menu and setup; automated checks and review fix passed; included in the M5 milestone commit; native checks pending before M7.
+- [M5 verification](verification/runs/2026-11-18T212428Z-m5.md) — Settings, menu and setup; automated checks and review fix passed; included in the M5 milestone commit; native checks remain Untested.
 
 - [UI follow-up verification](verification/runs/2026-11-19T064952Z-ui.md) — Settings cards, setup text and dynamic panel sizing; hidden checks passed, review and on-screen resize proof pending.
 
@@ -68,6 +69,12 @@ Claude and Codex researched the whole topic independently, at the user's request
 - [Panel latency spike](spikes/2026-11-18-panel-latency.md) — measured show, keystroke, memory and idle CPU against the budgets.
 
 **2026-11-19 gate update:** Claude moved the pending native checks to the M7 release gate in the [M5 guide](build/m5-settings-menu-first-run.md). Their recorded outcomes remain unchanged.
+
+**2026-11-20 waiver:** [DEC-061](decisions.md#round-13-2026-11-19) waives supervised native checks and M6 on-screen measurements for 0.1.0. They remain Untested, and historical Failed memory budgets remain Failed.
+
+- [M7 verification](verification/runs/2026-11-20T141252Z-m7.md) — production archive, headless upgrade and hidden checks complete; reviewed and approved.
+- [Release notes draft](release/0.1.0.md) — install steps, known limits and verified archive checksum.
+- [Pre-publication privacy review](release/privacy.md) — public note on the completed review and publication choices.
 
 - [M6 hidden-stage results](verification/runs/2026-11-18T225138Z-m6.md): functional checks passed; 20k target and 200k rebuild limit missed; on-screen qualification pending.
 

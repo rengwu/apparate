@@ -62,22 +62,30 @@ private final class PanelActivity {
     private let opaque: Bool
     private let activityEnabled: Bool
     private var activity: PanelActivity?
+#if APPARATE_TESTING
     private(set) var activityBegins = 0, activityEnds = 0
+#endif
     var activityHeld: Bool { activity != nil }
+#if APPARATE_TESTING
     var observationRun: UInt64?
     private(set) var observationShow: UInt64 = 0
+#endif
     private let magnifier = NSImageView(), topRule = NSBox(), bottomRule = NSBox()
     private var hasCompletedPresentation = false
     private var displayedOpenWith = false
     var panelFrame: NSRect { panel.frame }
+#if APPARATE_TESTING
     private(set) var layoutFrameChanges = 0
+#endif
     var onHidden: (() -> Void)?, onQuit: (() -> Void)?, onSettings: (() -> Void)?
+#if APPARATE_TESTING
     var onTiming: ((Double, Double?) -> Void)?
     var onUpdate: ((UInt64, Bool, Double) -> Void)?
     var onTextBegin: (() -> Void)?
     var onText: ((String, UInt64) -> Void)?
     private(set) var accessibilityNotifications = 0
     private(set) var warmUpMS: Double?
+#endif
     var isVisible: Bool { panel.isVisible }
     var isKey: Bool { panel.isKeyWindow }
     var isMain: Bool { panel.isMainWindow }
@@ -112,7 +120,9 @@ private final class PanelActivity {
         rows.onScroll = { [weak session] in session?.scroll($0) }
         rows.onAccessibilitySelection = { [weak self] in
             guard let self else { return }
+#if APPARATE_TESTING
             self.accessibilityNotifications += 1
+#endif
             if self.panel.presentationAllowed && self.panel.isVisible {
                 NSAccessibility.post(element: self.rows, notification: .selectedRowsChanged)
             }
@@ -159,9 +169,13 @@ private final class PanelActivity {
         rows.invalidateAppearance(); background.needsDisplay = true
     }
     func warmUp() {
+#if APPARATE_TESTING
         let start = ContinuousClock.now
+#endif
         background.layoutSubtreeIfNeeded(); _ = try? render()
+#if APPARATE_TESTING
         warmUpMS = durationMS(start.duration(to: .now))
+#endif
     }
     func show(start: ContinuousClock.Instant = .now) {
         guard panel.presentationAllowed else { return }
@@ -171,19 +185,30 @@ private final class PanelActivity {
             panel.setFrameOrigin(NSPoint(x: area.midX - 320, y: area.midY + 167 - panel.frame.height))
         }
         panel.makeKeyAndOrderFront(nil); panel.makeFirstResponder(search)
+#if APPARATE_TESTING
         let shown = durationMS(start.duration(to: .now)); onTiming?(shown, nil)
         // An implicit transaction completion is only a proxy, never a presentation timestamp.
         CATransaction.setCompletionBlock { [weak self] in MainActor.assumeIsolated {
             self?.onTiming?(shown, durationMS(start.duration(to: .now)))
         } }
+#endif
     }
     private func beginShowing() {
-        observationShow &+= 1; hasCompletedPresentation = false
-        if activityEnabled && activity == nil { activity = PanelActivity(); activityBegins += 1 }
+#if APPARATE_TESTING
+        observationShow &+= 1
+#endif
+        hasCompletedPresentation = false
+        if activityEnabled && activity == nil {
+            activity = PanelActivity()
+#if APPARATE_TESTING
+            activityBegins += 1
+#endif
+        }
         editor?.unmarkText(); search.stringValue = ""; editor?.string = ""
         editor?.setSelectedRange(NSRange(location: 0, length: 0))
         session.show(); update()
     }
+#if APPARATE_TESTING
     func beginHiddenShowing() throws {
         guard !panel.presentationAllowed else { throw SourceError("Hidden checks require a non-presenting panel.") }
         beginShowing(); try verifyHidden()
@@ -196,6 +221,7 @@ private final class PanelActivity {
         guard !panel.isVisible, !panel.isKeyWindow, !panel.isMainWindow, !NSApp.isActive,
               !panel.canBecomeKey, !panel.canBecomeMain else { throw SourceError("The automated panel acquired presentation or focus.") }
     }
+#endif
     func hide() { session.hide(); panel.orderOut(nil) }
     func windowDidResignKey(_ notification: Notification) { if session.model.visible && panel.presentationAllowed { hide(); onHidden?() } }
     private var editor: NSTextView? { search.currentEditor() as? NSTextView ?? panel.firstResponder as? NSTextView }
@@ -209,10 +235,14 @@ private final class PanelActivity {
         editor.writingToolsBehavior = .none
     }
     func controlTextDidChange(_ notification: Notification) {
+#if APPARATE_TESTING
         onTextBegin?()
+#endif
         let value = editor?.string ?? search.stringValue
         session.edit(value, composing: editor?.hasMarkedText() ?? false)
+#if APPARATE_TESTING
         onText?(value, session.model.revision)
+#endif
     }
     @objc private func editorHistoryChanged(_ notification: Notification) {
         // Inspect the undo manager only for a history event, not on each keystroke.
@@ -302,9 +332,16 @@ private final class PanelActivity {
         return false
     }
     private func update() {
-        if !session.model.visible && activity != nil { activity = nil; activityEnds += 1 }
+        if !session.model.visible && activity != nil {
+            activity = nil
+#if APPARATE_TESTING
+            activityEnds += 1
+#endif
+        }
+#if APPARATE_TESTING
         let start = ContinuousClock.now
         defer { onUpdate?(session.model.revision, session.model.pending, durationMS(start.duration(to: .now))) }
+#endif
         CATransaction.begin(); CATransaction.setDisableActions(true)
         defer { CATransaction.commit() }
         if displayedOpenWith != session.isOpenWith {
@@ -339,10 +376,12 @@ private final class PanelActivity {
         else if session.model.selected?.entry.target.fileURL != nil { footer.stringValue = "↩ Open   ⌘↩ Reveal in Finder   ⌘C Copy path" + ((session.model.selected?.entry.item.kind == .file || session.model.selected?.entry.item.kind == .folder) ? "   " + session.openWithKey.display + " Open With…" : "") }
         else { footer.stringValue = "↩ Open" }
         layout(rows: rows.contents.count, message: !empty.isHidden)
+#if APPARATE_TESTING
         if let run = observationRun, !session.model.pending {
             rows.observationMarker = FrameMarker(run: run, show: observationShow, revision: session.model.revision,
                 digest: ObservationClock.digest(session.model.rows.map(\.result)))
         } else { rows.observationMarker = nil }
+#endif
         rows.needsDisplay = true; background.layoutSubtreeIfNeeded()
     }
     private func layout(rows count: Int, message: Bool) {
@@ -356,7 +395,11 @@ private final class PanelActivity {
         // it high within this borderless 24 pt cell; move the whole native field
         // down 2 pt so its editor, placeholder and marked text move together.
         magnifier.frame = NSRect(x: 16, y: height - 29, width: 18, height: 18)
-        search.frame = NSRect(x: 43, y: height - 35, width: observationRun == nil ? 580 : 536, height: 24)
+        var searchWidth: CGFloat = 580
+#if APPARATE_TESTING
+        if observationRun != nil { searchWidth = 536 }
+#endif
+        search.frame = NSRect(x: 43, y: height - 35, width: searchWidth, height: 24)
         topRule.frame = NSRect(x: 0, y: height - 41, width: 640, height: 1)
         topRule.isHidden = count == 0 && !message
         bottomRule.frame = NSRect(x: 0, y: 28, width: 640, height: 1); bottomRule.isHidden = count == 0
@@ -364,10 +407,13 @@ private final class PanelActivity {
         empty.frame = NSRect(x: 15, y: height - 75, width: 610, height: 22)
         let frame = NSRect(x: panel.frame.minX, y: top - height, width: 640, height: height)
         if panel.frame != frame {
+#if APPARATE_TESTING
             layoutFrameChanges += 1
+#endif
             panel.setFrame(frame, display: false, animate: false)
         }
     }
+#if APPARATE_TESTING
     /// Existing smoke checks enter via the text-field delegate, with no presentation.
     func enterTestQuery(_ value: String) {
         search.stringValue = value; editor?.string = value
@@ -402,6 +448,7 @@ private final class PanelActivity {
         }
     }
     func setAppearance(dark: Bool) { panel.appearance = NSAppearance(named: dark ? .darkAqua : .aqua); rows.invalidateAppearance(); colorsChanged() }
+#endif
     func render() throws -> NSBitmapImageRep {
         background.layoutSubtreeIfNeeded()
         guard let rep = background.bitmapImageRepForCachingDisplay(in: background.bounds) else { throw SourceError("The panel could not be rendered.") }
@@ -410,8 +457,11 @@ private final class PanelActivity {
         }
         return rep
     }
+#if APPARATE_TESTING
     func capture(to url: URL) throws {
         guard let data = try render().representation(using: url.pathExtension == "jpg" ? .jpeg : .png, properties: [.compressionFactor: 0.82]) else { throw SourceError("The panel render could not be encoded.") }
         try data.write(to: url, options: .atomic)
     }
+#endif
+
 }

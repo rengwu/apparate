@@ -77,47 +77,9 @@ No reliable way to detect an open sheet without extra permissions was found.
 
 ## Evidence
 
-The Apple Account name and picture, and the user name in Users & Groups, are covered in grey. The captures also show some apps installed on this Mac. The system switched to Dark appearance partway through the run; this did not affect navigation.
+The screenshots from this spike are kept locally and are not published, following the pre-publication privacy review. The per-item results and test scripts remain in the repository. The system switched to Dark appearance partway through the run; this did not affect navigation.
 
 - [Per-item results (CSV)](../attachments/2026-11-18-settings-deep-links/results.csv)
-
-Keyboard (the first image is the baseline):
-
-![Keyboard anchors 00–05](../attachments/2026-11-18-settings-deep-links/sheet-s00.jpg)
-
-![Keyboard anchors 06–11](../attachments/2026-11-18-settings-deep-links/sheet-s01.jpg)
-
-![Keyboard anchors 12–16 and the Privacy & Security baseline](../attachments/2026-11-18-settings-deep-links/sheet-s02.jpg)
-
-Other panes:
-
-![Privacy & Security](../attachments/2026-11-18-settings-deep-links/sheet-s03.jpg)
-
-![Displays and Desktop & Dock](../attachments/2026-11-18-settings-deep-links/sheet-s04.jpg)
-
-![Desktop & Dock and Menu Bar](../attachments/2026-11-18-settings-deep-links/sheet-s05.jpg)
-
-![Menu Bar, Network and Sound](../attachments/2026-11-18-settings-deep-links/sheet-s06.jpg)
-
-![Sound and Lock Screen](../attachments/2026-11-18-settings-deep-links/sheet-s07.jpg)
-
-![Battery and Screen Time](../attachments/2026-11-18-settings-deep-links/sheet-s08.jpg)
-
-![Sharing, Users & Groups and Wallpaper](../attachments/2026-11-18-settings-deep-links/sheet-s09.jpg)
-
-![Wallpaper, Spotlight, Language & Region and Login Items](../attachments/2026-11-18-settings-deep-links/sheet-s10.jpg)
-
-![Login Items and Accessibility](../attachments/2026-11-18-settings-deep-links/sheet-s11.jpg)
-
-![Date & Time and AirDrop & Continuity](../attachments/2026-11-18-settings-deep-links/sheet-s12.jpg)
-
-System Settings already open:
-
-![An open sheet blocks later links](../attachments/2026-11-18-settings-deep-links/sheet-warm.jpg)
-
-![Without a sheet, later links work](../attachments/2026-11-18-settings-deep-links/sheet-warm2.jpg)
-
-![Quit first, then open](../attachments/2026-11-18-settings-deep-links/sheet-quitfirst.jpg)
 
 ## Consequences for the build
 

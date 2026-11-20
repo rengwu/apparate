@@ -1,0 +1,19 @@
+{
+  "completed_scans" : 0,
+  "config_sha256" : "18c04bc86b0ab04b2edcb564397fe8949f863cbd46543369e889995ced8f735e",
+  "count" : 4,
+  "data_directory_override" : true,
+  "last_update" : 1795184674.2691391,
+  "launched_app" : false,
+  "loaded_from_disk" : true,
+  "mode" : "check",
+  "open_with" : "Editor.app",
+  "result" : "Passed",
+  "revision" : 1,
+  "search_names" : [
+    "README.md"
+  ],
+  "skip_hidden" : true,
+  "usage_count" : 1,
+  "watcher" : "quiet injected watcher; no event replay"
+}

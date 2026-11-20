@@ -6,13 +6,16 @@ if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
     echo "VERSION must contain a semantic version with three numbers." >&2
     exit 1
 fi
-swift build --package-path "$root" -c release --arch arm64 --product Apparate
-bin="$(swift build --package-path "$root" -c release --arch arm64 --show-bin-path)"
+export APPARATE_BUILD_TESTING=0
+scratch="$root/.build/production"
+swift build --package-path "$root" --scratch-path "$scratch" -c release --arch arm64 --product Apparate
+bin="$(swift build --package-path "$root" --scratch-path "$scratch" -c release --arch arm64 --show-bin-path)"
 bundle="$root/build/Apparate.app"
 rm -rf "$bundle"
 mkdir -p "$bundle/Contents/MacOS" "$bundle/Contents/Resources"
 cp "$bin/Apparate" "$bundle/Contents/MacOS/Apparate"
 cp "$root/THIRD_PARTY_NOTICES.txt" "$bundle/Contents/Resources/"
+cp "$root/LICENSE" "$bundle/Contents/Resources/"
 cp "$root/Resources/AppIcon.icns" "$bundle/Contents/Resources/"
 cp "$root/Resources/MenuBarIconTemplate.png" "$root/Resources/MenuBarIconTemplate@2x.png" "$bundle/Contents/Resources/"
 cat > "$bundle/Contents/Info.plist" <<EOF
@@ -36,3 +39,9 @@ EOF
 codesign --force --deep --sign - --requirements '=designated => identifier "local.apparate"' "$bundle"
 codesign --verify --deep --strict "$bundle"
 echo "Built build/Apparate.app ($version, arm64)"
+archive="$root/build/Apparate.zip"
+temporary_archive="$(mktemp "$root/build/.Apparate.XXXXXX.zip")"
+trap 'rm -f "$temporary_archive"' EXIT
+ditto -c -k --norsrc --noextattr --keepParent "$bundle" "$temporary_archive"
+mv "$temporary_archive" "$archive"
+shasum -a 256 "$archive"

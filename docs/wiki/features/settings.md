@@ -41,7 +41,7 @@ Use [M5 verification setup](../verification/setup.md#m5-settings-menu-and-setup)
 
 ## Supervised recipes — Untested
 
-Run only in a user-agreed slot, with a backed-up config and agreed fixture folders. These checks are required before M7 release.
+Run only in a user-agreed slot, with a backed-up config and agreed fixture folders. These checks remain Untested and are waived for 0.1.0 by [DEC-061](../decisions.md#round-13-2026-11-19).
 
 1. Open Settings through menu, panel ⌘,, app reopen and setup. Confirm one window, selected toolbar item, per-tab size, appearance in light/dark, focus return, ⌘W and ⌘Q. Reopen with the status icon hidden. Check ordinary text editing, selection, Tab, undo/cut/copy/paste and non-US keyboard layout.
 2. Record an agreed safe shortcut; cancel using Esc, tab, close and focus loss. Try a known occupied key and confirm the previous key still opens the launcher. Confirm menu text tracks the actual key. With the user's agreement, inspect Spotlight's binding, free ⌘Space manually and return; Apparate should retry registration. Restore the user's shortcut preferences afterward. Never edit symbolichotkeys automatically.

@@ -58,9 +58,12 @@ import ApparateCore
     @objc func checkAccess() { model.requestAccess() }
     @objc func chooseFolders() { onChooseFolders?() }
     @objc func finish() { model.cancelAccess(); window.close() }
+#if APPARATE_TESTING
     func verifyHidden() throws { try window.verifyHidden() }
     func capture(to url: URL, dark: Bool? = nil) throws {
         if let dark { window.appearance = NSAppearance(named: dark ? .darkAqua : .aqua) }
         refresh(); try window.capture(to: url)
     }
+#endif
+
 }

@@ -10,7 +10,7 @@ import subprocess
 import tempfile
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--binary", type=Path, help="Explicit isolated review executable")
+parser.add_argument("--binary", type=Path, required=True, help="Explicit executable built with APPARATE_BUILD_TESTING=1")
 parser.add_argument('--fixture-app', action='store_true')
 parser.add_argument('--file-source', choices=['fixture', 'projects'])
 parser.add_argument('--mode', choices=['fixtures', 'live-readonly'], default='fixtures')
@@ -38,7 +38,9 @@ assert not args.action_open or args.show == 'panel'
 assert not args.settings_check or (args.mode == 'fixtures' and not args.show and not args.file_source and not args.panel_check and not args.action_open and args.runs == 1)
 assert not args.panel_check or (args.mode == 'fixtures' and not args.show and not args.file_source and not args.action_open and args.runs == 1)
 root = Path(__file__).resolve().parent.parent
-binary = args.binary.resolve() if args.binary else root / 'build/Apparate.app/Contents/MacOS/Apparate'
+binary = args.binary.resolve()
+if not binary.is_file() or b'APPARATE_TEST_MODE' not in binary.read_bytes():
+    parser.error('--binary must be a testing build; refusing to launch a production app')
 assert binary.is_file(), 'Missing executable; supply --binary or assemble the default app'
 with tempfile.TemporaryDirectory(prefix='apparate-m2-app-') as directory:
     home = Path(directory)

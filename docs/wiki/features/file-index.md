@@ -47,7 +47,7 @@ The release harness supplies `--file-benchmark synthetic`, `--file-benchmark pro
 
 ## Coverage and limits
 
-These checks establish Core behavior and isolated signed-app integration. Native opens, keyboard delivery/focus, physical IME, real protected-folder grants and their persistence across normally launched rebuilds remain in the [supervised run](../verification/runs/2026-11-18T164001Z-m2-supervised.md), required before M7 release. M6 owns the end-to-end performance verdict. Sampled memory peaks are lower bounds on the true instantaneous peak; timing results describe the recorded corpus and machine.
+These checks establish Core behavior and isolated signed-app integration. Native opens, keyboard delivery/focus, physical IME, real protected-folder grants and their persistence across normally launched rebuilds remain in the [supervised run](../verification/runs/2026-11-18T164001Z-m2-supervised.md), waived for 0.1.0 by [DEC-061](../decisions.md#round-13-2026-11-19). M6 owns the end-to-end performance verdict. Sampled memory peaks are lower bounds on the true instantaneous peak; timing results describe the recorded corpus and machine.
 
 ## Verification history
 

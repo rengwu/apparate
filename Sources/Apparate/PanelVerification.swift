@@ -63,6 +63,28 @@ private final class PanelSearchTrace: Sendable {
         do { try JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys]).write(to: profile.directory.appendingPathComponent("diagnostics.json"), options: .atomic) }
         catch { NSLog("Panel check receipt could not be written.") }
     }
+    private static func releaseDemo(_ profile: TestProfile) async throws -> [String: Any] {
+        var config = AppConfig(); config.resultLocation = .inline; config.folders = []
+        let entries = [
+            CatalogEntry(item: SearchItem(id: "demo:app", kind: .app, name: "Desk Notes"),
+                         target: .application(URL(fileURLWithPath: "/Applications/Desk Notes.app")), location: "/Applications", icon: .symbol("app")),
+            CatalogEntry(item: SearchItem(id: "demo:setting", kind: .setting, name: "Desktop & Dock"),
+                         target: .settings(bundle: "com.apple.Desktop-Settings.extension", anchor: nil), location: "System Settings", icon: .symbol("gearshape")),
+            CatalogEntry(item: SearchItem(id: "demo:folder", kind: .folder, name: "Desktop", path: "/Workspace/Desktop"),
+                         target: .file(URL(fileURLWithPath: "/Workspace/Desktop")), location: "~/Workspace", icon: .symbol("folder")),
+            CatalogEntry(item: SearchItem(id: "demo:file", kind: .file, name: "desktop-plan.md", path: "/Workspace/desktop-plan.md"),
+                         target: .file(URL(fileURLWithPath: "/Workspace/desktop-plan.md")), location: "~/Workspace", icon: .symbol("doc.plaintext"))
+        ]
+        let session = LauncherSession(config: config, usage: { UsageSnapshot() })
+        let panel = PanelController(session: session, icons: IconLoader(fixtureOnly: true), presentationAllowed: false, initialAppearance: .darkAqua)
+        defer { panel.hide() }
+        session.setCatalog(try CatalogSnapshot(entries: entries))
+        try panel.beginHiddenShowing(); try panel.injectText("desk"); try await settle(session)
+        try require(session.model.rows.count == 4 && Set(session.model.rows.map { $0.entry.item.kind }) == Set([.app, .setting, .folder, .file]), "Demo must use real matching for all four result kinds")
+        try require(panel.rows.observationMarker == nil && panel.rows.resultLocation == .inline, "Demo layout/marker")
+        try panel.verifyHidden(); try panel.capture(to: profile.directory.appendingPathComponent("apparate-demo.png"))
+        return ["query": "desk", "names": session.model.rows.map { $0.entry.item.name }, "fixture_only": true, "layout": "inline", "appearance": "dark", "observation_marker": false]
+    }
     private static func settle(_ session: LauncherSession, timeoutMS: Double = 2000) async throws {
         let start = ContinuousClock.now
         while session.model.pending && durationMS(start.duration(to: .now)) < timeoutMS { try await Task.sleep(for: .milliseconds(1)) }
@@ -274,6 +296,7 @@ private final class PanelSearchTrace: Sendable {
         report["path_navigation"] = try await pathNavigation(profile)
         report["indexed_dot_names"] = try await indexedDotNames(profile)
         report["tight_path_ranking"] = try await tightPathRanking(profile)
+        report["release_demo"] = try await releaseDemo(profile)
         report["result_completion"] = try await resultCompletion(profile)
         report["right_folder_completion"] = try await rightFolderCompletion(profile)
         report["larger_below_icons"] = try await largerBelowIcons(profile)

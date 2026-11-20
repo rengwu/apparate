@@ -1,0 +1,13 @@
+Apparate.app/
+Apparate.app/Contents/
+Apparate.app/Contents/_CodeSignature/
+Apparate.app/Contents/_CodeSignature/CodeResources
+Apparate.app/Contents/MacOS/
+Apparate.app/Contents/MacOS/Apparate
+Apparate.app/Contents/Resources/
+Apparate.app/Contents/Resources/MenuBarIconTemplate.png
+Apparate.app/Contents/Resources/MenuBarIconTemplate@2x.png
+Apparate.app/Contents/Resources/LICENSE
+Apparate.app/Contents/Resources/AppIcon.icns
+Apparate.app/Contents/Resources/THIRD_PARTY_NOTICES.txt
+Apparate.app/Contents/Info.plist

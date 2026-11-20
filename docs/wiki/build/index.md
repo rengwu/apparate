@@ -1,7 +1,7 @@
 ---
 title: Build
 section: Build
-updated: 2026-11-20
+updated: 2026-11-21
 ---
 # Build
 
@@ -9,13 +9,14 @@ Build guides, one per milestone of the [implementation plan](../plan.md). Claude
 
 | Milestone | Guide | Status |
 | --- | --- | --- |
-| M1 Foundation, matching and ranking | [M1 guide](m1-foundation.md) | Reviewed and passed; committed `0a6a63e` |
-| M2 Apps, settings, actions, first panel | [M2 guide](m2-sources-actions-panel.md) | [Built; automated checks passed](../verification/runs/2026-11-18T164000Z-m2.md); [reviewed: passed after five fixes](m2-sources-actions-panel.md#review); committed `b3e68c4`; supervised checks pending |
-| M3 File index | [M3 guide](m3-file-index.md) | Reviewed: passed after a speed fix; committed `ef9f683` |
-| M4 Launcher panel | [M4 guide](m4-launcher-panel.md) | Reviewed: passed, latency carried to M6; committed `e1543de`; supervised checks pending |
-| M5 Settings, menu bar, first run | [M5 guide](m5-settings-menu-first-run.md) | Reviewed: passed after one fix; committed `a784dad`; supervised checks pending |
-| M6 Performance qualification | [M6 guide](m6-performance.md) | Hidden stage reviewed and committed `87d171c`; on-screen stage waits for the user (DEC-049) |
-| UI follow-up (from the supervised session) | [UI follow-up guide](ui-follow-up.md) | Sections 1–14 reviewed and passed 2026-11-20; commit requested |
+| M1 Foundation, matching and ranking | [M1 guide](m1-foundation.md) | Reviewed and passed; committed `bf15efe` |
+| M2 Apps, settings, actions, first panel | [M2 guide](m2-sources-actions-panel.md) | [Built; automated checks passed](../verification/runs/2026-11-18T164000Z-m2.md); [reviewed: passed after five fixes](m2-sources-actions-panel.md#review); committed `87a6c41`; supervised checks pending |
+| M3 File index | [M3 guide](m3-file-index.md) | Reviewed: passed after a speed fix; committed `c07f516` |
+| M4 Launcher panel | [M4 guide](m4-launcher-panel.md) | Reviewed: passed, latency carried to M6; committed `9847930`; supervised checks pending |
+| M5 Settings, menu bar, first run | [M5 guide](m5-settings-menu-first-run.md) | Reviewed: passed after one fix; committed `9658758`; supervised checks pending |
+| M6 Performance qualification | [M6 guide](m6-performance.md) | Hidden stage reviewed and committed `13038cb`; on-screen stage waits for the user (DEC-049) |
+| UI follow-up (from the supervised session) | [UI follow-up guide](ui-follow-up.md) | Sections 1–14 reviewed and passed; committed `9194cfd` |
+| M7 Release 0.1.0 | [M7 guide](m7-release.md) | [Built; automated checks passed](../verification/runs/2026-11-20T141252Z-m7.md); reviewed and approved for the M7 commit; privacy choices applied; native checks remain Untested, waived for 0.1.0 (DEC-061) |
 
 ## How a guide is used
 

@@ -43,11 +43,11 @@ Apply the same pass to every text in the Settings window, and list each text kep
 
 The user's references, all from Rex's settings. They are dark; for light mode use System Settings on macOS 27, which uses the same grouped style.
 
-![Rex: Terminal — section headings, a card, a menu, number fields with steppers, a Choose… button, switches with descriptions](../attachments/2026-11-19-settings-style/rex-terminal.png)
+The Terminal reference showed section headings, a card, a menu, number fields with steppers, a Choose… button and switches with descriptions. Its screenshot is kept locally and is not published.
 
 ![Rex: Shortcuts — the keycap shortcut buttons and Record Shortcut, a footnote under a card](../attachments/2026-11-19-settings-style/rex-shortcuts.png)
 
-![Rex: Interface — switch rows, a borderless menu, a segmented control, footnotes](../attachments/2026-11-19-settings-style/rex-interface.png)
+The Interface reference showed switch rows, a borderless menu, a segmented control and footnotes. Its screenshot is kept locally and is not published.
 
 For comparison, today's [General](../evidence/2026-11-18T212428Z-m5/native/settings-general-dark.jpg), [Search](../evidence/2026-11-18T212428Z-m5/post-review/settings-search-dark.jpg), [Folders](../evidence/2026-11-18T212428Z-m5/post-review/settings-folders-dark.jpg) and [setup](../evidence/2026-11-18T212428Z-m5/native/setup-incomplete-light.jpg).
 

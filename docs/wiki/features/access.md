@@ -25,7 +25,7 @@ Follow [setup](../verification/setup.md). Core tests use sequential delayed fake
 
 ## Coverage and limitations
 
-Native prompt behavior, denial/retry and grant survival after rebuilding cannot be inferred from fake probes or code signing. The normally launched signed app and actual user decisions are required. See the separate [supervised run](../verification/runs/2026-11-18T164001Z-m2-supervised.md); these recipes are unvalidated and must pass before M7 release. No file crawl is part of M2.
+Native prompt behavior, denial/retry and grant survival after rebuilding cannot be inferred from fake probes or code signing. The normally launched signed app and actual user decisions are required. See the separate [supervised run](../verification/runs/2026-11-18T164001Z-m2-supervised.md); these recipes remain unvalidated and are waived for 0.1.0 by [DEC-061](../decisions.md#round-13-2026-11-19). No file crawl is part of M2.
 
 ## Verification history
 

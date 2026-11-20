@@ -15,10 +15,15 @@ extension ResultLocation {
     private var waiting: [String: [(NSImage?) -> Void]] = [:]
     private(set) var generation = 0
     var pendingFileLoads: Int { waiting.count }
-    private let fixtureOnly: Bool
+#if APPARATE_TESTING
+    private var fixtureOnly = false
+    convenience init(fixtureOnly: Bool, fileRaster: FileRaster? = nil) {
+        self.init(fileRaster: fileRaster); self.fixtureOnly = fixtureOnly
+    }
+#endif
     private let fileRaster: FileRaster
-    init(fixtureOnly: Bool = false, fileRaster: FileRaster? = nil) {
-        self.fixtureOnly = fixtureOnly; cache.countLimit = 128
+    init(fileRaster: FileRaster? = nil) {
+        cache.countLimit = 128
         self.fileRaster = fileRaster ?? { path, pixels in
             await Task.detached(priority: .utility) {
                 autoreleasepool { Self.rasterize(NSWorkspace.shared.icon(forFile: path), pixels: pixels) }
@@ -26,7 +31,9 @@ extension ResultLocation {
         }
     }
     func resolvedIcon(_ icon: ItemIcon, kind: ItemKind) -> ItemIcon {
+#if APPARATE_TESTING
         if fixtureOnly, case .file = icon { return .symbol(kind == .folder ? "folder" : "doc") }
+#endif
         return icon
     }
     func load(_ icon: ItemIcon, kind: ItemKind = .file, size: PanelIconSize = .compact, completion: @escaping (NSImage?) -> Void) {

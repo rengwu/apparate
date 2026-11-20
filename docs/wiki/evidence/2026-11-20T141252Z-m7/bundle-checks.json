@@ -1,0 +1,30 @@
+{
+  "result": "Passed",
+  "inputs_verified": 94,
+  "core_unchanged_from_base": true,
+  "production_archive_sha256": "90982a147fddaa706c736acdfd738fbd562d64949a4dff4311a3c26f2c83fb09",
+  "production_and_testing_signatures": true,
+  "current_testing_comparator": "signed review bundle executable",
+  "core_suites": [
+    134,
+    134,
+    134
+  ],
+  "profiles": [
+    "panel",
+    "settings",
+    "app-smoke",
+    "pipeline"
+  ],
+  "pipeline_hashes": 360,
+  "driver_refusals": 6,
+  "upgrade_fields_equal": true,
+  "upgrade_app_launched": false,
+  "retained_render_scenarios": 239,
+  "raw_matches_with_prior": 238,
+  "superseded_raw_images_verified": 239,
+  "app_smoke_image_sha256": "51a498885a8d357a6f0c619544c3c1a5f61f48f49d67cb90f9c0e7813cc35258",
+  "demo_sha256": "1ff969173914f59e6b2d188f747cc60455fdef668b08ad0dd896d0b36482b6fc",
+  "historical_review_preserved": true,
+  "app_launched_by_this_check": false
+}

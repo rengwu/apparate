@@ -1,13 +1,48 @@
 ---
 title: Verification setup
 section: Verification
-updated: 2026-11-19
+updated: 2026-11-20
 ---
 # Verification setup
 
 Run from the Apparate project root on macOS 27 arm64 with Swift 6.4.2 Command Line Tools, Python 3 and Node.js 22+. There are no downloaded packages or runtime services. The executable Core harness is used because XCTest and Swift Testing are unavailable in this Command Line Tools installation.
 
-## During the supervised session
+## M7 release build and hidden checks
+
+This section supersedes older build/launch recipes below. `build.sh` always builds production without test profiles. Smoke/performance drivers now require an explicit testing `--binary` and reject production before launch. `APPARATE_HOME` remains a data-location override, not an effect-isolation switch. Never use the production app for unattended hidden profiles.
+
+```sh
+APPARATE_BUILD_TESTING=1 swift build --scratch-path /private/tmp/apparate-m7-testing
+APPARATE_BUILD_TESTING=1 swift run --scratch-path /private/tmp/apparate-m7-testing ApparateCoreTests
+APPARATE_BUILD_TESTING=1 swift build --scratch-path /private/tmp/apparate-m7-testing -c release --product Apparate
+APPARATE_BUILD_TESTING=1 swift run --scratch-path /private/tmp/apparate-m7-testing -c release ApparateCoreTests
+APPARATE_BUILD_TESTING=1 ./build.sh
+APPARATE_BUILD_TESTING=0 swift run --scratch-path .build/production -c release ApparateCoreTests
+APPARATE_BUILD_TESTING=0 swift build --scratch-path .build/production -c release --product ApparateUpgradeCheck
+```
+
+The inherited flag in the `build.sh` command intentionally verifies that the script forces it off. Testing and production scratch directories are separate. Build steps never install or launch the production app. The user runs a separate installed copy; do not modify, replace, launch or quit that copy or access its session data.
+
+Assemble the testing app from the release output and repository resources using the executed [M7 assembly recipe](../evidence/2026-11-20T141252Z-m7/assembly.txt). It refuses to replace an existing review bundle. For a rerun, choose a fresh bundle/evidence path and adjust the recipe paths; preserve existing identities and receipts. The following examples use the already-built M7 review bundle and a fresh `build/checks/m7-repeat` output tree:
+
+```sh
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-m7-testing-final/Apparate.app/Contents/MacOS/Apparate --panel-check functional --output build/checks/m7-repeat/panel
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-m7-testing-final/Apparate.app/Contents/MacOS/Apparate --settings-check --output build/checks/m7-repeat/settings
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-m7-testing-final/Apparate.app/Contents/MacOS/Apparate --file-source fixture --fixture-app --render panel --action-open --output build/checks/m7-repeat/app-smoke
+python3 Tests/performance.py pipeline --binary build/review/2026-11-20-m7-testing-final/Apparate.app/Contents/MacOS/Apparate --count 20000 --dot-entries --output build/checks/m7-repeat/pipeline
+python3 Tests/release-check.py --bundle build/Apparate.app --zip build/Apparate.zip --testing-binary build/review/2026-11-20-m7-testing-final/Apparate.app/Contents/MacOS/Apparate --output build/checks/m7-repeat/artifact
+python3 Tests/upgrade-check.py --binary .build/production/release/ApparateUpgradeCheck --output build/checks/m7-repeat/upgrade
+```
+
+These helpers and argument shapes were executed for [M7](runs/2026-11-20T141252Z-m7.md); the new repeat directory above is illustrative and has not been run. Wait for each owned process to exit; require Passed receipts, zero stderr/native effects and cleanup. The shared-app fixture graph reads only its disposable fixture tree. The pipeline's hashes verify result equality; the M7 run does not qualify timing budgets.
+
+`release-check.py` inspects a fresh temporary extraction, resource hashes, signature, architecture, forbidden strings/symbols and package dependency graphs. It never executes the app. `upgrade-check.py` compiles baseline Core from `9194cfd`, seeds owned config/index/history and compares production-mode Core reads, including `APPARATE_HOME`, with no full crawl. It removes the owned temporary package/home after completion. Neither helper establishes launched clean-install/upgrade behavior or native privacy-grant persistence.
+
+Privacy helpers write review material to ignored local storage: `Tests/privacy-audit.py --output local/privacy-audit --images <owned-scratch> --personal-name <name-to-check>` inventories tracked/intended files and reachable blobs; `swiftc Tests/PrivacyImages.swift -o <owned-scratch>/recognize` builds the offline OCR helper, which accepts the generated manifest and output JSONL paths. The detailed M7 review and its receipts are retained locally. See the [public privacy note](../release/privacy.md).
+
+The current [release feature](../features/release.md) and [DEC-061](../decisions.md#round-13-2026-11-19) supersede old release gates below: native/on-screen checks remain Untested, waived for 0.1.0. Older run results remain historical evidence.
+
+## Historical supervised-session setup
 
 Do not run `build.sh`, replace or launch `build/Apparate.app`, or touch Claude's session home while that app is in use. The UI follow-up uses `swift build --scratch-path /private/tmp/apparate-ui-build-20261119` (debug/release), with an independently assembled bundle under `build/review/2026-11-19-ui/Apparate.app`. The smoke and performance drivers accept `--binary <explicit executable>`; always pass that review executable in this session. Its resources come from the repository, never from the running bundle. Bundle assembly, identities, final commands and receipts are recorded in the [UI run](runs/2026-11-19T064952Z-ui.md). All profiles remain hidden with isolated temporary homes and fake global effects.
 
@@ -23,7 +58,7 @@ codesign -d -r- build/Apparate.app
 
 Expected: identifier `local.apparate`, version `0.1.0`, minimum system `27.0`, arm64 only, `LSUIElement` true, designated requirement `identifier "local.apparate"`. The bundle includes the three folder-purpose strings and fzy notice. `build.sh` removes the old bundle after successful compilation and before assembly. It signs/verifies but never launches or installs the app.
 
-Read-only git status/diff/log are authorized in this project. M3 was reviewed and committed as `ef9f683`; its catalog follow-up was separately authorized for implementation and commit. The ignore oracle may initialize Git only inside its disposable fixture directories; no project git mutation is part of verification. Each run's input manifest identifies its package, build, source and test files. The catalog follow-up manifest is `docs/wiki/evidence/2026-11-18T191222Z-catalog/source-manifest.json`. Check it before relying on that run:
+Read-only git status/diff/log are authorized in this project. M3 was reviewed and committed as `c07f516`; its catalog follow-up was separately authorized for implementation and commit. The ignore oracle may initialize Git only inside its disposable fixture directories; no project git mutation is part of verification. Each run's input manifest identifies its package, build, source and test files. The catalog follow-up manifest is `docs/wiki/evidence/2026-11-18T191222Z-catalog/source-manifest.json`. Check it before relying on that run:
 
 ```sh
 python3 - <<'PY'

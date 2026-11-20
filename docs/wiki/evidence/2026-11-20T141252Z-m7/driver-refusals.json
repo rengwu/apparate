@@ -1,0 +1,43 @@
+{
+  "result": "Passed",
+  "cases": [
+    {
+      "driver": "smoke-app.py",
+      "case": "production",
+      "exit": 2,
+      "result": "Passed"
+    },
+    {
+      "driver": "smoke-app.py",
+      "case": "decoy",
+      "exit": 2,
+      "result": "Passed"
+    },
+    {
+      "driver": "smoke-app.py",
+      "case": "missing-argument",
+      "exit": 2,
+      "result": "Passed"
+    },
+    {
+      "driver": "performance.py",
+      "case": "production",
+      "exit": 2,
+      "result": "Passed"
+    },
+    {
+      "driver": "performance.py",
+      "case": "decoy",
+      "exit": 2,
+      "result": "Passed"
+    },
+    {
+      "driver": "performance.py",
+      "case": "missing-argument",
+      "exit": 2,
+      "result": "Passed"
+    }
+  ],
+  "decoy_never_launched": true,
+  "owned_home_removed": true
+}

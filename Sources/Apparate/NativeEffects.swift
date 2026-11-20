@@ -92,6 +92,7 @@ import ApparateCore
     func unregister(_ token: Int) { if let key = keys.removeValue(forKey: token) { UnregisterEventHotKey(key) } }
 }
 
+#if APPARATE_TESTING
 /// Used only by an explicit isolated test profile; none of these methods touch global state.
 @MainActor final class TestEffects: ActionExecuting, HotKeyRegistering {
     private(set) var actionCount = 0, registrationCount = 0, applicationOpens = 0, urlOpens = 0
@@ -104,3 +105,4 @@ import ApparateCore
     func register(_ key: AppConfig.HotKey) throws -> Int { registrationCount += 1; return registrationCount }
     func unregister(_ token: Int) {}
 }
+#endif

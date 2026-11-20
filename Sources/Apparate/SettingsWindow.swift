@@ -369,6 +369,9 @@ import ApparateCore
         openWithShortcut.title = model.config.openWithKey.display; openWithShortcut.setAccessibilityLabel("Open With shortcut, " + model.config.openWithKey.display)
         shortcut.title = model.config.hotKey.display; shortcut.setAccessibilityLabel("Open Apparate shortcut, " + model.config.hotKey.display)
     }
+#if APPARATE_TESTING
     func capture(to url: URL, dark: Bool) throws { window.appearance = NSAppearance(named: dark ? .darkAqua : .aqua); refresh(); try window.capture(to: url) }
     func verifyHidden() throws { try window.verifyHidden() }
+#endif
+
 }

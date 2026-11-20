@@ -1,0 +1,23 @@
+{
+  "dependencies": [
+    {
+      "byName": [
+        "ApparateCore",
+        null
+      ]
+    }
+  ],
+  "exclude": [
+    "TestProfile.swift",
+    "AppTestDiagnostics.swift",
+    "FullPerformance.swift",
+    "PanelVerification.swift",
+    "PerformanceVerification.swift",
+    "SettingsVerification.swift"
+  ],
+  "name": "Apparate",
+  "packageAccess": true,
+  "resources": [],
+  "settings": [],
+  "type": "executable"
+}

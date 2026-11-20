@@ -305,13 +305,13 @@ Following jstack conventions:
 
 | Milestone | Guide | Built | Reviewed | Commit |
 | --- | --- | --- | --- | --- |
-| M1 Foundation, matching and ranking | [written](build/m1-foundation.md) | [yes](verification/runs/2026-11-18T154000Z-m1.md) | [passed](build/m1-foundation.md#review); [fix verified](verification/runs/2026-11-18T154000Z-m1.md#post-review-fix) | `0a6a63e` |
-| M2 Apps, settings, actions, first panel | [written](build/m2-sources-actions-panel.md) | [automated checks passed](verification/runs/2026-11-18T164000Z-m2.md); [supervised pending](verification/runs/2026-11-18T164001Z-m2-supervised.md) | [passed after five fixes](build/m2-sources-actions-panel.md#review) | `b3e68c4` |
-| M3 File index | [written](build/m3-file-index.md) | [automated checks passed; performance limits recorded](verification/runs/2026-11-18T181500Z-m3.md) | [passed after a speed fix](build/m3-file-index.md#review) | `ef9f683` |
-| M4 Launcher panel | [written](build/m4-launcher-panel.md) | [yes](verification/runs/2026-11-18T200340Z-m4.md) | [passed; latency carried to M6](build/m4-launcher-panel.md#review) | `e1543de` |
-| M5 Settings, menu bar, first run | [written](build/m5-settings-menu-first-run.md) | [yes](verification/runs/2026-11-18T212428Z-m5.md) | [passed after one fix](build/m5-settings-menu-first-run.md#review) | `a784dad` |
+| M1 Foundation, matching and ranking | [written](build/m1-foundation.md) | [yes](verification/runs/2026-11-18T154000Z-m1.md) | [passed](build/m1-foundation.md#review); [fix verified](verification/runs/2026-11-18T154000Z-m1.md#post-review-fix) | `bf15efe` |
+| M2 Apps, settings, actions, first panel | [written](build/m2-sources-actions-panel.md) | [automated checks passed](verification/runs/2026-11-18T164000Z-m2.md); [supervised pending](verification/runs/2026-11-18T164001Z-m2-supervised.md) | [passed after five fixes](build/m2-sources-actions-panel.md#review) | `87a6c41` |
+| M3 File index | [written](build/m3-file-index.md) | [automated checks passed; performance limits recorded](verification/runs/2026-11-18T181500Z-m3.md) | [passed after a speed fix](build/m3-file-index.md#review) | `c07f516` |
+| M4 Launcher panel | [written](build/m4-launcher-panel.md) | [yes](verification/runs/2026-11-18T200340Z-m4.md) | [passed; latency carried to M6](build/m4-launcher-panel.md#review) | `9847930` |
+| M5 Settings, menu bar, first run | [written](build/m5-settings-menu-first-run.md) | [yes](verification/runs/2026-11-18T212428Z-m5.md) | [passed after one fix](build/m5-settings-menu-first-run.md#review) | `9658758` |
 | M6 Performance qualification | [written](build/m6-performance.md) | [hidden stage](verification/runs/2026-11-18T225138Z-m6.md); on-screen stage waits for the user | [hidden stage approved](build/m6-performance.md#review-of-the-hidden-stage) | part 1; on-screen pending |
-| M7 Release 0.1.0 | — | — | — | — |
+| M7 Release 0.1.0 | [written](build/m7-release.md) | [artifact and automated checks complete](verification/runs/2026-11-20T141252Z-m7.md); native checks Untested, waived for 0.1.0 (DEC-061); [privacy choices applied](release/privacy.md) | [passed](build/m7-release.md#review-and-privacy-choices-2026-11-21) | M7 milestone commit |
 
 ## Risks
 

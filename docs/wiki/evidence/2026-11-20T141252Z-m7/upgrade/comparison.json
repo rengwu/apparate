@@ -1,0 +1,20 @@
+{
+  "result": "Passed",
+  "baseline_revision": "b14f02c888bfcafd4384bd787d1cc0841856288d",
+  "baseline_sha256": "b2a9806fbb448c849b0966a1303ef71543ee087167df82cf50aa4a653d0b0889",
+  "candidate_sha256": "f2bb161879112eedab4ae544a0ded94e1ccea819717e7c7119a36d49f66f20bd",
+  "matching_fields": [
+    "config_sha256",
+    "count",
+    "revision",
+    "last_update",
+    "search_names",
+    "usage_count",
+    "open_with",
+    "skip_hidden"
+  ],
+  "harness_sha256": "8754bf1c03f01f567bac137987dd4c8bd7d8b848fd3d91f55e75c4f41daa9380",
+  "scope": "Production Core cache/config/history compatibility; no application launch or native effects",
+  "all_processes_exited": true,
+  "owned_home_removed": true
+}

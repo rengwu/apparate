@@ -12,7 +12,7 @@ import tempfile
 import time
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--binary", type=Path, help="Explicit isolated review executable")
+parser.add_argument("--binary", type=Path, required=True, help="Explicit executable built with APPARATE_BUILD_TESTING=1")
 parser.add_argument('mode', choices=['pipeline', 'latency', 'full'])
 parser.add_argument('--count', type=int, choices=[20000, 200000], default=20000)
 parser.add_argument('--projects', action='store_true')
@@ -29,7 +29,9 @@ assert not (args.bare or args.probes) or args.mode == 'latency'
 assert not args.output.exists(), 'Keep each attempt in a fresh evidence directory'
 args.output.mkdir(parents=True)
 root = Path(__file__).resolve().parent.parent
-binary = args.binary.resolve() if args.binary else root / 'build/Apparate.app/Contents/MacOS/Apparate'
+binary = args.binary.resolve()
+if not binary.is_file() or b'APPARATE_TEST_MODE' not in binary.read_bytes():
+    parser.error('--binary must be a testing build; refusing to launch a production app')
 identity = {'app_sha256': hashlib.sha256(binary.read_bytes()).hexdigest(), 'mode': args.mode,
             'count': args.count, 'projects': args.projects, 'bare': args.bare, 'probes': args.probes,
             'delivery': args.delivery, 'start_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}

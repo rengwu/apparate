@@ -1,0 +1,29 @@
+Building for debugging...
+[Pre-planning 1 / 211]
+[Planning deferred tasks]
+[7 / 27] ApparateCore
+[18 / 38] ApparateCore
+[22 / 43] ApparateUpgradeCheck-product
+[25 / 44] ApparateCore
+[25 / 44] ApparateFixtures
+[27 / 46] ApparateFixtures
+[33 / 52] ApparateFixtures
+[34 / 52] ApparateCoreTests-product
+[39 / 63] ApparateUpgradeCheck-product
+[43 / 66] Apparate-product
+[45 / 67] ApparateUpgradeCheck-product
+[47 / 67] ApparateCoreTests-product
+[55 / 67] ApparateCore
+[55 / 67]
+[56 / 65] ApparateCoreTests-product
+[57 / 65] ApparateCoreTests-product
+/Users/rengwu/Projects/apparate/Package.swift: ApparateUpgradeCheck-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: ApparateUpgradeCheck-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[57 / 65] ApparateUpgradeCheck-product
+[59 / 65] ApparateCoreTests-product
+[60 / 63] Apparate-product
+[61 / 64] Apparate-product
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[63 / 64] Apparate-product
+Build complete! (7.28 sec)

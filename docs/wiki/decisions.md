@@ -102,7 +102,7 @@ Source: the user's submitted grill-form ("Apparate — round 6").
 | --- | --- | --- |
 | DEC-040 | None of the four reference-style icon directions yet; draw four more. | User's note: "give me four more". |
 | DEC-041 | No user-added app folders. An app found in an indexed folder ranks and opens as an app. | User choice; matched the recommendation. Changes the plan's M2 app sources and M3 file kinds. |
-| DEC-042 | Claude sets up local git and commits M1 and M2. | User choice; matched the recommendation. Done on 2026-11-19: `0a6a63e` (M1) and `b3e68c4` (M2). |
+| DEC-042 | Claude sets up local git and commits M1 and M2. | User choice; matched the recommendation. Done on 2026-11-19: `bf15efe` (M1) and `87a6c41` (M2). |
 
 ## Round 7 — 2026-11-19
 
@@ -156,7 +156,7 @@ Source: the user's submitted grill-form ("Apparate — round 12").
 
 ## Round 13 — 2026-11-19
 
-Source: the user's messages in the chat during the supervised session, with screenshots (in the [UI follow-up guide](build/ui-follow-up.md)), and the round-13 to round-18 grill-forms. DEC-059 and DEC-060 came from the chat on 2026-11-20 (round 19).
+Source: the user's messages in the chat during the supervised session, with screenshots (in the [UI follow-up guide](build/ui-follow-up.md)), and the round-13 to round-18 grill-forms. DEC-059 to DEC-061 came from the chat on 2026-11-20 (round 19).
 
 | ID | Decision | Basis |
 | --- | --- | --- |
@@ -170,6 +170,7 @@ Source: the user's messages in the chat during the supervised session, with scre
 | DEC-058 | → completes a selected folder the same way Tab does ([DEC-056](#round-13-2026-11-19)), when the caret is at the end of the text with nothing selected. Anywhere else, and on any other kind of result, → moves the caret as usual. | The user, while trying the Tab build: "pressing right arrow key on a highlighted folder works the same as 'tab', autocompleting it". The caret-at-end condition is Claude's, so → still moves the caret while editing. |
 | DEC-059 | The Folders tab gets a "Skip hidden files" switch below the `.gitignore` switch, **on** by default. On: items whose names start with a dot are not indexed at all, so `'.config` finds nothing from the index; typing a path such as `~/.config` still works. Off: [DEC-055](#round-13-2026-11-19) as before. A dot folder added as its own folder in Settings is still indexed inside either way. | The user: "we should have a similar switch here for ignoring hidden files". What on means was the user's choice in round 19, matching Claude's recommendation. The user first chose off by default, then changed it to on: "it should be on by default. i'm considered a power user". Built in [UI follow-up section 12](build/ui-follow-up.md#12-skip-hidden-files). |
 | DEC-060 | In a path query (one with `/`), each folder skipped between the matched parts, and between the last matched part and the result, lowers the result's score. `apparate/build` then ranks `~/Projects/apparate/build` above `~/Projects/apparate/docs/wiki/build`, even after one open of the deeper folder; a folder opened often can still rise. Searches without `/` are unchanged. | The user, after `docs/wiki/build` (opened once) outranked `apparate/build`: "it has less depth, and furthermore its an exact match". Claude proposed the skipped-folder penalty; the user: "cool solution, lets do it". Built in [UI follow-up section 13](build/ui-follow-up.md#13-path-queries-prefer-the-tightest-path). |
+| DEC-061 | Release 0.1.0 without the supervised on-screen checks (M2, M4, M5 and the UI follow-up) and without the M6 on-screen speed measurements. The release notes list them as not yet checked on a real Mac. This waives the rule Claude set in the M5 guide that M7 would not release until they passed. | The user: "waive the checks for now, proceed with the release". The checks stay open for a later session. |
 
 ## Observed from the reference apps
 

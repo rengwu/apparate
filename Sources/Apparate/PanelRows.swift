@@ -47,7 +47,9 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
     private var images: [String: NSImage] = [:]
     private struct IconRequest: Equatable { let icon: ItemIcon, kind: ItemKind; let size: PanelIconSize }
     private var requestedIcons: [String: IconRequest] = [:]
+#if APPARATE_TESTING
     var observationMarker: FrameMarker? { didSet { needsDisplay = true } }
+#endif
     var resultLocation = ResultLocation.inline {
         didSet {
             if oldValue != resultLocation {
@@ -144,6 +146,7 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
             let rect = NSRect(x: 0, y: rowTop + CGFloat(index - firstVisible) * rowHeight, width: bounds.width, height: rowHeight)
             if dirtyRect.intersects(rect) { drawRow(index, rect: rect) }
         }
+#if APPARATE_TESTING
         if let marker = observationMarker {
             // Same draw as the complete rows; compact diagnostic code in the search strip. A full invalidation
             // on each accepted revision draws every visible row and this marker together.
@@ -152,6 +155,7 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
                 NSRect(x: 582 + i % FrameMarker.columns, y: 16 + i / FrameMarker.columns, width: 1, height: 1).fill()
             }
         }
+#endif
     }
     func geometryIsValid() -> Bool {
         bounds.width == 628 && (rowTop == 0 ? bounds.height == rowHeight * 9 : bounds.height >= PanelLayout.stripHeight && bounds.height <= PanelLayout.maximumHeight && (contents.isEmpty || rowTop + CGFloat(visibleIndices.count) * rowHeight <= bounds.height - 35))

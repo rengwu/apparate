@@ -1,0 +1,47 @@
+Building for production...
+[Planning deferred tasks]
+[22 / 34]
+[23 / 35] ApparateCore
+[35 / 95]
+[41 / 95]
+[45 / 95]
+[46 / 95]
+[50 / 95]
+[52 / 95]
+[55 / 95]
+[59 / 95]
+[61 / 95]
+[62 / 95]
+[63 / 95]
+[69 / 95]
+[70 / 95]
+[71 / 95]
+[75 / 95]
+[76 / 95]
+[77 / 95]
+[79 / 95]
+[81 / 95]
+[83 / 95]
+[84 / 95] ApparateCore
+/Users/rengwu/Projects/apparate/Package.swift: ApparateCore: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[91 / 96] Apparate-product
+[103 / 145]
+[113 / 145]
+[120 / 145]
+[123 / 145]
+[126 / 145]
+[134 / 145]
+[136 / 145]
+[137 / 145]
+[138 / 145]
+[139 / 145]
+[140 / 145]
+[141 / 145] Apparate-product
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/rengwu/Projects/apparate/Package.swift: Apparate-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[143 / 145] Apparate-product
+[144 / 145] Apparate-product
+Build complete! (48.92 sec)
+/Users/rengwu/Projects/apparate/build/Apparate.app: replacing existing signature
+Built build/Apparate.app (0.1.0, arm64)
+90982a147fddaa706c736acdfd738fbd562d64949a4dff4311a3c26f2c83fb09  /Users/rengwu/Projects/apparate/build/Apparate.zip

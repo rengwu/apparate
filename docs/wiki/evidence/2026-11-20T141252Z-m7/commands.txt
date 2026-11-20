@@ -1,0 +1,33 @@
+M7 commands executed from the repository root. Each app driver used an explicit testing executable.
+
+APPARATE_BUILD_TESTING=1 swift build --scratch-path /private/tmp/apparate-m7-testing
+APPARATE_BUILD_TESTING=1 swift run --scratch-path /private/tmp/apparate-m7-testing ApparateCoreTests
+APPARATE_BUILD_TESTING=1 swift build --scratch-path /private/tmp/apparate-m7-testing -c release --product Apparate
+APPARATE_BUILD_TESTING=1 swift run --scratch-path /private/tmp/apparate-m7-testing -c release ApparateCoreTests
+APPARATE_BUILD_TESTING=1 ./build.sh
+APPARATE_BUILD_TESTING=0 swift run --scratch-path .build/production -c release ApparateCoreTests
+APPARATE_BUILD_TESTING=0 swift build --scratch-path .build/production -c release --product ApparateUpgradeCheck
+
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-m7-testing-final/Apparate.app/Contents/MacOS/Apparate --panel-check functional --output docs/wiki/evidence/2026-11-20T141252Z-m7/panel
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-m7-testing-final/Apparate.app/Contents/MacOS/Apparate --settings-check --output docs/wiki/evidence/2026-11-20T141252Z-m7/settings
+python3 Tests/smoke-app.py --binary build/review/2026-11-20-m7-testing-final/Apparate.app/Contents/MacOS/Apparate --file-source fixture --fixture-app --render panel --action-open --output docs/wiki/evidence/2026-11-20T141252Z-m7/app-smoke
+python3 Tests/performance.py pipeline --binary build/review/2026-11-20-m7-testing-final/Apparate.app/Contents/MacOS/Apparate --count 20000 --dot-entries --output docs/wiki/evidence/2026-11-20T141252Z-m7/pipeline
+python3 Tests/release-check.py --bundle build/Apparate.app --zip build/Apparate.zip --testing-binary build/review/2026-11-20-m7-testing-final/Apparate.app/Contents/MacOS/Apparate --output docs/wiki/evidence/2026-11-20T141252Z-m7/artifact
+python3 Tests/upgrade-check.py --binary .build/production/release/ApparateUpgradeCheck --output docs/wiki/evidence/2026-11-20T141252Z-m7/upgrade
+
+First testing profile attempts used build/review/2026-11-20-m7-testing/Apparate.app; receipts moved to panel-testing-first/settings-testing-first. The demo paths changed, the testing app rebuilt and the final profiles rerun. Assembly recipes and logs are retained separately.
+Artifact attempt 1 failed on an unreliable short-string presence assertion. Successive successful comparisons with the first testing and final unbundled testing executables remain in artifact-testing-first/ and artifact-testing-unbundled/. artifact/ uses the final signed testing bundle.
+
+Offline privacy inventory: python3 Tests/privacy-audit.py --output docs/wiki/evidence/2026-11-20T141252Z-m7/privacy --images /private/tmp/apparate-m7-privacy-images --personal-name <known personal name supplied locally>
+Offline OCR: swiftc Tests/PrivacyImages.swift -o /private/tmp/apparate-m7-privacy-images/recognize
+The helper took its generated manifest and output JSONL paths. The initial default Vision attempt stalled and was terminated; the CPU-only retry processed 676 images and a subsequent extra manifest processed two new images. No screen capture.
+
+python3 docs/wiki/evidence/2026-11-20T141252Z-m7/check-integrity.py
+node docs/wiki/_build.mjs
+node docs/wiki/_build.mjs --check
+node /Users/<account>/Projects/jstack/skills/verify-change/scripts/check-reports.mjs docs/wiki
+git diff --check
+
+No install, production launch, running-app/data access, /Applications modification, publication, tag, push or gh call. Hidden profiles and compatibility helpers removed their owned process/data homes; review bundles and original-render scratch archives were preserved.
+
+2026-11-21 publication choices: the detailed privacy output directory was moved to ignored local storage, preserving its relative path. No source input or release artifact changed. The public integrity helper now checks artifact/functional evidence without requiring private audit files. History cleanup belongs to Claude.

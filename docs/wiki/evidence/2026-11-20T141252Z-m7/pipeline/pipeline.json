@@ -1,0 +1,63 @@
+{
+  "clock": "mach_absolute_time",
+  "count": 20000,
+  "dot_count": 2950,
+  "dot_fixture": true,
+  "dot_queries_pipeline": {
+    "count": 120,
+    "max": 2.6571666666666665,
+    "median": 1.441625,
+    "p95": 2.2657916666666664
+  },
+  "elapsed_seconds": 1.9167632909999999,
+  "errors": 0,
+  "file": {
+    "count": 360,
+    "max": 2.6490833333333335,
+    "median": 0.9105416666666666,
+    "p95": 1.97425
+  },
+  "file_count": 20000,
+  "fixture_manifest": {
+    "dot_directory_sentinels": 1500,
+    "dot_entries_created": 3000,
+    "dot_entries_indexed": 2950,
+    "ignored_dot_entries": 50,
+    "listed_directories_expected": 501,
+    "ordinary_entries_indexed": 17050,
+    "projects": 500,
+    "retained_total": 20000
+  },
+  "focus_guards_checked": true,
+  "matched_hashes": 360,
+  "native_actions": 0,
+  "native_hotkey_registrations": 0,
+  "native_login_changes": 0,
+  "native_status_items": 0,
+  "on_screen_budgets": "Untested",
+  "ordinary_pipeline": {
+    "count": 240,
+    "max": 1.7259166666666668,
+    "median": 0.908625,
+    "p95": 1.5679166666666668
+  },
+  "pipeline": {
+    "count": 360,
+    "max": 2.6571666666666665,
+    "median": 0.98725,
+    "p95": 1.995
+  },
+  "profile": "pipeline",
+  "protected_folder_probes": 0,
+  "result": "Passed",
+  "schema": 1,
+  "scope": "Same snapshot, parsed query, empty usage, top-50 limit; file-only vs production pipeline; independent reference hash outside timers; stage-probe third invocation separate. Opposite orders, not an end-to-end latency verdict.",
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "symbolichotkeys_writes": 0,
+  "thermal_end": 0,
+  "thermal_start": 0,
+  "timebase_denom": 3,
+  "timebase_numer": 125,
+  "visible_profile": "none"
+}

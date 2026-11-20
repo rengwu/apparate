@@ -1,7 +1,7 @@
 ---
 title: Features
 section: Features
-updated: 2026-11-19
+updated: 2026-11-20
 ---
 # Features
 
@@ -20,5 +20,6 @@ M1 supplies the headless foundation. M2 adds applications, System Settings items
 - [Settings](settings.md) — FEAT-settings: preferences, transactions, login state and folders.
 - [Menu bar](menu.md) — FEAT-menu: optional status item and retained access routes.
 - [First run](first-run.md) — FEAT-first-run: shortcut and explicit access steps.
+- [Release and updates](release.md) — FEAT-release: production/test builds, archive, update compatibility and publication limits.
 
 See [verification setup](../verification/setup.md) for repeatable commands and isolation.

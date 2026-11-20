@@ -16,16 +16,21 @@ import ApparateCore
     private var hotkey: HotKeyRegistration?
     private var nativeRegistrar: NativeHotKeyRegistrar?
     private var actions: ActionDispatcher?
+#if APPARATE_TESTING
     private var testEffects: TestEffects?
     private var profile: TestProfile?
+#endif
     private var icons: IconLoader!
-    private var diagnostics: AppTestDiagnostics?
     private var files: FileIndexController?
+#if APPARATE_TESTING
+    private var diagnostics: AppTestDiagnostics?
     private var performance: FullPerformance?
+#endif
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         do {
             let env = ProcessInfo.processInfo.environment
+#if APPARATE_TESTING
             profile = try TestProfile.read(env)
             NSApp.setActivationPolicy(profile == nil ? .accessory : .prohibited)
             icons = IconLoader(fixtureOnly: profile?.mode == "fixtures")
@@ -39,33 +44,37 @@ import ApparateCore
             if let profile, profile.settingsCheck {
                 Task { await SettingsVerification.run(profile) }; return
             }
+#else
+            NSApp.setActivationPolicy(.accessory)
+            icons = IconLoader()
+#endif
             let directory = AppConfig.dataDirectory(environment: env)
             let firstRun = !FileManager.default.fileExists(atPath: directory.appendingPathComponent("config.json").path)
             let store = try ConfigStore(directory: directory); config = store
             let history = try UsageStore(directory: directory); usage = history
-            let session = LauncherSession(config: store.current, requiresFiles: true,
-                pathReader: profile == nil ? PathReading() : .restricted(to: directory.path),
-                openWith: profile == nil ? OpenWithWorkspace.service(history: history) : OpenWithService { _,_ in OpenWithDiscovery(contentType: nil, claimed: []) }, usage: { try await history.snapshot() }); self.session = session
-            let panel = PanelController(session: session, icons: icons, presentationAllowed: profile == nil); self.panel = panel
-            panel.onTiming = { [weak self] shown, commit in self?.diagnostics?.shownMS = shown; if let commit { self?.diagnostics?.commitProxyMS = commit } }
-            let executor: any ActionExecuting
-            let registrar: any HotKeyRegistering
+            var pathReader = PathReading()
+            var openWith = OpenWithWorkspace.service(history: history)
+            var presentationAllowed = true
+#if APPARATE_TESTING
             if profile != nil {
-                let effects = TestEffects(); testEffects = effects; executor = effects; registrar = effects
-                access = FolderAccessController(directory: directory, probe: { folder in
-                    switch folder { case .desktop: .allowed; case .documents: .denied; case .downloads: .notFound }
-                })
-            } else {
-                executor = NativeActionExecutor()
-                let native = NativeHotKeyRegistrar(); native.onPress = { [weak self] in self?.hotkeyPressed() }
-                nativeRegistrar = native; registrar = native
-                access = FolderAccessController(directory: directory)
+                pathReader = .restricted(to: directory.path)
+                openWith = OpenWithService { _,_ in OpenWithDiscovery(contentType: nil, claimed: []) }
+                presentationAllowed = false
             }
+#endif
+            let session = LauncherSession(config: store.current, requiresFiles: true, pathReader: pathReader,
+                openWith: openWith, usage: { try await history.snapshot() }); self.session = session
+            let panel = PanelController(session: session, icons: icons, presentationAllowed: presentationAllowed); self.panel = panel
+#if APPARATE_TESTING
+            panel.onTiming = { [weak self] shown, commit in self?.diagnostics?.shownMS = shown; if let commit { self?.diagnostics?.commitProxyMS = commit } }
+#endif
+            let (executor, registrar) = effectServices(directory: directory)
             session.setPathAccess(FileAccessPolicy(observations: access?.observations ?? []))
             access?.onError = { [weak self] message in self?.logError(message) }
-            let presence: @Sendable (URL) -> FilePresence
-            if profile == nil { presence = { url in filePresence(url) } }
-            else { presence = { _ in FilePresence.present } }
+            var presence: @Sendable (URL) -> FilePresence = { filePresence($0) }
+#if APPARATE_TESTING
+            if profile != nil { presence = { _ in FilePresence.present } }
+#endif
             let dispatcher = ActionDispatcher(executor: executor, presence: presence, recordOpenWith: { try await history.recordSuccessfulOpen(id: $0, contentType: $1, application: $2) }, record: { try await history.recordSuccessfulOpen(id: $0) })
             actions = dispatcher
             dispatcher.onHistoryError = { [weak self] _ in self?.logError("Usage history could not be saved.") }
@@ -89,13 +98,19 @@ import ApparateCore
                 }
             }
             hotkey = HotKeyRegistration(registrar: registrar)
-            let settings = SettingsModel(store: store, hotkey: hotkey!, access: access!,
-                login: profile == nil ? NativeLoginService() : FixtureLoginService(),
-                readSpotlight: profile == nil ? NativeLoginService.spotlight : { .disabled })
+            let login: any LoginServicing
+            let readSpotlight: () -> SpotlightShortcut
+#if APPARATE_TESTING
+            login = profile == nil ? NativeLoginService() : FixtureLoginService()
+            readSpotlight = profile == nil ? NativeLoginService.spotlight : { .disabled }
+#else
+            login = NativeLoginService(); readSpotlight = NativeLoginService.spotlight
+#endif
+            let settings = SettingsModel(store: store, hotkey: hotkey!, access: access!, login: login, readSpotlight: readSpotlight)
             settingsModel = settings
-            settingsWindow = SettingsWindow(model: settings, presentationAllowed: profile == nil)
-            setupWindow = SetupWindow(model: settings, presentationAllowed: profile == nil)
-            let menu = MenuController(presentationAllowed: profile == nil); self.menu = menu
+            settingsWindow = SettingsWindow(model: settings, presentationAllowed: presentationAllowed)
+            setupWindow = SetupWindow(model: settings, presentationAllowed: presentationAllowed)
+            let menu = MenuController(presentationAllowed: presentationAllowed); self.menu = menu
             settings.onChange = { [weak self] in self?.refreshPreferences() }
             settings.retryHotkey()
             if settings.hotkeyError != nil && !(firstRun && settings.spotlightNotice) {
@@ -111,7 +126,9 @@ import ApparateCore
             settingsWindow?.onKeyboardShortcuts = { [weak self] in self?.preferencesAction { try await executor.openURL(keyboard) } }
             setupWindow?.onKeyboardShortcuts = settingsWindow?.onKeyboardShortcuts
             settingsWindow?.onPickFolders = { [weak self] window, completion in
+#if APPARATE_TESTING
                 guard self?.profile == nil else { completion([]); return }
+#endif
                 let picker = NSOpenPanel(); picker.canChooseFiles = false; picker.canChooseDirectories = true
                 picker.allowsMultipleSelection = true; picker.treatsFilePackagesAsDirectories = false
                 picker.beginSheetModal(for: window) { response in
@@ -128,22 +145,25 @@ import ApparateCore
             }
             latestConfigError = store.errors.last
             for problem in store.errors { logError(problem) }
+            let paths = AppSource.defaultRoots.map(\.path) + [AppSource.finder.path]
+            let source = SystemCatalogSource(cacheDirectory: directory)
+#if APPARATE_TESTING
             if profile?.mode == "fixtures" {
-                catalog = CatalogController(paths: [], loader: {
-                    CatalogLoad(snapshot: try TestProfile.fixtureCatalog(), watchPaths: [])
-                })
-            } else {
-                let paths = AppSource.defaultRoots.map(\.path) + [AppSource.finder.path]
-                let source = SystemCatalogSource(cacheDirectory: directory)
-                catalog = CatalogController(paths: paths, loader: { try await source.load() })
-            }
+                catalog = CatalogController(paths: [], loader: { CatalogLoad(snapshot: try TestProfile.fixtureCatalog(), watchPaths: []) })
+            } else { catalog = CatalogController(paths: paths, loader: { try await source.load() }) }
+#else
+            catalog = CatalogController(paths: paths, loader: { try await source.load() })
+#endif
             let fileStore = try FileIndexStore(directory: directory)
             let fileController = FileIndexController(config: store.current, store: fileStore,
                 access: FileAccessPolicy(observations: access?.observations ?? []))
             files = fileController
             fileController.onError = { [weak self] in self?.logError($0) }
             fileController.onChange = { [weak self] snapshot in
-                self?.session?.setFiles(snapshot); self?.refreshIndexStatus(); self?.diagnostics?.ready()
+                self?.session?.setFiles(snapshot); self?.refreshIndexStatus()
+#if APPARATE_TESTING
+                self?.diagnostics?.ready()
+#endif
             }
             access?.onCompletion = { [weak self] observations in
                 let policy = FileAccessPolicy(observations: observations)
@@ -156,13 +176,19 @@ import ApparateCore
             catalog?.onError = { [weak self] message in self?.logError(message) }
             catalog?.onChange = { [weak self] snapshot in
                 guard let self else { return }
-                self.icons.invalidate(); self.session?.setCatalog(snapshot); self.diagnostics?.catalogPublished()
+                self.icons.invalidate(); self.session?.setCatalog(snapshot)
+#if APPARATE_TESTING
+                self.diagnostics?.catalogPublished()
+#endif
             }
+#if APPARATE_TESTING
             if let profile, profile.performance == nil {
                 diagnostics = AppTestDiagnostics(profile: profile, catalog: catalog, files: files, session: session, panel: panel,
                                                  access: access, setupWindow: setupWindow, settingsWindow: settingsWindow, menu: menu, effects: testEffects)
             }
+#endif
             fileController.start(); catalog?.start()
+#if APPARATE_TESTING
             if let profile, profile.performance == "full" || profile.performance == "prepare" {
                 let measurement = FullPerformance(profile: profile, catalog: catalog!, files: fileController, session: session, panel: panel,
                     settings: settingsWindow!, setup: setupWindow!, menu: menu, effects: testEffects!)
@@ -173,11 +199,28 @@ import ApparateCore
                 if SetupWindow.shouldShow(configExisted: !firstRun, override: env["APPARATE_SHOW"]) { setupWindow?.show() }
                 else if env["APPARATE_SHOW"] == "panel" { panel.show() }
             }
+#else
+            if firstRun { setupWindow?.show() }
+#endif
 
         } catch {
-            // Invalid test wiring fails closed before any native global effect is installed.
+            // Configuration failures terminate instead of running with partial services.
             NSLog("Startup failed: %@", error.localizedDescription); NSApp.terminate(nil)
         }
+    }
+    private func effectServices(directory: URL) -> (any ActionExecuting, any HotKeyRegistering) {
+#if APPARATE_TESTING
+        if profile != nil {
+            let effects = TestEffects(); testEffects = effects
+            access = FolderAccessController(directory: directory, probe: { folder in
+                switch folder { case .desktop: .allowed; case .documents: .denied; case .downloads: .notFound }
+            })
+            return (effects, effects)
+        }
+#endif
+        let native = NativeHotKeyRegistrar(); native.onPress = { [weak self] in self?.hotkeyPressed() }
+        nativeRegistrar = native; access = FolderAccessController(directory: directory)
+        return (NativeActionExecutor(), native)
     }
     private func hotkeyPressed() {
         if settingsWindow?.recording == true { settingsWindow?.recordCurrentShortcut(); return }
@@ -205,13 +248,17 @@ import ApparateCore
         Task { do { try await action() } catch { settingsModel?.report(error.localizedDescription) } }
     }
     private func logError(_ reason: String) {
-        diagnostics?.errors += 1
-        performance?.errors += 1
-        if profile == nil { NSLog("Apparate: %@", reason) }
+#if APPARATE_TESTING
+        diagnostics?.errors += 1; performance?.errors += 1
+        if profile != nil { return }
+#endif
+        NSLog("Apparate: %@", reason)
     }
     private func alertError(_ reason: String, title: String) {
+#if APPARATE_TESTING
         diagnostics?.errors += 1
         if profile != nil { return }
+#endif
         NSApp.activate()
         let alert = NSAlert(); alert.messageText = title; alert.informativeText = reason
         alert.addButton(withTitle: "OK"); alert.runModal()

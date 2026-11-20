@@ -30,6 +30,7 @@ import ApparateCore
     }
 }
 
+#if APPARATE_TESTING
 /// Test profiles never construct a native service or status item.
 @MainActor final class FixtureLoginService: LoginServicing {
     var status: SMAppService.Status
@@ -44,6 +45,7 @@ import ApparateCore
     }
 }
 
+#endif
 final class PreferencesNativeWindow: NSWindow {
     let presentationAllowed: Bool
     init(title: String, size: NSSize, presentationAllowed: Bool) {
@@ -61,6 +63,7 @@ final class PreferencesNativeWindow: NSWindow {
         guard presentationAllowed else { return }
         center(); NSApp.activate(); makeKeyAndOrderFront(nil)
     }
+#if APPARATE_TESTING
     func verifyHidden() throws {
         guard !presentationAllowed, !isVisible, !isKeyWindow, !isMainWindow, !NSApp.isActive,
               !canBecomeKey, !canBecomeMain else { throw SourceError("A preferences test acquired presentation or focus.") }
@@ -74,6 +77,7 @@ final class PreferencesNativeWindow: NSWindow {
         guard let data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: 0.82]) else { throw SourceError("Could not encode preferences raster") }
         try data.write(to: url); try verifyHidden()
     }
+#endif
 }
 final class PreferencesContent: NSView {
     override var isOpaque: Bool { true }
