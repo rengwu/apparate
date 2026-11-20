@@ -49,7 +49,7 @@ with tempfile.TemporaryDirectory(prefix='apparate-release-', dir='/private/tmp')
         assert not item.is_symlink()
         if item.is_file(): assert item.read_bytes() == (args.bundle / item.relative_to(app)).read_bytes()
     info = plistlib.loads((app / 'Contents/Info.plist').read_bytes())
-    assert info['CFBundleShortVersionString'] == info['CFBundleVersion'] == version == '0.1.0'
+    assert info['CFBundleShortVersionString'] == info['CFBundleVersion'] == version
     assert info['LSMinimumSystemVersion'] == '27.0' and info['CFBundleIdentifier'] == 'local.apparate'
     assert info['CFBundleIconFile'] == 'AppIcon'
     for source in ['Resources/AppIcon.icns', 'THIRD_PARTY_NOTICES.txt', 'LICENSE']:

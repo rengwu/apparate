@@ -8,8 +8,6 @@ Native Swift and AppKit. Find apps, files, folders and System Settings, or searc
 
 [Download for macOS](https://github.com/rengwu/apparate/releases/latest/download/Apparate.zip)
 
-<img alt="Apparate finding an app, a setting, a folder and a file for desk" src="docs/assets/apparate-demo.png" width="420">
-
 <br clear="right">
 
 ## Features

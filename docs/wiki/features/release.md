@@ -42,3 +42,4 @@ The user's [privacy choices](../release/privacy.md) are applied: the specified r
 ## Verification history
 
 - [M7 verification](../verification/runs/2026-11-20T141252Z-m7.md): static artifact, production-Core compatibility and hidden functional checks passed; launched/native/on-screen scope remains Untested.
+- [0.1.1](../release/0.1.1.md), 2026-11-21: only the icon changed, and the README dropped its demo image. `Tests/release-check.py` passed on the archive (`evidence/2026-11-21T173056Z-release-0.1.1/artifact/`); the check no longer pins version 0.1.0. The hidden app checks were not rerun.
