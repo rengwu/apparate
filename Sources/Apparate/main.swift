@@ -233,10 +233,9 @@ import ApparateCore
         if let key = hotkey?.active, let window = NSApp.keyWindow,
            window === settingsWindow?.window || window === setupWindow?.window,
            menu?.performWindowCommand(key, close: { window.performClose(nil) }) == true { return }
-        if let key = hotkey?.active, panel?.isVisible == true,
+        if let key = hotkey?.active, panel?.isShowing == true,
            menu?.performWindowCommand(key, close: { panel?.hide() }) == true { return }
-        let start = ContinuousClock.now
-        if panel?.isVisible == true { panel?.hide() } else { panel?.show(start: start) }
+        panel?.toggle()
     }
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool { showSettings(); return false }
     private func showSettings(tab: SettingsWindow.Tab? = nil) { panel?.hide(); settingsWindow?.show(tab: tab) }

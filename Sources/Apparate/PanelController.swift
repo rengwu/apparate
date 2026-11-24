@@ -6,6 +6,13 @@ private final class LauncherPanel: NSPanel {
     let presentationAllowed: Bool
     var onKey: ((NSEvent) -> Bool)?
     private(set) var dispatchedKey: NSEvent?
+#if APPARATE_TESTING
+    private(set) var orderOutCount = 0
+    override func orderOut(_ sender: Any?) {
+        orderOutCount += 1
+        super.orderOut(sender)
+    }
+#endif
     init(presentationAllowed: Bool) {
         self.presentationAllowed = presentationAllowed
         super.init(contentRect: NSRect(x: 0, y: 0, width: 640, height: 41),
@@ -73,9 +80,13 @@ private final class PanelActivity {
     private let magnifier = NSImageView(), topRule = NSBox(), bottomRule = NSBox()
     private var hasCompletedPresentation = false
     private var displayedOpenWith = false
+    private(set) var dragFadeID: UUID?
     var panelFrame: NSRect { panel.frame }
 #if APPARATE_TESTING
     private(set) var layoutFrameChanges = 0
+    var orderOutCount: Int { panel.orderOutCount }
+    var opacity: CGFloat { panel.alphaValue }
+    var ignoresMouse: Bool { panel.ignoresMouseEvents }
 #endif
     var onHidden: (() -> Void)?, onQuit: (() -> Void)?, onSettings: (() -> Void)?
 #if APPARATE_TESTING
@@ -86,7 +97,7 @@ private final class PanelActivity {
     private(set) var accessibilityNotifications = 0
     private(set) var warmUpMS: Double?
 #endif
-    var isVisible: Bool { panel.isVisible }
+    var isShowing: Bool { session.model.visible }
     var isKey: Bool { panel.isKeyWindow }
     var isMain: Bool { panel.isMainWindow }
     var footerText: String { footer.stringValue }
@@ -117,7 +128,7 @@ private final class PanelActivity {
         session.onChange = { [weak self] in self?.update() }
         rows.onSelect = { [weak session] in session?.select(id: $0) }
         rows.onActivate = { [weak session] in session?.activate(id: $0) }
-        rows.onDragExit = { [weak self] in self?.dismiss() }
+        rows.onDragExit = { [weak self] in self?.fadeAfterDragExit() }
         rows.onScroll = { [weak session] in session?.scroll($0) }
         rows.onAccessibilitySelection = { [weak self] in
             guard let self else { return }
@@ -178,9 +189,12 @@ private final class PanelActivity {
         warmUpMS = durationMS(start.duration(to: .now))
 #endif
     }
+    func toggle() {
+        if isShowing { hide() } else { show() }
+    }
     func show(start: ContinuousClock.Instant = .now) {
-        guard panel.presentationAllowed else { return }
         beginShowing()
+        guard panel.presentationAllowed else { return }
         if let screen = NSScreen.main ?? NSScreen.screens.first {
             let area = screen.visibleFrame
             panel.setFrameOrigin(NSPoint(x: area.midX - 320, y: area.midY + 167 - panel.frame.height))
@@ -195,6 +209,7 @@ private final class PanelActivity {
 #endif
     }
     private func beginShowing() {
+        resetDragFade()
 #if APPARATE_TESTING
         observationShow &+= 1
 #endif
@@ -212,7 +227,7 @@ private final class PanelActivity {
 #if APPARATE_TESTING
     func beginHiddenShowing() throws {
         guard !panel.presentationAllowed else { throw SourceError("Hidden checks require a non-presenting panel.") }
-        beginShowing(); try verifyHidden()
+        show(); try verifyHidden()
     }
     func sendHiddenKey(_ event: NSEvent) throws {
         guard !panel.presentationAllowed else { throw SourceError("Owned key checks require a hidden panel.") }
@@ -223,13 +238,46 @@ private final class PanelActivity {
               !panel.canBecomeKey, !panel.canBecomeMain else { throw SourceError("The automated panel acquired presentation or focus.") }
     }
 #endif
-    func hide() { session.hide(); panel.orderOut(nil) }
+    func hide() {
+        session.hide(); panel.orderOut(nil)
+        resetDragFade()
+    }
+    private func fadeAfterDragExit() {
+        guard isShowing else { return }
+        let id = UUID()
+        dragFadeID = id
+        session.hide()
+        panel.ignoresMouseEvents = true
+        onHidden?()
+        guard dragFadeID == id else { return }
+        NSAnimationContext.runAnimationGroup { context in
+            context.duration = 0.15
+            panel.animator().alphaValue = 0
+        } completionHandler: { [weak self] in
+            MainActor.assumeIsolated { self?.finishDragFade(id) }
+        }
+    }
+    func finishDragFade(_ id: UUID) {
+        guard dragFadeID == id else { return }
+        panel.orderOut(nil)
+        resetDragFade()
+    }
+    private func resetDragFade() {
+        guard dragFadeID != nil else { return }
+        dragFadeID = nil
+        // Retargeting with zero duration also stops any in-flight window animation.
+        NSAnimationContext.runAnimationGroup { context in
+            context.duration = 0
+            panel.animator().alphaValue = 1
+        }
+        panel.ignoresMouseEvents = false
+    }
     private func dismiss() {
         guard session.model.visible else { return }
         hide(); onHidden?()
     }
     func windowDidResignKey(_ notification: Notification) {
-        if panel.presentationAllowed { dismiss() }
+        dismiss()
     }
     private var editor: NSTextView? { search.currentEditor() as? NSTextView ?? panel.firstResponder as? NSTextView }
     func controlTextDidBeginEditing(_ notification: Notification) {
@@ -319,6 +367,8 @@ private final class PanelActivity {
         let flags = event.modifierFlags.intersection([.command, .control, .option, .shift])
         if flags == .command, event.charactersIgnoringModifiers?.lowercased() == "q" { onQuit?(); return true }
         if flags == .command, event.charactersIgnoringModifiers == "," { hide(); onSettings?(); return true }
+        // The window can still be key while its dismissed session fades.
+        if dragFadeID != nil { return true }
         let openKey = session.openWithKey
         if event.keyCode == openKey.keyCode && flags == ShortcutEvent.modifiers(openKey) {
             session.setComposing(editor?.hasMarkedText() ?? false)
@@ -345,6 +395,8 @@ private final class PanelActivity {
             activityEnds += 1
 #endif
         }
+        // Keep the displayed Open With field and rows until the window has faded.
+        guard dragFadeID == nil else { return }
 #if APPARATE_TESTING
         let start = ContinuousClock.now
         defer { onUpdate?(session.model.revision, session.model.pending, durationMS(start.duration(to: .now))) }

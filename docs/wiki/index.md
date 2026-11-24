@@ -1,6 +1,6 @@
 ---
 title: Apparate
-updated: 2026-11-24
+updated: 2026-11-25
 ---
 # Apparate
 
@@ -100,3 +100,5 @@ Claude and Codex researched the whole topic independently, at the user's request
 - [Drag results out](verification/runs/2026-11-24T074838Z-drag-out.md) — hidden click, drag and dismissal checks for result rows. External drops await on-screen verification.
 
 - [Drag settings and completed-drop usage](verification/runs/2026-11-24T093455Z-drag-policy.md) — Like Finder and Never move, persisted usage, and Open With history.
+
+- [Drag-exit fade](verification/runs/2026-11-24T162231Z-drag-fade.md) covers dismissal, drops during the fade and reopening with the hotkey.

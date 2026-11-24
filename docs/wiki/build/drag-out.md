@@ -1,8 +1,8 @@
 ---
 title: Drag results out
 section: Build
-updated: 2026-11-24
-status: Sections 0–4 committed `9053c75`; sections 5–6 reviewed and passed; on-screen drops pending
+updated: 2026-11-25
+status: Sections 0–6 committed (`9053c75`, `e4bdd37`); section 7 (fade) review passed; on-screen checks pending
 ---
 # Drag results out
 
@@ -21,6 +21,7 @@ The user, with a screenshot of the panel listing PDF results for a name query: "
 | [DEC-066](../decisions.md#round-22-2026-11-24) | A Settings choice between Like Finder (default) and Never move (section 5). |
 | [DEC-067](../decisions.md#round-22-2026-11-24) | The drag image is the icon only (section 3). |
 | [DEC-068](../decisions.md#round-22-2026-11-24) | A completed drop counts as a use (section 6). |
+| [DEC-069](../decisions.md#round-23-2026-11-25) | The panel fades out over 0.15 seconds when a drag leaves it (section 7). |
 | [DEC-013](../decisions.md#round-2-2026-11-18) | AppKit only. |
 | [DEC-052](../decisions.md#round-13-2026-11-19) | The panel grows to fit its results; drag targets follow the rows that are shown. |
 | [DEC-057](../decisions.md#round-13-2026-11-19) | Open With rows are apps; they follow the same rule as any other row. |
@@ -157,3 +158,46 @@ One commit after the review passes: subject `Panel: Never move setting and drops
 Codex had no pushback. Its one reading, agreed and added to section 6: a dropped Open With app counts as plain usage of the app, with no Open With choice recorded. Building it, Codex found that Open With rows carry their own IDs (`open-with:` plus the path), so each row now also carries the underlying catalog app ID for usage. Selection still uses the row ID.
 
 Claude read the diff (config key, Settings row, the live mask, the drop callback through the dispatcher's history path, the usage refresh, the Open With ID). Claude also looked at the Settings renders in light and dark, and reran the hidden panel and Settings profiles on `build/review/2026-11-24-drag-policy-final`. Both passed: masks 23 (Like Finder) and 3 (Never move), and one recorded use per completed drop. The Open With drop counted for the app while the remembered app stayed unchanged. Both choices persisted. The review passed on 2026-11-24 with no findings. Never move's real destinations, Finder's copy and alias choices and the two-drop ranking check remain Untested ([run](../verification/runs/2026-11-24T093455Z-drag-policy.md)).
+
+## 7. Fade out when the drag leaves
+
+[DEC-069](../decisions.md#round-23-2026-11-25). The user, trying the build: "can we add a very short fade out animation when it disappears on our drag?"
+
+- **Which hide fades:** only the hide from section 4, when a drag leaves the panel. Esc, losing focus, opening a result, Settings and ⌘Q stay instant.
+- **What it looks like:** the panel's opacity goes from full to zero over 0.15 seconds with the default timing curve. Then the panel is ordered out and its opacity reset for the next showing. Nothing moves or scales. No Reduce Motion special case: a fade is what macOS uses in place of motion there.
+- **The state changes at once; only the picture lags:** the session hides and `onHidden` fires the moment the drag leaves, as now. Only ordering the window out waits for the fade. A drop that lands during the fade records its use exactly as section 6 says.
+- **The picture holds still:** the fading panel keeps showing the query, rows and selection it had when the drag left. Hiding the session mustn't redraw it mid-fade. Watch the Open With case: hiding discards Open With mode, which today rewrites the search field.
+- **The pointer passes through:** while fading, the panel ignores the mouse, so a drag that comes back over it reaches whatever is underneath. The panel doesn't come back for that drag (DEC-065). Mouse handling is restored when it next shows.
+- **Showing again mid-fade:** the hotkey during the fade cancels it. The panel shows at full opacity with a fresh search, like any showing, and the old fade's completion must not order out or touch the new showing.
+- **The hotkey reads the session, not the window:** (Codex's reading, agreed) the hotkey today checks whether the window is visible, which stays true during the fade, so it would hide instead of show. It now checks whether the session is showing.
+
+## Checks for section 7
+
+Hidden, in the existing panel profile. The non-presenting panel never draws, so keep starting and finishing the fade in small functions the harness can drive, as section 4 did for the drag.
+
+14. A drag exit hides the session and calls `onHidden` once, at once. The window is ordered out only when the fade finishes, then has full opacity again and takes the mouse again.
+15. Esc, key loss, opening a result and Settings still order the panel out at once, with no fade.
+16. A showing during the fade ends with the panel visible at full opacity and taking the mouse; finishing the old fade afterwards leaves it showing.
+17. During the fade, the drawn query, rows and selection are unchanged, for a normal drag and an Open With drag.
+18. A drop completed during the fade records one use; check 12 still passes.
+19. Full test suite, release build, `./build.sh`, then the wiki rebuild and check.
+
+On-screen, for the user, Untested until then:
+
+- Drag out over a Finder window and over the Desktop: the fade is short and smooth, and a drop right where the panel was lands in the window underneath.
+- Press the hotkey right after a drag leaves: the panel shows normally, fully opaque.
+
+## Records for section 7
+
+- Update [FEAT-panel](../features/panel.md)'s drag section.
+- Append a new run to `verification/runs/`, linked from the sections 5–6 run.
+
+## Commit for section 7
+
+One commit after the review passes: subject `Panel: fade out when a drag leaves`. Never push.
+
+## Review of section 7
+
+Codex had no pushback. It found that the hotkey went by window visibility, which stays true while the panel fades; the hotkey now goes by the session (added to section 7).
+
+Claude read the diff: the fade token, the skipped redraw while fading, keys swallowed during the fade except ⌘Q and ⌘,, and the reset on every hide and showing. The hidden check reopens and replays the stale completion right away, so it can't show that the reset really stops a fade still running. Claude checked that separately with a small AppKit probe (a throwaway window, not Apparate): a 0.5-second fade retargeted to full opacity with zero duration at 0.15 seconds held full opacity through 1.3 seconds, and the old completion fired at once, which the fade token ignores. Claude also reran the hidden panel profile on `build/review/2026-11-25-drag-fade`; it passed. The review passed on 2026-11-25 with no findings. The visible fade, drops under it and a real hotkey press during it remain Untested ([run](../verification/runs/2026-11-24T162231Z-drag-fade.md)).

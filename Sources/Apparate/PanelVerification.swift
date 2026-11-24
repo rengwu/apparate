@@ -407,10 +407,20 @@ private final class PanelSearchTrace: Sendable {
         press(first)
         guard let drag = rows.takeDrag(at: NSPoint(x: first.x + 40, y: first.y)) else { throw PanelCheckFailure(message: "Missing outside drag") }
         let outside = NSPoint(x: panel.panelFrame.maxX + 1, y: panel.panelFrame.midY)
+        let heldRows = rows.contents, heldFrame = panel.panelFrame, orders = panel.orderOutCount
         rows.dragMoved(to: outside); rows.dragMoved(to: outside)
-        try require(!session.model.visible && hidden == 1 && !panel.activityHeld, "Drag exit did not hide once")
-        try panel.beginHiddenShowing()
-        try require(rows.contents.isEmpty, "Reopen did not clear the rows")
+        guard let oldFade = panel.dragFadeID else { throw PanelCheckFailure(message: "Missing drag-exit fade") }
+        try require(!panel.isShowing && hidden == 1 && !panel.activityHeld && panel.ignoresMouse &&
+                    panel.orderOutCount == orders, "Drag exit did not hide the session immediately and defer order-out")
+        config.resultLocation = .below; session.setConfig(config)
+        try panel.sendHiddenKey(key("x", code: 7))
+        try require(panel.text == "term" && rows.contents == heldRows && rows.selectedID == droppedID &&
+                    panel.panelFrame == heldFrame && rows.resultLocation != .below, "Normal result presentation changed during fade")
+        panel.toggle()
+        panel.finishDragFade(oldFade)
+        let staleOrders = panel.orderOutCount - orders, dragHidden = hidden
+        try require(panel.isShowing && panel.dragFadeID == nil && panel.opacity == 1 && !panel.ignoresMouse &&
+                    panel.text.isEmpty && rows.contents.isEmpty && panel.orderOutCount == orders, "Old fade touched the new showing")
         rows.dragEnded(at: outside, operation: .copy); release(first)
         rows.dragEnded(at: outside, operation: .copy)
         try require(writes.count == 1, "Completed drop must emit its ID exactly once")
@@ -418,9 +428,27 @@ private final class PanelSearchTrace: Sendable {
         let counts = try await history.counts()
         try require(counts == [droppedID: 1] && effects.actionCount == 0, "Drop did not record the captured ID exactly once without opening")
         try require(session.model.visible && hidden == 1 && opens == before && drag.item.item is NSURL, "Late drag callback affected a new showing")
+        func checkInstant(_ name: String, _ action: () -> Void) throws {
+            let oldOrders = panel.orderOutCount
+            action()
+            try require(!panel.isShowing && panel.dragFadeID == nil && !panel.ignoresMouse && panel.opacity == 1 &&
+                        panel.orderOutCount == oldOrders + 1, "\(name) did not order the panel out immediately")
+        }
+        try checkInstant("Hotkey") { panel.toggle() }
+        try panel.beginHiddenShowing()
+        try checkInstant("Esc") { _ = panel.escape() }
+        try panel.beginHiddenShowing()
+        try checkInstant("Key loss") { panel.windowDidResignKey(Notification(name: NSWindow.didResignKeyNotification)) }
+        try panel.beginHiddenShowing(); try panel.injectText("term"); try await settle(session)
+        session.onAction = { _ in panel.hide() }
+        try checkInstant("Open") { click(rows, at: first) }
+        try panel.beginHiddenShowing()
+        try checkInstant("Settings") { _ = panel.keyEquivalent(key(",", code: 43, flags: .command)) }
         try panel.verifyHidden()
-        return ["clicked_kinds": cases.map { String(describing: $0.1) }, "file_urls": urls, "hidden_callbacks": hidden,
+        return ["clicked_kinds": cases.map { String(describing: $0.1) }, "file_urls": urls, "hidden_callbacks": dragHidden,
                 "inside_release_preserved_results": true, "ended_after_row_clear": true, "pending_survivor": pressedID,
+                "normal_drag_fade_held_presentation": true, "stale_fade_order_outs": staleOrders,
+                "hotkey_reopened_during_fade": true, "instant_order_outs": ["Hotkey", "Esc", "key loss", "open", "Settings"],
                 "pending_replacement_opens": 0, "composition_click_suppressed": true,
                 "outside_mask": finderMask.rawValue, "never_move_outside_mask": neverMoveMask.rawValue,
                 "inside_mask": rows.dragOperations(in: .withinApplication).rawValue, "persisted_drop_counts": counts, "cancelled_counts": cancelledCounts]
@@ -488,13 +516,31 @@ private final class PanelSearchTrace: Sendable {
             record: { try await history.recordSuccessfulOpen(id: $0) })
         var dropWrite: Task<Void, Never>?
         panel.rows.onDrop = { id in dropWrite = Task { await dispatcher.recordUse(of: id) } }
+        try panel.injectText("editor"); try await settle(session)
         let appPoint = NSPoint(x: 20, y: PanelLayout.rowTop + panel.rows.rowHeight + 14)
         panel.rows.mouseDown(with: mouse(.leftMouseDown, at: appPoint, in: panel.rows))
         let appDrag = panel.rows.takeDrag(at: NSPoint(x: 60, y: appPoint.y))
         try require((appDrag?.item.item as? URL) == current.target.fileURL && actions.count == 2, "Open With drag did not supply the app URL")
         let outside = NSPoint(x: panel.panelFrame.maxX + 1, y: panel.panelFrame.midY)
+        let heldRows = panel.rows.contents, heldID = panel.rows.selectedID, heldFooter = panel.footerText
+        let orders = panel.orderOutCount
+        var hidden = 0
+        panel.onHidden = { hidden += 1 }
         panel.rows.dragMoved(to: outside)
+        guard let fade = panel.dragFadeID else { throw PanelCheckFailure(message: "Missing Open With fade") }
+        try require(!session.isOpenWith && !panel.isShowing && hidden == 1 && !panel.activityHeld && panel.ignoresMouse &&
+                    panel.text == "editor" && panel.rows.contents == heldRows && panel.rows.selectedID == heldID &&
+                    panel.footerText == heldFooter && panel.placeholderText == "Open notes.md with…" && panel.orderOutCount == orders,
+                    "Session dismissal changed the Open With picture or ordered the window out early")
         panel.rows.dragEnded(at: outside, operation: .copy)
+        try require(dropWrite != nil && panel.dragFadeID == fade, "Drop was not recorded during the fade")
+        let deadline = ContinuousClock.now.advanced(by: .seconds(2))
+        while panel.dragFadeID == fade && .now < deadline { try await Task.sleep(for: .milliseconds(10)) }
+        try require(panel.dragFadeID == nil, "Animation did not deliver its completion")
+        panel.finishDragFade(fade)
+        let fadeOrders = panel.orderOutCount - orders
+        try require(panel.dragFadeID == nil && fadeOrders == 1 && panel.opacity == 1 &&
+                    !panel.ignoresMouse && hidden == 1, "Fade completion did not order out once and restore the window")
         await dropWrite?.value
         let dropCounts = try await history.counts(), handler = try await history.lastOpenWith(for: "public.text")
         try require(dropCounts == [file.item.id: 1, current.item.id: 1] && handler == last.target.fileURL &&
@@ -523,7 +569,8 @@ private final class PanelSearchTrace: Sendable {
         try emptyPanel.verifyHidden()
         return ["renders": renders, "native_local_key_route": true, "exact_back": true, "no_op_keys": ["Tab", "Shift-Tab", "Command-Return", "Command-C"],
                 "fake_opens": actions.count, "real_workspace_discovery": 0, "real_opens": 0, "folder_type": "public.folder", "custom_shortcut": "⌥⌘K", "marked_trigger_consumed": true, "app_drag_url_checked": true,
-                "app_drop_counts": dropCounts, "remembered_handler_after_drop": handler?.lastPathComponent ?? ""]
+                "app_drop_counts": dropCounts, "remembered_handler_after_drop": handler?.lastPathComponent ?? "",
+                "open_with_fade_held_presentation": true, "drop_during_fade": true, "fade_order_outs": fadeOrders]
     }
     private static func rightFolderCompletion(_ profile: TestProfile) async throws -> [String: Any] {
         let home = "/Fixture/Home", folder = home + "/Projects/quinecms-demo-site", unicode = "Folder 👩🏽‍💻e\u{301}東京"

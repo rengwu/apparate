@@ -193,6 +193,14 @@ Source: the user's chat request (with a screenshot of the panel, not kept becaus
 | DEC-067 | The drag image is the row's icon only, without the name. | Claude's call; the user kept it in round 22. Claude had recommended adding the name, like Finder. |
 | DEC-068 | A completed drop counts as a use for ranking, the same as opening the item. A cancelled drag doesn't count. | Claude's brief left drags out; the user chose to count completed drops in round 22, matching Claude's recommendation there. |
 
+## Round 23 — 2026-11-25
+
+Source: the user's chat request while trying the drag-out build.
+
+| ID | Decision | Basis |
+| --- | --- | --- |
+| DEC-069 | When a drag leaves the panel, the panel fades out over 0.15 seconds instead of vanishing. Only that hide fades; Esc, losing focus, opening a result and the others stay instant. | The user: "can we add a very short fade out animation when it disappears on our drag?" The duration and keeping other hides instant are Claude's calls, in [drag-out section 7](build/drag-out.md#7-fade-out-when-the-drag-leaves). |
+
 ## Observed from the reference apps
 
 Klip, Yacht and Portia (in `~/Projects`) are SwiftPM packages built by a `build.sh` script with Command Line Tools only. They are pure AppKit (no SwiftUI) menu bar apps. Each is released as a zip or DMG on GitHub Releases, ad-hoc signed and not notarized. Klip signs with a fixed designated requirement (`identifier "local.klip"`), which keeps privacy grants valid across rebuilds. These are observations, not decisions for Apparate; round 2 asks whether to follow them.

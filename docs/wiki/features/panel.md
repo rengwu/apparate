@@ -1,7 +1,7 @@
 ---
 title: Launcher panel
 section: Features
-updated: 2026-11-24
+updated: 2026-11-25
 ---
 # Launcher panel
 
@@ -50,7 +50,11 @@ The result container exposes all up-to-50 accessibility rows, a separate visible
 
 Move a pressed file, folder or app past the system drag distance to lift its icon. An Open With row supplies the chosen app’s file URL. Settings, commands and web rows open on release even when the pointer moves.
 
-Apparate supplies one file URL. **Like Finder**, the default, offers the destination copy, move, link and generic operations. **Never move** offers only copy and link. The General setting applies immediately. A drag within Apparate offers no operation. Releasing the drag inside the panel before the pointer crosses its edge preserves the query and selection. Once the pointer leaves the panel, the panel hides and the destination handles the drop. A completed drop counts as one use of the dragged row for ranking, including an app dragged from Open With. That app gains plain usage while the original file type keeps its remembered handler. Cancelling records nothing. The ID captured at drag start survives dismissal. [Round 22 decisions](../decisions.md#round-22-2026-11-24).
+Apparate supplies one file URL. **Like Finder**, the default, offers the destination copy, move, link and generic operations. **Never move** offers only copy and link. The General setting applies immediately. A drag within Apparate offers no operation. Releasing the drag inside the panel before the pointer crosses its edge preserves the query and selection.
+
+When the drag crosses the panel’s edge, the search session closes immediately. The window keeps its query, rows and selection in place while its opacity fades to zero over 0.15 seconds. It ignores the mouse during the fade so the destination underneath can receive the drop. Pressing the hotkey during the fade opens a fresh search at full opacity. Esc dismissal, loss of focus, opening a result, Settings and quit stay immediate. [Round 23 decision](../decisions.md#round-23-2026-11-25).
+
+A completed drop counts as one use of the dragged row for ranking, even when it lands during the fade. An app dragged from Open With gains plain usage while the original file type keeps its remembered handler. Cancelling records nothing. The ID captured at drag start survives dismissal. [Round 22 decisions](../decisions.md#round-22-2026-11-24).
 
 ## Open With
 
@@ -89,6 +93,7 @@ These require the user’s explicit supervised slot. DEC-050 excludes real IME, 
 
 11. **Never move.** Drag a disposable file into a same-disk Finder folder and verify the source remains. Repeat with ⌘⌥ and verify an alias. Check that Mail, a browser upload field, Terminal and the Dock still accept a supported item. Record any refusal.
 12. **Drop usage.** With comparable results in a fixture folder, drop the same file successfully twice, then search again. Compare its ranking with two successful opens from the same starting history.
+13. **Drag-exit fade.** Position the panel over a Finder window. Drag a disposable file just outside its edge, then immediately back over its old position and release. Check that the fade is short and smooth and that Finder receives the file. Repeat over the Desktop. On a separate drag, press the hotkey as soon as the pointer leaves and check that a fresh, fully opaque panel stays open.
 
 ## Coverage and limitations
 
@@ -97,6 +102,8 @@ Hidden activation guards, model/command behavior, layout, owned accessibility st
 The [post-review investigation](../verification/runs/2026-11-18T200340Z-m4.md#post-review-fixes) measures input, worker queue/search, main delivery, acceptance and view stages. Both delivery modes preserve generation guards. The requested hidden-proxy targets remain missed; activity and delivery-hop comparisons do not establish App Nap as the cause.
 
 ## Verification history
+
+- [Drag-exit fade](../verification/runs/2026-11-24T162231Z-drag-fade.md).
 
 - [Drag policy and completed-drop usage](../verification/runs/2026-11-24T093455Z-drag-policy.md).
 
