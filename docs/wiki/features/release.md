@@ -1,7 +1,7 @@
 ---
 title: Release and updates
 section: Features
-updated: 2026-11-21
+updated: 2026-11-25
 ---
 # Release and updates
 
@@ -43,3 +43,4 @@ The user's [privacy choices](../release/privacy.md) are applied: the specified r
 
 - [M7 verification](../verification/runs/2026-11-20T141252Z-m7.md): static artifact, production-Core compatibility and hidden functional checks passed; launched/native/on-screen scope remains Untested.
 - [0.1.1](../release/0.1.1.md), 2026-11-21: only the icon changed, and the README dropped its demo image. `Tests/release-check.py` passed on the archive (`evidence/2026-11-21T173056Z-release-0.1.1/artifact/`); the check no longer pins version 0.1.0. The hidden app checks were not rerun.
+- On 2026-11-25 the extracted 0.2.0 archive matched the signed arm64 bundle built from the reviewed drag sources at `61e8863`. Production Core loaded the 0.1.x config, history and index with zero rescans. All 135 Core checks passed, including the Like Finder default for an absent `dragCanMove` key. The hidden panel and Settings results come from the reviewed fade build. [0.2.0 notes](../release/0.2.0.md), [archive](../evidence/2026-11-24T180612Z-release-0.2.0/artifact/release.json), [upgrade](../evidence/2026-11-24T180612Z-release-0.2.0/upgrade/comparison.json), [Core](../evidence/2026-11-24T180612Z-release-0.2.0/production-core.log), [fade run](../verification/runs/2026-11-24T162231Z-drag-fade.md).

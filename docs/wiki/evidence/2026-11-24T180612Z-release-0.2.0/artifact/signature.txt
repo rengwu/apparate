@@ -1,0 +1,11 @@
+designated => identifier "local.apparate"
+Executable=<extraction>/Apparate.app/Contents/MacOS/Apparate
+Identifier=local.apparate
+Format=app bundle with Mach-O thin (arm64)
+CodeDirectory v=20400 size=5671 flags=0x2(adhoc) hashes=171+3 location=embedded
+Signature=adhoc
+Info.plist entries=12
+TeamIdentifier=not set
+Sealed Resources version=2 rules=13 files=5
+Total signatures=1
+Chosen signature=1

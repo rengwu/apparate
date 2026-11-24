@@ -19,6 +19,7 @@ Native Swift and AppKit. Find apps, files, folders and System Settings, or searc
 - Browse paths beginning with **/** or **~/**; **Tab** completes a result, and **→** completes a selected folder when the caret is at the end
 - **⇧Return** chooses an app to open a file or folder; change this shortcut in Settings
 - **⌘Return** reveals a file, folder or app in Finder
+- Drag files, folders and apps out of the results, as you would from Finder
 - Results learn from what you open
 
 ## Install

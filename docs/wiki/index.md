@@ -75,6 +75,7 @@ Claude and Codex researched the whole topic independently, at the user's request
 - [M7 verification](verification/runs/2026-11-20T141252Z-m7.md) — production archive, headless upgrade and hidden checks complete; reviewed and approved.
 - [Release notes draft](release/0.1.0.md) — install steps, known limits and verified archive checksum.
 - [Release notes 0.1.1](release/0.1.1.md) — the new icon; install steps and archive checksum.
+- [Release notes 0.2.0](release/0.2.0.md) cover dragging results out, the Dragged files setting and the archive checksum.
 - [Pre-publication privacy review](release/privacy.md) — public note on the completed review and publication choices.
 
 - [M6 hidden-stage results](verification/runs/2026-11-18T225138Z-m6.md): functional checks passed; 20k target and 200k rebuild limit missed; on-screen qualification pending.

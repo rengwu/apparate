@@ -195,11 +195,12 @@ Source: the user's chat request (with a screenshot of the panel, not kept becaus
 
 ## Round 23 — 2026-11-25
 
-Source: the user's chat request while trying the drag-out build.
+Source: the user's chat requests while trying the drag-out build.
 
 | ID | Decision | Basis |
 | --- | --- | --- |
 | DEC-069 | When a drag leaves the panel, the panel fades out over 0.15 seconds instead of vanishing. Only that hide fades; Esc, losing focus, opening a result and the others stay instant. | The user: "can we add a very short fade out animation when it disappears on our drag?" The duration and keeping other hides instant are Claude's calls, in [drag-out section 7](build/drag-out.md#7-fade-out-when-the-drag-leaves). |
+| DEC-070 | Release the drag work as **0.2.0** (a new feature, so the minor number goes up). The on-screen drag checks are not all done; the release notes say which haven't been checked by hand. | The user tried the fade build and said "looks great. commit, push, release." The version number is Claude's call. |
 
 ## Observed from the reference apps
 

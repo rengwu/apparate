@@ -18,6 +18,7 @@ Build guides, one per milestone of the [implementation plan](../plan.md). Claude
 | UI follow-up (from the supervised session) | [UI follow-up guide](ui-follow-up.md) | Sections 1–14 reviewed and passed; committed `9194cfd` |
 | M7 Release 0.1.0 | [M7 guide](m7-release.md) | [Built; automated checks passed](../verification/runs/2026-11-20T141252Z-m7.md); reviewed; committed and tagged `v0.1.0`; [published](https://github.com/rengwu/apparate/releases/tag/v0.1.0) 2026-11-21; privacy choices applied; native checks remain Untested, waived for 0.1.0 (DEC-061) |
 | Drag results out (request, 2026-11-24) | [Drag-out brief](drag-out.md) | Sections 0–4 [reviewed: passed after two fixes](drag-out.md#review), committed `9053c75`; sections 5–6 (round 22) [reviewed: passed](drag-out.md#review-of-sections-5-and-6), committed `e4bdd37`; section 7 (fade, DEC-069) [reviewed: passed](drag-out.md#review-of-section-7); on-screen checks pending |
+| Release 0.2.0 (request, 2026-11-25) | [Release 0.2.0 brief](release-0.2.0.md) | [Reviewed: passed](release-0.2.0.md#review); [notes](../release/0.2.0.md); published by Claude after the commit |
 
 ## How a guide is used
 

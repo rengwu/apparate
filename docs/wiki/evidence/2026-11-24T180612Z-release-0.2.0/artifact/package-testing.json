@@ -1,0 +1,31 @@
+{
+  "dependencies": [
+    {
+      "byName": [
+        "ApparateCore",
+        null
+      ]
+    },
+    {
+      "byName": [
+        "ApparateFixtures",
+        null
+      ]
+    }
+  ],
+  "exclude": [],
+  "name": "Apparate",
+  "packageAccess": true,
+  "resources": [],
+  "settings": [
+    {
+      "kind": {
+        "define": {
+          "_0": "APPARATE_TESTING"
+        }
+      },
+      "tool": "swift"
+    }
+  ],
+  "type": "executable"
+}
