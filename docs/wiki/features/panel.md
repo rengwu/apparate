@@ -1,7 +1,7 @@
 ---
 title: Launcher panel
 section: Features
-updated: 2026-11-19
+updated: 2026-11-24
 ---
 # Launcher panel
 
@@ -31,7 +31,8 @@ Text appears immediately. Complete result sets arrive asynchronously; no product
 | Tab / ⇧Tab | Tab completes the current accepted selection in any search: folder → home-abbreviated path plus `/`; file → home-abbreviated path; app, setting or command → displayed name with its scope prefix kept. Paths drop the prefix. Web, identical text, pending results, no selection, unreconciled editor text and marked text do nothing. Shift-Tab does nothing. Both stay in the field; a completion places the caret at the end and native undo/redo updates the field and results. |
 | Open With key (default ⇧Return) | On a current accepted file/folder, enter Open With; pending, marked, repeat and other-kind triggers do nothing. |
 | Return / ⌘Return / ⌘C | Open / reveal / copy the selected filesystem path. During a pending query, queue the selected-row operation for that revision. |
-| Click / ⌘1–9 | Activate the displayed item's ID. If pending, it must survive in the new results; never substitute the item now occupying its old ordinal. |
+| Click | Press selects the row. Release opens the pressed ID unless a drag started. During a pending search, selection stays fixed and release queues the pressed ID, which must survive in the new results. While text is marked, both selection and activation stay suppressed. |
+| ⌘1–9 | Activate the ID of the corresponding visible row. A pending open requires that ID to survive in the new results. |
 | Edit / navigation / scroll / composition / hide / source or config change | Cancel queued actions and Restart arming. |
 | Restart | First Return, click or ⌘N arms it. Only a fresh nonrepeat Return confirms. The row says “Press Return again”; the footer says “↩ Confirm Restart   esc Cancel”. |
 | Esc | Input method first; otherwise disarm Restart without clearing the query, then clear text, then close. |
@@ -44,6 +45,12 @@ Text appears immediately. Complete result sets arrive asynchronously; no product
 While text is marked, the input method owns Return, arrows, Esc and Tab. Any Tab or Shift-Tab command that reaches the panel delegate is consumed without changing the text or focus. It cannot trigger an action or arm Restart. Real input-method candidate interaction is Untested and excluded from the session by DEC-050; release notes must retain that limitation.
 
 The result container exposes all up-to-50 accessibility rows, a separate visible subset, full title/location/kind/position, selected state and a press action. Elements keep identity by item ID. Selecting an offscreen element brings it into view; press validates its current ID. Selection-change notifications are posted only when the selection changes and the real panel is visible. Hidden checks use a notification counter and inspect the owned tree, without synthesizing VoiceOver speech.
+
+## Drag results out
+
+Move a pressed file, folder or app past the system drag distance to lift its icon. An Open With row supplies the chosen app’s file URL. Settings, commands and web rows open on release even when the pointer moves.
+
+Apparate supplies one file URL. The destination chooses among copy, move, link and generic operations. A drag within Apparate offers no operation. Releasing the drag inside the panel before the pointer crosses its edge preserves the query and selection. Once the pointer leaves the panel, the panel hides and the destination handles the drop. Dragging records no usage. [Drag-out brief](../build/drag-out.md).
 
 ## Open With
 
@@ -76,6 +83,9 @@ These require the user’s explicit supervised slot. DEC-050 excludes real IME, 
 5. **IME — excluded by DEC-050; Untested, future recipe only:** enable the user's chosen input method. Enter marked text and navigate its candidates with arrows/Return/Esc; no result opens or moves behind it. Commit text and verify normal navigation resumes. Confirm ⌘Q can quit during composition, then relaunch only within the supervised slot.
 6. **VoiceOver — excluded by DEC-050; Untested, future recipe only:** enable VoiceOver with the user. Navigate the result container and verify full labels, kind, position and selected state. Move beyond row 9, activate a fixture file, and verify the selected row is revealed. Check that ordinary selection changes are announced once and unrelated rerenders do not create repeated announcements.
 7. **Restart presentation:** arm Restart with Return, click and ⌘N separately. Verify repeat keys/clicks/number shortcuts do not confirm. Esc must first disarm while retaining the query. Stop at cancellation; actual acceptance is excluded by DEC-050 and remains Untested.
+8. **Finder and Desktop.** Use a disposable PDF and a same-disk Finder folder. Verify the default drop moves the file and an Option-drop copies it. Drop on the Desktop behind the panel’s original position and record the actual operation.
+9. **Other destinations.** Drag a disposable file into a Mail draft, a browser upload field, a chat draft and Terminal. Check the attachment, selected file or inserted path. Drag an app onto the Dock and a folder onto the Finder sidebar. Remove the test shortcuts afterward.
+10. **Release inside.** Start a drag and release over the panel without crossing its edge. Verify the query and selection persist. A subsequent plain click opens the pressed item.
 
 ## Coverage and limitations
 
@@ -84,6 +94,8 @@ Hidden activation guards, model/command behavior, layout, owned accessibility st
 The [post-review investigation](../verification/runs/2026-11-18T200340Z-m4.md#post-review-fixes) measures input, worker queue/search, main delivery, acceptance and view stages. Both delivery modes preserve generation guards. The requested hidden-proxy targets remain missed; activity and delivery-hop comparisons do not establish App Nap as the cause.
 
 ## Verification history
+
+- [Drag results out](../verification/runs/2026-11-24T074838Z-drag-out.md) covers press, release, file URLs, operation masks and panel dismissal.
 
 - [M2 automated verification](../verification/runs/2026-11-18T164000Z-m2.md).
 - [M3 integration](../verification/runs/2026-11-18T181500Z-m3.md): initial local-source readiness, compact files and typed discovered-app targets.

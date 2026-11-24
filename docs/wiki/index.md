@@ -1,6 +1,6 @@
 ---
 title: Apparate
-updated: 2026-11-21
+updated: 2026-11-24
 ---
 # Apparate
 
@@ -42,7 +42,7 @@ A minimal, very fast launcher for macOS. Planning notes, research, decisions, an
 - [M4 verification](verification/runs/2026-11-18T200340Z-m4.md) — approved and committed; hidden proxy latency remains failed and carried to M6.
 - [M5 verification](verification/runs/2026-11-18T212428Z-m5.md) — Settings, menu and setup; automated checks and review fix passed; included in the M5 milestone commit; native checks remain Untested.
 
-- [UI follow-up verification](verification/runs/2026-11-19T064952Z-ui.md) — Settings cards, setup text and dynamic panel sizing; hidden checks passed, review and on-screen resize proof pending.
+- [UI follow-up verification](verification/runs/2026-11-19T064952Z-ui.md) — Settings cards, setup text and dynamic panel sizing; hidden checks passed. Sections 1–14 passed review and were committed in `9194cfd`. On-screen resize verification remains open.
 
 - [UI six-fix recheck](verification/runs/2026-11-19T070456Z-ui-review.md) — revised controls and panel alignment; new hidden renders ready for review.
 
@@ -96,3 +96,5 @@ Claude and Codex researched the whole topic independently, at the user's request
 - [Tight relative-path ranking](verification/runs/2026-11-20T115638Z-tight-paths.md) — capped ancestor-gap penalty, usage crossover, unchanged non-path digests and 200k path timings.
 
 - [Single indexing indicator](verification/runs/2026-11-20T121149Z-indexing-indicator.md) — one Folders progress indicator, retained error statuses and exact idle/indexing frame equality.
+
+- [Drag results out](verification/runs/2026-11-24T074838Z-drag-out.md) — hidden click, drag and dismissal checks for result rows. External drops await on-screen verification.

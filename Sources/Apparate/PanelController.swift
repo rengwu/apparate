@@ -117,6 +117,7 @@ private final class PanelActivity {
         session.onChange = { [weak self] in self?.update() }
         rows.onSelect = { [weak session] in session?.select(id: $0) }
         rows.onActivate = { [weak session] in session?.activate(id: $0) }
+        rows.onDragExit = { [weak self] in self?.dismiss() }
         rows.onScroll = { [weak session] in session?.scroll($0) }
         rows.onAccessibilitySelection = { [weak self] in
             guard let self else { return }
@@ -223,7 +224,13 @@ private final class PanelActivity {
     }
 #endif
     func hide() { session.hide(); panel.orderOut(nil) }
-    func windowDidResignKey(_ notification: Notification) { if session.model.visible && panel.presentationAllowed { hide(); onHidden?() } }
+    private func dismiss() {
+        guard session.model.visible else { return }
+        hide(); onHidden?()
+    }
+    func windowDidResignKey(_ notification: Notification) {
+        if panel.presentationAllowed { dismiss() }
+    }
     private var editor: NSTextView? { search.currentEditor() as? NSTextView ?? panel.firstResponder as? NSTextView }
     func controlTextDidBeginEditing(_ notification: Notification) {
         guard let editor else { return }

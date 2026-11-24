@@ -1,4 +1,5 @@
 import AppKit
+import Carbon.HIToolbox
 import ApparateCore
 
 final class ResultAccessibilityRow: NSAccessibilityElement {
@@ -38,7 +39,7 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
 }
 
 /// One whole-row viewport with stable item-ID accessibility elements.
-@MainActor final class ResultsView: NSView {
+@MainActor final class ResultsView: NSView, NSDraggingSource {
     private(set) var contents: [PanelRowContent] = []
     private(set) var firstVisible = 0
     private(set) var selectedID: String?
@@ -67,6 +68,16 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
     var rowHeight: CGFloat { resultLocation.rowHeight }
     var rowTop: CGFloat = 0
     private var wheelRemainder: CGFloat = 0
+    private var press: (id: String, point: NSPoint, event: NSEvent)?
+    private var tracksDragExit = false
+    var onDragExit: (() -> Void)?
+    private static let dragDistance: CGSize = {
+        var distance = CGSize.zero
+        guard HIMouseTrackingGetParameters(OSType(kMouseParamsDragInitiation), nil, &distance) == noErr else {
+            return CGSize(width: 4, height: 4)
+        }
+        return distance
+    }()
     private let icons: IconLoader
     private var iconGeneration = -1
     var onActivate: ((String) -> Void)?, onSelect: ((String) -> Void)?, onScroll: ((Int) -> Void)?
@@ -87,6 +98,8 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
         contents = model.rows.enumerated().map { PanelRowContent($0.element, model: model, index: $0.offset) }
         firstVisible = model.firstVisibleRow; selectedID = model.selectedID
         let ids = Set(contents.map(\.id))
+        if !model.visible { tracksDragExit = false; press = nil }
+        if let press, !ids.contains(press.id) { self.press = nil }
         artwork = artwork.filter { ids.contains($0.key) }; images = images.filter { ids.contains($0.key) }
         requestedIcons = requestedIcons.filter { ids.contains($0.key) }
         accessibilityElements = accessibilityElements.filter { ids.contains($0.key) }
@@ -165,12 +178,63 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
         guard local.y >= rowTop, local.y < rowTop + CGFloat(visibleIndices.count) * rowHeight else { return nil }
         return super.hitTest(point)
     }
-    func activate(point: NSPoint) {
+    override func mouseDown(with event: NSEvent) {
+        press = nil
+        let point = convert(event.locationInWindow, from: nil)
         let index = firstVisible + Int(floor((point.y - rowTop) / rowHeight))
         guard bounds.contains(point), visibleIndices.contains(index) else { return }
-        onActivate?(contents[index].id)
+        let id = contents[index].id
+        press = (id, point, event)
+        onSelect?(id)
     }
-    override func mouseDown(with event: NSEvent) { activate(point: convert(event.locationInWindow, from: nil)) }
+    override func mouseUp(with event: NSEvent) {
+        guard let press else { return }
+        self.press = nil
+        onActivate?(press.id)
+    }
+    func takeDrag(at point: NSPoint) -> (item: NSDraggingItem, event: NSEvent)? {
+        guard let press,
+              abs(point.x - press.point.x) > Self.dragDistance.width || abs(point.y - press.point.y) > Self.dragDistance.height,
+              let index = visibleIndices.first(where: { contents[$0].id == press.id }),
+              let url = contents[index].fileURL else { return nil }
+        let rowY = rowTop + CGFloat(index - firstVisible) * rowHeight
+        let frame = drawing(at: index).iconFrame.offsetBy(dx: 0, dy: rowY)
+        let item = NSDraggingItem(pasteboardWriter: url as NSURL)
+        // A cold row can still be dragged before its asynchronous icon arrives.
+        let icon = loadedIcon(at: index) ?? NSWorkspace.shared.icon(forFile: url.path)
+        item.setDraggingFrame(frame, contents: icon)
+        self.press = nil
+        tracksDragExit = true
+        return (item, press.event)
+    }
+    override func mouseDragged(with event: NSEvent) {
+        guard let drag = takeDrag(at: convert(event.locationInWindow, from: nil)) else { return }
+        beginDraggingSession(with: [drag.item], event: drag.event, source: self)
+    }
+    static func dragOperations(in context: NSDraggingContext) -> NSDragOperation {
+        context == .outsideApplication ? [.copy, .move, .link, .generic] : []
+    }
+    func draggingSession(_ session: NSDraggingSession, sourceOperationMaskFor context: NSDraggingContext) -> NSDragOperation {
+        Self.dragOperations(in: context)
+    }
+    func dragMoved(to point: NSPoint) {
+        guard tracksDragExit, let window, !window.frame.contains(point) else { return }
+        tracksDragExit = false
+        onDragExit?()
+    }
+    func dragEnded(at point: NSPoint) {
+        dragMoved(to: point)
+        tracksDragExit = false
+    }
+    func draggingSession(_ session: NSDraggingSession, willBeginAt screenPoint: NSPoint) {
+        dragMoved(to: session.draggingLocation)
+    }
+    func draggingSession(_ session: NSDraggingSession, movedTo screenPoint: NSPoint) {
+        dragMoved(to: session.draggingLocation)
+    }
+    func draggingSession(_ session: NSDraggingSession, endedAt screenPoint: NSPoint, operation: NSDragOperation) {
+        dragEnded(at: screenPoint)
+    }
     override func scrollWheel(with event: NSEvent) {
         let delta = event.hasPreciseScrollingDeltas ? -event.scrollingDeltaY : -event.scrollingDeltaY * rowHeight
         wheelRemainder += delta
