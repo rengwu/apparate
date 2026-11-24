@@ -78,6 +78,12 @@ import ApparateCore
             let dispatcher = ActionDispatcher(executor: executor, presence: presence, recordOpenWith: { try await history.recordSuccessfulOpen(id: $0, contentType: $1, application: $2) }, record: { try await history.recordSuccessfulOpen(id: $0) })
             actions = dispatcher
             dispatcher.onHistoryError = { [weak self] _ in self?.logError("Usage history could not be saved.") }
+            panel.rows.onDrop = { id in
+                Task {
+                    await dispatcher.recordUse(of: id)
+                    session.successfulOpen()
+                }
+            }
             session.onOpenWithFailure = { [weak self] failure in
                 guard let self else { return }
                 self.panel?.hide()

@@ -74,6 +74,23 @@ private func check(_ value: @autoclosure () -> Bool, _ message: String) throws {
             session.setCatalog(try TestProfile.fixtureCatalog()); try panel.beginHiddenShowing(); try panel.injectText("term")
             while session.model.pending { try await Task.sleep(for: .milliseconds(1)) }
             let beforeLayoutRevision = session.model.revision, beforeLayoutSelection = session.model.selectedID
+            let draggedFiles = try control("dragged-files", in: settings.window) as! NSSegmentedControl
+            try check(draggedFiles.selectedSegment == 0 && draggedFiles.segmentCount == 2 && draggedFiles.accessibilityLabel() == "Dragged files" &&
+                      draggedFiles.label(forSegment: 0) == "Like Finder" && draggedFiles.label(forSegment: 1) == "Never move", "Dragged files control labels/default")
+            // Load a saved choice through the store before editing it in the open window.
+            var saved = model.config; saved.dragCanMove = false
+            try JSONEncoder().encode(saved).write(to: store.file, options: .atomic); store.reload()
+            try check(draggedFiles.selectedSegment == 1 && panel.rows.dragOperations(in: .outsideApplication) == [.copy, .link], "Saved Never move choice was not applied")
+            for canMove in [true, false] {
+                draggedFiles.selectedSegment = canMove ? 0 : 1
+                draggedFiles.sendAction(draggedFiles.action, to: draggedFiles.target)
+                let persisted = try ConfigStore.decode(Data(contentsOf: store.file))
+                let expected: NSDragOperation = canMove ? [.copy, .move, .link, .generic] : [.copy, .link]
+                try check(persisted.dragCanMove == canMove && panel.rows.dragOperations(in: .outsideApplication) == expected &&
+                          panel.rows.dragOperations(in: .withinApplication).isEmpty && session.model.revision == beforeLayoutRevision, "Drag choice failed persistence or live mask check")
+                try captureSettings(settings, canMove ? "like-finder" : "never-move", profile)
+            }
+            report["dragged_files_control"] = ["loaded_saved_never_move": true, "persisted_both_choices": true, "live_masks": [23, 3], "inside_mask": 0]
             for (index, value) in ResultLocation.allCases.enumerated() {
                 location.selectedSegment = index; location.sendAction(location.action, to: location.target)
                 try check(model.config.resultLocation == value && session.resultLocation == value && panel.rows.resultLocation == value, "Native location change did not reach open panel")
@@ -256,7 +273,7 @@ private func check(_ value: @autoclosure () -> Bool, _ message: String) throws {
             report["login_not_found"] = ["shared_native_status_mapping": true, "initial_off_enabled": true, "successful_registration_on": true, "refusal_off_inline": true, "non_bundle_disabled": true, "approval_can_unregister": true, "fake_changes": login.changes]
             let valid = try Data(contentsOf: store.file), broken = Data("{broken".utf8)
             try broken.write(to: store.file, options: .atomic); store.reload()
-            try check(!model.editable && !loginButton.isEnabled && !location.isEnabled && !hidden.isEnabled, "Broken config did not disable controls")
+            try check(!model.editable && !loginButton.isEnabled && !location.isEnabled && !draggedFiles.isEnabled && !hidden.isEnabled, "Broken config did not disable controls")
             var reveals = 0; settings.onRevealConfig = { reveals += 1 }
             (try control("reveal", in: settings.window) as! NSButton).performClick(nil)
             try check(reveals == 1 && (try? Data(contentsOf: store.file)) == broken, "Broken-file recovery path")

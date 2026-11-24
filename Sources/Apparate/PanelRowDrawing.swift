@@ -3,7 +3,7 @@ import CoreText
 import ApparateCore
 
 struct PanelRowContent: Equatable {
-    let id: String, title: String, location: String, kind: String
+    let id: String, usageID: String, title: String, location: String, kind: String
     let itemKind: ItemKind
     let fileURL: URL?
     let highlights: [Int], icon: ItemIcon
@@ -11,6 +11,7 @@ struct PanelRowContent: Equatable {
     init(_ row: PanelRow, model: PanelModel, index: Int) {
         id = row.entry.item.id; title = row.entry.item.name; itemKind = row.entry.item.kind
         fileURL = row.entry.target.fileURL
+        usageID = row.usageID
         selected = id == model.selectedID
         location = selected && model.restartArmed ? "Press Return again" : row.locationOverride ?? PanelText.location(row.entry)
         highlights = row.result.highlights; icon = row.entry.icon

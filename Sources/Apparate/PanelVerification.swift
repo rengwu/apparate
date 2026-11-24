@@ -309,9 +309,9 @@ private final class PanelSearchTrace: Sendable {
         report["right_folder_completion"] = try await rightFolderCompletion(profile)
         report["larger_below_icons"] = try await largerBelowIcons(profile)
         report["open_with"] = try await openWithMode(profile)
-        report["drag_out"] = try await dragOut()
+        report["drag_out"] = try await dragOut(profile)
     }
-    private static func dragOut() async throws -> [String: Any] {
+    private static func dragOut(_ profile: TestProfile) async throws -> [String: Any] {
         let folder = CatalogEntry(item: SearchItem(id: "fixture:folder", kind: .folder, name: "Term Folder"),
                                   target: .file(URL(fileURLWithPath: "/Fixture/Term Folder", isDirectory: true)), icon: .symbol("folder"))
         let fixtures = try TestProfile.fixtureCatalog()
@@ -321,6 +321,11 @@ private final class PanelSearchTrace: Sendable {
         defer { panel.hide() }
         try panel.beginHiddenShowing()
         let rows = panel.rows
+        let history = try UsageStore(directory: profile.directory.appendingPathComponent("drag-history"), clock: { 1000 })
+        let effects = TestEffects()
+        let dispatcher = ActionDispatcher(executor: effects, record: { try await history.recordSuccessfulOpen(id: $0) })
+        var writes: [Task<Void, Never>] = []
+        rows.onDrop = { id in writes.append(Task { await dispatcher.recordUse(of: id) }) }
         var opens: [String] = [], hidden = 0
         session.onAction = { opens.append($0.entry.item.id) }
         panel.onHidden = { hidden += 1 }
@@ -361,7 +366,7 @@ private final class PanelSearchTrace: Sendable {
                             pasteboard.string(forType: .fileURL) == expected.absoluteString, "Incorrect drag pasteboard")
                 let frame = rows.drawing(at: index).iconFrame.offsetBy(dx: 0, dy: rows.rowTop + CGFloat(index) * rows.rowHeight)
                 try require(drag.item.draggingFrame == frame && drag.event.type == .leftMouseDown, "Incorrect drag geometry/event")
-                rows.dragMoved(to: inside); rows.dragEnded(at: inside); release(moved)
+                rows.dragMoved(to: inside); rows.dragEnded(at: inside, operation: []); release(moved)
                 try require(hidden == 0 && session.model.visible && panel.text == query && rows.contents == selectedRows &&
                             rows.selectedID == entry.item.id && opens == opensBeforeDrag, "Inside drag hid, activated, or altered results")
                 urls[String(describing: kind)] = expected.absoluteString
@@ -371,8 +376,13 @@ private final class PanelSearchTrace: Sendable {
                 try require(opens == opensBeforeDrag + [entry.item.id], "Non-file movement swallowed the click")
             }
         }
-        try require(ResultsView.dragOperations(in: .outsideApplication) == [.copy, .move, .link, .generic] &&
-                    ResultsView.dragOperations(in: .withinApplication).isEmpty, "Unexpected drag mask")
+        let finderMask = rows.dragOperations(in: .outsideApplication)
+        try require(finderMask == [.copy, .move, .link, .generic] && rows.dragOperations(in: .withinApplication).isEmpty, "Unexpected Like Finder mask")
+        var config = AppConfig(); config.dragCanMove = false; session.setConfig(config)
+        let neverMoveMask = rows.dragOperations(in: .outsideApplication)
+        try require(neverMoveMask == [.copy, .link] && rows.dragOperations(in: .withinApplication).isEmpty, "Unexpected Never move mask")
+        let cancelledCounts = try await history.counts()
+        try require(writes.isEmpty && cancelledCounts.isEmpty, "Cancelled drag recorded usage")
         let first = NSPoint(x: 60, y: rows.rowTop + 12)
         try panel.injectText("restart"); try await settle(session)
         click(rows, at: first); click(rows, at: first)
@@ -393,6 +403,7 @@ private final class PanelSearchTrace: Sendable {
         try panel.injectText("keyboard"); press(second); release(first); try await settle(session)
         try require(opens == before && rows.contents.first?.itemKind == .setting, "Pending click activated a replacement")
         try panel.injectText("term"); try await settle(session)
+        let droppedID = rows.contents[0].id
         press(first)
         guard let drag = rows.takeDrag(at: NSPoint(x: first.x + 40, y: first.y)) else { throw PanelCheckFailure(message: "Missing outside drag") }
         let outside = NSPoint(x: panel.panelFrame.maxX + 1, y: panel.panelFrame.midY)
@@ -400,13 +411,19 @@ private final class PanelSearchTrace: Sendable {
         try require(!session.model.visible && hidden == 1 && !panel.activityHeld, "Drag exit did not hide once")
         try panel.beginHiddenShowing()
         try require(rows.contents.isEmpty, "Reopen did not clear the rows")
-        rows.dragEnded(at: outside); release(first)
+        rows.dragEnded(at: outside, operation: .copy); release(first)
+        rows.dragEnded(at: outside, operation: .copy)
+        try require(writes.count == 1, "Completed drop must emit its ID exactly once")
+        await writes[0].value
+        let counts = try await history.counts()
+        try require(counts == [droppedID: 1] && effects.actionCount == 0, "Drop did not record the captured ID exactly once without opening")
         try require(session.model.visible && hidden == 1 && opens == before && drag.item.item is NSURL, "Late drag callback affected a new showing")
         try panel.verifyHidden()
         return ["clicked_kinds": cases.map { String(describing: $0.1) }, "file_urls": urls, "hidden_callbacks": hidden,
                 "inside_release_preserved_results": true, "ended_after_row_clear": true, "pending_survivor": pressedID,
                 "pending_replacement_opens": 0, "composition_click_suppressed": true,
-                "outside_mask": ResultsView.dragOperations(in: .outsideApplication).rawValue, "inside_mask": ResultsView.dragOperations(in: .withinApplication).rawValue]
+                "outside_mask": finderMask.rawValue, "never_move_outside_mask": neverMoveMask.rawValue,
+                "inside_mask": rows.dragOperations(in: .withinApplication).rawValue, "persisted_drop_counts": counts, "cancelled_counts": cancelledCounts]
     }
     private static func openWithMode(_ profile: TestProfile) async throws -> [String: Any] {
         func app(_ name: String) -> CatalogEntry {
@@ -464,11 +481,26 @@ private final class PanelSearchTrace: Sendable {
         try require(actions.count == 2 && actions[1].entry == folder && actions[1].openWith?.contentType == "public.folder", "Folder Return failed")
         try panel.beginHiddenShowing(); try panel.injectText("notes.md"); try await settle(session)
         try panel.sendHiddenKey(key("k", code: 40, flags: [.command, .option])); try await settle(session)
-        let appPoint = NSPoint(x: 20, y: PanelLayout.rowTop + 14)
+        let history = try UsageStore(directory: profile.directory.appendingPathComponent("open-with-drag-history"), clock: { 1000 })
+        try await history.recordSuccessfulOpen(id: file.item.id, contentType: "public.text", application: last.target.fileURL)
+        let dispatcher = ActionDispatcher(executor: TestEffects(),
+            recordOpenWith: { try await history.recordSuccessfulOpen(id: $0, contentType: $1, application: $2) },
+            record: { try await history.recordSuccessfulOpen(id: $0) })
+        var dropWrite: Task<Void, Never>?
+        panel.rows.onDrop = { id in dropWrite = Task { await dispatcher.recordUse(of: id) } }
+        let appPoint = NSPoint(x: 20, y: PanelLayout.rowTop + panel.rows.rowHeight + 14)
         panel.rows.mouseDown(with: mouse(.leftMouseDown, at: appPoint, in: panel.rows))
         let appDrag = panel.rows.takeDrag(at: NSPoint(x: 60, y: appPoint.y))
-        try require((appDrag?.item.item as? URL) == last.target.fileURL && actions.count == 2, "Open With drag did not supply the app URL")
-        panel.rows.dragEnded(at: NSPoint(x: panel.panelFrame.midX, y: panel.panelFrame.midY))
+        try require((appDrag?.item.item as? URL) == current.target.fileURL && actions.count == 2, "Open With drag did not supply the app URL")
+        let outside = NSPoint(x: panel.panelFrame.maxX + 1, y: panel.panelFrame.midY)
+        panel.rows.dragMoved(to: outside)
+        panel.rows.dragEnded(at: outside, operation: .copy)
+        await dropWrite?.value
+        let dropCounts = try await history.counts(), handler = try await history.lastOpenWith(for: "public.text")
+        try require(dropCounts == [file.item.id: 1, current.item.id: 1] && handler == last.target.fileURL &&
+                    actions.count == 2 && !session.model.visible, "App drop changed the remembered handler, credited the wrong ID, or opened the file")
+        try panel.beginHiddenShowing(); try panel.injectText("notes.md"); try await settle(session)
+        try panel.sendHiddenKey(key("k", code: 40, flags: [.command, .option])); try await settle(session)
         click(panel.rows, at: appPoint)
         try require(actions.count == 3 && actions[2].entry == file && !session.model.visible, "Open With row click failed")
         try panel.beginHiddenShowing(); try panel.injectText("notes.md"); try await settle(session)
@@ -490,7 +522,8 @@ private final class PanelSearchTrace: Sendable {
         _ = emptyPanel.escape(); try require(emptyPanel.text == "notes.md" && !emptySession.isOpenWith, "Empty app list cannot go Back")
         try emptyPanel.verifyHidden()
         return ["renders": renders, "native_local_key_route": true, "exact_back": true, "no_op_keys": ["Tab", "Shift-Tab", "Command-Return", "Command-C"],
-                "fake_opens": actions.count, "real_workspace_discovery": 0, "real_opens": 0, "folder_type": "public.folder", "custom_shortcut": "⌥⌘K", "marked_trigger_consumed": true, "app_drag_url_checked": true]
+                "fake_opens": actions.count, "real_workspace_discovery": 0, "real_opens": 0, "folder_type": "public.folder", "custom_shortcut": "⌥⌘K", "marked_trigger_consumed": true, "app_drag_url_checked": true,
+                "app_drop_counts": dropCounts, "remembered_handler_after_drop": handler?.lastPathComponent ?? ""]
     }
     private static func rightFolderCompletion(_ profile: TestProfile) async throws -> [String: Any] {
         let home = "/Fixture/Home", folder = home + "/Projects/quinecms-demo-site", unicode = "Folder 👩🏽‍💻e\u{301}東京"

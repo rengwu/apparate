@@ -102,7 +102,7 @@ private final class PanelActivity {
          initialAppearance: NSAppearance.Name? = nil, bareField: Bool = false) {
         self.session = session; self.opaque = opaque; self.activityEnabled = activityEnabled
         search = bareField ? NSTextField() : NSSearchField()
-        rows = ResultsView(icons: icons)
+        rows = ResultsView(icons: icons, dragCanMove: { session.dragCanMove })
         panel = LauncherPanel(presentationAllowed: presentationAllowed)
         super.init()
         if let initialAppearance { panel.appearance = NSAppearance(named: initialAppearance) }

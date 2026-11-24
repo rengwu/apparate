@@ -2,7 +2,7 @@
 title: Drag results out
 section: Build
 updated: 2026-11-24
-status: Review passed, supervised drops pending
+status: Sections 0–4 committed `9053c75`; sections 5–6 reviewed and passed; on-screen drops pending
 ---
 # Drag results out
 
@@ -16,13 +16,17 @@ The user, with a screenshot of the panel listing PDF results for a name query: "
 
 | Decision | What it means here |
 | --- | --- |
-| The request above | A result row that is a file, folder or app can be dragged out of the panel and dropped anywhere that accepts a Finder drag. |
+| [DEC-064](../decisions.md#round-22-2026-11-24) | A result row that is a file, folder or app can be dragged out of the panel and dropped anywhere that accepts a Finder drag. |
+| [DEC-065](../decisions.md#round-22-2026-11-24) | The panel hides once the drag leaves it (section 4). |
+| [DEC-066](../decisions.md#round-22-2026-11-24) | A Settings choice between Like Finder (default) and Never move (section 5). |
+| [DEC-067](../decisions.md#round-22-2026-11-24) | The drag image is the icon only (section 3). |
+| [DEC-068](../decisions.md#round-22-2026-11-24) | A completed drop counts as a use (section 6). |
 | [DEC-013](../decisions.md#round-2-2026-11-18) | AppKit only. |
 | [DEC-052](../decisions.md#round-13-2026-11-19) | The panel grows to fit its results; drag targets follow the rows that are shown. |
 | [DEC-057](../decisions.md#round-13-2026-11-19) | Open With rows are apps; they follow the same rule as any other row. |
 | [Rules for every milestone](index.md#rules-for-every-milestone) | Lean, plain UI, no packages, headless core, private data out of records. |
 
-Two product calls are Claude's proposals and have not been put to the user yet. They are marked **(proposal)** below. The user may change them; build them as written unless told otherwise.
+Sections 0–4 were built, reviewed and committed in `9053c75`. The user then settled Claude's calls in round 22 (DEC-065 to DEC-068): sections 3 and 4 stand, and sections 5 and 6 are new work.
 
 ## 0. Housekeeping
 
@@ -46,11 +50,11 @@ Scroll-wheel, keyboard, ⌘1–9 and accessibility press are unchanged.
 ## 3. The drag itself
 
 - **Pasteboard:** the item's file URL, written as an `NSURL` pasteboard writer (`public.file-url`). Nothing else: no extra types, no promised files.
-- **Operations:** outside the app, offer `.copy`, `.move`, `.link` and `.generic`, the way Finder does, and let the destination choose. A drop into a Finder folder on the same disk moves the file, and ⌥ copies, exactly as when dragging from Finder. **(proposal)** Inside the app, offer nothing; the panel is not a drop target. Don't offer `.delete`: Apparate never copies, moves or deletes a file itself. The destination does the work, and the file index notices the change as it already does.
+- **Operations:** outside the app, offer `.copy`, `.move`, `.link` and `.generic`, the way Finder does, and let the destination choose. A drop into a Finder folder on the same disk moves the file, and ⌥ copies, exactly as when dragging from Finder. Section 5 adds a Never move choice. Inside the app, offer nothing; the panel is not a drop target. Don't offer `.delete`: Apparate never copies, moves or deletes a file itself. The destination does the work, and the file index notices the change as it already does.
 - **Image:** the row's icon at its drawn size and position, so it lifts out of the row. No title label.
-- **Not a use:** a drag doesn't record usage or change ranking. Only opens do.
+- **Usage:** superseded by section 6; a completed drop now counts as a use.
 
-## 4. The panel during a drag **(proposal)**
+## 4. The panel during a drag
 
 The panel sits in the middle of the screen, over whatever the user may want to drop on. So:
 
@@ -88,7 +92,7 @@ On-screen checks, for the user once the review passes. Record them as Untested i
 
 - Dropping anything onto Apparate.
 - Dragging more than one row at once.
-- New settings, footer text or menu items for dragging.
+- Settings, footer text or menu items for dragging, other than section 5's choice.
 - File operations performed by Apparate.
 - AppKit or pasteboard code in `ApparateCore`.
 
@@ -103,4 +107,53 @@ Codex had no pushback. Round 1 found two issues, both fixed and rechecked ([post
 1. Losing key focus during a drag no longer dismissed the panel, which could leave it floating and unfocused after a drag released over it. Losing focus now dismisses it as always.
 2. A row whose icon was still loading dragged a generic document symbol. It now uses the item's Finder icon.
 
-Claude reran the hidden panel profile on the fixed review build; the drag checks passed. The review passed on 2026-11-24. The on-screen drops in [FEAT-panel's supervised recipes](../features/panel.md#supervised-recipes-untested) (8–10) are still Untested, and so are the two proposals the user hasn't confirmed: hiding the panel once the drag leaves it, and Finder's move-on-same-disk behaviour.
+Claude reran the hidden panel profile on the fixed review build; the drag checks passed. The review passed on 2026-11-24. The on-screen drops in [FEAT-panel's supervised recipes](../features/panel.md#supervised-recipes-untested) (8–10) are still Untested, The user settled both proposals in round 22: the panel behaviour stands (DEC-065), and moving becomes a setting (DEC-066, section 5).
+
+## 5. Never move setting
+
+[DEC-066](../decisions.md#round-22-2026-11-24). The user: "make this toggleable in settings. between like finder and never move. default: like finder."
+
+- **Config:** a Bool `dragCanMove`, default `true`. A config without the key decodes to `true`, like the other keys added after 0.1.0.
+- **Settings → General:** a row "Dragged files" with a two-segment control, **Like Finder** and **Never move**, placed in the same card as "Location in results", below it. It uses the same control style as that row, and its accessibility label is "Dragged files". No explanation text.
+- **Operations:** Like Finder offers copy, move, link and generic outside the app, as now. Never move offers copy and link only. Generic goes too, because a destination can treat a generic drop as a move. Inside the app it stays empty in both modes.
+- **Live:** read the setting when the drag session asks for its mask, so a change applies to the next drag without relaunching.
+
+## 6. Completed drops count as uses
+
+[DEC-068](../decisions.md#round-22-2026-11-24).
+
+- When a drag session ends with any operation other than none, record usage exactly as a successful open of that row would: the same item ID, the same history store, the same error reporting (`onHistoryError`).
+- **Open With rows:** a dropped app counts as plain usage of that app. It doesn't record an Open With choice, so the remembered app for the original file's type is unchanged. (Codex's reading, agreed: opening that row would record the choice, which a drag shouldn't.)
+- A drag that ends with no operation (cancelled, or released over the panel) records nothing.
+- Capture the ID when the drag starts. By the time the drop ends, the panel has usually hidden and its rows may be gone.
+- Recording stays out of the view: the rows report the dropped ID through a callback, and the existing history path records it.
+
+## Checks for sections 5 and 6
+
+Hidden, in the existing panel and Settings profiles:
+
+9. Config: a file without `dragCanMove` decodes to `true`, and both values round-trip.
+10. The Settings control shows the saved value and writes the other one, and the Settings renders in light and dark include the new row.
+11. The mask is copy, move, link and generic with Like Finder, and copy and link with Never move. It's empty inside the app in both modes. Flipping the setting changes the next drag's mask without a relaunch.
+12. A drag that ends with copy records the dragged ID once through the history path. One that ends with none records nothing. One that ends after the panel hid and the rows cleared still records the captured ID.
+13. Full test suite, release build, `./build.sh`, then the wiki rebuild and check.
+
+On-screen, for the user, Untested until then:
+
+- With Never move: a same-disk Finder drop copies, and ⌘⌥ makes an alias. Mail, a browser upload field, Terminal and the Dock still accept. If any of them refuses without generic, record which one; Claude will take it to the user.
+- Drop the same file twice into a folder, then search for it: it ranks as if opened twice.
+
+## Records for sections 5 and 6
+
+- Update [FEAT-panel](../features/panel.md) (the drag section) and [FEAT-settings](../features/settings.md) (the new row).
+- Append the run to `verification/runs/` as a new run, linked from the first.
+
+## Commit for sections 5 and 6
+
+One commit after the review passes: subject `Panel: Never move setting and drops count as uses`. Never push.
+
+## Review of sections 5 and 6
+
+Codex had no pushback. Its one reading, agreed and added to section 6: a dropped Open With app counts as plain usage of the app, with no Open With choice recorded. Building it, Codex found that Open With rows carry their own IDs (`open-with:` plus the path), so each row now also carries the underlying catalog app ID for usage. Selection still uses the row ID.
+
+Claude read the diff (config key, Settings row, the live mask, the drop callback through the dispatcher's history path, the usage refresh, the Open With ID). Claude also looked at the Settings renders in light and dark, and reran the hidden panel and Settings profiles on `build/review/2026-11-24-drag-policy-final`. Both passed: masks 23 (Like Finder) and 3 (Never move), and one recorded use per completed drop. The Open With drop counted for the app while the remembered app stayed unchanged. Both choices persisted. The review passed on 2026-11-24 with no findings. Never move's real destinations, Finder's copy and alias choices and the two-drop ranking check remain Untested ([run](../verification/runs/2026-11-24T093455Z-drag-policy.md)).

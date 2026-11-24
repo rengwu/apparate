@@ -70,7 +70,10 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
     private var wheelRemainder: CGFloat = 0
     private var press: (id: String, point: NSPoint, event: NSEvent)?
     private var tracksDragExit = false
+    private var draggedID: String?
+    private let dragCanMove: () -> Bool
     var onDragExit: (() -> Void)?
+    var onDrop: ((String) -> Void)?
     private static let dragDistance: CGSize = {
         var distance = CGSize.zero
         guard HIMouseTrackingGetParameters(OSType(kMouseParamsDragInitiation), nil, &distance) == noErr else {
@@ -85,8 +88,9 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
     var visibleIndices: Range<Int> { firstVisible..<min(contents.count, firstVisible + PanelModel.pageSize) }
     override var isFlipped: Bool { true }
     override var acceptsFirstResponder: Bool { false }
-    init(icons: IconLoader) {
-        self.icons = icons; super.init(frame: NSRect(x: 6, y: 35, width: 628, height: 252))
+    init(icons: IconLoader, dragCanMove: @escaping () -> Bool) {
+        self.icons = icons; self.dragCanMove = dragCanMove
+        super.init(frame: NSRect(x: 6, y: 35, width: 628, height: 252))
         setAccessibilityElement(true); setAccessibilityRole(.table); setAccessibilityLabel("Search results")
     }
     required init?(coder: NSCoder) { fatalError("init(coder:) is not supported") }
@@ -203,6 +207,7 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
         // A cold row can still be dragged before its asynchronous icon arrives.
         let icon = loadedIcon(at: index) ?? NSWorkspace.shared.icon(forFile: url.path)
         item.setDraggingFrame(frame, contents: icon)
+        draggedID = contents[index].usageID
         self.press = nil
         tracksDragExit = true
         return (item, press.event)
@@ -211,20 +216,24 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
         guard let drag = takeDrag(at: convert(event.locationInWindow, from: nil)) else { return }
         beginDraggingSession(with: [drag.item], event: drag.event, source: self)
     }
-    static func dragOperations(in context: NSDraggingContext) -> NSDragOperation {
-        context == .outsideApplication ? [.copy, .move, .link, .generic] : []
+    func dragOperations(in context: NSDraggingContext) -> NSDragOperation {
+        guard context == .outsideApplication else { return [] }
+        return dragCanMove() ? [.copy, .move, .link, .generic] : [.copy, .link]
     }
     func draggingSession(_ session: NSDraggingSession, sourceOperationMaskFor context: NSDraggingContext) -> NSDragOperation {
-        Self.dragOperations(in: context)
+        dragOperations(in: context)
     }
     func dragMoved(to point: NSPoint) {
         guard tracksDragExit, let window, !window.frame.contains(point) else { return }
         tracksDragExit = false
         onDragExit?()
     }
-    func dragEnded(at point: NSPoint) {
+    func dragEnded(at point: NSPoint, operation: NSDragOperation) {
+        let id = draggedID
+        draggedID = nil
         dragMoved(to: point)
         tracksDragExit = false
+        if !operation.isEmpty, let id { onDrop?(id) }
     }
     func draggingSession(_ session: NSDraggingSession, willBeginAt screenPoint: NSPoint) {
         dragMoved(to: session.draggingLocation)
@@ -233,7 +242,7 @@ final class ResultAccessibilityRow: NSAccessibilityElement {
         dragMoved(to: session.draggingLocation)
     }
     func draggingSession(_ session: NSDraggingSession, endedAt screenPoint: NSPoint, operation: NSDragOperation) {
-        dragEnded(at: screenPoint)
+        dragEnded(at: screenPoint, operation: operation)
     }
     override func scrollWheel(with event: NSEvent) {
         let delta = event.hasPreciseScrollingDeltas ? -event.scrollingDeltaY : -event.scrollingDeltaY * rowHeight

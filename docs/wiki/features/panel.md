@@ -21,7 +21,7 @@ The panel follows system appearance and uses popover vibrancy; Reduce Transparen
 
 A user-initiated, latency-critical activity is held only while the panel is showing and released on hide; hidden startup warm-up does not hold it. The search field disables completion and prose editing services.
 
-Text appears immediately. Complete result sets arrive asynchronously; no production main-thread wait is added. Query revisions invalidate old work synchronously. Usage is read once per showing and reused for every edit, config change and source update; editing does not read SQLite. A successful primary open refreshes usage on the next showing, or explicitly if the user already reopened it. Selection follows its ID across results, falling back to the first row. Pending edits retain the previous complete presentation and its height. A location-layout change reflows that complete presentation immediately, without changing the query revision, selection, viewport, composition or pending action. Other config changes retain their restart behavior. Before any complete presentation, a nonempty pending query shows Searching…. Scrolling still updates the displayed viewport and its numbered shortcuts while a query is pending.
+Text appears immediately. Complete result sets arrive asynchronously; no production main-thread wait is added. Query revisions invalidate old work synchronously. Usage is read once per showing and reused for every edit, config change and source update; editing does not read SQLite. A successful primary open or completed drop refreshes usage on the next showing, or explicitly if the user already reopened it. Selection follows its ID across results, falling back to the first row. Pending edits retain the previous complete presentation and its height. A location-layout change reflows that complete presentation immediately, without changing the query revision, selection, viewport, composition or pending action. Other config changes retain their restart behavior. Before any complete presentation, a nonempty pending query shows Searching…. Scrolling still updates the displayed viewport and its numbered shortcuts while a query is pending.
 
 | Input/state | Outcome |
 | --- | --- |
@@ -50,7 +50,7 @@ The result container exposes all up-to-50 accessibility rows, a separate visible
 
 Move a pressed file, folder or app past the system drag distance to lift its icon. An Open With row supplies the chosen app’s file URL. Settings, commands and web rows open on release even when the pointer moves.
 
-Apparate supplies one file URL. The destination chooses among copy, move, link and generic operations. A drag within Apparate offers no operation. Releasing the drag inside the panel before the pointer crosses its edge preserves the query and selection. Once the pointer leaves the panel, the panel hides and the destination handles the drop. Dragging records no usage. [Drag-out brief](../build/drag-out.md).
+Apparate supplies one file URL. **Like Finder**, the default, offers the destination copy, move, link and generic operations. **Never move** offers only copy and link. The General setting applies immediately. A drag within Apparate offers no operation. Releasing the drag inside the panel before the pointer crosses its edge preserves the query and selection. Once the pointer leaves the panel, the panel hides and the destination handles the drop. A completed drop counts as one use of the dragged row for ranking, including an app dragged from Open With. That app gains plain usage while the original file type keeps its remembered handler. Cancelling records nothing. The ID captured at drag start survives dismissal. [Round 22 decisions](../decisions.md#round-22-2026-11-24).
 
 ## Open With
 
@@ -87,6 +87,9 @@ These require the user’s explicit supervised slot. DEC-050 excludes real IME, 
 9. **Other destinations.** Drag a disposable file into a Mail draft, a browser upload field, a chat draft and Terminal. Check the attachment, selected file or inserted path. Drag an app onto the Dock and a folder onto the Finder sidebar. Remove the test shortcuts afterward.
 10. **Release inside.** Start a drag and release over the panel without crossing its edge. Verify the query and selection persist. A subsequent plain click opens the pressed item.
 
+11. **Never move.** Drag a disposable file into a same-disk Finder folder and verify the source remains. Repeat with ⌘⌥ and verify an alias. Check that Mail, a browser upload field, Terminal and the Dock still accept a supported item. Record any refusal.
+12. **Drop usage.** With comparable results in a fixture folder, drop the same file successfully twice, then search again. Compare its ranking with two successful opens from the same starting history.
+
 ## Coverage and limitations
 
 Hidden activation guards, model/command behavior, layout, owned accessibility state and fixture render inspection are automated evidence. They do not establish real global-key delivery, focus transfer, screen presentation, composited vibrancy, Spaces or spoken VoiceOver behavior. The M4 performance record reports these separately as Untested; it does not claim the DEC-008 end-to-end budgets have passed.
@@ -94,6 +97,8 @@ Hidden activation guards, model/command behavior, layout, owned accessibility st
 The [post-review investigation](../verification/runs/2026-11-18T200340Z-m4.md#post-review-fixes) measures input, worker queue/search, main delivery, acceptance and view stages. Both delivery modes preserve generation guards. The requested hidden-proxy targets remain missed; activity and delivery-hop comparisons do not establish App Nap as the cause.
 
 ## Verification history
+
+- [Drag policy and completed-drop usage](../verification/runs/2026-11-24T093455Z-drag-policy.md).
 
 - [Drag results out](../verification/runs/2026-11-24T074838Z-drag-out.md) covers press, release, file URLs, operation masks and panel dismissal.
 

@@ -4,7 +4,11 @@ public struct PanelRow: Sendable, Equatable {
     public let result: SearchResult
     public let entry: CatalogEntry
     public let locationOverride: String?
-    public init(result: SearchResult, entry: CatalogEntry, locationOverride: String? = nil) { self.result = result; self.entry = entry; self.locationOverride = locationOverride }
+    public let usageID: String
+    public init(result: SearchResult, entry: CatalogEntry, locationOverride: String? = nil, usageID: String? = nil) {
+        self.result = result; self.entry = entry; self.locationOverride = locationOverride
+        self.usageID = usageID ?? entry.item.id
+    }
 }
 public struct PanelModel: Sendable {
     public static let pageSize = 9
@@ -204,7 +208,7 @@ public enum PanelText {
         showing &+= 1; usageRead?.cancel(); usageRead = nil; usageSnapshot = nil
         coordinator.invalidate(); pathCoordinator.invalidate(clear: true); model.hide(); onChange?()
     }
-    /// Called after an accepted primary open has finished recording history.
+    /// A successful open or completed drop refreshes the usage snapshot.
     /// Hidden panels read afresh on their next showing; an already reopened panel refreshes now.
     public func successfulOpen() {
         usageSnapshot = nil
@@ -227,9 +231,11 @@ public enum PanelText {
     public func edit(_ text: String, composing: Bool = false) { restoredPosition = nil; model.setComposing(composing); _ = model.begin(query: text, allowEmpty: isOpenWith); submit() }
     public func setComposing(_ value: Bool) { model.setComposing(value) }
     public var resultLocation: ResultLocation { config.resultLocation }
+    public var dragCanMove: Bool { config.dragCanMove }
     public func setConfig(_ config: AppConfig) {
         var previous = self.config
         previous.resultLocation = config.resultLocation
+        previous.dragCanMove = config.dragCanMove
         self.config = config
         if previous != config { sourceRevision &+= 1 }
         // Presentation changes preserve pending generations, actions and composition.

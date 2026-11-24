@@ -95,12 +95,13 @@ public struct ActionFailure: Sendable {
             let itemMissing = if let url = entry.target.fileURL { await missing(url) } else { false }
             return ActionFailure(title: entry.item.name, reason: error.localizedDescription, missingID: itemMissing ? entry.item.id : nil)
         }
-        if request.operation == .open {
-            do {
-                if let choice = request.openWith, let recordOpenWith { try await recordOpenWith(entry.item.id, choice.contentType, choice.application) }
-                else { try await record(entry.item.id) }
-            } catch { onHistoryError?(error.localizedDescription) }
-        }
+        if request.operation == .open { await recordUse(of: entry.item.id, openWith: request.openWith) }
         return nil
+    }
+    public func recordUse(of id: String, openWith choice: OpenWithChoice? = nil) async {
+        do {
+            if let choice, let recordOpenWith { try await recordOpenWith(id, choice.contentType, choice.application) }
+            else { try await record(id) }
+        } catch { onHistoryError?(error.localizedDescription) }
     }
 }

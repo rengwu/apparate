@@ -45,9 +45,10 @@ public struct AppConfig: Codable, Equatable, Sendable {
     public var respectGitignore = true
     public var skipHiddenFiles = true
     public var resultLocation = ResultLocation.inline
+    public var dragCanMove = true
     public init() {}
     private enum CodingKeys: String, CodingKey {
-        case version, hotKey, openWithKey, showMenuBarIcon, prefixes, searchURL, folders, respectGitignore, skipHiddenFiles, resultLocation
+        case version, hotKey, openWithKey, showMenuBarIcon, prefixes, searchURL, folders, respectGitignore, skipHiddenFiles, resultLocation, dragCanMove
     }
     public init(from decoder: Decoder) throws {
         self.init()
@@ -60,6 +61,7 @@ public struct AppConfig: Codable, Equatable, Sendable {
         searchURL = c.contains(.searchURL) ? try c.decode(String.self, forKey: .searchURL) : searchURL
         folders = c.contains(.folders) ? try c.decode([Folder].self, forKey: .folders) : folders
         resultLocation = c.contains(.resultLocation) ? try c.decode(ResultLocation.self, forKey: .resultLocation) : resultLocation
+        dragCanMove = c.contains(.dragCanMove) ? try c.decode(Bool.self, forKey: .dragCanMove) : dragCanMove
         respectGitignore = c.contains(.respectGitignore) ? try c.decode(Bool.self, forKey: .respectGitignore) : respectGitignore
         skipHiddenFiles = c.contains(.skipHiddenFiles) ? try c.decode(Bool.self, forKey: .skipHiddenFiles) : skipHiddenFiles
     }

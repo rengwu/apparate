@@ -22,7 +22,9 @@ import ApparateCore
     private let openWithShortcut = NSButton(title: "", target: nil, action: nil)
     private let login = NSSwitch(), menuIcon = NSSwitch(), respect = NSSwitch(), skipHidden = NSSwitch()
     private let location = NSSegmentedControl(labels: ["Inline", "Right", "Below"], trackingMode: .selectOne, target: nil, action: nil)
+    private let draggedFiles = NSSegmentedControl(labels: ["Like Finder", "Never move"], trackingMode: .selectOne, target: nil, action: nil)
     private var renderedLocation = ResultLocation.inline
+    private var renderedDragCanMove = true
     private var renderedSkipHidden = true
     private let presets = NSPopUpButton(), url = PreferencesField()
     private let prefixes = PreferencesCard(), folders = PreferencesCard()
@@ -83,8 +85,13 @@ import ApparateCore
             guard let self, ResultLocation.allCases.indices.contains((control as! NSSegmentedControl).selectedSegment) else { return }
             model.set(\.resultLocation, from: renderedLocation, to: ResultLocation.allCases[(control as! NSSegmentedControl).selectedSegment])
         }
+        draggedFiles.segmentStyle = .rounded
+        bind(draggedFiles) { [weak self] _ in
+            guard let self else { return }
+            model.set(\.dragCanMove, from: renderedDragCanMove, to: draggedFiles.selectedSegment == 0)
+        }
         pages[.general] = page([shortcutCard, PreferencesCard([PreferencesRow("Open With", control: openWithShortcut)]), PreferencesCard([loginRow, PreferencesRow("Show menu bar icon", control: menuIcon)]),
-                               PreferencesCard([PreferencesRow("Location in results", control: location)])])
+                               PreferencesCard([PreferencesRow("Location in results", control: location), PreferencesRow("Dragged files", control: draggedFiles)])])
         presets.addItems(withTitles: SearchPreset.allCases.map(\.rawValue) + ["Custom"])
         bind(presets) { [weak self] _ in
             guard let self else { return }
@@ -123,7 +130,8 @@ import ApparateCore
         folders.identifier = .init("folder-card"); folderActions.identifier = .init("folder-actions")
         indexRow = PreferencesRow("Index", control: rebuild)
         pages[.folders] = page([folders, folderActions, PreferencesCard([PreferencesRow("Skip files listed in .gitignore", control: respect), PreferencesRow("Skip hidden files", control: skipHidden)]), PreferencesCard([indexRow])])
-        controls = [shortcut, openWithShortcut, keyboard, login, menuIcon, location, presets, url, prefixAdd, folderAdd, respect, skipHidden, rebuild, allow]
+        controls = [shortcut, openWithShortcut, keyboard, login, menuIcon, location, draggedFiles, presets, url, prefixAdd, folderAdd, respect, skipHidden, rebuild, allow]
+        draggedFiles.identifier = .init("dragged-files"); draggedFiles.setAccessibilityLabel("Dragged files")
         skipHidden.identifier = .init("skip-hidden"); skipHidden.setAccessibilityLabel("Skip hidden files")
         for (id, control, label) in [("open-with-shortcut", openWithShortcut as NSControl, "Open With shortcut"), ("result-location", location as NSControl, "Location in results"), ("shortcut", shortcut as NSControl, "Open Apparate shortcut"), ("url", url, "Search URL"), ("menu-icon", menuIcon, "Show menu bar icon"), ("login", login, "Launch at login"), ("preset", presets, "Search engine"), ("folder-add", folderAdd, "Add Folders"), ("prefix-add", prefixAdd, "Add Prefix"), ("respect", respect, "Skip files listed in .gitignore"), ("rebuild", rebuild, "Rebuild index"), ("allow", allow, "Allow folder access"), ("reveal", reveal, "Show config.json in Finder"), ("keyboard", keyboard, "Open Keyboard Shortcuts")] {
             control.identifier = .init(id); control.setAccessibilityLabel(label)
@@ -196,6 +204,8 @@ import ApparateCore
         menuIcon.state = model.config.showMenuBarIcon ? .on : .off
         renderedLocation = model.config.resultLocation
         location.selectedSegment = ResultLocation.allCases.firstIndex(of: renderedLocation)!
+        renderedDragCanMove = model.config.dragCanMove
+        draggedFiles.selectedSegment = renderedDragCanMove ? 0 : 1
         login.state = [.enabled, .requiresApproval].contains(model.loginState) ? .on : .off
         login.isEnabled = enabled && model.loginState != .unavailable
         loginRow.describe(model.loginState == .requiresApproval ? "Approval required in Login Items" : model.loginState == .unavailable ? "Launch at login is unavailable for this app." : "")

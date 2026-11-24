@@ -1,7 +1,7 @@
 ---
 title: Opening and commands
 section: Features
-updated: 2026-11-19
+updated: 2026-11-24
 ---
 # Opening and commands
 
@@ -15,7 +15,7 @@ updated: 2026-11-19
 
 - Applications use asynchronous `NSWorkspace.openApplication`. Files/folders, web searches and settings use `NSWorkspace.open`; its Bool means acceptance, not successful browser navigation or settings selection.
 - Web replacement percent-encodes a single query value, including spaces, ampersands, plus signs, fragments, percent signs, slashes, emoji and CJK. The template must be HTTP(S) with a host and one placeholder.
-- Reveal and Copy path apply only to app/file/folder targets. Only a successful primary open records usage. A history-save failure is reported separately and does not turn an accepted open into a failed action.
+- Reveal and Copy path apply only to app/file/folder targets. Successful primary opens and completed [panel drops](panel.md#drag-results-out) record usage. A history-save failure is reported separately and does not turn an accepted open into a failed action.
 - A user-action failure activates the app and then shows a standard alert with the item’s name and reason; the panel stays hidden. Open With discovery errors and hotkey registration failures also use this alert path. Config, catalog, access-persistence and usage errors are logged. Only ENOENT/ENOTDIR counts as missing and removes the item. Permission/other failures retain it.
 - Commands are Lock Screen (alias Lock), Sleep, Restart and Show Trash (alias Trash). Lock dynamically resolves the optional private `SACLockScreenImmediate` symbol; Sleep uses `IOPMSleepSystem`; Restart sends the system-process restart Apple event; Show Trash opens the user's Trash folder. Missing APIs or returned errors are reported.
 - Restart requires two fresh Returns tied to the same selected item and result generation. Typing, selection movement, new results, composition, Esc and hiding disarm it. Key repeat never confirms it. Click and ⌘1–9 may arm Restart but cannot confirm it; Esc first disarms while preserving the query.

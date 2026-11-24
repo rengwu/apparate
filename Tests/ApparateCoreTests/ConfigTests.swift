@@ -21,6 +21,13 @@ import ApparateCore
         try expect(AppConfig.dataDirectory(environment: ["APPARATE_HOME": dir.path]).path == dir.path, "Data directory override ignored")
         try expect(AppConfig.dataDirectory(environment: ["APPARATE_HOME": ""]).lastPathComponent == "Apparate")
     }
+    await h.test("config: drag policy defaults to Like Finder and round trips both choices") {
+        try expect(try ConfigStore.decode(Data("{}".utf8)).dragCanMove)
+        for canMove in [false, true] {
+            var config = AppConfig(); config.dragCanMove = canMove
+            try expect(try ConfigStore.decode(JSONEncoder().encode(config)).dragCanMove == canMove)
+        }
+    }
     await h.test("config: result location defaults, round trips and rejects unknown values") {
         try expect(try ConfigStore.decode(Data("{}".utf8)).resultLocation == .inline)
         for location in ResultLocation.allCases {

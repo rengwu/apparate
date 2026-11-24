@@ -1,7 +1,7 @@
 ---
 title: Settings
 section: Features
-updated: 2026-11-20
+updated: 2026-11-24
 ---
 # Settings
 
@@ -17,7 +17,9 @@ Open **Settings…** from the menu, press ⌘, in the launcher, reopen the app, 
 
 General records the Open Apparate shortcut with ⌘, ⌥ or ⌃. Esc, tab change, closing or losing key status cancels recording. The current global shortcut is consumed by the recorder while recording. A replacement registers before saving, keeps the previous token until the save succeeds, and rolls back on failure. The menu shows the active key; if an external config requests an unavailable key, Settings explains which old key is still active. Focus refresh retries the configured key without duplicating an existing registration.
 
-**Location in results** is a native, labelled segmented control on General, in its own card: Inline / Right / Below. Inline is the default. A choice persists immediately and updates an open launcher without rerunning its search; external config changes refresh the selection. A stale choice is rejected, failed saves retain the previous value, and broken config disables the control.
+**Location in results** is a native, labelled segmented control on General with Inline, Right and Below choices. Inline is the default. A choice persists immediately and updates an open launcher without rerunning its search; external config changes refresh the selection. A stale choice is rejected, failed saves retain the previous value, and broken config disables the control.
+
+**Dragged files** sits below **Location in results** in the same General card. **Like Finder** (default) lets destinations copy, move or link a file, or choose a generic operation. **Never move** offers only copy and link. Configs without `dragCanMove` use Like Finder. The choice saves immediately and applies to the open launcher. [Panel drag behavior](panel.md#drag-results-out).
 
 The shortcut card groups the shortcut and its error description with a separate conditional Spotlight/action row. Prefix characters are centered in compact fields. Depth numbers and native stepper arrows share one rounded fill. Single-line titles center on their controls.
 
@@ -54,6 +56,8 @@ Run only in a user-agreed slot, with a backed-up config and agreed fixture folde
 Hidden content renders cover layout and inline states, not toolbar/window chrome, focus, real registration, native picker presentation or Login Items. No performance qualification is claimed; M6 owns the finished app budgets. The test harness remains compiled into this development build; its removal from distribution remains M7 work.
 
 ## Verification history
+
+- [Dragged files control and live changes](../verification/runs/2026-11-24T093455Z-drag-policy.md).
 
 - [M5 automated verification](../verification/runs/2026-11-18T212428Z-m5.md).
 

@@ -1,7 +1,7 @@
 ---
 title: Search
 section: Features
-updated: 2026-11-20
+updated: 2026-11-24
 ---
 # Search
 
@@ -11,7 +11,7 @@ updated: 2026-11-20
 
 The Core library accepts fixture-supplied `SearchItem` values in an immutable `SearchIndex`. IDs are opaque and unique; duplicate IDs are rejected. `ParsedQuery(raw, config:)` applies [config](config.md), `SearchIndex.search` returns the best 50 rows, and `SearchCoordinator.submit` computes on a serial worker and delivers on MainActor. Call `invalidate` when a query, config or index becomes obsolete, or submit its replacement. A submission captures the app/settings catalog, compact file snapshot, parsed query and showing’s usage snapshot. Both sources use the same ranking; their unique top 50 are published together. Web fallback is decided after merging. Discovered apps are deduplicated against the fixed app catalog.
 
-`UsageStore` owns `index.sqlite` through an actor. Only an accepted primary open calls `recordSuccessfulOpen`; selecting or viewing a result is not an open. Core tests invoke this boundary with synthetic IDs and an injected clock.
+`UsageStore` owns `index.sqlite` through an actor. Accepted primary opens and completed [panel drops](panel.md#drag-results-out) each call `recordSuccessfulOpen` once for the used item ID. Core tests invoke this boundary with synthetic IDs and an injected clock.
 
 ## Expected outcomes
 

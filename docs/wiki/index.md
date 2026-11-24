@@ -98,3 +98,5 @@ Claude and Codex researched the whole topic independently, at the user's request
 - [Single indexing indicator](verification/runs/2026-11-20T121149Z-indexing-indicator.md) — one Folders progress indicator, retained error statuses and exact idle/indexing frame equality.
 
 - [Drag results out](verification/runs/2026-11-24T074838Z-drag-out.md) — hidden click, drag and dismissal checks for result rows. External drops await on-screen verification.
+
+- [Drag settings and completed-drop usage](verification/runs/2026-11-24T093455Z-drag-policy.md) — Like Finder and Never move, persisted usage, and Open With history.

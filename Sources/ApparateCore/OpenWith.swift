@@ -64,25 +64,24 @@ public struct OpenWithService: Sendable {
 /// Prepared once per discovery/catalog snapshot. Matching runs on a worker, never the UI thread.
 package struct OpenWithIndex: Sendable {
     let groups: [SearchIndex]
-    let entries: [String: CatalogEntry]
-    let labels: [String: String]
+    private let entries: [String: (row: CatalogEntry, appID: String)]
     package init(discovery: OpenWithDiscovery, catalog: [CatalogEntry]) throws {
-        var seen = Set<String>(), all: [String: CatalogEntry] = [:], labels: [String: String] = [:]
+        var all: [String: (row: CatalogEntry, appID: String)] = [:]
         var groups: [SearchIndex] = []
         for (group, candidates) in [[discovery.lastApplication].compactMap { $0 }, [discovery.defaultApplication].compactMap { $0 }, discovery.claimed, catalog].enumerated() {
             var items: [SearchItem] = []
             for entry in candidates.sorted(by: { $0.item.id < $1.item.id }) {
                 guard entry.item.kind == .app, case .application(let original) = entry.target else { continue }
                 let url = original.standardizedFileURL, id = "open-with:" + url.path
-                guard seen.insert(id).inserted else { continue }
+                guard all[id] == nil else { continue }
                 let item = SearchItem(id: id, kind: .app, name: entry.item.name, alternateNames: entry.item.alternateNames)
                 let label = group == 0 ? "Last used" : group == 1 ? "Default" : ""
-                all[id] = CatalogEntry(item: item, target: .application(url), location: label, icon: entry.icon)
-                labels[id] = label; items.append(item)
+                all[id] = (CatalogEntry(item: item, target: .application(url), location: label, icon: entry.icon), entry.item.id)
+                items.append(item)
             }
             groups.append(try SearchIndex(items: items))
         }
-        self.groups = groups; entries = all; self.labels = labels
+        self.groups = groups; entries = all
     }
     package func rows(query: String) -> [PanelRow] {
         let query = ParsedQuery(literalName: query)
@@ -102,7 +101,10 @@ package struct OpenWithIndex: Sendable {
             }
             if results.count == 50 { break }
         }
-        return results.compactMap { result in entries[result.item.id].map { PanelRow(result: result, entry: $0, locationOverride: labels[result.item.id]) } }
+        return results.compactMap { result in
+            guard let app = entries[result.item.id] else { return nil }
+            return PanelRow(result: result, entry: app.row, locationOverride: app.row.location, usageID: app.appID)
+        }
     }
 }
 

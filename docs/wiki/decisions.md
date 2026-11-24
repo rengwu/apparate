@@ -1,7 +1,7 @@
 ---
 title: Decisions
 section: Planning
-updated: 2026-11-18
+updated: 2026-11-24
 ---
 # Decisions
 
@@ -180,6 +180,18 @@ Source: the user's chat request, then two grill-forms: "Apparate icon — backgr
 | --- | --- | --- |
 | DEC-062 | The icon's background changes from near-black to Dusk: a dark blue at the top fading to plum at the bottom, with a soft violet lift behind the ball. It stays dark. The poof, its colours and the sparkle layout stay as in [DEC-046](#round-10-2026-11-19) and [DEC-047](#round-11-2026-11-19). | The user: "i like the current icon, but i think the background can be better than pure black. maybe add a slight tint or either purple, or blue. (still keep it dark though)". User choice in round 20 (D · Dusk) from Plum, Indigo, Midnight and Dusk, all equally dark. Claude had recommended B (Indigo). |
 | DEC-063 | The poof and sparkles are drawn 20% larger inside the same tile. The sparkles keep their size relative to the ball but move outward less than it grows, so they stay clear of the tile edge. | The user's note on round 20: "can we make the contents a little bigger? (lesser padding / empty space)". User choice in round 21 (120%) from 110%, 120% and 130%; matched the recommendation. |
+
+## Round 22 — 2026-11-24
+
+Source: the user's chat request (with a screenshot of the panel, not kept because it shows real file names), then the grill-form "Drag results out — Claude's calls" (round 22) on the calls Claude made in the [drag-out brief](build/drag-out.md).
+
+| ID | Decision | Basis |
+| --- | --- | --- |
+| DEC-064 | File, folder and app results can be dragged out of the panel and dropped anywhere that takes a drag from Finder; the drop carries the item's file URL. Pressing a row selects it, and releasing without dragging opens it. Settings items, commands and web searches don't drag. | The user: "it's be nice if i can mouse drag and drop files to anywhere, as if i'm dragging it from finder". Built and committed in `9053c75`. |
+| DEC-065 | The panel stays while the drag is over it and hides as soon as the drag leaves it, so whatever is behind it can take the drop. A drag released over the panel cancels and leaves the panel as it was. | Claude's call in the brief; the user kept it in round 22 from four choices (hide when the drag starts, stay until a drop, stay until closed). |
+| DEC-066 | Settings → General gets a choice for dragged files: **Like Finder** (the default) or **Never move**. Like Finder lets the destination move the file, so a drop into a Finder folder on the same disk moves it and ⌥ copies. Never move takes the move away, so that drop copies. Apparate never copies, moves or deletes a file itself. | Claude's call was Like Finder only. The user in round 22: "make this toggleable in settings. between like finder and never move. default: like finder." |
+| DEC-067 | The drag image is the row's icon only, without the name. | Claude's call; the user kept it in round 22. Claude had recommended adding the name, like Finder. |
+| DEC-068 | A completed drop counts as a use for ranking, the same as opening the item. A cancelled drag doesn't count. | Claude's brief left drags out; the user chose to count completed drops in round 22, matching Claude's recommendation there. |
 
 ## Observed from the reference apps
 
